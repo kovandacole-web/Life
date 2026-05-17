@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Momentum Workspace</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: #f2f2f2;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: #141414;
+      border-right: 1px solid #262626;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    .new-board {
+      display: flex;
+      gap: 10px;
+    }
+
+    .new-board input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      background: #1f1f1f;
+      color: white;
+      outline: none;
+    }
+
+    button {
+      background: #2d2d2d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      background: #404040;
+    }
+
+    .board-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+    }
+
+    .board-item {
+      padding: 14px;
+      background: #1a1a1a;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .board-item:hover,
+    .board-item.active {
+      border: 1px solid #4d4d4d;
+      background: #242424;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .board-title {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .task-controls {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .task-controls input {
+      flex: 1;
+      padding: 14px;
+      background: #1c1c1c;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      outline: none;
+    }
+
+    .task-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .column {
+      background: #161616;
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 500px;
+      border: 1px solid #262626;
+    }
+
+    .column h2 {
+      margin-bottom: 16px;
+      color: #d9d9d9;
+      font-size: 20px;
+    }
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 100px;
+    }
+
+    .task {
+      background: #232323;
+      padding: 14px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: grab;
+      border: 1px solid #303030;
+    }
+
+    .task.completed {
+      opacity: 0.6;
+      text-decoration: line-through;
+    }
+
+    .task-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .task input[type="checkbox"] {
+      transform: scale(1.2);
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .delete-btn {
+      background: #3a1f1f;
+    }
+
+    .delete-btn:hover {
+      background: #5a2626;
+    }
+
+    .empty-state {
+      color: #777;
+      margin-top: 40px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    @media (max-width: 800px) {
+      body {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #262626;
+      }
+
+      .main {
+        padding: 18px;
+      }
+
+      .board-title {
+        font-size: 24px;
+      }
+
+      .task-controls {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">Momentum</div>
+
+    <div class="new-board">
+      <input type="text" id="boardInput" placeholder="New workspace..." />
+      <button onclick="addBoard()">+</button>
+    </div>
+
+    <div class="board-list" id="boardList"></div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="board-title" id="boardTitle">Select a Workspace</div>
+    </div>
+
+    <div class="task-controls">
+      <input type="text" id="taskInput" placeholder="Add a new task..." />
+      <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <br />
+
+    <div class="task-columns">
+      <div class="column">
+        <h2>To Do</h2>
+        <div class="task-list" id="todo"></div>
+      </div>
+
+      <div class="column">
+        <h2>Completed</h2>
+        <div class="task-list" id="completed"></div>
+      </div>
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      Create a workspace to start tracking goals.
+    </div>
+  </div>
+
+  <script>
+    let boards = JSON.parse(localStorage.getItem('momentumBoards')) || [];
+    let activeBoard = null;
+
+    function saveBoards() {
+      localStorage.setItem('momentumBoards', JSON.stringify(boards));
+    }
+
+    function renderBoards() {
+      const boardList = document.getElementById('boardList');
+      boardList.innerHTML = '';
+
+      boards.forEach((board, index) => {
+        const div = document.createElement('div');
+        div.className = 'board-item' + (activeBoard === index ? ' active' : '');
+        div.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+            <span>${board.name}</span>
+            <button class="delete-btn" onclick="deleteBoard(${index}); event.stopPropagation();">✕</button>
+          </div>
+        `;
+
+        div.onclick = () => {
+          activeBoard = index;
+          renderBoards();
+          renderTasks();
+        };
+
+        boardList.appendChild(div);
+      });
+    }
+
+    function addBoard() {
+      const input = document.getElementById('boardInput');
+      const name = input.value.trim();
+
+      if (!name) return;
+
+      boards.push({
+        name,
+        tasks: []
+      });
+
+      input.value = '';
+      activeBoard = boards.length - 1;
+      saveBoards();
+      renderBoards();
+      renderTasks();
+    }
+
+    function deleteBoard(index) {
+      boards.splice(index, 1);
+
+      if (activeBoard === index) {
+        activeBoard = null;
+      }
+
+      saveBoards();
+      renderBoards();
+      renderTasks();
+    }
+
+    function addTask() {
+      if (activeBoard === null) return;
+
+      const input = document.getElementById('taskInput');
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      boards[activeBoard].tasks.push({
+        text,
+        completed: false
+      });
+
+      input.value = '';
+      saveBoards();
+      renderTasks();
+    }
+
+    function toggleTask(index) {
+      const task = boards[activeBoard].tasks[index];
+      task.completed = !task.completed;
+      saveBoards();
+      renderTasks();
+    }
+
+    function deleteTask(index) {
+      boards[activeBoard].tasks.splice(index, 1);
+      saveBoards();
+      renderTasks();
+    }
+
+    function renderTasks() {
+      const todo = document.getElementById('todo');
+      const completed = document.getElementById('completed');
+      const title = document.getElementById('boardTitle');
+      const empty = document.getElementById('emptyState');
+
+      todo.innerHTML = '';
+      completed.innerHTML = '';
+
+      if (activeBoard === null || !boards[activeBoard]) {
+        title.innerText = 'Select a Workspace';
+        empty.style.display = 'block';
+        return;
+      }
+
+      empty.style.display = 'none';
+
+      const board = boards[activeBoard];
+      title.innerText = board.name;
+
+      board.tasks.forEach((task, index) => {
+        const div = document.createElement('div');
+        div.className = 'task' + (task.completed ? ' completed' : '');
+        div.draggable = true;
+        div.dataset.index = index;
+
+        div.innerHTML = `
+          <div class="task-left">
+            <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${index})" />
+            <span>${task.text}</span>
+          </div>
+
+          <div class="task-actions">
+            <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>
+          </div>
+        `;
+
+        addDragEvents(div);
+
+        if (task.completed) {
+          completed.appendChild(div);
+        } else {
+          todo.appendChild(div);
+        }
+      });
+    }
+
+    let draggedItem = null;
+
+    function addDragEvents(element) {
+      element.addEventListener('dragstart', () => {
+        draggedItem = element;
+        setTimeout(() => {
+          element.style.display = 'none';
+        }, 0);
+      });
+
+      element.addEventListener('dragend', () => {
+        setTimeout(() => {
+          draggedItem.style.display = 'flex';
+          draggedItem = null;
+          saveBoards();
+          renderTasks();
+        }, 0);
+      });
+    }
+
+    document.querySelectorAll('.task-list').forEach((list) => {
+      list.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+
+      list.addEventListener('drop', (e) => {
+        e.preventDefault();
+
+        if (!draggedItem || activeBoard === null) return;
+
+        const draggedIndex = parseInt(draggedItem.dataset.index);
+        const task = boards[activeBoard].tasks.splice(draggedIndex, 1)[0];
+
+        task.completed = list.id === 'completed';
+
+        boards[activeBoard].tasks.push(task);
+
+        saveBoards();
+        renderTasks();
+      });
+    });
+
+    renderBoards();
+    renderTasks();
+  </script>
+</body>
+</html>
