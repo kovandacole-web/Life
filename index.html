@@ -252,6 +252,32 @@
 
     <br />
 
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:24px;">
+      <div style="background:#151515; border:1px solid #262626; border-radius:18px; padding:18px;">
+        <h3 style="margin-bottom:10px;">Golf Notes & Videos</h3>
+        <textarea id="golfNotes" placeholder="Paste golf notes, YouTube links, swing thoughts, drills..." style="width:100%; min-height:140px; background:#1f1f1f; border:none; border-radius:12px; color:white; padding:12px; resize:vertical;"></textarea>
+      </div>
+
+      <div style="background:#151515; border:1px solid #262626; border-radius:18px; padding:18px;">
+        <h3 style="margin-bottom:10px;">Chess Notes & Videos</h3>
+        <textarea id="chessNotes" placeholder="Openings, tactics, videos, mistakes, lessons..." style="width:100%; min-height:140px; background:#1f1f1f; border:none; border-radius:12px; color:white; padding:12px; resize:vertical;"></textarea>
+      </div>
+
+      <div style="background:#151515; border:1px solid #262626; border-radius:18px; padding:18px;">
+        <h3 style="margin-bottom:10px;">Piano Notes & Videos</h3>
+        <textarea id="pianoNotes" placeholder="Songs, scales, practice routines, tutorial links..." style="width:100%; min-height:140px; background:#1f1f1f; border:none; border-radius:12px; color:white; padding:12px; resize:vertical;"></textarea>
+      </div>
+
+      <div style="background:#151515; border:1px solid #262626; border-radius:18px; padding:18px;">
+        <h3 style="margin-bottom:10px;">Drawing Notes & Videos</h3>
+        <textarea id="drawingNotes" placeholder="Techniques, anatomy studies, references, videos..." style="width:100%; min-height:140px; background:#1f1f1f; border:none; border-radius:12px; color:white; padding:12px; resize:vertical;"></textarea>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px; display:flex; justify-content:flex-end;">
+      <button onclick="saveSkillNotes()">Save Notes</button>
+    </div>
+
     <div class="task-columns">
       <div class="column">
         <h2>To Do</h2>
@@ -293,8 +319,29 @@
 
         div.onclick = () => {
           activeBoard = index;
-          renderBoards();
-          renderTasks();
+          function saveSkillNotes() {
+      const notes = {
+        golf: document.getElementById('golfNotes').value,
+        chess: document.getElementById('chessNotes').value,
+        piano: document.getElementById('pianoNotes').value,
+        drawing: document.getElementById('drawingNotes').value
+      };
+
+      localStorage.setItem('momentumSkillNotes', JSON.stringify(notes));
+    }
+
+    function loadSkillNotes() {
+      const notes = JSON.parse(localStorage.getItem('momentumSkillNotes')) || {};
+
+      document.getElementById('golfNotes').value = notes.golf || '';
+      document.getElementById('chessNotes').value = notes.chess || '';
+      document.getElementById('pianoNotes').value = notes.piano || '';
+      document.getElementById('drawingNotes').value = notes.drawing || '';
+    }
+
+    renderBoards();
+    renderTasks();
+    loadSkillNotes();
         };
 
         boardList.appendChild(div);
