@@ -232,6 +232,21 @@
 </style>
 </head>
 <body>
+<div id="sidebarNav" style="position:fixed;left:0;top:0;width:220px;height:100vh;background:#0f0f0f;border-right:1px solid #262626;padding:24px;overflow:auto;z-index:1000;">
+<h2 style="margin-bottom:24px;">Momentum OS</h2>
+<div style="display:flex;flex-direction:column;gap:12px;">
+<button onclick="showPage('dashboardPage')">Dashboard</button>
+<button onclick="showPage('tasksPage')">Tasks & Goals</button>
+<button onclick="showPage('golfPage')">Golf</button>
+<button onclick="showPage('chessPage')">Chess</button>
+<button onclick="showPage('pianoPage')">Piano</button>
+<button onclick="showPage('drawingPage')">Drawing</button>
+<button onclick="showPage('nutritionPage')">Nutrition</button>
+<button onclick="showPage('schedulePage')">Schedule</button>
+</div>
+</div>
+
+<div style="margin-left:240px;padding:24px;">
   <div class="sidebar">
     <div class="logo">Momentum</div>
 
@@ -245,7 +260,9 @@
 
   <div class="main">
     <div style="background:#151515; border:1px solid #262626; border-radius:20px; padding:24px; margin-bottom:24px;">
-      <h2 style="margin-bottom:18px;">Daily Nutrition Plan</h2>
+      </div>
+<div id="nutritionPage" class="page-section" style="display:none;">
+<h2 style="margin-bottom:18px;">Daily Nutrition Plan</h2>
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
         <div style="background:#1c1c1c; padding:16px; border-radius:14px;">
@@ -272,7 +289,9 @@
 
     <div style="background:#151515; border:1px solid #262626; border-radius:20px; padding:24px; margin-bottom:24px;">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:18px;">
-        <h2>Daily Discipline Schedule</h2>
+        </div>
+<div id="schedulePage" class="page-section" style="display:none;">
+<h2>Daily Discipline Schedule</h2>
         <div style="padding:10px 16px; background:#1f1f1f; border-radius:12px;">Record My Day For YouTube</div>
       </div>
 
@@ -368,7 +387,8 @@
       </div>
     </div>
 
-    <div class="dashboard-grid">
+    <div id="dashboardPage" class="page-section">
+<div class="dashboard-grid">
 <div class="glass-card">
 <h3>Today's Momentum</h3>
 <div class="stat-number" id="tasksCompleteStat">0%</div>
@@ -393,6 +413,9 @@
 <div class="habit-row"><span>Journal</span><input type="checkbox" onchange="toggleHabit(this)"></div>
 <div class="habit-row"><span>Stretching</span><input type="checkbox" onchange="toggleHabit(this)"></div>
 </div>
+</div>
+
+<div id="tasksPage" class="page-section" style="display:none;">
 <div class="topbar">
       <div class="board-title" id="boardTitle">Select a Workspace</div>
     </div>
@@ -406,22 +429,33 @@
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:24px;">
       <div style="background:#151515; border:1px solid #262626; border-radius:18px; padding:18px;">
-        <h3 style="margin-bottom:10px;">Golf Notes & Videos</h3>
+        <div id="golfPage" class="page-section" style="display:none;">
+<h2 style="margin-bottom:20px;">Golf Training</h2>
+<h3 style="margin-bottom:10px;">Golf Notes & Videos</h3>
         <textarea id="golfNotes" placeholder="Paste golf notes, YouTube links, swing thoughts, drills..." style="width:100%; min-height:140px; background:#1f1f1f; border:none; border-radius:12px; color:white; padding:12px; resize:vertical;"></textarea>
       </div>
 
       <div style="background:#151515; border:1px solid #262626; border-radius:18px; padding:18px;">
-        <h3 style="margin-bottom:10px;">Chess Notes & Videos</h3>
+        </div>
+<div id="chessPage" class="page-section" style="display:none;">
+<h2 style="margin-bottom:20px;">Chess Training</h2>
+<h3 style="margin-bottom:10px;">Chess Notes & Videos</h3>
         <textarea id="chessNotes" placeholder="Openings, tactics, videos, mistakes, lessons..." style="width:100%; min-height:140px; background:#1f1f1f; border:none; border-radius:12px; color:white; padding:12px; resize:vertical;"></textarea>
       </div>
 
       <div style="background:#151515; border:1px solid #262626; border-radius:18px; padding:18px;">
-        <h3 style="margin-bottom:10px;">Piano Notes & Videos</h3>
+        </div>
+<div id="pianoPage" class="page-section" style="display:none;">
+<h2 style="margin-bottom:20px;">Piano Training</h2>
+<h3 style="margin-bottom:10px;">Piano Notes & Videos</h3>
         <textarea id="pianoNotes" placeholder="Songs, scales, practice routines, tutorial links..." style="width:100%; min-height:140px; background:#1f1f1f; border:none; border-radius:12px; color:white; padding:12px; resize:vertical;"></textarea>
       </div>
 
       <div style="background:#151515; border:1px solid #262626; border-radius:18px; padding:18px;">
-        <h3 style="margin-bottom:10px;">Drawing Notes & Videos</h3>
+        </div>
+<div id="drawingPage" class="page-section" style="display:none;">
+<h2 style="margin-bottom:20px;">Drawing Training</h2>
+<h3 style="margin-bottom:10px;">Drawing Notes & Videos</h3>
         <textarea id="drawingNotes" placeholder="Techniques, anatomy studies, references, videos..." style="width:100%; min-height:140px; background:#1f1f1f; border:none; border-radius:12px; color:white; padding:12px; resize:vertical;"></textarea>
       </div>
     </div>
@@ -759,5 +793,14 @@ createYouTubeEmbed('drawingNotes');
     document.getElementById('streakDisplay').innerText = streak + ' Days';
     updateTimerDisplay();
   </script>
+</div>
+<script>
+function showPage(pageId){
+const pages=document.querySelectorAll('.page-section');
+pages.forEach(page=>page.style.display='none');
+document.getElementById(pageId).style.display='block';
+window.scrollTo(0,0);
+}
+</script>
 </body>
 </html>
