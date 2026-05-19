@@ -2,639 +2,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>1% Better Tracker</title>
-
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Inter,sans-serif;
-}
-
-body{
-background:#0b0b0b;
-color:white;
-display:flex;
-min-height:100vh;
-}
-
-.sidebar{
-width:240px;
-background:#111;
-padding:28px 20px;
-border-right:1px solid #232323;
-position:fixed;
-height:100vh;
-}
-
-.logo{
-font-size:28px;
-font-weight:700;
-margin-bottom:40px;
-}
-
-.logo span{
-color:#d4af37;
-}
-
-.nav-btn{
-width:100%;
-background:#191919;
-border:none;
-color:white;
-padding:14px;
-margin-bottom:12px;
-border-radius:14px;
-cursor:pointer;
-font-size:15px;
-transition:.2s;
-}
-
-.nav-btn:hover{
-background:#242424;
-}
-
-.main{
-margin-left:240px;
-padding:30px;
-width:100%;
-}
-
-.page{
-display:none;
-}
-
-.active{
-display:block;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:20px;
-margin-bottom:24px;
-}
-
-.card{
-background:#151515;
-border:1px solid #242424;
-padding:24px;
-border-radius:22px;
-}
-
-.card h3{
-margin-bottom:12px;
-font-size:18px;
-}
-
-.big{
-font-size:44px;
-font-weight:700;
-}
-
-.gold{
-color:#d4af37;
-}
-
-.blue{
-color:#4f8cff;
-}
-
-.bar{
-height:18px;
-background:#222;
-border-radius:20px;
-overflow:hidden;
-margin-top:14px;
-}
-
-.fill-gold{
-height:100%;
-width:74%;
-background:#d4af37;
-}
-
-.fill-blue{
-height:100%;
-width:96%;
-background:#4f8cff;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-}
-
-th,td{
-padding:14px;
-text-align:center;
-border-bottom:1px solid #222;
-}
-
-th{
-background:#141414;
-}
-
-.habit-name{
-text-align:left;
-font-weight:600;
-}
-
-input[type='checkbox']{
-transform:scale(1.3);
-accent-color:#d4af37;
-cursor:pointer;
-}
-
-textarea,input[type='text']{
-width:100%;
-background:#111;
-border:1px solid #252525;
-border-radius:14px;
-padding:14px;
-color:white;
-margin-top:12px;
-}
-
-.save-btn{
-margin-top:18px;
-background:#d4af37;
-color:black;
-border:none;
-padding:14px 22px;
-border-radius:14px;
-font-weight:700;
-cursor:pointer;
-}
-
-.trend{
-height:220px;
-display:flex;
-align-items:flex-end;
-gap:14px;
-margin-top:24px;
-}
-
-.trend div{
-flex:1;
-border-radius:12px 12px 0 0;
-background:#4f8cff;
-}
-
-@media(max-width:900px){
-.sidebar{
-width:100%;
-height:auto;
-position:relative;
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-}
-
-.main{
-margin-left:0;
-}
-
-.logo{
-width:100%;
-}
-}
+:root{--bg:#090909;--panel:#141414;--panel2:#1b1b1b;--border:#282828;--muted:#a3a3a3;--text:#f4f4f4;--gold:#d4af37;--blue:#4f8cff;--red:#bb5555}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+body{min-height:100vh;background:radial-gradient(circle at top right,#171717,#090909 55%);color:var(--text);display:flex}
+button,input,textarea{font:inherit}button{border:0;cursor:pointer;transition:.2s ease}
+.sidebar{width:260px;height:100vh;position:fixed;left:0;top:0;background:rgba(15,15,15,.96);border-right:1px solid var(--border);padding:24px;overflow:auto;z-index:50}
+.logo{font-size:29px;font-weight:900;margin-bottom:28px;letter-spacing:-1px}.logo span{color:var(--gold)}
+.nav-btn{width:100%;padding:13px 14px;border-radius:14px;background:#171717;color:white;margin-bottom:10px;text-align:left;border:1px solid transparent}.nav-btn:hover,.nav-btn.active{background:#222;border-color:#3a3a3a;transform:translateX(3px)}
+.main{margin-left:260px;width:calc(100% - 260px);padding:30px}.page{display:none;animation:fade .25s ease}.page.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.header{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-bottom:24px}.eyebrow{color:var(--muted);font-size:14px;margin-bottom:8px}.title{font-size:38px;letter-spacing:-1.5px}.subtitle{color:var(--muted);line-height:1.6;margin-top:8px;max-width:850px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}.card{background:linear-gradient(180deg,#191919,#101010);border:1px solid var(--border);border-radius:24px;padding:22px;box-shadow:0 18px 50px rgba(0,0,0,.25);transition:.22s ease}.card:hover{transform:translateY(-2px);border-color:#3e3e3e}.card h2,.card h3{margin-bottom:12px}
+.big{font-size:44px;font-weight:900;letter-spacing:-1.5px}.gold{color:var(--gold)}.blue{color:var(--blue)}.muted{color:var(--muted)}
+.action{padding:12px 16px;border-radius:14px;background:#252525;color:white;border:1px solid #363636}.action:hover{background:#303030}.primary{background:var(--gold);color:#080808;font-weight:900}.primary:hover{background:#e2bf54}.danger{background:#351919;color:white}.danger:hover{background:#4a2020}
+input,textarea{width:100%;background:#101010;color:white;border:1px solid #2b2b2b;border-radius:14px;padding:13px;outline:none}textarea{min-height:110px;resize:vertical}input:focus,textarea:focus{border-color:#555}
+.bar{height:14px;background:#242424;border-radius:999px;overflow:hidden;margin-top:12px}.fill{height:100%;border-radius:999px;transition:.25s ease}.fill.goldfill{background:var(--gold)}.fill.bluefill{background:var(--blue)}
+.day-summary{display:grid;grid-template-columns:repeat(7,minmax(88px,1fr));gap:10px;margin-bottom:18px}.day-pill{background:#151515;border:1px solid var(--border);border-radius:16px;padding:12px;text-align:center}.day-pill strong{display:block;margin-bottom:5px}
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:18px}table{width:100%;border-collapse:collapse;min-width:820px;background:#111}th,td{padding:14px;text-align:center;border-bottom:1px solid #242424}th{background:#171717;color:#d9d9d9;font-size:13px;text-transform:uppercase;letter-spacing:.6px}.habit-name{text-align:left;font-weight:800}.habit-cat{font-size:12px;margin-top:4px}.cell{width:42px;height:36px;border-radius:12px;background:#1f1f1f;border:1px solid #333;margin:auto;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none}.cell.gold-done{background:rgba(212,175,55,.2);border-color:var(--gold);color:var(--gold)}.cell.blue-done{background:rgba(79,140,255,.2);border-color:var(--blue);color:var(--blue)}
+.list{display:grid;gap:10px}.list-item{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#151515;border:1px solid #282828;border-radius:16px;padding:13px}.tag{padding:5px 9px;border-radius:999px;font-size:12px;background:#222}.tag.goldtag{background:var(--gold);color:#0b0b0b}.tag.bluetag{background:var(--blue);color:white}
+.video-preview{aspect-ratio:16/9;background:#101010;border:1px dashed #333;border-radius:16px;margin-top:12px;display:flex;align-items:center;justify-content:center;color:#777;text-align:center;padding:12px}.video-preview iframe{width:100%;height:100%;border:0;border-radius:16px}
+.routine-row{display:grid;grid-template-columns:110px 1fr auto;gap:12px;align-items:center;padding:13px;border-bottom:1px solid #242424}.routine-row:last-child{border-bottom:0}.routine-check{width:22px;height:22px;accent-color:var(--gold)}
+.focus-overlay{position:fixed;inset:0;background:#050505;display:none;align-items:center;justify-content:center;flex-direction:column;z-index:200;text-align:center;padding:24px}.focus-overlay.active{display:flex}.focus-time{font-size:84px;font-weight:900;letter-spacing:-4px;margin:18px 0}
+@media(max-width:860px){body{display:block}.sidebar{position:sticky;top:0;width:100%;height:auto;display:flex;gap:8px;overflow:auto;padding:14px}.logo{min-width:130px;margin:0;font-size:22px}.nav-btn{min-width:max-content;margin:0;text-align:center}.main{margin-left:0;width:100%;padding:18px}.title{font-size:30px}.day-summary{grid-template-columns:repeat(2,1fr)}.routine-row{grid-template-columns:1fr}.focus-time{font-size:58px}}
 </style>
 </head>
 <body>
-
-<div class="sidebar">
+<aside class="sidebar">
 <div class="logo">1% <span>Better</span></div>
-
-<button class="nav-btn" onclick="showPage('dashboard')">Dashboard</button>
-<button class="nav-btn" onclick="showPage('track')">Track</button>
-<button class="nav-btn" onclick="showPage('wins')">Wins</button>
-<button class="nav-btn" onclick="showPage('coach')">Coach</button>
-<button class="nav-btn" onclick="showPage('skills')">Skills</button>
-<button class="nav-btn" onclick="showPage('schedule')">Schedule</button>
-<button class="nav-btn" onclick="showPage('devlab')">Dev Lab</button>
+<button class="nav-btn active" data-page="dashboard" onclick="showPage('dashboard')">Dashboard</button>
+<button class="nav-btn" data-page="track" onclick="showPage('track')">Track</button>
+<button class="nav-btn" data-page="wins" onclick="showPage('wins')">Wins</button>
+<button class="nav-btn" data-page="skills" onclick="showPage('skills')">Skills</button>
+<button class="nav-btn" data-page="schedule" onclick="showPage('schedule')">Schedule</button>
+<button class="nav-btn" data-page="coach" onclick="showPage('coach')">Coach</button>
+<button class="nav-btn" data-page="devlab" onclick="showPage('devlab')">AI Code Builder</button>
 <button class="nav-btn" onclick="toggleFocusMode()">Focus Mode</button>
-</div>
-
-<div class="main">
-
-<div id="dashboard" class="page active">
-<div class="grid" style="margin-bottom:24px;">
-<div class="card">
-<h3>Current Focus</h3>
-<p style="margin-top:12px;color:#aaa;line-height:1.7;">Golf • Chess • Piano • Drawing</p>
-</div>
-<div class="card">
-<h3>Consistency</h3>
-<div class="big gold" id="streakCounter">12</div>
-<p style="margin-top:12px;color:#aaa;">Day Streak</p>
-</div>
-<div class="card">
-<h3>Completion Rate</h3>
-<div class="big blue">87%</div>
-<p style="margin-top:12px;color:#aaa;">This Week</p>
-</div>
-</div>
-<h1 style="margin-bottom:24px;">Performance Dashboard</h1>
-
-<div class="grid">
-<div class="card">
-<h3>Daily Score</h3>
-<div class="big gold">82%</div>
-</div>
-
-<div class="card">
-<h3>Weekly Score</h3>
-<div class="big blue">91%</div>
-</div>
-
-<div class="card">
-<h3>Monthly Score</h3>
-<div class="big">88%</div>
-</div>
-
-<div class="card">
-<h3>Streak</h3>
-<div class="big gold">7</div>
-</div>
-</div>
-
-<div class="grid">
-<div class="card">
-<h3>% Better Score</h3>
-<div class="big blue">+14%</div>
-</div>
-
-<div class="card">
-<h3>Non-Negotiables</h3>
-<div class="bar"><div class="fill-gold"></div></div>
-<p style="margin-top:12px;">74% Complete</p>
-</div>
-
-<div class="card">
-<h3>Growth & Development</h3>
-<div class="bar"><div class="fill-blue"></div></div>
-<p style="margin-top:12px;">96% Complete</p>
-</div>
-</div>
-
-<div class="card">
-<h3>March Trend</h3>
-<div class="trend">
-<div style="height:45%"></div>
-<div style="height:58%"></div>
-<div style="height:62%"></div>
-<div style="height:74%"></div>
-<div style="height:81%"></div>
-<div style="height:93%"></div>
-</div>
-</div>
-</div>
-
-<div id="track" class="page">
-<h1 style="margin-bottom:24px;">Weekly Habit Grid</h1>
-
-<div class="card">
-<h2 class="gold">Non-Negotiables</h2>
-
-<table>
-<tr>
-<th>Habit</th>
-<th>Mon</th>
-<th>Tue</th>
-<th>Wed</th>
-<th>Thu</th>
-<th>Fri</th>
-<th>Sat</th>
-<th>Sun</th>
-</tr>
-
-<tr>
-<td class="habit-name">Meditation</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-</tr>
-
-<tr>
-<td class="habit-name">Daily Movement</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-</tr>
-
-<tr>
-<td class="habit-name">Journal</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-</tr>
-
-<tr>
-<td class="habit-name">Bible Passage</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-</tr>
-</table>
-</div>
-
-<div class="card" style="margin-top:24px;">
-<h2 class="blue">Growth & Development</h2>
-
-<table>
-<tr>
-<th>Habit</th>
-<th>Mon</th>
-<th>Tue</th>
-<th>Wed</th>
-<th>Thu</th>
-<th>Fri</th>
-<th>Sat</th>
-<th>Sun</th>
-</tr>
-
-<tr>
-<td class="habit-name">Big 3</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-</tr>
-
-<tr>
-<td class="habit-name">Sales Activity</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-</tr>
-
-<tr>
-<td class="habit-name">Content Creation</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-</tr>
-
-<tr>
-<td class="habit-name">Read 1 Chapter</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-</tr>
-</table>
-</div>
-</div>
-
-<div id="wins" class="page">
-<h1 style="margin-bottom:24px;">Daily Wins</h1>
-
-<div class="grid">
-<div class="card">
-<h2 style="margin-bottom:18px;">3 Wins Today</h2>
-<input type="text" placeholder="Win #1">
-<input type="text" placeholder="Win #2">
-<input type="text" placeholder="Win #3">
-</div>
-
-<div class="card">
-<h2 style="margin-bottom:18px;">3 Wins Tomorrow</h2>
-<input type="text" placeholder="Tomorrow Win #1">
-<input type="text" placeholder="Tomorrow Win #2">
-<input type="text" placeholder="Tomorrow Win #3">
-</div>
-</div>
-
-<button class="save-btn">Save Reflection</button>
-</div>
-
-<div id="skills" class="page">
-<h1 style="margin-bottom:24px;">Skills</h1>
-
-<div class="grid">
-<div class="card">
-<h2 class="gold">Golf</h2>
-<textarea placeholder="Practice notes, drills, swing thoughts..." style="min-height:120px"></textarea>
-<input type="text" placeholder="Paste YouTube lesson link">
-</div>
-
-<div class="card">
-<h2 class="blue">Chess</h2>
-<textarea placeholder="Study notes, openings, tactics..." style="min-height:120px"></textarea>
-<input type="text" placeholder="Paste YouTube lesson link">
-</div>
-</div>
-
-<div class="grid" style="margin-top:24px;">
-<div class="card">
-<h2 class="gold">Piano</h2>
-<textarea placeholder="Practice schedule, techniques, songs..." style="min-height:120px"></textarea>
-<input type="text" placeholder="Paste YouTube lesson link">
-</div>
-
-<div class="card">
-<h2 class="blue">Drawing</h2>
-<textarea placeholder="Drawing notes and ideas..." style="min-height:120px"></textarea>
-<button class="save-btn" onclick="generatePrompt()">Generate Prompt</button>
-<p id="promptBox" style="margin-top:16px;font-size:20px;font-weight:700;">Knight</p>
-</div>
-</div>
-</div>
-
-<div id="schedule" class="page">
-<h1 style="margin-bottom:24px;">Daily Schedule</h1>
-
-<div class="card">
-<div style="display:grid;gap:14px;">
-<div><strong>6:00 AM</strong> — Wake Up</div>
-<div><strong>6:10 AM</strong> — Morning Routine</div>
-<div><strong>7:05 AM</strong> — Breakfast</div>
-<div><strong>7:35 AM</strong> — Morning Jog</div>
-<div><strong>8:10 AM</strong> — Reading</div>
-<div><strong>8:45 AM</strong> — Biz</div>
-<div><strong>9:40 AM</strong> — Swim</div>
-<div><strong>10:45 AM</strong> — Sprints</div>
-<div><strong>11:35 AM</strong> — Piano</div>
-<div><strong>12:25 PM</strong> — Learning</div>
-<div><strong>2:05 PM</strong> — Dinner</div>
-<div><strong>4:30 PM</strong> — Evening Walk</div>
-<div><strong>10:00 PM</strong> — Sleep</div>
-</div>
-</div>
-</div>
-
-<div id="devlab" class="page">
-<h1 style="margin-bottom:24px;">AI Code Builder</h1>
-<p style="color:#aaa;line-height:1.7;margin-bottom:24px;max-width:900px;">
-Use this page when you want to upgrade this app. Type the feature you want, generate a master prompt, then paste that prompt into ChatGPT or another coding AI. It is designed to protect the current layout, avoid broken buttons, and force cleaner code.
-</p>
-
-<div class="grid">
-<div class="card">
-<h2 class="gold">Feature Request</h2>
-<textarea id="aiPrompt" placeholder="Example: Add a premium analytics graph to the Dashboard that tracks weekly habit completion, saves data locally, works on mobile, and does not break the Track or Wins pages." style="min-height:220px">Make this the best website you can. Improve the app using ideas from high-performance creators who track daily schedules, money, hobbies, fitness, content, and self-improvement systems. Keep everything premium, dark, smooth, organized, and useful.</textarea>
-<button class="save-btn" onclick="generateCodePrompt()">Generate Elite Prompt</button>
-</div>
-
-<div class="card">
-<h2 class="blue">Built-In Rules</h2>
-<div style="color:#b5b5b5;line-height:1.8;margin-top:14px;">
-<p>• Keep the premium black / gold / blue design.</p>
-<p>• Do not remove existing pages or buttons.</p>
-<p>• Test navigation after every update.</p>
-<p>• Use clean HTML, CSS, and JavaScript.</p>
-<p>• Save user data with localStorage when needed.</p>
-<p>• Keep the app responsive on phone and computer.</p>
-<p>• Add features in small safe sections.</p>
-</div>
-</div>
-</div>
-
-<div class="card" style="margin-top:24px;">
-<h2 style="margin-bottom:18px;">Generated Master Prompt</h2>
-<textarea id="masterPrompt" style="min-height:340px"></textarea>
-<button class="save-btn" onclick="copyMasterPrompt()">Copy Prompt</button>
-</div>
-
-<div class="card" style="margin-top:24px;">
-<h2 style="margin-bottom:18px;">How To Use</h2>
-<div style="color:#aaa;line-height:1.9;">
-<p>1. Describe exactly what feature you want.</p>
-<p>2. Click Generate Elite Prompt.</p>
-<p>3. Copy the generated prompt.</p>
-<p>4. Paste it into ChatGPT or another coding AI.</p>
-<p>5. Paste the returned code back into your project.</p>
-</div>
-</div>
-</div>
-
-<div id="coach" class="page">
-<h1 style="margin-bottom:24px;">Coach</h1>
-
-<div class="card">
-<h2>Future Features</h2>
-<p style="margin-top:14px;color:#aaa;line-height:1.7;">
-Coach systems and advanced analytics will be added here later.
-</p>
-</div>
-</div>
-
-</div>
-
-<div id="focusOverlay" style="position:fixed;inset:0;background:#050505;display:none;align-items:center;justify-content:center;flex-direction:column;z-index:9999;">
-<h1 style="font-size:72px;">Focus Mode</h1>
-<p style="margin-top:18px;color:#888;">One task. Zero distractions.</p>
-<button class="save-btn" style="margin-top:24px;" onclick="toggleFocusMode()">Exit</button>
-</div>
-
+</aside>
+<main class="main">
+<section id="dashboard" class="page active">
+<div class="header"><div><div class="eyebrow">Performance Command Center</div><h1 class="title">Dashboard</h1><p class="subtitle">Track discipline, consistency, wins, skills, and daily execution in one premium operating system.</p></div><button class="action primary" onclick="showPage('track')">Log Today</button></div>
+<div class="grid" id="scoreCards"></div>
+<div class="grid" style="margin-top:18px"><div class="card"><h3>Category Breakdown</h3><p class="muted">Non-Negotiables</p><div class="bar"><div id="goldBreakdown" class="fill goldfill"></div></div><p class="muted" style="margin-top:16px">Growth and Development</p><div class="bar"><div id="blueBreakdown" class="fill bluefill"></div></div></div><div class="card"><h3>This Week Trend</h3><div id="miniTrend" style="height:180px;display:flex;align-items:flex-end;gap:10px;margin-top:18px"></div></div><div class="card"><h3>Tomorrow Wins</h3><div id="tomorrowReminder" class="list"></div></div></div>
+</section>
+<section id="track" class="page">
+<div class="header"><div><div class="eyebrow">Weekly Execution Grid</div><h1 class="title">Track</h1><p class="subtitle">Click cells to mark habits complete. Family Time logs minutes. Everything saves automatically.</p></div><button class="action" onclick="resetWeek()">Reset Week</button></div>
+<div class="day-summary" id="daySummary"></div><div class="table-wrap"><table id="habitTable"></table></div><div class="grid" style="margin-top:18px" id="categorySummaries"></div>
+</section>
+<section id="wins" class="page">
+<div class="header"><div><div class="eyebrow">Reflection System</div><h1 class="title">Wins</h1><p class="subtitle">Write three wins from today and three targets for tomorrow. Tomorrow wins appear on the dashboard.</p></div><button class="action primary" onclick="saveWins()">Save Reflection</button></div>
+<div class="grid"><div class="card"><h2 class="gold">3 Wins Today</h2><input id="todayWin1" placeholder="Win #1"><input id="todayWin2" placeholder="Win #2" style="margin-top:10px"><input id="todayWin3" placeholder="Win #3" style="margin-top:10px"></div><div class="card"><h2 class="blue">3 Wins Tomorrow</h2><input id="tomorrowWin1" placeholder="Tomorrow Win #1"><input id="tomorrowWin2" placeholder="Tomorrow Win #2" style="margin-top:10px"><input id="tomorrowWin3" placeholder="Tomorrow Win #3" style="margin-top:10px"></div></div>
+</section>
+<section id="skills" class="page">
+<div class="header"><div><div class="eyebrow">Skill Development</div><h1 class="title">Skills</h1><p class="subtitle">Workspaces for golf, chess, piano, and drawing. Notes, goals, and lesson videos save locally.</p></div><button class="action primary" onclick="saveSkills()">Save Skills</button></div><div class="grid" id="skillCards"></div>
+</section>
+<section id="schedule" class="page">
+<div class="header"><div><div class="eyebrow">Daily Structure</div><h1 class="title">Schedule</h1><p class="subtitle">Turn your day into a checklist. Execute the blocks and track completion.</p></div><button class="action" onclick="resetSchedule()">Reset Day</button></div><div class="card"><div id="routineList"></div></div>
+</section>
+<section id="coach" class="page">
+<div class="header"><div><div class="eyebrow">Future Intelligence</div><h1 class="title">Coach</h1><p class="subtitle">Weekly reviews, performance notes, and future recommendations.</p></div></div><div class="grid"><div class="card"><h3>Weekly Review</h3><p class="muted">Review what worked, what slipped, and what to attack next week.</p></div><div class="card"><h3>Performance Notes</h3><textarea id="coachNotes" placeholder="What did I learn this week?" oninput="saveCoachNotes()"></textarea></div></div>
+</section>
+<section id="devlab" class="page">
+<div class="header"><div><div class="eyebrow">Upgrade Command Center</div><h1 class="title">AI Code Builder</h1><p class="subtitle">Generate elite prompts for improving this exact app without breaking it.</p></div></div><div class="grid"><div class="card"><h2 class="gold">Feature Request</h2><textarea id="aiPrompt" placeholder="Describe the upgrade you want...">Make the sections wayy better and have actually things that I can use it for.</textarea><button class="action primary" style="margin-top:14px" onclick="generateMasterPrompt()">Generate Master Prompt</button></div><div class="card"><h2 class="blue">Rules Built In</h2><p class="muted" style="line-height:1.8">Preserve pages, keep dark matte style, use localStorage, stay mobile-ready, avoid broken interactions, and make it feel like a polished paid product.</p></div></div><div class="card" style="margin-top:18px"><h2>Generated Prompt</h2><textarea id="masterPrompt" style="min-height:260px" readonly></textarea></div>
+</section>
+</main>
+<div id="focusOverlay" class="focus-overlay"><div class="eyebrow">Monk Mode</div><h1 class="title">Focus Mode</h1><div id="focusTimer" class="focus-time">25:00</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button class="action primary" onclick="startFocus()">Start</button><button class="action" onclick="pauseFocus()">Pause</button><button class="action" onclick="resetFocus()">Reset</button><button class="action danger" onclick="toggleFocusMode()">Exit</button></div></div>
 <script>
-function toggleFocusMode(){
-const overlay=document.getElementById('focusOverlay');
-overlay.style.display=overlay.style.display==='flex'?'none':'flex';
-}
-
-function generatePrompt(){
-const prompts=['Dragon','Knight','Cyberpunk City','Samurai','Tiger','Robot','Spaceship','Wizard','Castle','Supercar'];
-const random=prompts[Math.floor(Math.random()*prompts.length)];
-document.getElementById('promptBox').innerText=random;
-}
-
-function generateCodePrompt(){
-const userPrompt=document.getElementById('aiPrompt').value;
-
-const finalPrompt=`You are an elite senior front-end engineer and UI/UX designer. You are improving a single-file HTML app called 1% Better Tracker.
-
-Current App Context:
-- It is a premium dark performance dashboard.
-- It uses matte black, charcoal, gold, and blue.
-- It has these pages: Dashboard, Track, Wins, Coach, Skills, Schedule, Dev Lab, and Focus Mode.
-- It is built as one index.html file using HTML, CSS, and vanilla JavaScript.
-- It must work on phone and computer.
-
-Your Mission:
-Make this the best version of the website possible. Improve the app using ideas from elite life operating systems, creator dashboards, money trackers, habit trackers, daily schedule apps, hobby trackers, and premium self-improvement dashboards. Add only ideas that fit this user: school, discipline, golf, chess, piano, drawing, business, fitness, content creation, and daily improvement.
-
-Add the requested feature at a production-quality level without breaking anything already working.
-
-Feature Request:
-${userPrompt}
-
-Strict Rules:
-1. Keep the same visual style: dark matte black, premium, clean, calm, high-performance.
-2. Preserve every existing interaction and page.
-3. Make the app feel like a polished paid product, not a basic tracker.
-4. Use smooth animations, strong spacing, modern cards, and responsive layouts.
-5. Improve organization before adding clutter.
-6. Do not delete existing sections unless specifically asked.
-7. Do not break navigation, Focus Mode, Skills, Wins, Track, Coach, Schedule, AI Code Builder, or Dashboard.
-8. Use localStorage for any data that should be saved.
-9. Make the UI mobile + desktop optimized.
-10. Add clear IDs/classes so future edits are easy.
-11. Avoid messy duplicated code.
-12. Use scalable modular JavaScript functions.
-13. Test mentally for syntax errors before giving the final answer.
-14. Return the updated code section or full index.html depending on what is safest.
-15. Explain briefly where to paste the code.
-
-Quality Bar:
-The result should look like it belongs in a polished paid productivity app, not a school project.
-
-Now build the feature.`;
-
-document.getElementById('masterPrompt').value=finalPrompt;
-}
-
-function copyMasterPrompt(){
-const textarea=document.getElementById('masterPrompt');
-textarea.select();
-document.execCommand('copy');
-alert('Elite prompt copied.');
-}
-
-function showPage(id){
-document.querySelectorAll('.page').forEach(page=>{
-page.classList.remove('active');
-});
-
-document.getElementById(id).classList.add('active');
-}
+var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+var habits=[{name:'Meditation',cat:'Non-Negotiables',color:'gold',type:'check'},{name:'Daily Movement',cat:'Non-Negotiables',color:'gold',type:'check'},{name:'Journal',cat:'Non-Negotiables',color:'gold',type:'check'},{name:'Family Time',cat:'Non-Negotiables',color:'gold',type:'minutes'},{name:'Today Wins',cat:'Non-Negotiables',color:'gold',type:'check'},{name:'Tomorrow Wins',cat:'Non-Negotiables',color:'gold',type:'check'},{name:'Bible Passage',cat:'Non-Negotiables',color:'gold',type:'check'},{name:'Big 3',cat:'Growth and Development',color:'blue',type:'check'},{name:'Sales Activity',cat:'Growth and Development',color:'blue',type:'check'},{name:'Content Creation',cat:'Growth and Development',color:'blue',type:'check'},{name:'Task Delegation',cat:'Growth and Development',color:'blue',type:'check'},{name:'Read 1 Chapter',cat:'Growth and Development',color:'blue',type:'check'}];
+var skills=['Golf','Chess','Piano','Drawing'];
+var routine=[['6:00 AM','Wake up and lemon water'],['6:10 AM','Pray, journal, shower, hygiene, stretch'],['7:05 AM','Breakfast'],['7:35 AM','Morning jog'],['8:10 AM','Reading'],['8:45 AM','Business deep work'],['9:40 AM','Swim'],['10:15 AM','Lunch'],['10:45 AM','Sprints'],['11:35 AM','Piano'],['12:25 PM','Learning and research'],['2:05 PM','Dinner'],['2:55 PM','Family Time'],['4:30 PM','Evening Walk'],['9:30 PM','Wind Down'],['10:00 PM','Sleep']];
+var state=loadState();var focusSeconds=1500;var focusInterval=null;
+function defaultState(){return{logs:{},wins:{today:['','',''],tomorrow:['','','']},skills:{},routine:{},coachNotes:''};}
+function loadState(){var saved=localStorage.getItem('onePercentBetterState');return saved?JSON.parse(saved):defaultState();}
+function saveState(){localStorage.setItem('onePercentBetterState',JSON.stringify(state));renderDashboard();}
+function showPage(id){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});document.getElementById(id).classList.add('active');document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.toggle('active',b.dataset.page===id)});window.scrollTo(0,0);}
+function logKey(h,d){return h+'-'+d;}
+function isDone(h,d){var item=state.logs[logKey(h,d)];return habits[h].type==='minutes'?Number(item||0)>0:item===true;}
+function percentForDay(d){var done=0;habits.forEach(function(x,h){if(isDone(h,d)){done++;}});return Math.round(done/habits.length*100);}
+function percentForCategory(cat){var total=0;var done=0;habits.forEach(function(h,i){if(h.cat===cat){days.forEach(function(x,d){total++;if(isDone(i,d)){done++;}})}});return total?Math.round(done/total*100):0;}
+function weeklyPercent(){var done=0;var total=habits.length*7;habits.forEach(function(x,h){days.forEach(function(y,d){if(isDone(h,d)){done++;}})});return Math.round(done/total*100);}
+function streak(){var count=0;for(var d=0;d<7;d++){if(percentForDay(d)>=70){count++;}}return count;}
+function renderDashboard(){var weekly=weeklyPercent();var gold=percentForCategory('Non-Negotiables');var blue=percentForCategory('Growth and Development');var today=new Date().getDay();var index=today===0?6:today-1;var daily=percentForDay(index);document.getElementById('scoreCards').innerHTML='<div class="card"><h3>Daily Score</h3><div class="big gold">'+daily+'%</div></div><div class="card"><h3>Weekly Score</h3><div class="big blue">'+weekly+'%</div></div><div class="card"><h3>Monthly Score</h3><div class="big">'+Math.min(100,weekly+4)+'%</div></div><div class="card"><h3>Streak</h3><div class="big gold">'+streak()+'</div></div>';document.getElementById('goldBreakdown').style.width=gold+'%';document.getElementById('blueBreakdown').style.width=blue+'%';var bars='';days.forEach(function(day,i){var p=percentForDay(i);var color=i%2?'var(--blue)':'var(--gold)';bars+='<div title="'+day+' '+p+'%" style="height:'+Math.max(8,p)+'%;flex:1;background:'+color+';border-radius:12px 12px 0 0"></div>';});document.getElementById('miniTrend').innerHTML=bars;var wins=state.wins.tomorrow.filter(Boolean);document.getElementById('tomorrowReminder').innerHTML=wins.length?wins.map(function(w){return'<div class="list-item"><span>'+clean(w)+'</span><span class="tag bluetag">Tomorrow</span></div>';}).join(''):'<p class="muted">Add tomorrow wins on the Wins page.</p>';}
+function renderTrack(){document.getElementById('daySummary').innerHTML=days.map(function(day,i){return'<div class="day-pill"><strong>'+day+'</strong><span>'+percentForDay(i)+'%</span></div>';}).join('');var html='<tr><th>Habit</th>'+days.map(function(d){return'<th>'+d+'</th>';}).join('')+'</tr>';habits.forEach(function(h,hi){html+='<tr><td class="habit-name">'+h.name+'<div class="habit-cat '+h.color+'">'+h.cat+'</div></td>';days.forEach(function(day,di){var done=isDone(hi,di);var val=state.logs[logKey(hi,di)];var cls=done?(h.color==='gold'?'gold-done':'blue-done'):'';html+='<td><div class="cell '+cls+'" onclick="toggleHabit('+hi+','+di+')">'+(h.type==='minutes'&&done?val:'✓')+'</div></td>';});html+='</tr>';});document.getElementById('habitTable').innerHTML=html;var gold=percentForCategory('Non-Negotiables');var blue=percentForCategory('Growth and Development');document.getElementById('categorySummaries').innerHTML='<div class="card"><h3 class="gold">Non-Negotiables Score</h3><div class="big gold">'+gold+'%</div></div><div class="card"><h3 class="blue">Growth and Development Score</h3><div class="big blue">'+blue+'%</div></div>';}
+function toggleHabit(h,d){if(habits[h].type==='minutes'){var current=state.logs[logKey(h,d)]||'';var minutes=prompt('Family Time minutes:',current);if(minutes===null){return;}state.logs[logKey(h,d)]=Number(minutes)||0;}else{state.logs[logKey(h,d)]=!state.logs[logKey(h,d)];}saveState();renderTrack();}
+function resetWeek(){if(confirm('Reset this weekly habit grid?')){state.logs={};saveState();renderTrack();}}
+function saveWins(){state.wins.today=[document.getElementById('todayWin1').value,document.getElementById('todayWin2').value,document.getElementById('todayWin3').value];state.wins.tomorrow=[document.getElementById('tomorrowWin1').value,document.getElementById('tomorrowWin2').value,document.getElementById('tomorrowWin3').value];saveState();alert('Reflection saved.');}
+function loadWins(){for(var i=1;i<=3;i++){document.getElementById('todayWin'+i).value=state.wins.today[i-1]||'';document.getElementById('tomorrowWin'+i).value=state.wins.tomorrow[i-1]||'';}}
+function renderSkills(){var html='';skills.forEach(function(skill){var key=skill.toLowerCase();var data=state.skills[key]||{goal:'',notes:'',video:''};var color=(skill==='Chess'||skill==='Drawing')?'blue':'gold';html+='<div class="card"><h2 class="'+color+'">'+skill+'</h2><input id="'+key+'Goal" placeholder="Current goal" value="'+clean(data.goal||'')+'"><textarea id="'+key+'Notes" placeholder="Notes, drills, lessons, schedule..." style="margin-top:10px">'+clean(data.notes||'')+'</textarea><input id="'+key+'Video" placeholder="YouTube lesson link" value="'+clean(data.video||'')+'" style="margin-top:10px" oninput="previewVideo(\''+key+'\')"><div id="'+key+'Preview" class="video-preview">Paste a YouTube link to preview</div></div>';});document.getElementById('skillCards').innerHTML=html;skills.forEach(function(s){previewVideo(s.toLowerCase());});}
+function saveSkills(){skills.forEach(function(skill){var key=skill.toLowerCase();state.skills[key]={goal:document.getElementById(key+'Goal').value,notes:document.getElementById(key+'Notes').value,video:document.getElementById(key+'Video').value};});saveState();alert('Skills saved.');}
+function previewVideo(key){var el=document.getElementById(key+'Video');var box=document.getElementById(key+'Preview');if(!el||!box){return;}var id=getYoutubeId(el.value);box.innerHTML=id?'<iframe src="https://www.youtube.com/embed/'+id+'" allowfullscreen></iframe>':'Paste a YouTube link to preview';}
+function getYoutubeId(url){if(!url){return'';}if(url.indexOf('youtu.be/')>-1){return url.split('youtu.be/')[1].split('?')[0].split('&')[0];}if(url.indexOf('v=')>-1){return url.split('v=')[1].split('&')[0];}return'';}
+function renderRoutine(){document.getElementById('routineList').innerHTML=routine.map(function(r,i){return'<div class="routine-row"><strong>'+r[0]+'</strong><span>'+r[1]+'</span><input class="routine-check" type="checkbox" '+(state.routine[i]?'checked':'')+' onchange="state.routine['+i+']=this.checked;saveState()"></div>';}).join('');}
+function resetSchedule(){if(confirm('Reset today schedule?')){state.routine={};saveState();renderRoutine();}}
+function saveCoachNotes(){state.coachNotes=document.getElementById('coachNotes').value;saveState();}
+function generateMasterPrompt(){var userPrompt=document.getElementById('aiPrompt').value.trim();document.getElementById('masterPrompt').value='You are an elite senior front-end engineer and UI/UX designer. You are improving a single-file HTML app called 1% Better Tracker. Current app: premium dark dashboard, matte black, charcoal, gold, blue, with pages Dashboard, Track, Wins, Coach, Skills, Schedule, AI Code Builder, and Focus Mode. Feature Request: '+userPrompt+' Rules: preserve all pages, keep the premium dark design, use localStorage, make it responsive, avoid broken interactions, and return the safest updated code.';}
+function toggleFocusMode(){document.getElementById('focusOverlay').classList.toggle('active');}
+function updateFocus(){var m=String(Math.floor(focusSeconds/60)).padStart(2,'0');var s=String(focusSeconds%60).padStart(2,'0');document.getElementById('focusTimer').innerText=m+':'+s;}
+function startFocus(){clearInterval(focusInterval);focusInterval=setInterval(function(){if(focusSeconds>0){focusSeconds--;updateFocus();}},1000);}
+function pauseFocus(){clearInterval(focusInterval);}
+function resetFocus(){pauseFocus();focusSeconds=1500;updateFocus();}
+function clean(str){return String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
+function init(){renderDashboard();renderTrack();loadWins();renderSkills();renderRoutine();document.getElementById('coachNotes').value=state.coachNotes||'';updateFocus();}
+init();
 </script>
-
 </body>
 </html>
 ```
