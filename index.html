@@ -67,7 +67,29 @@
       color: var(--gold);
     }
 
+    .nav-group {
+      margin-bottom: 22px;
+    }
+
+    .nav-label {
+      color: #6f6f6f;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      font-weight: 800;
+      margin: 0 0 9px 4px;
+    }
+
+    .nav-divider {
+      height: 1px;
+      background: #242424;
+      margin: 18px 0;
+    }
+
     .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       width: 100%;
       padding: 13px 14px;
       border-radius: 14px;
@@ -76,6 +98,7 @@
       margin-bottom: 10px;
       text-align: left;
       border: 1px solid transparent;
+      font-size: 14px;
     }
 
     .nav-btn:hover,
@@ -83,6 +106,39 @@
       background: #222;
       border-color: #3a3a3a;
       transform: translateX(3px);
+    }
+
+    .nav-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      background: #222;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex: 0 0 auto;
+    }
+
+    .nav-btn.active .nav-icon {
+      background: rgba(212, 175, 55, 0.18);
+      color: var(--gold);
+    }
+
+    .focus-nav-btn {
+      width: 100%;
+      margin-top: 4px;
+      padding: 14px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.95), rgba(143, 112, 28, 0.95));
+      color: #080808;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .focus-nav-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
     }
 
     .main {
@@ -506,6 +562,7 @@
         gap: 8px;
         overflow: auto;
         padding: 14px;
+        align-items: center;
       }
 
       .logo {
@@ -514,10 +571,26 @@
         font-size: 22px;
       }
 
+      .nav-group {
+        display: flex;
+        gap: 8px;
+        margin: 0;
+      }
+
+      .nav-label,
+      .nav-divider {
+        display: none;
+      }
+
       .nav-btn {
         min-width: max-content;
         margin: 0;
         text-align: center;
+      }
+
+      .focus-nav-btn {
+        min-width: max-content;
+        margin: 0;
       }
 
       .main {
@@ -548,18 +621,36 @@
 <body>
   <aside class="sidebar">
     <div class="logo">1% <span>Better</span></div>
-    <button class="nav-btn active" data-page="dashboard">Dashboard</button>
-    <button class="nav-btn" data-page="track">Track</button>
-    <button class="nav-btn" data-page="wins">Wins</button>
-    <button class="nav-btn" data-page="skills">Skills</button>
-    <button class="nav-btn" data-page="schedule">Schedule</button>
-    <button class="nav-btn" data-page="punchcards">Punch Cards</button>
-    <button class="nav-btn" data-page="ideas">Ideas Vault</button>
-    <button class="nav-btn" data-page="xp">XP System</button>
-    <button class="nav-btn" data-page="catholic">Catholic Study</button>
-    <button class="nav-btn" data-page="coach">Coach</button>
-    <button class="nav-btn" data-page="devlab">AI Code Builder</button>
-    <button class="nav-btn" id="focusOpenBtn">Focus Mode</button>
+
+    <div class="nav-group">
+      <div class="nav-label">Command Center</div>
+      <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span>Dashboard</button>
+      <button class="nav-btn" data-page="track"><span class="nav-icon">✓</span>Track</button>
+      <button class="nav-btn" data-page="wins"><span class="nav-icon">★</span>Wins</button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Daily Systems</div>
+      <button class="nav-btn" data-page="schedule"><span class="nav-icon">☼</span>Schedule</button>
+      <button class="nav-btn" data-page="skills"><span class="nav-icon">◆</span>Skills</button>
+      <button class="nav-btn" data-page="catholic"><span class="nav-icon">✚</span>Catholic Study</button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Growth Tools</div>
+      <button class="nav-btn" data-page="punchcards"><span class="nav-icon">▦</span>Punch Cards</button>
+      <button class="nav-btn" data-page="xp"><span class="nav-icon">XP</span>XP System</button>
+      <button class="nav-btn" data-page="ideas"><span class="nav-icon">✎</span>Ideas Vault</button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Build</div>
+      <button class="nav-btn" data-page="coach"><span class="nav-icon">◉</span>Coach</button>
+      <button class="nav-btn" data-page="devlab"><span class="nav-icon">⌘</span>AI Code Builder</button>
+    </div>
+
+    <div class="nav-divider"></div>
+    <button class="focus-nav-btn" id="focusOpenBtn">Enter Focus Mode</button>
   </aside>
 
   <main class="main">
@@ -1340,4 +1431,4 @@
     init();
   </script>
 </body>
-</html> 
+</html>
