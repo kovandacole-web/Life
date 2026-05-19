@@ -499,25 +499,28 @@ width:100%;
 </div>
 
 <div id="devlab" class="page">
-<h1 style="margin-bottom:24px;">Dev Lab AI</h1>
+<h1 style="margin-bottom:24px;">AI Code Builder</h1>
+<p style="color:#aaa;line-height:1.7;margin-bottom:24px;max-width:900px;">
+Use this page when you want to upgrade this app. Type the feature you want, generate a master prompt, then paste that prompt into ChatGPT or another coding AI. It is designed to protect the current layout, avoid broken buttons, and force cleaner code.
+</p>
 
 <div class="grid">
 <div class="card">
-<h2 class="gold">AI Build Prompt</h2>
-<textarea id="aiPrompt" placeholder="Example: Add a modern analytics graph with smooth animations and local storage saving..." style="min-height:220px"></textarea>
+<h2 class="gold">Feature Request</h2>
+<textarea id="aiPrompt" placeholder="Example: Add a premium analytics graph to the Dashboard that tracks weekly habit completion, saves data locally, works on mobile, and does not break the Track or Wins pages." style="min-height:220px"></textarea>
 <button class="save-btn" onclick="generateCodePrompt()">Generate Elite Prompt</button>
 </div>
 
 <div class="card">
-<h2 class="blue">System Instructions</h2>
+<h2 class="blue">Built-In Rules</h2>
 <div style="color:#b5b5b5;line-height:1.8;margin-top:14px;">
-<p>• Build production-level code</p>
-<p>• Use modern UI/UX principles</p>
-<p>• Keep all existing functionality stable</p>
-<p>• Optimize for mobile + desktop</p>
-<p>• Maintain dark premium aesthetic</p>
-<p>• Avoid breaking previous systems</p>
-<p>• Write scalable clean architecture</p>
+<p>• Keep the premium black / gold / blue design.</p>
+<p>• Do not remove existing pages or buttons.</p>
+<p>• Test navigation after every update.</p>
+<p>• Use clean HTML, CSS, and JavaScript.</p>
+<p>• Save user data with localStorage when needed.</p>
+<p>• Keep the app responsive on phone and computer.</p>
+<p>• Add features in small safe sections.</p>
 </div>
 </div>
 </div>
@@ -574,7 +577,37 @@ document.getElementById('promptBox').innerText=random;
 function generateCodePrompt(){
 const userPrompt=document.getElementById('aiPrompt').value;
 
-const finalPrompt=`You are an elite senior software engineer building a premium life operating system web app.\n\nRequirements:\n- Production-quality code\n- Modern responsive UI\n- Maintain all previous functionality\n- Dark matte black aesthetic\n- Smooth animations\n- Clean architecture\n- Mobile + desktop optimized\n- No broken interactions\n- Preserve existing design system\n- Use scalable modular code\n\nFeature Request:\n${userPrompt}\n\nReturn ONLY the final code with explanations kept minimal.`;
+const finalPrompt=`You are an elite senior front-end engineer and UI/UX designer. You are improving a single-file HTML app called 1% Better Tracker.
+
+Current App Context:
+- It is a premium dark performance dashboard.
+- It uses matte black, charcoal, gold, and blue.
+- It has these pages: Dashboard, Track, Wins, Coach, Skills, Schedule, Dev Lab, and Focus Mode.
+- It is built as one index.html file using HTML, CSS, and vanilla JavaScript.
+- It must work on phone and computer.
+
+Your Mission:
+Add the requested feature at a production-quality level without breaking anything already working.
+
+Feature Request:
+${userPrompt}
+
+Strict Rules:
+1. Keep the same visual style: dark, premium, clean, calm, high-performance.
+2. Do not delete existing sections unless specifically asked.
+3. Do not break navigation, Focus Mode, Skills, Wins, Track, or Dashboard.
+4. Use localStorage for any data that should be saved.
+5. Make the UI responsive.
+6. Add clear IDs/classes so future edits are easy.
+7. Avoid messy duplicated code.
+8. Test mentally for syntax errors before giving the final answer.
+9. Return the updated code section or full index.html depending on what is safest.
+10. Explain briefly where to paste the code.
+
+Quality Bar:
+The result should look like it belongs in a polished paid productivity app, not a school project.
+
+Now build the feature.`;
 
 document.getElementById('masterPrompt').value=finalPrompt;
 }
