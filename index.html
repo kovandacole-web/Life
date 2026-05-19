@@ -216,6 +216,7 @@ width:100%;
 <button class="nav-btn" onclick="showPage('coach')">Coach</button>
 <button class="nav-btn" onclick="showPage('skills')">Skills</button>
 <button class="nav-btn" onclick="showPage('schedule')">Schedule</button>
+<button class="nav-btn" onclick="showPage('devlab')">Dev Lab</button>
 <button class="nav-btn" onclick="toggleFocusMode()">Focus Mode</button>
 </div>
 
@@ -497,6 +498,48 @@ width:100%;
 </div>
 </div>
 
+<div id="devlab" class="page">
+<h1 style="margin-bottom:24px;">Dev Lab AI</h1>
+
+<div class="grid">
+<div class="card">
+<h2 class="gold">AI Build Prompt</h2>
+<textarea id="aiPrompt" placeholder="Example: Add a modern analytics graph with smooth animations and local storage saving..." style="min-height:220px"></textarea>
+<button class="save-btn" onclick="generateCodePrompt()">Generate Elite Prompt</button>
+</div>
+
+<div class="card">
+<h2 class="blue">System Instructions</h2>
+<div style="color:#b5b5b5;line-height:1.8;margin-top:14px;">
+<p>• Build production-level code</p>
+<p>• Use modern UI/UX principles</p>
+<p>• Keep all existing functionality stable</p>
+<p>• Optimize for mobile + desktop</p>
+<p>• Maintain dark premium aesthetic</p>
+<p>• Avoid breaking previous systems</p>
+<p>• Write scalable clean architecture</p>
+</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:24px;">
+<h2 style="margin-bottom:18px;">Generated Master Prompt</h2>
+<textarea id="masterPrompt" style="min-height:340px"></textarea>
+<button class="save-btn" onclick="copyMasterPrompt()">Copy Prompt</button>
+</div>
+
+<div class="card" style="margin-top:24px;">
+<h2 style="margin-bottom:18px;">How To Use</h2>
+<div style="color:#aaa;line-height:1.9;">
+<p>1. Describe exactly what feature you want.</p>
+<p>2. Click Generate Elite Prompt.</p>
+<p>3. Copy the generated prompt.</p>
+<p>4. Paste it into ChatGPT or another coding AI.</p>
+<p>5. Paste the returned code back into your project.</p>
+</div>
+</div>
+</div>
+
 <div id="coach" class="page">
 <h1 style="margin-bottom:24px;">Coach</h1>
 
@@ -526,6 +569,21 @@ function generatePrompt(){
 const prompts=['Dragon','Knight','Cyberpunk City','Samurai','Tiger','Robot','Spaceship','Wizard','Castle','Supercar'];
 const random=prompts[Math.floor(Math.random()*prompts.length)];
 document.getElementById('promptBox').innerText=random;
+}
+
+function generateCodePrompt(){
+const userPrompt=document.getElementById('aiPrompt').value;
+
+const finalPrompt=`You are an elite senior software engineer building a premium life operating system web app.\n\nRequirements:\n- Production-quality code\n- Modern responsive UI\n- Maintain all previous functionality\n- Dark matte black aesthetic\n- Smooth animations\n- Clean architecture\n- Mobile + desktop optimized\n- No broken interactions\n- Preserve existing design system\n- Use scalable modular code\n\nFeature Request:\n${userPrompt}\n\nReturn ONLY the final code with explanations kept minimal.`;
+
+document.getElementById('masterPrompt').value=finalPrompt;
+}
+
+function copyMasterPrompt(){
+const textarea=document.getElementById('masterPrompt');
+textarea.select();
+document.execCommand('copy');
+alert('Elite prompt copied.');
 }
 
 function showPage(id){
