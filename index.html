@@ -214,11 +214,30 @@ width:100%;
 <button class="nav-btn" onclick="showPage('track')">Track</button>
 <button class="nav-btn" onclick="showPage('wins')">Wins</button>
 <button class="nav-btn" onclick="showPage('coach')">Coach</button>
+<button class="nav-btn" onclick="showPage('skills')">Skills</button>
+<button class="nav-btn" onclick="showPage('schedule')">Schedule</button>
+<button class="nav-btn" onclick="toggleFocusMode()">Focus Mode</button>
 </div>
 
 <div class="main">
 
 <div id="dashboard" class="page active">
+<div class="grid" style="margin-bottom:24px;">
+<div class="card">
+<h3>Current Focus</h3>
+<p style="margin-top:12px;color:#aaa;line-height:1.7;">Golf • Chess • Piano • Drawing</p>
+</div>
+<div class="card">
+<h3>Consistency</h3>
+<div class="big gold" id="streakCounter">12</div>
+<p style="margin-top:12px;color:#aaa;">Day Streak</p>
+</div>
+<div class="card">
+<h3>Completion Rate</h3>
+<div class="big blue">87%</div>
+<p style="margin-top:12px;color:#aaa;">This Week</p>
+</div>
+</div>
 <h1 style="margin-bottom:24px;">Performance Dashboard</h1>
 
 <div class="grid">
@@ -423,6 +442,61 @@ width:100%;
 <button class="save-btn">Save Reflection</button>
 </div>
 
+<div id="skills" class="page">
+<h1 style="margin-bottom:24px;">Skills</h1>
+
+<div class="grid">
+<div class="card">
+<h2 class="gold">Golf</h2>
+<textarea placeholder="Practice notes, drills, swing thoughts..." style="min-height:120px"></textarea>
+<input type="text" placeholder="Paste YouTube lesson link">
+</div>
+
+<div class="card">
+<h2 class="blue">Chess</h2>
+<textarea placeholder="Study notes, openings, tactics..." style="min-height:120px"></textarea>
+<input type="text" placeholder="Paste YouTube lesson link">
+</div>
+</div>
+
+<div class="grid" style="margin-top:24px;">
+<div class="card">
+<h2 class="gold">Piano</h2>
+<textarea placeholder="Practice schedule, techniques, songs..." style="min-height:120px"></textarea>
+<input type="text" placeholder="Paste YouTube lesson link">
+</div>
+
+<div class="card">
+<h2 class="blue">Drawing</h2>
+<textarea placeholder="Drawing notes and ideas..." style="min-height:120px"></textarea>
+<button class="save-btn" onclick="generatePrompt()">Generate Prompt</button>
+<p id="promptBox" style="margin-top:16px;font-size:20px;font-weight:700;">Knight</p>
+</div>
+</div>
+</div>
+
+<div id="schedule" class="page">
+<h1 style="margin-bottom:24px;">Daily Schedule</h1>
+
+<div class="card">
+<div style="display:grid;gap:14px;">
+<div><strong>6:00 AM</strong> — Wake Up</div>
+<div><strong>6:10 AM</strong> — Morning Routine</div>
+<div><strong>7:05 AM</strong> — Breakfast</div>
+<div><strong>7:35 AM</strong> — Morning Jog</div>
+<div><strong>8:10 AM</strong> — Reading</div>
+<div><strong>8:45 AM</strong> — Biz</div>
+<div><strong>9:40 AM</strong> — Swim</div>
+<div><strong>10:45 AM</strong> — Sprints</div>
+<div><strong>11:35 AM</strong> — Piano</div>
+<div><strong>12:25 PM</strong> — Learning</div>
+<div><strong>2:05 PM</strong> — Dinner</div>
+<div><strong>4:30 PM</strong> — Evening Walk</div>
+<div><strong>10:00 PM</strong> — Sleep</div>
+</div>
+</div>
+</div>
+
 <div id="coach" class="page">
 <h1 style="margin-bottom:24px;">Coach</h1>
 
@@ -436,7 +510,24 @@ Coach systems and advanced analytics will be added here later.
 
 </div>
 
+<div id="focusOverlay" style="position:fixed;inset:0;background:#050505;display:none;align-items:center;justify-content:center;flex-direction:column;z-index:9999;">
+<h1 style="font-size:72px;">Focus Mode</h1>
+<p style="margin-top:18px;color:#888;">One task. Zero distractions.</p>
+<button class="save-btn" style="margin-top:24px;" onclick="toggleFocusMode()">Exit</button>
+</div>
+
 <script>
+function toggleFocusMode(){
+const overlay=document.getElementById('focusOverlay');
+overlay.style.display=overlay.style.display==='flex'?'none':'flex';
+}
+
+function generatePrompt(){
+const prompts=['Dragon','Knight','Cyberpunk City','Samurai','Tiger','Robot','Spaceship','Wizard','Castle','Supercar'];
+const random=prompts[Math.floor(Math.random()*prompts.length)];
+document.getElementById('promptBox').innerText=random;
+}
+
 function showPage(id){
 document.querySelectorAll('.page').forEach(page=>{
 page.classList.remove('active');
