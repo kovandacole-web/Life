@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -31,9 +33,7 @@
       display: flex;
     }
 
-    button,
-    input,
-    textarea {
+    button, input, textarea {
       font: inherit;
     }
 
@@ -44,7 +44,7 @@
     }
 
     .sidebar {
-      width: 260px;
+      width: 270px;
       height: 100vh;
       position: fixed;
       left: 0;
@@ -80,16 +80,7 @@
       margin: 0 0 9px 4px;
     }
 
-    .nav-divider {
-      height: 1px;
-      background: #242424;
-      margin: 18px 0;
-    }
-
     .nav-btn {
-      display: flex;
-      align-items: center;
-      gap: 10px;
       width: 100%;
       padding: 13px 14px;
       border-radius: 14px;
@@ -98,11 +89,13 @@
       margin-bottom: 10px;
       text-align: left;
       border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 14px;
     }
 
-    .nav-btn:hover,
-    .nav-btn.active {
+    .nav-btn:hover, .nav-btn.active {
       background: #222;
       border-color: #3a3a3a;
       transform: translateX(3px);
@@ -116,7 +109,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 13px;
       flex: 0 0 auto;
     }
 
@@ -127,7 +120,7 @@
 
     .focus-nav-btn {
       width: 100%;
-      margin-top: 4px;
+      margin-top: 8px;
       padding: 14px;
       border-radius: 16px;
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.95), rgba(143, 112, 28, 0.95));
@@ -136,14 +129,9 @@
       text-align: center;
     }
 
-    .focus-nav-btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.08);
-    }
-
     .main {
-      margin-left: 260px;
-      width: calc(100% - 260px);
+      margin-left: 270px;
+      width: calc(100% - 270px);
       padding: 30px;
     }
 
@@ -157,14 +145,8 @@
     }
 
     @keyframes fade {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .header {
@@ -214,8 +196,7 @@
       border-color: #3e3e3e;
     }
 
-    .card h2,
-    .card h3 {
+    .card h2, .card h3 {
       margin-bottom: 12px;
     }
 
@@ -225,17 +206,9 @@
       letter-spacing: -1.5px;
     }
 
-    .gold {
-      color: var(--gold);
-    }
-
-    .blue {
-      color: var(--blue);
-    }
-
-    .muted {
-      color: var(--muted);
-    }
+    .gold { color: var(--gold); }
+    .blue { color: var(--blue); }
+    .muted { color: var(--muted); }
 
     .action {
       padding: 12px 16px;
@@ -255,21 +228,12 @@
       font-weight: 900;
     }
 
-    .primary:hover {
-      background: #e2bf54;
-    }
-
     .danger {
       background: #351919;
       color: white;
     }
 
-    .danger:hover {
-      background: #4a2020;
-    }
-
-    input,
-    textarea {
+    input, textarea {
       width: 100%;
       background: #101010;
       color: white;
@@ -284,8 +248,7 @@
       resize: vertical;
     }
 
-    input:focus,
-    textarea:focus {
+    input:focus, textarea:focus {
       border-color: #555;
     }
 
@@ -303,13 +266,8 @@
       transition: 0.25s ease;
     }
 
-    .fill.goldfill {
-      background: var(--gold);
-    }
-
-    .fill.bluefill {
-      background: var(--blue);
-    }
+    .fill.goldfill { background: var(--gold); }
+    .fill.bluefill { background: var(--blue); }
 
     .day-summary {
       display: grid;
@@ -344,8 +302,7 @@
       background: #111;
     }
 
-    th,
-    td {
+    th, td {
       padding: 14px;
       text-align: center;
       border-bottom: 1px solid #242424;
@@ -418,15 +375,8 @@
       background: #222;
     }
 
-    .tag.goldtag {
-      background: var(--gold);
-      color: #0b0b0b;
-    }
-
-    .tag.bluetag {
-      background: var(--blue);
-      color: white;
-    }
+    .tag.goldtag { background: var(--gold); color: #0b0b0b; }
+    .tag.bluetag { background: var(--blue); color: white; }
 
     .video-preview {
       aspect-ratio: 16 / 9;
@@ -450,8 +400,7 @@
       border-radius: 16px;
     }
 
-    .routine-row,
-    .study-row {
+    .routine-row, .study-row {
       display: grid;
       grid-template-columns: 110px 1fr auto;
       gap: 12px;
@@ -460,13 +409,11 @@
       border-bottom: 1px solid #242424;
     }
 
-    .routine-row:last-child,
-    .study-row:last-child {
+    .routine-row:last-child, .study-row:last-child {
       border-bottom: 0;
     }
 
-    .routine-check,
-    .study-row input[type="checkbox"] {
+    .routine-check, .study-row input[type="checkbox"] {
       width: 22px;
       height: 22px;
       accent-color: var(--gold);
@@ -549,10 +496,7 @@
     }
 
     @media (max-width: 860px) {
-      body {
-        display: block;
-      }
-
+      body { display: block; }
       .sidebar {
         position: sticky;
         top: 0;
@@ -564,57 +508,36 @@
         padding: 14px;
         align-items: center;
       }
-
       .logo {
         min-width: 130px;
         margin: 0;
         font-size: 22px;
       }
-
       .nav-group {
         display: flex;
         gap: 8px;
         margin: 0;
       }
-
-      .nav-label,
-      .nav-divider {
-        display: none;
-      }
-
+      .nav-label { display: none; }
       .nav-btn {
         min-width: max-content;
         margin: 0;
         text-align: center;
       }
-
+      .nav-icon { display: none; }
       .focus-nav-btn {
         min-width: max-content;
         margin: 0;
       }
-
       .main {
         margin-left: 0;
         width: 100%;
         padding: 18px;
       }
-
-      .title {
-        font-size: 30px;
-      }
-
-      .day-summary {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .routine-row,
-      .study-row {
-        grid-template-columns: 1fr;
-      }
-
-      .focus-time {
-        font-size: 58px;
-      }
+      .title { font-size: 30px; }
+      .day-summary { grid-template-columns: repeat(2, 1fr); }
+      .routine-row, .study-row { grid-template-columns: 1fr; }
+      .focus-time { font-size: 58px; }
     }
   </style>
 </head>
@@ -649,7 +572,6 @@
       <button class="nav-btn" data-page="devlab"><span class="nav-icon">⌘</span>AI Code Builder</button>
     </div>
 
-    <div class="nav-divider"></div>
     <button class="focus-nav-btn" id="focusOpenBtn">Enter Focus Mode</button>
   </aside>
 
@@ -1389,6 +1311,7 @@
       document.querySelectorAll('[data-page]').forEach(button => {
         button.addEventListener('click', () => showPage(button.dataset.page));
       });
+
       document.querySelectorAll('[data-page-link]').forEach(button => {
         button.addEventListener('click', () => showPage(button.dataset.pageLink));
       });
@@ -1432,4 +1355,16 @@
   </script>
 </body>
 </html>
- 
+"""
+
+path = Path("/mnt/data/index.html")
+path.write_text(html, encoding="utf-8")
+
+# quick sanity checks
+text = path.read_text(encoding="utf-8")
+assert text.strip().lower().startswith("<!doctype html>")
+assert text.count("<script>") == text.count("</script>") == 1
+assert text.count("<style>") == text.count("</style>") == 1
+assert "</html>" in text
+
+path.as_posix()
