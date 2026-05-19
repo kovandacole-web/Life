@@ -826,13 +826,86 @@
     <section id="schedule" class="page">
       <div class="header">
         <div>
-          <div class="eyebrow">Daily Structure</div>
+          <div class="eyebrow">Discipline + Athlete Summer System</div>
           <h1 class="title">Schedule</h1>
-          <p class="subtitle">Turn your day into a checklist. Execute the blocks and track completion.</p>
+          <p class="subtitle">Built around waking up at 6:00 AM, no phone for the first hour, speed training, business, skills, Catholic study, and elite recovery.</p>
         </div>
         <button class="action" id="resetScheduleBtn">Reset Day</button>
       </div>
-      <div class="card"><div id="routineList"></div></div>
+
+      <div class="grid" style="margin-bottom:18px">
+        <div class="card">
+          <h2 class="gold">Daily Rules</h2>
+          <div class="list">
+            <div class="list-item"><span>No phone first hour</span><span class="tag goldtag">Required</span></div>
+            <div class="list-item"><span>Wall stare before deep work</span><span class="tag goldtag">Reset</span></div>
+            <div class="list-item"><span>Train hard, recover smart</span><span class="tag bluetag">Athlete</span></div>
+            <div class="list-item"><span>Sleep target: 8.5–9 hours</span><span class="tag bluetag">Recovery</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="blue">Daily Priorities</h2>
+          <p class="muted" style="line-height:1.8">
+            Fitness / speed training<br>
+            Business and money work<br>
+            Chess, piano, and drawing<br>
+            Reading + Catholic study<br>
+            Golf course 2 days per week
+          </p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:18px">
+        <h2 class="gold">Normal Training Day</h2>
+        <div id="routineList"></div>
+      </div>
+
+      <div class="grid" style="margin-bottom:18px">
+        <div class="card">
+          <h2 class="blue">Weekly Training Split</h2>
+          <div class="list">
+            <div class="list-item"><span><strong>Monday</strong> — Speed + Business + Skills</span><span class="tag bluetag">Hard</span></div>
+            <div class="list-item"><span><strong>Tuesday</strong> — Long Jog + Swim</span><span class="tag">Endurance</span></div>
+            <div class="list-item"><span><strong>Wednesday</strong> — Speed + Sport Practice</span><span class="tag bluetag">Hard</span></div>
+            <div class="list-item"><span><strong>Thursday</strong> — Recovery + Skills</span><span class="tag goldtag">Recover</span></div>
+            <div class="list-item"><span><strong>Friday</strong> — Speed + Competition Day</span><span class="tag bluetag">Fast</span></div>
+            <div class="list-item"><span><strong>Saturday</strong> — Golf Course Day</span><span class="tag goldtag">Golf</span></div>
+            <div class="list-item"><span><strong>Sunday</strong> — Golf + Meal Prep + Weekly Review</span><span class="tag goldtag">Plan</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="gold">Golf Course Day</h2>
+          <div class="list">
+            <div class="list-item"><span>2-hour golf course block</span><span class="tag goldtag">Main</span></div>
+            <div class="list-item"><span>Light mobility before playing</span><span class="tag">Warm-up</span></div>
+            <div class="list-item"><span>Write 3 swing/strategy notes after</span><span class="tag bluetag">Review</span></div>
+            <div class="list-item"><span>Keep other training lighter</span><span class="tag">Smart</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="blue">Recovery Day</h2>
+          <div class="list">
+            <div class="list-item"><span>Mobility</span><span class="tag goldtag">Required</span></div>
+            <div class="list-item"><span>Easy swim or walk</span><span class="tag">Light</span></div>
+            <div class="list-item"><span>Extra chess, piano, or drawing</span><span class="tag bluetag">Skills</span></div>
+            <div class="list-item"><span>Business deep work if energy is good</span><span class="tag">Optional</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="gold">Sunday Meal Prep</h2>
+          <p class="muted" style="line-height:1.8;margin-bottom:12px">Sunday night, prep the week so discipline is easier.</p>
+          <div class="list">
+            <div class="list-item"><span>Chicken or ground beef</span><span class="tag goldtag">Protein</span></div>
+            <div class="list-item"><span>Rice + broccoli/carrots</span><span class="tag">Meals</span></div>
+            <div class="list-item"><span>Eggs, fruit, Greek yogurt</span><span class="tag bluetag">Ready</span></div>
+            <div class="list-item"><span>Nuts/snacks packed</span><span class="tag">Prep</span></div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="punchcards" class="page">
@@ -997,22 +1070,31 @@
 
     const skills = ['Golf', 'Chess', 'Piano', 'Drawing'];
     const routine = [
-      ['6:00 AM', 'Wake up and lemon water'],
-      ['6:10 AM', 'Pray, journal, shower, hygiene, stretch'],
-      ['7:05 AM', 'Breakfast'],
-      ['7:35 AM', 'Morning jog'],
-      ['8:10 AM', 'Reading'],
-      ['8:45 AM', 'Business deep work'],
-      ['9:40 AM', 'Swim'],
-      ['10:15 AM', 'Lunch'],
-      ['10:45 AM', 'Sprints'],
-      ['11:35 AM', 'Piano'],
-      ['12:25 PM', 'Learning and research'],
-      ['2:05 PM', 'Dinner'],
-      ['2:55 PM', 'Family Time'],
-      ['4:30 PM', 'Evening Walk'],
-      ['9:30 PM', 'Wind Down'],
-      ['10:00 PM', 'Sleep']
+      ['6:00 AM', 'Wake up, water, make bed, quick prayer — no phone'],
+      ['6:10 AM', 'Wall stare dopamine reset — no music, no phone'],
+      ['6:25 AM', 'Mobility + dynamic warm-up: ankles, hips, hamstrings, glutes'],
+      ['6:45 AM', 'Morning run block: speed, long jog, or recovery walk depending on the day'],
+      ['7:25 AM', 'Breakfast: protein, fruit, whole grain, water'],
+      ['8:00 AM', 'Catholic study + reading part 1: Bible, notes, reflection'],
+      ['8:45 AM', 'Wall stare reset before business'],
+      ['8:50 AM', 'Business / money work: product ideas, selling, learning, content, app building'],
+      ['9:50 AM', 'Break, walk, snack — no scrolling'],
+      ['10:10 AM', 'Chess: study, puzzles, playing, or mistake review'],
+      ['11:00 AM', 'Piano: scales, song practice, hard-part repetition'],
+      ['11:45 AM', 'Lunch: protein + rice/whole grain + vegetables'],
+      ['12:30 PM', 'Rest / reset so you do not burn out'],
+      ['1:00 PM', 'Drawing: prompt, technique practice, or reference drawing'],
+      ['1:30 PM', 'Reading / Catholic study part 2'],
+      ['2:15 PM', 'Sport practice / skill block: agility, coordination, golf practice, or speed technique'],
+      ['3:15 PM', 'Swim / recovery conditioning: easy, technique, or recovery swim'],
+      ['4:00 PM', 'Free time, family time, or recovery'],
+      ['4:45 PM', 'Optional work block: business, YouTube, chess review, golf notes, or app building'],
+      ['5:30 PM', 'Dinner window / family time starts flexible'],
+      ['6:30 PM', 'Light evening block: walk, stretch, faith reading, drawing, or family'],
+      ['7:30 PM', 'Dinner / cleanup / reset for tomorrow'],
+      ['8:30 PM', 'Wind down: light reading, stretch, journal, wins today, wins tomorrow'],
+      ['9:15 PM', 'Night routine: shower, brush teeth, clothes ready, no phone if possible'],
+      ['9:30–10:00 PM', 'Lights out target for 8.5–9 hours of sleep']
     ];
 
     let state = loadState();
@@ -1521,4 +1603,3 @@
   </script>
 </body>
 </html>
- 
