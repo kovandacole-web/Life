@@ -731,9 +731,9 @@
 
     <div class="nav-group">
       <div class="nav-label">Learning</div>
-      <button class="nav-btn" data-page="skills">
-        <span class="nav-icon">◆</span>
-        <span class="nav-text"><span class="nav-title">Skills</span><span class="nav-desc">Golf, chess, piano, drawing</span></span>
+      $1<button class="nav-btn" data-page="speaking">
+        <span class="nav-icon">🎙</span>
+        <span class="nav-text"><span class="nav-title">Speaking Practice</span><span class="nav-desc">Voice, confidence, speeches</span></span>
       </button>
       <button class="nav-btn" data-page="catholic">
         <span class="nav-icon">✚</span>
@@ -862,6 +862,51 @@
         </div>
       </div>
       <div class="grid" id="skillCards"></div>
+    </section>
+
+    <section id="speaking" class="page">
+      <div class="header">
+        <div>
+          <div class="eyebrow">CEO Communication Training</div>
+          <h1 class="title">Speaking Practice</h1>
+          <p class="subtitle">Practice clear speaking, confidence, vocal variety, posture, and strong message structure.</p>
+        </div>
+        <button class="action primary" id="saveSpeechBtn">Save Speaking Practice</button>
+      </div>
+
+      <div class="grid" style="margin-bottom:18px">
+        <div class="card">
+          <h2 class="gold">Speech Builder</h2>
+          <input id="speechTopic" placeholder="Speech topic: example, Why discipline matters">
+          <textarea id="speechHook" placeholder="Hook: first sentence that grabs attention" style="margin-top:10px"></textarea>
+          <textarea id="speechPoints" placeholder="3 main points, one per line" style="margin-top:10px"></textarea>
+          <textarea id="speechClose" placeholder="Closing line / call to action" style="margin-top:10px"></textarea>
+        </div>
+
+        <div class="card">
+          <h2 class="blue">Delivery Checklist</h2>
+          <div id="speechChecklist"></div>
+        </div>
+
+        <div class="card">
+          <h2>Practice Score</h2>
+          <div class="big gold" id="speechScore">0%</div>
+          <p class="muted" style="margin-top:10px">Score updates from your delivery checklist.</p>
+          <button class="action" style="margin-top:14px" id="speechPromptBtn">Generate Practice Topic</button>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2 class="gold">Recording Review</h2>
+          <textarea id="speechReview" placeholder="After recording yourself, write what sounded good, what felt weak, and what to fix next time."></textarea>
+        </div>
+        <div class="card">
+          <h2 class="blue">Next Drill</h2>
+          <div id="speechDrillBox" style="font-size:24px;font-weight:900;margin:16px 0">30-second story with strong eye contact</div>
+          <p class="muted">Use this as a quick daily rep before business, school, or content practice.</p>
+        </div>
+      </div>
     </section>
 
     <section id="schedule" class="page">
@@ -1388,16 +1433,88 @@ dark fantasy"></textarea>
       });
     }
 
+    function renderSpeechPractice() {
+      const speech = state.speech || { topic: '', hook: '', points: '', close: '', review: '', checks: {}, drill: '30-second story with strong eye contact' };
+      if (!state.speech) state.speech = speech;
+      const topic = document.getElementById('speechTopic');
+      if (!topic) return;
+      topic.value = speech.topic || '';
+      document.getElementById('speechHook').value = speech.hook || '';
+      document.getElementById('speechPoints').value = speech.points || '';
+      document.getElementById('speechClose').value = speech.close || '';
+      document.getElementById('speechReview').value = speech.review || '';
+      document.getElementById('speechDrillBox').innerText = speech.drill || '30-second story with strong eye contact';
+      const items = ['Clear hook', 'Strong posture', 'Eye contact', 'Vocal variety', 'No filler words', 'Clear 3 points', 'Strong close'];
+      document.getElementById('speechChecklist').innerHTML = items.map((item, index) => {
+        return '<div class="study-row"><span>' + item + '</span><span></span><input type="checkbox" ' + (speech.checks[index] ? 'checked' : '') + ' data-speech-check="' + index + '"></div>';
+      }).join('');
+      document.querySelectorAll('[data-speech-check]').forEach(box => {
+        box.addEventListener('change', () => {
+          state.speech.checks[box.dataset.speechCheck] = box.checked;
+          updateSpeechScore();
+          saveState();
+        });
+      });
+      updateSpeechScore();
+    }
+
+    function updateSpeechScore() {
+      const speech = state.speech || { checks: {} };
+      const total = 7;
+      let done = 0;
+      for (let i = 0; i < total; i++) if (speech.checks && speech.checks[i]) done++;
+      const score = Math.round((done / total) * 100);
+      const box = document.getElementById('speechScore');
+      if (box) box.innerText = score + '%';
+    }
+
+    function saveSpeechPractice() {
+      if (!state.speech) state.speech = { checks: {} };
+      state.speech.topic = document.getElementById('speechTopic').value;
+      state.speech.hook = document.getElementById('speechHook').value;
+      state.speech.points = document.getElementById('speechPoints').value;
+      state.speech.close = document.getElementById('speechClose').value;
+      state.speech.review = document.getElementById('speechReview').value;
+      state.speech.drill = document.getElementById('speechDrillBox').innerText;
+      addXP(25, false);
+      saveState();
+      renderXP();
+      alert('Speaking practice saved.');
+    }
+
+    function generateSpeechPrompt() {
+      const topics = ['Explain why discipline matters', 'Sell a simple business idea', 'Teach one lesson from your Catholic study', 'Tell a story about overcoming laziness', 'Explain your golf improvement plan', 'Pitch your YouTube channel idea', 'Give a 60-second motivational talk', 'Explain one thing you learned today'];
+      const drills = ['30-second story with strong eye contact', '60-second speech with no filler words', 'Explain one idea using only 3 points', 'Practice vocal variety: quiet, normal, powerful', 'Record yourself and review posture', 'Give a confident business pitch', 'Teach a lesson like a coach'];
+      const topic = topics[Math.floor(Math.random() * topics.length)];
+      const drill = drills[Math.floor(Math.random() * drills.length)];
+      document.getElementById('speechTopic').value = topic;
+      document.getElementById('speechDrillBox').innerText = drill;
+      if (!state.speech) state.speech = { checks: {} };
+      state.speech.topic = topic;
+      state.speech.drill = drill;
+      saveState();
+    }
+
     function renderSkills() {
+      const templates = {
+        Golf: { color: 'gold', focus: 'Swing, short game, putting, course strategy', drills: ['10 slow tempo swings', '20 putts from 5 feet', 'Chipping landing spot practice', 'Post-round notes'] },
+        Chess: { color: 'blue', focus: 'Tactics, openings, endgames, mistake review', drills: ['15 puzzles', 'Review one lost game', 'Study one opening line', 'Play one focused game'] },
+        Piano: { color: 'gold', focus: 'Scales, slow practice, hard sections, musicality', drills: ['5 min scales', '10 min slow practice', 'Repeat hardest 4 bars', 'Record one attempt'] },
+        Drawing: { color: 'blue', focus: 'Prompt, reference, construction, shading, review', drills: ['Generate a prompt', '10 min shape study', 'Draw from reference', 'Write one improvement note'] }
+      };
       document.getElementById('skillCards').innerHTML = skills.map(skill => {
         const key = skill.toLowerCase();
         const data = state.skills[key] || { goal: '', notes: '', video: '' };
-        const color = skill === 'Chess' || skill === 'Drawing' ? 'blue' : 'gold';
+        const template = templates[skill];
         return `
           <div class="card">
-            <h2 class="${color}">${skill}</h2>
-            <input id="${key}Goal" placeholder="Current goal" value="${clean(data.goal)}">
-            <textarea id="${key}Notes" placeholder="Notes, drills, lessons, schedule..." style="margin-top:10px">${clean(data.notes)}</textarea>
+            <h2 class="${template.color}">${skill}</h2>
+            <p class="muted" style="line-height:1.6;margin-bottom:12px">${template.focus}</p>
+            <input id="${key}Goal" placeholder="Current measurable goal" value="${clean(data.goal)}">
+            <div class="list" style="margin-top:12px">
+              ${template.drills.map(drill => `<div class="list-item"><span>${drill}</span><span class="tag ${template.color === 'gold' ? 'goldtag' : 'bluetag'}">Drill</span></div>`).join('')}
+            </div>
+            <textarea id="${key}Notes" placeholder="What did I practice? What improved? What is the next weak point?" style="margin-top:12px">${clean(data.notes)}</textarea>
             <input id="${key}Video" placeholder="YouTube lesson link" value="${clean(data.video)}" style="margin-top:10px">
             <div id="${key}Preview" class="video-preview">Paste a YouTube link to preview</div>
           </div>
@@ -1410,20 +1527,6 @@ dark fantasy"></textarea>
         input.addEventListener('input', () => previewVideo(key));
         previewVideo(key);
       });
-    }
-
-    function generateDrawingPrompt() {
-      const subjects = ['Knight', 'Samurai', 'Robot', 'Dragon', 'Tiger', 'Wizard', 'Athlete', 'Explorer', 'Angel', 'Monk', 'Detective', 'Supercar', 'Castle', 'Spaceship', 'Warrior'];
-      const actions = ['training at sunrise', 'standing in the rain', 'walking through a ruined city', 'protecting a hidden treasure', 'studying an ancient book', 'fighting through a storm', 'resting after battle', 'looking over a mountain valley', 'entering a dark cathedral', 'preparing for a race'];
-      const styles = ['cinematic', 'realistic', 'comic-book style', 'dark fantasy', 'minimalist sketch', 'high-detail pencil study', 'dramatic lighting', 'dynamic action pose'];
-      const subject = subjects[Math.floor(Math.random() * subjects.length)];
-      const action = actions[Math.floor(Math.random() * actions.length)];
-      const style = styles[Math.floor(Math.random() * styles.length)];
-      const prompt = subject + ' ' + action + ' — ' + style;
-      const box = document.getElementById('drawingPromptBox');
-      if (box) box.innerText = prompt;
-      state.skills.drawingPrompt = prompt;
-      saveState();
     }
 
     function saveSkills() {
@@ -1774,6 +1877,10 @@ dark fantasy"></textarea>
       document.getElementById('resetWeekBtn').addEventListener('click', resetWeek);
       document.getElementById('saveWinsBtn').addEventListener('click', saveWins);
       document.getElementById('saveSkillsBtn').addEventListener('click', saveSkills);
+      const saveSpeechBtn = document.getElementById('saveSpeechBtn');
+      if (saveSpeechBtn) saveSpeechBtn.addEventListener('click', saveSpeechPractice);
+      const speechPromptBtn = document.getElementById('speechPromptBtn');
+      if (speechPromptBtn) speechPromptBtn.addEventListener('click', generateSpeechPrompt);
       const drawingPromptBtn = document.getElementById('drawingPromptBtn');
       if (drawingPromptBtn) drawingPromptBtn.addEventListener('click', generateDrawingPrompt);
       const drawingPromptBtn2 = document.getElementById('drawingPromptBtn2');
@@ -1805,6 +1912,7 @@ dark fantasy"></textarea>
       renderTrack();
       loadWins();
       renderSkills();
+      renderSpeechPractice();
       if (state.skills.drawingPrompt && document.getElementById('drawingPromptBox')) {
         document.getElementById('drawingPromptBox').innerText = state.skills.drawingPrompt;
       }
@@ -1824,3 +1932,4 @@ dark fantasy"></textarea>
   </script>
 </body>
 </html>
+ 
