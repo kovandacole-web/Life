@@ -735,8 +735,14 @@
         <span class="nav-icon">◆</span>
         <span class="nav-text"><span class="nav-title">Skills</span><span class="nav-desc">Golf, chess, piano, drawing</span></span>
       </button>
-      $1
-    <button class="nav-btn" data-page="customize">Customize</button>
+      <button class="nav-btn" data-page="catholic">
+        <span class="nav-icon">✚</span>
+        <span class="nav-text"><span class="nav-title">Catholic Study</span><span class="nav-desc">Faith, notes, study focus</span></span>
+      </button>
+      <button class="nav-btn" data-page="customize">
+        <span class="nav-icon">⚙</span>
+        <span class="nav-text"><span class="nav-title">Customize</span><span class="nav-desc">Edit prompts + schedule</span></span>
+      </button>
       <button class="nav-btn" data-page="ideas">
         <span class="nav-icon">✎</span>
         <span class="nav-text"><span class="nav-title">Ideas Vault</span><span class="nav-desc">Business, content, notes</span></span>
@@ -1666,8 +1672,7 @@ dark fantasy"></textarea>
     }
 
     function getPromptLines(value, fallback) {
-      const lines = String(value || '').split('
-').map(item => item.trim()).filter(Boolean);
+      const lines = String(value || '').split(String.fromCharCode(10)).map(item => item.trim()).filter(Boolean);
       return lines.length ? lines : fallback;
     }
 
@@ -1694,28 +1699,9 @@ dark fantasy"></textarea>
       if (!appName || !subjects || !actions || !styles) return;
       const custom = state.customDrawingPrompts || {};
       appName.value = state.customAppName || '1% Better';
-      subjects.value = custom.subjects || 'Knight
-Samurai
-Robot
-Dragon
-Tiger
-Wizard
-Athlete
-Explorer
-Angel
-Monk';
-      actions.value = custom.actions || 'training at sunrise
-standing in the rain
-walking through a ruined city
-protecting a hidden treasure
-studying an ancient book
-fighting through a storm';
-      styles.value = custom.styles || 'cinematic
-realistic
-comic-book style
-dark fantasy
-minimalist sketch
-high-detail pencil study';
+      subjects.value = custom.subjects || ['Knight','Samurai','Robot','Dragon','Tiger','Wizard','Athlete','Explorer','Angel','Monk'].join(String.fromCharCode(10));
+      actions.value = custom.actions || ['training at sunrise','standing in the rain','walking through a ruined city','protecting a hidden treasure','studying an ancient book','fighting through a storm'].join(String.fromCharCode(10));
+      styles.value = custom.styles || ['cinematic','realistic','comic-book style','dark fantasy','minimalist sketch','high-detail pencil study'].join(String.fromCharCode(10));
       renderCustomScheduleList();
     }
 
@@ -1838,4 +1824,3 @@ high-detail pencil study';
   </script>
 </body>
 </html>
- 
