@@ -65,7 +65,51 @@ input,textarea{width:100%;background:#101010;color:white;border:1px solid #2b2b2
 <div class="header"><div><div class="eyebrow">Future Intelligence</div><h1 class="title">Coach</h1><p class="subtitle">Weekly reviews, performance notes, and future recommendations.</p></div></div><div class="grid"><div class="card"><h3>Weekly Review</h3><p class="muted">Review what worked, what slipped, and what to attack next week.</p></div><div class="card"><h3>Performance Notes</h3><textarea id="coachNotes" placeholder="What did I learn this week?" oninput="saveCoachNotes()"></textarea></div></div>
 </section>
 <section id="devlab" class="page">
-<div class="header"><div><div class="eyebrow">Upgrade Command Center</div><h1 class="title">AI Code Builder</h1><p class="subtitle">Generate elite prompts for improving this exact app without breaking it.</p></div></div><div class="grid"><div class="card"><h2 class="gold">Feature Request</h2><textarea id="aiPrompt" placeholder="Describe the upgrade you want...">Make the sections wayy better and have actually things that I can use it for.</textarea><button class="action primary" style="margin-top:14px" onclick="generateMasterPrompt()">Generate Master Prompt</button></div><div class="card"><h2 class="blue">Rules Built In</h2><p class="muted" style="line-height:1.8">Preserve pages, keep dark matte style, use localStorage, stay mobile-ready, avoid broken interactions, and make it feel like a polished paid product.</p></div></div><div class="card" style="margin-top:18px"><h2>Generated Prompt</h2><textarea id="masterPrompt" style="min-height:260px" readonly></textarea></div>
+<div class="header">
+  <div>
+    <div class="eyebrow">Upgrade Command Center</div>
+    <h1 class="title">AI Code Builder</h1>
+    <p class="subtitle">Two tools: one creates elite prompts from your ideas, and the other turns prompts into code-building instructions for this exact app.</p>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2 class="gold">1. Prompt Builder</h2>
+    <p class="muted" style="line-height:1.7;margin-bottom:12px">Type a rough idea. This creates a stronger prompt that tells AI exactly what to build.</p>
+    <textarea id="promptIdea" placeholder="Example: Make my Skills page better for golf, chess, piano, and drawing.">Make the sections wayy better and have actually things that I can use it for.</textarea>
+    <button class="action primary" style="margin-top:14px" onclick="generateElitePrompt()">Generate Better Prompt</button>
+  </div>
+
+  <div class="card">
+    <h2 class="blue">2. Code Builder</h2>
+    <p class="muted" style="line-height:1.7;margin-bottom:12px">Paste a prompt here. This creates a code-generation request that protects the app and tells AI how to build safely.</p>
+    <textarea id="codePrompt" placeholder="Paste your finished prompt here..."></textarea>
+    <button class="action primary" style="margin-top:14px" onclick="generateCodeRequest()">Generate Code Request</button>
+  </div>
+</div>
+
+<div class="grid" style="margin-top:18px">
+  <div class="card">
+    <h2>Generated Better Prompt</h2>
+    <textarea id="elitePromptOutput" style="min-height:260px" readonly></textarea>
+  </div>
+
+  <div class="card">
+    <h2>Generated Code Request</h2>
+    <textarea id="codeRequestOutput" style="min-height:260px" readonly></textarea>
+  </div>
+</div>
+
+<div class="card" style="margin-top:18px">
+  <h2 class="gold">How To Use This</h2>
+  <p class="muted" style="line-height:1.8">
+    Step 1: Write a rough idea in Prompt Builder.<br>
+    Step 2: Generate a better prompt.<br>
+    Step 3: Copy that better prompt into Code Builder.<br>
+    Step 4: Generate a code request and paste it into ChatGPT when you want the app updated.
+  </p>
+</div>
 </section>
 </main>
 <div id="focusOverlay" class="focus-overlay"><div class="eyebrow">Monk Mode</div><h1 class="title">Focus Mode</h1><div id="focusTimer" class="focus-time">25:00</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button class="action primary" onclick="startFocus()">Start</button><button class="action" onclick="pauseFocus()">Pause</button><button class="action" onclick="resetFocus()">Reset</button><button class="action danger" onclick="toggleFocusMode()">Exit</button></div></div>
@@ -98,7 +142,68 @@ function getYoutubeId(url){if(!url){return'';}if(url.indexOf('youtu.be/')>-1){re
 function renderRoutine(){document.getElementById('routineList').innerHTML=routine.map(function(r,i){return'<div class="routine-row"><strong>'+r[0]+'</strong><span>'+r[1]+'</span><input class="routine-check" type="checkbox" '+(state.routine[i]?'checked':'')+' onchange="state.routine['+i+']=this.checked;saveState()"></div>';}).join('');}
 function resetSchedule(){if(confirm('Reset today schedule?')){state.routine={};saveState();renderRoutine();}}
 function saveCoachNotes(){state.coachNotes=document.getElementById('coachNotes').value;saveState();}
-function generateMasterPrompt(){var userPrompt=document.getElementById('aiPrompt').value.trim();document.getElementById('masterPrompt').value='You are an elite senior front-end engineer and UI/UX designer. You are improving a single-file HTML app called 1% Better Tracker. Current app: premium dark dashboard, matte black, charcoal, gold, blue, with pages Dashboard, Track, Wins, Coach, Skills, Schedule, AI Code Builder, and Focus Mode. Feature Request: '+userPrompt+' Rules: preserve all pages, keep the premium dark design, use localStorage, make it responsive, avoid broken interactions, and return the safest updated code.';}
+function generateElitePrompt(){
+var idea=document.getElementById('promptIdea').value.trim();
+if(!idea){idea='Improve the app sections and make them more useful.';}
+var output='You are an elite senior front-end engineer and UI/UX designer improving a premium single-file HTML app called 1% Better Tracker.
+
+Mission:
+Turn this rough idea into a polished, useful, production-quality feature that fits the app perfectly.
+
+Rough Idea:
+'+idea+'
+
+App Style:
+- Matte black / charcoal dashboard
+- Gold for Non-Negotiables
+- Blue for Growth and Development
+- Premium, calm, focused, high-performance UI
+- Mobile and desktop optimized
+
+Requirements:
+- Make the feature actually useful, not just decorative
+- Keep the design clean and organized
+- Preserve all existing pages and interactions
+- Use localStorage if data should be saved
+- Avoid clutter
+- Add smooth spacing, cards, and clear hierarchy
+- Make it feel like a polished paid productivity app
+
+Return a clear feature plan and the safest code changes.';
+document.getElementById('elitePromptOutput').value=output;
+document.getElementById('codePrompt').value=output;
+}
+function generateCodeRequest(){
+var prompt=document.getElementById('codePrompt').value.trim();
+if(!prompt){prompt='Improve the app while preserving all existing functionality.';}
+var output='You are an elite senior front-end engineer and UI/UX designer. You are editing a single-file HTML app called 1% Better Tracker.
+
+Current App Context:
+- The app is one index.html file.
+- It uses HTML, CSS, and vanilla JavaScript.
+- It has Dashboard, Track, Wins, Skills, Schedule, Coach, AI Code Builder, and Focus Mode.
+- It uses a premium dark matte black design with gold and blue accents.
+- It saves data with localStorage.
+
+Code Task:
+'+prompt+'
+
+Strict Coding Rules:
+1. Do not remove existing pages.
+2. Do not break navigation.
+3. Do not break Focus Mode.
+4. Preserve the dark premium design system.
+5. Use scalable, simple JavaScript functions.
+6. Use localStorage for saved user data.
+7. Make the feature work on mobile and desktop.
+8. Keep code clean and avoid duplicate messy sections.
+9. Test mentally for syntax errors before finalizing.
+10. Return the safest code update, preferably the exact sections to replace.
+
+Quality Bar:
+The result should look like a polished paid productivity app, not a school project.';
+document.getElementById('codeRequestOutput').value=output;
+}
 function toggleFocusMode(){document.getElementById('focusOverlay').classList.toggle('active');}
 function updateFocus(){var m=String(Math.floor(focusSeconds/60)).padStart(2,'0');var s=String(focusSeconds%60).padStart(2,'0');document.getElementById('focusTimer').innerText=m+':'+s;}
 function startFocus(){clearInterval(focusInterval);focusInterval=setInterval(function(){if(focusSeconds>0){focusSeconds--;updateFocus();}},1000);}
