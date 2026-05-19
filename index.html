@@ -589,6 +589,25 @@
       margin: 14px auto;
     }
 
+    .custom-row {
+      display: grid;
+      grid-template-columns: 110px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      background: #151515;
+      border: 1px solid #282828;
+      border-radius: 16px;
+      padding: 12px;
+      margin-top: 10px;
+    }
+
+    .small-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 12px 0 7px;
+      display: block;
+    }
+
     @media (max-width: 860px) {
       body {
         display: block;
@@ -716,10 +735,8 @@
         <span class="nav-icon">◆</span>
         <span class="nav-text"><span class="nav-title">Skills</span><span class="nav-desc">Golf, chess, piano, drawing</span></span>
       </button>
-      <button class="nav-btn" data-page="catholic">
-        <span class="nav-icon">✚</span>
-        <span class="nav-text"><span class="nav-title">Catholic Study</span><span class="nav-desc">Faith, notes, study focus</span></span>
-      </button>
+      $1
+    <button class="nav-btn" data-page="customize">Customize</button>
       <button class="nav-btn" data-page="ideas">
         <span class="nav-icon">✎</span>
         <span class="nav-text"><span class="nav-title">Ideas Vault</span><span class="nav-desc">Business, content, notes</span></span>
@@ -819,6 +836,24 @@
           <p class="subtitle">Workspaces for golf, chess, piano, and drawing. Notes, goals, and lesson videos save locally.</p>
         </div>
         <button class="action primary" id="saveSkillsBtn">Save Skills</button>
+        <button class="action" id="drawingPromptBtn">Generate Drawing Idea</button>
+      </div>
+      <div class="grid" style="margin-bottom:18px">
+        <div class="card">
+          <h2 class="gold">Drawing Idea Generator</h2>
+          <p class="muted" style="line-height:1.7;margin-bottom:14px">Use this when you do not know what to draw. Generate a prompt, then save notes in the Drawing card below.</p>
+          <div id="drawingPromptBox" style="font-size:28px;font-weight:900;letter-spacing:-.5px;margin:18px 0">Knight training at sunrise</div>
+          <button class="action primary" id="drawingPromptBtn2">Generate New Idea</button>
+        </div>
+        <div class="card">
+          <h2 class="blue">Prompt Types</h2>
+          <div class="list">
+            <div class="list-item"><span>Characters</span><span class="tag goldtag">People</span></div>
+            <div class="list-item"><span>Scenes</span><span class="tag bluetag">Worlds</span></div>
+            <div class="list-item"><span>Objects</span><span class="tag">Study</span></div>
+            <div class="list-item"><span>Creative combos</span><span class="tag">Fun</span></div>
+          </div>
+        </div>
       </div>
       <div class="grid" id="skillCards"></div>
     </section>
@@ -992,6 +1027,53 @@
           <textarea id="faithNotes" placeholder="Bible notes, Catechism notes, prayer reflections..." style="margin-top:10px"></textarea>
         </div>
         <div class="card"><h2>Weekly Focus</h2><textarea id="faithFocus" placeholder="Example: Humility, discipline, patience, prayer, courage..."></textarea></div>
+      </div>
+    </section>
+
+    <section id="customize" class="page">
+      <div class="header">
+        <div>
+          <div class="eyebrow">Make It Yours</div>
+          <h1 class="title">Customize</h1>
+          <p class="subtitle">Edit parts of the app and save them permanently: drawing prompt words, schedule blocks, and your app name.</p>
+        </div>
+        <button class="action primary" id="saveCustomizeBtn">Save Customizations</button>
+      </div>
+
+      <div class="grid" style="margin-bottom:18px">
+        <div class="card">
+          <h2 class="gold">App Name</h2>
+          <label class="small-label">Sidebar title</label>
+          <input id="customAppName" placeholder="1% Better">
+          <p class="muted" style="margin-top:12px;line-height:1.7">This changes the name shown in the sidebar.</p>
+        </div>
+
+        <div class="card">
+          <h2 class="blue">Drawing Prompt Words</h2>
+          <label class="small-label">Subjects — one per line</label>
+          <textarea id="customSubjects" placeholder="Knight
+Samurai
+Robot"></textarea>
+          <label class="small-label">Actions — one per line</label>
+          <textarea id="customActions" placeholder="training at sunrise
+standing in the rain"></textarea>
+          <label class="small-label">Styles — one per line</label>
+          <textarea id="customStyles" placeholder="cinematic
+realistic
+dark fantasy"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="gold">Schedule Block Editor</h2>
+        <p class="muted" style="line-height:1.7;margin-bottom:14px">Add your own blocks. These will replace the default normal training day schedule after saving.</p>
+        <div class="grid">
+          <input id="customScheduleTime" placeholder="Time, ex: 6:00 AM">
+          <input id="customScheduleTask" placeholder="Task, ex: Wake up + prayer">
+          <button class="action primary" id="addScheduleBlockBtn">Add Block</button>
+        </div>
+        <div id="customScheduleList" style="margin-top:14px"></div>
+        <button class="action danger" id="resetCustomScheduleBtn" style="margin-top:14px">Use Default Schedule</button>
       </div>
     </section>
 
@@ -1324,6 +1406,20 @@
       });
     }
 
+    function generateDrawingPrompt() {
+      const subjects = ['Knight', 'Samurai', 'Robot', 'Dragon', 'Tiger', 'Wizard', 'Athlete', 'Explorer', 'Angel', 'Monk', 'Detective', 'Supercar', 'Castle', 'Spaceship', 'Warrior'];
+      const actions = ['training at sunrise', 'standing in the rain', 'walking through a ruined city', 'protecting a hidden treasure', 'studying an ancient book', 'fighting through a storm', 'resting after battle', 'looking over a mountain valley', 'entering a dark cathedral', 'preparing for a race'];
+      const styles = ['cinematic', 'realistic', 'comic-book style', 'dark fantasy', 'minimalist sketch', 'high-detail pencil study', 'dramatic lighting', 'dynamic action pose'];
+      const subject = subjects[Math.floor(Math.random() * subjects.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+      const style = styles[Math.floor(Math.random() * styles.length)];
+      const prompt = subject + ' ' + action + ' — ' + style;
+      const box = document.getElementById('drawingPromptBox');
+      if (box) box.innerText = prompt;
+      state.skills.drawingPrompt = prompt;
+      saveState();
+    }
+
     function saveSkills() {
       skills.forEach(skill => {
         const key = skill.toLowerCase();
@@ -1355,7 +1451,7 @@
     }
 
     function renderRoutine() {
-      document.getElementById('routineList').innerHTML = routine.map((item, index) => {
+      document.getElementById('routineList').innerHTML = getScheduleBlocks().map((item, index) => {
         return `
           <div class="routine-row">
             <strong>${item[0]}</strong>
@@ -1556,6 +1652,130 @@
       document.getElementById('focusStats').innerText = 'Sessions completed: ' + state.focusStats.count;
     }
 
+    function getScheduleBlocks() {
+      return state.customSchedule && state.customSchedule.length ? state.customSchedule : routine;
+    }
+
+    function applyAppName() {
+      const savedName = state.customAppName || '1% Better';
+      const logo = document.querySelector('.logo');
+      if (logo) {
+        const parts = savedName.split(' ');
+        logo.innerHTML = parts.length > 1 ? parts[0] + ' <span>' + parts.slice(1).join(' ') + '</span>' : savedName;
+      }
+    }
+
+    function getPromptLines(value, fallback) {
+      const lines = String(value || '').split('
+').map(item => item.trim()).filter(Boolean);
+      return lines.length ? lines : fallback;
+    }
+
+    function generateDrawingPrompt() {
+      const custom = state.customDrawingPrompts || {};
+      const subjects = getPromptLines(custom.subjects, ['Knight', 'Samurai', 'Robot', 'Dragon', 'Tiger', 'Wizard', 'Athlete', 'Explorer', 'Angel', 'Monk', 'Detective', 'Supercar', 'Castle', 'Spaceship', 'Warrior']);
+      const actions = getPromptLines(custom.actions, ['training at sunrise', 'standing in the rain', 'walking through a ruined city', 'protecting a hidden treasure', 'studying an ancient book', 'fighting through a storm', 'resting after battle', 'looking over a mountain valley', 'entering a dark cathedral', 'preparing for a race']);
+      const styles = getPromptLines(custom.styles, ['cinematic', 'realistic', 'comic-book style', 'dark fantasy', 'minimalist sketch', 'high-detail pencil study', 'dramatic lighting', 'dynamic action pose']);
+      const subject = subjects[Math.floor(Math.random() * subjects.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+      const style = styles[Math.floor(Math.random() * styles.length)];
+      const prompt = subject + ' ' + action + ' — ' + style;
+      const box = document.getElementById('drawingPromptBox');
+      if (box) box.innerText = prompt;
+      state.skills.drawingPrompt = prompt;
+      saveState();
+    }
+
+    function renderCustomize() {
+      const appName = document.getElementById('customAppName');
+      const subjects = document.getElementById('customSubjects');
+      const actions = document.getElementById('customActions');
+      const styles = document.getElementById('customStyles');
+      if (!appName || !subjects || !actions || !styles) return;
+      const custom = state.customDrawingPrompts || {};
+      appName.value = state.customAppName || '1% Better';
+      subjects.value = custom.subjects || 'Knight
+Samurai
+Robot
+Dragon
+Tiger
+Wizard
+Athlete
+Explorer
+Angel
+Monk';
+      actions.value = custom.actions || 'training at sunrise
+standing in the rain
+walking through a ruined city
+protecting a hidden treasure
+studying an ancient book
+fighting through a storm';
+      styles.value = custom.styles || 'cinematic
+realistic
+comic-book style
+dark fantasy
+minimalist sketch
+high-detail pencil study';
+      renderCustomScheduleList();
+    }
+
+    function renderCustomScheduleList() {
+      const list = document.getElementById('customScheduleList');
+      if (!list) return;
+      const blocks = getScheduleBlocks();
+      list.innerHTML = blocks.map((block, index) => `
+        <div class="custom-row">
+          <strong>${clean(block[0])}</strong>
+          <span>${clean(block[1])}</span>
+          <button class="action danger custom-delete" data-index="${index}">Delete</button>
+        </div>
+      `).join('');
+      document.querySelectorAll('.custom-delete').forEach(button => {
+        button.addEventListener('click', () => removeScheduleBlock(Number(button.dataset.index)));
+      });
+    }
+
+    function addScheduleBlock() {
+      const time = document.getElementById('customScheduleTime').value.trim();
+      const task = document.getElementById('customScheduleTask').value.trim();
+      if (!time || !task) return;
+      if (!state.customSchedule || !state.customSchedule.length) state.customSchedule = [...routine];
+      state.customSchedule.push([time, task]);
+      document.getElementById('customScheduleTime').value = '';
+      document.getElementById('customScheduleTask').value = '';
+      saveState();
+      renderCustomScheduleList();
+      renderRoutine();
+    }
+
+    function removeScheduleBlock(index) {
+      if (!state.customSchedule || !state.customSchedule.length) state.customSchedule = [...routine];
+      state.customSchedule.splice(index, 1);
+      saveState();
+      renderCustomScheduleList();
+      renderRoutine();
+    }
+
+    function resetCustomSchedule() {
+      if (!confirm('Reset to the default schedule?')) return;
+      state.customSchedule = [];
+      saveState();
+      renderCustomScheduleList();
+      renderRoutine();
+    }
+
+    function saveCustomizations() {
+      state.customAppName = document.getElementById('customAppName').value.trim() || '1% Better';
+      state.customDrawingPrompts = {
+        subjects: document.getElementById('customSubjects').value,
+        actions: document.getElementById('customActions').value,
+        styles: document.getElementById('customStyles').value
+      };
+      saveState();
+      applyAppName();
+      alert('Customizations saved.');
+    }
+
     function bindEvents() {
       document.querySelectorAll('[data-page]').forEach(button => {
         button.addEventListener('click', () => showPage(button.dataset.page));
@@ -1568,11 +1788,21 @@
       document.getElementById('resetWeekBtn').addEventListener('click', resetWeek);
       document.getElementById('saveWinsBtn').addEventListener('click', saveWins);
       document.getElementById('saveSkillsBtn').addEventListener('click', saveSkills);
+      const drawingPromptBtn = document.getElementById('drawingPromptBtn');
+      if (drawingPromptBtn) drawingPromptBtn.addEventListener('click', generateDrawingPrompt);
+      const drawingPromptBtn2 = document.getElementById('drawingPromptBtn2');
+      if (drawingPromptBtn2) drawingPromptBtn2.addEventListener('click', generateDrawingPrompt);
       document.getElementById('resetScheduleBtn').addEventListener('click', resetSchedule);
       document.getElementById('addPunchCardBtn').addEventListener('click', addPunchCard);
       document.getElementById('addIdeaBtn').addEventListener('click', addIdea);
       document.getElementById('addXPBtn').addEventListener('click', () => addXP(25));
       document.getElementById('saveCatholicBtn').addEventListener('click', saveCatholicStudy);
+      const saveCustomizeBtn = document.getElementById('saveCustomizeBtn');
+      if (saveCustomizeBtn) saveCustomizeBtn.addEventListener('click', saveCustomizations);
+      const addScheduleBlockBtn = document.getElementById('addScheduleBlockBtn');
+      if (addScheduleBlockBtn) addScheduleBlockBtn.addEventListener('click', addScheduleBlock);
+      const resetCustomScheduleBtn = document.getElementById('resetCustomScheduleBtn');
+      if (resetCustomScheduleBtn) resetCustomScheduleBtn.addEventListener('click', resetCustomSchedule);
       document.getElementById('coachNotes').addEventListener('input', saveCoachNotes);
       document.getElementById('generateElitePromptBtn').addEventListener('click', generateElitePrompt);
       document.getElementById('generateCodeRequestBtn').addEventListener('click', generateCodeRequest);
@@ -1589,11 +1819,16 @@
       renderTrack();
       loadWins();
       renderSkills();
+      if (state.skills.drawingPrompt && document.getElementById('drawingPromptBox')) {
+        document.getElementById('drawingPromptBox').innerText = state.skills.drawingPrompt;
+      }
       renderRoutine();
       renderPunchCards();
       renderIdeas();
       renderXP();
       renderFaithChecklist();
+      renderCustomize();
+      applyAppName();
       renderFocusStats();
       document.getElementById('coachNotes').value = state.coachNotes || '';
       updateFocus();
