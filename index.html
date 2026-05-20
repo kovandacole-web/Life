@@ -3,1614 +3,351 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1% Better Tracker</title>
+  <title>1% Better OS</title>
   <style>
     :root {
-      --bg: #090909;
-      --panel: #141414;
-      --panel2: #1b1b1b;
-      --card: #111111;
-      --border: #282828;
-      --muted: #9b9b9b;
+      --bg: #080808;
+      --bg2: #101010;
+      --panel: #151515;
+      --panel2: #1d1d1d;
+      --border: #2a2a2a;
+      --muted: #9c9c9c;
       --text: #f5f5f5;
       --gold: #d4af37;
       --blue: #4f8cff;
-      --red: #b95656;
-      --green: #6ed17a;
-      --shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+      --green: #77d183;
+      --red: #c65b5b;
+      --shadow: 0 20px 70px rgba(0,0,0,.35);
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top right, rgba(79, 140, 255, 0.09), transparent 30%),
-        radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 28%),
-        var(--bg);
-      color: var(--text);
-      display: flex;
-    }
-
-    button, input, textarea, select {
-      font: inherit;
-    }
-
-    button {
-      border: 0;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .sidebar {
-      width: 286px;
-      height: 100vh;
-      position: fixed;
-      left: 0;
-      top: 0;
-      background: rgba(13, 13, 13, 0.96);
-      border-right: 1px solid var(--border);
-      padding: 22px;
-      overflow-y: auto;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-    }
-
-    .logo {
-      font-size: 29px;
-      font-weight: 950;
-      letter-spacing: -1.2px;
-      margin-bottom: 18px;
-    }
-
-    .logo span {
-      color: var(--gold);
-    }
-
-    .sidebar-tip {
-      background: linear-gradient(180deg, #171717, #111111);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
-      margin-bottom: 20px;
-    }
-
-    .sidebar-tip strong {
-      display: block;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .sidebar-tip p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-
-    .nav-group {
-      margin-bottom: 18px;
-    }
-
-    .nav-label {
-      color: #777;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      font-weight: 800;
-      margin: 12px 0 8px;
-    }
-
-    .nav-btn {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-      padding: 11px;
-      border-radius: 15px;
-      background: transparent;
-      color: white;
-      margin-bottom: 8px;
-      text-align: left;
-      border: 1px solid transparent;
-    }
-
-    .nav-btn:hover,
-    .nav-btn.active {
-      background: #1a1a1a;
-      border-color: #333;
-      transform: translateX(3px);
-    }
-
-    .nav-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 12px;
-      background: #202020;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      flex: 0 0 auto;
-      font-weight: 900;
-    }
-
-    .nav-title {
-      display: block;
-      font-weight: 850;
-      font-size: 13px;
-    }
-
-    .nav-desc {
-      display: block;
-      color: #777;
-      font-size: 11px;
-      margin-top: 2px;
-      font-weight: 650;
-    }
-
-    .nav-btn.active .nav-icon {
-      background: rgba(212, 175, 55, 0.18);
-      color: var(--gold);
-    }
-
-    .focus-nav-btn {
-      width: 100%;
-      padding: 13px 14px;
-      border-radius: 15px;
-      background: var(--gold);
-      color: #080808;
-      font-weight: 950;
-      margin-top: 10px;
-    }
-
-    .focus-nav-btn:hover {
-      background: #e2bf54;
-      transform: translateY(-1px);
-    }
-
-    .main {
-      margin-left: 286px;
-      width: calc(100% - 286px);
-      padding: 30px;
-    }
-
-    .page {
-      display: none;
-      animation: fade 0.22s ease;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .eyebrow {
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .title {
-      font-size: clamp(30px, 5vw, 44px);
-      letter-spacing: -1.7px;
-      line-height: 1;
-      font-weight: 950;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      line-height: 1.6;
-      margin-top: 10px;
-      max-width: 880px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-    }
-
-    .grid.wide {
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    }
-
-    .card {
-      background: linear-gradient(180deg, rgba(25, 25, 25, 0.98), rgba(12, 12, 12, 0.98));
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 22px;
-      box-shadow: var(--shadow);
-      transition: 0.22s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: #3d3d3d;
-    }
-
-    .card h2,
-    .card h3 {
-      margin-bottom: 12px;
-    }
-
-    .big {
-      font-size: 44px;
-      font-weight: 950;
-      letter-spacing: -1.8px;
-      line-height: 1;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Inter, Arial, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { min-height: 100vh; background: radial-gradient(circle at 80% -10%, #202020 0, var(--bg) 42%); color: var(--text); display: flex; }
+    button, input, textarea, select { font: inherit; }
+    button { border: 0; cursor: pointer; transition: .18s ease; }
+    input, textarea, select { width: 100%; background: #0e0e0e; color: var(--text); border: 1px solid var(--border); border-radius: 14px; padding: 12px 13px; outline: none; }
+    textarea { resize: vertical; min-height: 105px; line-height: 1.5; }
+    input:focus, textarea:focus, select:focus { border-color: #555; box-shadow: 0 0 0 3px rgba(212,175,55,.08); }
+    .app-shell { display: flex; width: 100%; }
+    .sidebar { position: fixed; inset: 0 auto 0 0; width: 282px; background: rgba(13,13,13,.96); border-right: 1px solid var(--border); padding: 20px; overflow-y: auto; z-index: 50; }
+    .logo { font-size: 28px; font-weight: 950; letter-spacing: -1px; margin-bottom: 16px; }
+    .logo span { color: var(--gold); }
+    .sidebar-tip { background: linear-gradient(180deg,#171717,#111); border: 1px solid var(--border); border-radius: 20px; padding: 14px; margin-bottom: 18px; }
+    .sidebar-tip strong { color: var(--gold); display: block; margin-bottom: 6px; }
+    .sidebar-tip p { color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .nav-label { color: #777; text-transform: uppercase; font-size: 11px; letter-spacing: .9px; margin: 18px 0 8px; font-weight: 800; }
+    .nav-btn { width: 100%; display: flex; align-items: center; gap: 10px; text-align: left; color: #eee; background: transparent; padding: 10px; border-radius: 15px; border: 1px solid transparent; }
+    .nav-btn:hover, .nav-btn.active { background: #191919; border-color: #303030; transform: translateX(2px); }
+    .nav-icon { width: 34px; height: 34px; border-radius: 12px; background: #202020; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; color: #ddd; font-size: 13px; font-weight: 900; }
+    .nav-btn.active .nav-icon { color: var(--gold); background: rgba(212,175,55,.13); }
+    .nav-title { font-weight: 900; display: block; }
+    .nav-desc { color: #777; font-size: 11px; font-weight: 700; display: block; margin-top: 2px; }
+    .focus-nav { width: 100%; margin-top: 18px; padding: 13px 14px; border-radius: 16px; background: var(--gold); color: #080808; font-weight: 950; }
+    .main { margin-left: 282px; width: calc(100% - 282px); padding: 28px; }
+    .page { display: none; animation: fade .22s ease; }
+    .page.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .header { display: flex; justify-content: space-between; align-items: flex-end; gap: 18px; flex-wrap: wrap; margin-bottom: 22px; }
+    .eyebrow { color: var(--muted); font-size: 13px; font-weight: 800; letter-spacing: .5px; margin-bottom: 7px; text-transform: uppercase; }
+    .title { font-size: clamp(30px, 4vw, 46px); letter-spacing: -1.8px; line-height: 1; }
+    .subtitle { color: var(--muted); line-height: 1.6; margin-top: 10px; max-width: 850px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+    .card { background: linear-gradient(180deg,rgba(25,25,25,.98),rgba(14,14,14,.98)); border: 1px solid var(--border); border-radius: 24px; padding: 21px; box-shadow: var(--shadow); transition: .18s ease; }
+    .card:hover { border-color: #3e3e3e; transform: translateY(-1px); }
+    .card h2, .card h3 { margin-bottom: 12px; letter-spacing: -.4px; }
+    .muted { color: var(--muted); }
     .gold { color: var(--gold); }
     .blue { color: var(--blue); }
-    .muted { color: var(--muted); }
-
-    .action {
-      padding: 12px 16px;
-      border-radius: 14px;
-      background: #252525;
-      color: white;
-      border: 1px solid #363636;
-      font-weight: 800;
-    }
-
-    .action:hover {
-      background: #303030;
-      transform: translateY(-1px);
-    }
-
-    .primary {
-      background: var(--gold);
-      color: #090909;
-      border-color: transparent;
-      font-weight: 950;
-    }
-
-    .primary:hover { background: #e2bf54; }
-
-    .danger {
-      background: #351919;
-      color: white;
-    }
-
-    .danger:hover { background: #4a2020; }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      background: #101010;
-      color: white;
-      border: 1px solid #2c2c2c;
-      border-radius: 14px;
-      padding: 13px;
-      outline: none;
-    }
-
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #555;
-    }
-
-    .bar {
-      height: 14px;
-      background: #242424;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-top: 12px;
-    }
-
-    .fill {
-      height: 100%;
-      border-radius: 999px;
-      transition: 0.25s ease;
-    }
-
+    .green { color: var(--green); }
+    .red { color: var(--red); }
+    .big { font-size: 42px; font-weight: 950; letter-spacing: -1.5px; line-height: 1; }
+    .small { font-size: 12px; color: var(--muted); }
+    .action { background: #242424; color: #fff; border: 1px solid #343434; border-radius: 14px; padding: 11px 14px; font-weight: 850; }
+    .action:hover { background: #303030; }
+    .primary { background: var(--gold); color: #070707; border-color: rgba(255,255,255,.1); }
+    .primary:hover { background: #e0bf55; }
+    .blue-btn { background: var(--blue); color: #fff; }
+    .danger { background: #341a1a; color: #fff; border-color: #542828; }
+    .danger:hover { background: #4b2222; }
+    .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .stack { display: grid; gap: 10px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; }
+    .tag { display: inline-flex; align-items: center; justify-content: center; padding: 5px 9px; border-radius: 999px; font-size: 12px; font-weight: 900; background: #242424; color: #ddd; white-space: nowrap; }
+    .tag.goldtag { background: var(--gold); color: #090909; }
+    .tag.bluetag { background: var(--blue); color: #fff; }
+    .tag.greentag { background: rgba(119,209,131,.16); color: var(--green); border: 1px solid rgba(119,209,131,.22); }
+    .list { display: grid; gap: 10px; }
+    .list-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #141414; border: 1px solid #282828; border-radius: 16px; padding: 12px; }
+    .list-item span:first-child { line-height: 1.35; }
+    .bar { height: 13px; background: #242424; border-radius: 999px; overflow: hidden; }
+    .fill { height: 100%; border-radius: 999px; transition: width .24s ease; }
     .goldfill { background: var(--gold); }
     .bluefill { background: var(--blue); }
-
-    .day-summary {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(88px, 1fr));
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .day-pill {
-      background: #151515;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px;
-      text-align: center;
-    }
-
-    .day-pill strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .table-wrap {
-      overflow: auto;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 820px;
-      background: #111;
-    }
-
-    th,
-    td {
-      padding: 14px;
-      text-align: center;
-      border-bottom: 1px solid #242424;
-    }
-
-    th {
-      background: #171717;
-      color: #d9d9d9;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-    }
-
-    .habit-name {
-      text-align: left;
-      font-weight: 850;
-    }
-
-    .habit-cat {
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    .cell {
-      width: 42px;
-      height: 36px;
-      border-radius: 12px;
-      background: #1f1f1f;
-      border: 1px solid #333;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      transition: 0.15s ease;
-    }
-
-    .cell:hover {
-      border-color: #555;
-      transform: scale(1.05);
-    }
-
-    .cell.gold-done {
-      background: rgba(212, 175, 55, 0.22);
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .cell.blue-done {
-      background: rgba(79, 140, 255, 0.22);
-      border-color: var(--blue);
-      color: var(--blue);
-    }
-
-    .list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .list-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      background: #151515;
-      border: 1px solid #282828;
-      border-radius: 16px;
-      padding: 13px;
-    }
-
-    .tag {
-      padding: 5px 9px;
-      border-radius: 999px;
-      font-size: 12px;
-      background: #222;
-      white-space: nowrap;
-    }
-
-    .goldtag {
-      background: var(--gold);
-      color: #0b0b0b;
-    }
-
-    .bluetag {
-      background: var(--blue);
-      color: white;
-    }
-
-    .video-preview {
-      aspect-ratio: 16 / 9;
-      background: #101010;
-      border: 1px dashed #333;
-      border-radius: 16px;
-      margin-top: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      text-align: center;
-      padding: 12px;
-      overflow: hidden;
-    }
-
-    .video-preview iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      border-radius: 16px;
-    }
-
-    .routine-row,
-    .study-row {
-      display: grid;
-      grid-template-columns: 120px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 13px;
-      border-bottom: 1px solid #242424;
-    }
-
-    .routine-row:last-child,
-    .study-row:last-child {
-      border-bottom: 0;
-    }
-
-    .routine-check,
-    .study-row input[type="checkbox"] {
-      width: 22px;
-      height: 22px;
-      accent-color: var(--gold);
-    }
-
-    .punch-grid {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .punch-dot {
-      aspect-ratio: 1;
-      border-radius: 10px;
-      background: #202020;
-      border: 1px solid #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      cursor: pointer;
-      transition: 0.15s ease;
-    }
-
-    .punch-dot:hover {
-      transform: scale(1.06);
-      border-color: #555;
-    }
-
-    .punch-dot.done {
-      background: rgba(212, 175, 55, 0.22);
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .xp-ring {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: conic-gradient(var(--gold) 0%, #252525 0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 10px auto;
-    }
-
-    .xp-ring-inner {
-      width: 108px;
-      height: 108px;
-      border-radius: 50%;
-      background: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-
-    .focus-overlay {
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at center, rgba(212, 175, 55, 0.08), transparent 38%),
-        #050505;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 200;
-      text-align: center;
-      padding: 24px;
-    }
-
-    .focus-overlay.active {
-      display: flex;
-    }
-
-    .focus-time {
-      font-size: clamp(58px, 12vw, 92px);
-      font-weight: 950;
-      letter-spacing: -4px;
-      margin: 18px 0;
-    }
-
-    .focus-input {
-      max-width: 460px;
-      margin: 14px auto;
-    }
-
-    @media (max-width: 900px) {
+    .greenfill { background: var(--green); }
+    .chart { height: 180px; display: flex; align-items: flex-end; gap: 10px; margin-top: 16px; }
+    .chart-bar { flex: 1; min-width: 20px; background: linear-gradient(180deg,var(--gold),#8f741f); border-radius: 12px 12px 0 0; position: relative; }
+    .chart-bar:nth-child(even) { background: linear-gradient(180deg,var(--blue),#28508e); }
+    .chart-bar small { position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%); color: #777; font-size: 10px; }
+    .table-wrap { overflow: auto; border: 1px solid var(--border); border-radius: 18px; background: #111; }
+    table { width: 100%; border-collapse: collapse; min-width: 900px; }
+    th, td { padding: 13px; border-bottom: 1px solid #252525; text-align: center; }
+    th { background: #171717; color: #d8d8d8; font-size: 12px; text-transform: uppercase; letter-spacing: .7px; }
+    .habit-name { text-align: left; font-weight: 950; }
+    .habit-meta { display: block; color: #777; font-size: 11px; margin-top: 4px; }
+    .cell { width: 44px; height: 36px; border-radius: 12px; background: #1e1e1e; border: 1px solid #333; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; font-weight: 950; }
+    .cell.done.goldcell { background: rgba(212,175,55,.19); border-color: var(--gold); color: var(--gold); }
+    .cell.done.bluecell { background: rgba(79,140,255,.19); border-color: var(--blue); color: var(--blue); }
+    .day-summary { display: grid; grid-template-columns: repeat(7, minmax(90px, 1fr)); gap: 10px; margin-bottom: 18px; }
+    .day-pill { background: #151515; border: 1px solid var(--border); border-radius: 16px; padding: 12px; text-align: center; }
+    .day-pill strong { display: block; margin-bottom: 4px; }
+    .check { width: 22px; height: 22px; accent-color: var(--gold); }
+    .routine-row { display: grid; grid-template-columns: 110px 1fr auto; gap: 12px; align-items: center; padding: 13px; border-bottom: 1px solid #242424; }
+    .routine-row:last-child { border-bottom: 0; }
+    .video-preview { aspect-ratio: 16/9; background: #101010; border: 1px dashed #333; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #777; text-align: center; padding: 12px; margin-top: 10px; overflow: hidden; }
+    .video-preview iframe { width: 100%; height: 100%; border: 0; border-radius: 16px; }
+    .punch-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px; margin-top: 14px; }
+    .punch-dot { aspect-ratio: 1; border-radius: 10px; background: #202020; border: 1px solid #333; display: flex; align-items: center; justify-content: center; font-size: 11px; cursor: pointer; }
+    .punch-dot.done { background: rgba(212,175,55,.22); border-color: var(--gold); color: var(--gold); }
+    .focus-overlay { position: fixed; inset: 0; display: none; z-index: 200; background: #050505; align-items: center; justify-content: center; flex-direction: column; padding: 24px; text-align: center; }
+    .focus-overlay.active { display: flex; }
+    .focus-time { font-size: clamp(64px, 12vw, 110px); font-weight: 950; letter-spacing: -5px; margin: 18px 0; }
+    .focus-input { max-width: 520px; margin: 12px auto; }
+    .toast { position: fixed; right: 22px; bottom: 22px; background: #151515; border: 1px solid var(--border); box-shadow: var(--shadow); border-radius: 16px; padding: 13px 15px; color: #fff; z-index: 300; opacity: 0; transform: translateY(8px); pointer-events: none; transition: .2s ease; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    @media(max-width: 900px) {
       body { display: block; }
-      .sidebar {
-        position: sticky;
-        top: 0;
-        width: 100%;
-        height: auto;
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 14px;
-      }
-      .logo { min-width: 132px; margin: 0; font-size: 22px; align-self: center; }
+      .sidebar { position: sticky; top: 0; width: 100%; height: auto; display: flex; gap: 8px; overflow-x: auto; overflow-y: hidden; padding: 12px; }
+      .logo { min-width: 130px; margin: 0; font-size: 22px; display: flex; align-items: center; }
       .sidebar-tip, .nav-label, .nav-desc { display: none; }
-      .nav-group { display: flex; gap: 8px; margin: 0; }
-      .nav-btn { min-width: max-content; margin: 0; padding: 10px 12px; }
-      .nav-icon { width: 28px; height: 28px; }
-      .focus-nav-btn { min-width: max-content; margin: 0; padding: 10px 14px; }
-      .main { margin-left: 0; width: 100%; padding: 18px; }
+      .nav-btn { width: auto; min-width: max-content; margin: 0; padding: 10px 12px; }
+      .nav-icon { display: none; }
+      .focus-nav { min-width: max-content; margin: 0; }
+      .main { width: 100%; margin-left: 0; padding: 18px; }
       .day-summary { grid-template-columns: repeat(2, 1fr); }
-      .routine-row, .study-row { grid-template-columns: 1fr; }
+      .routine-row { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="logo">1% <span>Better</span></div>
-
-    <div class="sidebar-tip">
-      <strong>Today’s Flow</strong>
-      <p>Start with Dashboard, log habits in Track, then finish the day with Wins.</p>
-    </div>
-
-    <div class="nav-group">
-      <div class="nav-label">Start Here</div>
-      <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span><span><span class="nav-title">Dashboard</span><span class="nav-desc">Scores, streaks, trends</span></span></button>
-      <button class="nav-btn" data-page="track"><span class="nav-icon">✓</span><span><span class="nav-title">Track</span><span class="nav-desc">Weekly habit grid</span></span></button>
-      <button class="nav-btn" data-page="wins"><span class="nav-icon">★</span><span><span class="nav-title">Wins</span><span class="nav-desc">Daily reflection</span></span></button>
-    </div>
-
-    <div class="nav-group">
-      <div class="nav-label">Daily Execution</div>
-      <button class="nav-btn" data-page="schedule"><span class="nav-icon">☼</span><span><span class="nav-title">Schedule</span><span class="nav-desc">Routine + training split</span></span></button>
-      <button class="nav-btn" data-page="gym"><span class="nav-icon">↯</span><span><span class="nav-title">Gym / Speed</span><span class="nav-desc">Speed, stretch, workouts</span></span></button>
-      <button class="nav-btn" data-page="punchcards"><span class="nav-icon">▦</span><span><span class="nav-title">Punch Cards</span><span class="nav-desc">Reps, goals, streak cards</span></span></button>
-      <button class="nav-btn" data-page="xp"><span class="nav-icon">XP</span><span><span class="nav-title">XP System</span><span class="nav-desc">Levels, ranks, rewards</span></span></button>
-    </div>
-
-    <div class="nav-group">
-      <div class="nav-label">Learning</div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="logo">1% <span>Better</span></div>
+      <div class="sidebar-tip"><strong>Today’s Flow</strong><p>Open Dashboard → log Track → use Focus → finish with Wins + Review.</p></div>
+      <div class="nav-label">Command</div>
+      <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span><span><span class="nav-title">Dashboard</span><span class="nav-desc">Mission, scores, graph</span></span></button>
+      <button class="nav-btn" data-page="today"><span class="nav-icon">☼</span><span><span class="nav-title">Today</span><span class="nav-desc">Top 3 + quick capture</span></span></button>
+      <button class="nav-btn" data-page="track"><span class="nav-icon">✓</span><span><span class="nav-title">Track</span><span class="nav-desc">Custom habit grid</span></span></button>
+      <button class="nav-btn" data-page="schedule"><span class="nav-icon">▤</span><span><span class="nav-title">Schedule</span><span class="nav-desc">Mode-based day builder</span></span></button>
+      <div class="nav-label">Growth</div>
+      <button class="nav-btn" data-page="training"><span class="nav-icon">↯</span><span><span class="nav-title">Training</span><span class="nav-desc">Speed, gym, mobility</span></span></button>
       <button class="nav-btn" data-page="skills"><span class="nav-icon">◆</span><span><span class="nav-title">Skills</span><span class="nav-desc">Golf, chess, piano, drawing</span></span></button>
-      <button class="nav-btn" data-page="catholic"><span class="nav-icon">✚</span><span><span class="nav-title">Catholic Study</span><span class="nav-desc">Faith, notes, study focus</span></span></button>
-      <button class="nav-btn" data-page="ideas"><span class="nav-icon">✎</span><span><span class="nav-title">Ideas Vault</span><span class="nav-desc">Business, content, notes</span></span></button>
-    </div>
+      <button class="nav-btn" data-page="business"><span class="nav-icon">$</span><span><span class="nav-title">Business</span><span class="nav-desc">Creator + money work</span></span></button>
+      <button class="nav-btn" data-page="faith"><span class="nav-icon">✚</span><span><span class="nav-title">Catholic Study</span><span class="nav-desc">Faith, virtue, notes</span></span></button>
+      <div class="nav-label">Systems</div>
+      <button class="nav-btn" data-page="wins"><span class="nav-icon">★</span><span><span class="nav-title">Wins</span><span class="nav-desc">Night reflection</span></span></button>
+      <button class="nav-btn" data-page="ideas"><span class="nav-icon">✎</span><span><span class="nav-title">Ideas Vault</span><span class="nav-desc">Second brain</span></span></button>
+      <button class="nav-btn" data-page="review"><span class="nav-icon">◉</span><span><span class="nav-title">Weekly Review</span><span class="nav-desc">Coach report</span></span></button>
+      <button class="nav-btn" data-page="build"><span class="nav-icon">⌘</span><span><span class="nav-title">Build Studio</span><span class="nav-desc">Prompt + code planner</span></span></button>
+      <button class="focus-nav" id="openFocus">Enter Focus Mode</button>
+    </aside>
 
-    <div class="nav-group">
-      <div class="nav-label">Improve</div>
-      <button class="nav-btn" data-page="coach"><span class="nav-icon">◉</span><span><span class="nav-title">Coach</span><span class="nav-desc">Review + notes</span></span></button>
-      <button class="nav-btn" data-page="devlab"><span class="nav-icon">⌘</span><span><span class="nav-title">AI Code Builder</span><span class="nav-desc">Prompts + code requests</span></span></button>
-    </div>
+    <main class="main">
+      <section id="dashboard" class="page active">
+        <div class="header">
+          <div><div class="eyebrow">Life OS Command Center</div><h1 class="title">Win Today</h1><p class="subtitle">A premium dashboard built around your summer: speed, sport, Catholic study, skills, business, content, and daily execution.</p></div>
+          <div class="row"><button class="action primary" data-page-link="today">Plan Today</button><button class="action" data-page-link="track">Log Habits</button></div>
+        </div>
+        <div class="grid" id="scoreCards"></div>
+        <div class="grid-2" style="margin-top:18px;">
+          <div class="card"><h2>Today’s Mission</h2><div id="missionPreview" class="list"></div></div>
+          <div class="card"><h2>Consistency Graph</h2><div class="chart" id="weekChart"></div></div>
+          <div class="card"><h2>Category Breakdown</h2><p class="muted">Non-Negotiables</p><div class="bar"><div id="nonBreakdown" class="fill goldfill"></div></div><p class="muted" style="margin-top:14px;">Growth</p><div class="bar"><div id="growthBreakdown" class="fill bluefill"></div></div><p class="muted" style="margin-top:14px;">Athletic / Skills</p><div class="bar"><div id="athBreakdown" class="fill greenfill"></div></div></div>
+          <div class="card"><h2>Tomorrow Preview</h2><div id="tomorrowPreview" class="list"></div></div>
+        </div>
+      </section>
 
-    <button class="focus-nav-btn" id="focusOpenBtn">Enter Focus Mode</button>
-  </aside>
+      <section id="today" class="page">
+        <div class="header"><div><div class="eyebrow">Daily Command</div><h1 class="title">Today</h1><p class="subtitle">Set your top 3, choose your schedule mode, and capture anything quickly.</p></div><button class="action primary" id="saveToday">Save Today</button></div>
+        <div class="grid-2">
+          <div class="card"><h2 class="gold">Top 3 Must-Wins</h2><div class="stack"><input id="mission1" placeholder="Mission #1"><input id="mission2" placeholder="Mission #2"><input id="mission3" placeholder="Mission #3"></div></div>
+          <div class="card"><h2 class="blue">Daily Setup</h2><div class="stack"><select id="dayMode"><option>Normal Training Day</option><option>Golf Course Day</option><option>Recovery Day</option><option>Sunday Meal Prep Day</option></select><input id="trainingFocus" placeholder="Training focus: speed, mobility, swim..."><input id="faithFocusToday" placeholder="Faith focus: humility, patience, prayer..."></div></div>
+          <div class="card"><h2>Quick Capture</h2><textarea id="quickCapture" placeholder="Drop anything here: tasks, reminders, ideas, worries, notes..."></textarea><button class="action" id="sendCapture" style="margin-top:10px;">Send to Ideas Vault</button></div>
+          <div class="card"><h2>No Phone + Wall Reset</h2><div class="list"><label class="list-item"><span>No phone first hour</span><input class="check" type="checkbox" id="noPhoneCheck"></label><label class="list-item"><span>5-minute wall stare before deep work</span><input class="check" type="checkbox" id="wallResetCheck"></label><label class="list-item"><span>Wins tonight before bed</span><input class="check" type="checkbox" id="winsTonightCheck"></label></div></div>
+        </div>
+      </section>
 
-  <main class="main">
-    <section id="dashboard" class="page active">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Performance Command Center</div>
-          <h1 class="title">Dashboard</h1>
-          <p class="subtitle">Track discipline, consistency, wins, skills, and daily execution in one premium operating system.</p>
-        </div>
-        <button class="action primary" data-page-link="track">Log Today</button>
-      </div>
-      <div class="grid" id="scoreCards"></div>
-      <div class="grid" style="margin-top:18px">
-        <div class="card">
-          <h3>Category Breakdown</h3>
-          <p class="muted">Non-Negotiables</p>
-          <div class="bar"><div id="goldBreakdown" class="fill goldfill"></div></div>
-          <p class="muted" style="margin-top:16px">Growth and Development</p>
-          <div class="bar"><div id="blueBreakdown" class="fill bluefill"></div></div>
-        </div>
-        <div class="card">
-          <h3>This Week Trend</h3>
-          <div id="miniTrend" style="height:180px;display:flex;align-items:flex-end;gap:10px;margin-top:18px"></div>
-        </div>
-        <div class="card">
-          <h3>Tomorrow Wins</h3>
-          <div id="tomorrowReminder" class="list"></div>
-        </div>
-      </div>
-    </section>
+      <section id="track" class="page">
+        <div class="header"><div><div class="eyebrow">Weekly Execution</div><h1 class="title">Track</h1><p class="subtitle">Custom habits, weekly grid, minutes/count tracking, and category scores.</p></div><div class="row"><button class="action primary" id="addHabitBtn">Add Habit</button><button class="action danger" id="resetWeekBtn">Reset Week</button></div></div>
+        <div class="day-summary" id="daySummary"></div>
+        <div class="table-wrap"><table id="habitTable"></table></div>
+        <div class="grid" id="categoryCards" style="margin-top:18px;"></div>
+      </section>
 
-    <section id="track" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Weekly Execution Grid</div>
-          <h1 class="title">Track</h1>
-          <p class="subtitle">Click cells to mark habits complete. Family Time logs minutes. Everything saves automatically.</p>
-        </div>
-        <button class="action" id="resetWeekBtn">Reset Week</button>
-      </div>
-      <div class="day-summary" id="daySummary"></div>
-      <div class="table-wrap"><table id="habitTable"></table></div>
-      <div class="grid" style="margin-top:18px" id="categorySummaries"></div>
-    </section>
+      <section id="schedule" class="page">
+        <div class="header"><div><div class="eyebrow">Day Builder</div><h1 class="title">Schedule</h1><p class="subtitle">Switch modes and run the version of the day that fits your training.</p></div><button class="action" id="resetScheduleBtn">Reset Schedule Checks</button></div>
+        <div class="grid" style="margin-bottom:18px;"><div class="card"><h2>Schedule Mode</h2><select id="scheduleMode"><option>Normal Training Day</option><option>Golf Course Day</option><option>Recovery Day</option><option>Sunday Meal Prep Day</option></select><p class="muted" style="margin-top:12px;">The checklist changes based on your mode.</p></div><div class="card"><h2 class="gold">Rules</h2><div class="list"><div class="list-item"><span>No phone first hour</span><span class="tag goldtag">Required</span></div><div class="list-item"><span>Wall stare before deep work</span><span class="tag">Reset</span></div><div class="list-item"><span>Target sleep: 8.5–9 hours</span><span class="tag bluetag">Recovery</span></div></div></div></div>
+        <div class="card"><h2 id="scheduleTitle" class="gold">Normal Training Day</h2><div id="scheduleList"></div></div>
+      </section>
 
-    <section id="wins" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Reflection System</div>
-          <h1 class="title">Wins</h1>
-          <p class="subtitle">Write three wins from today and three targets for tomorrow. Tomorrow wins appear on the dashboard.</p>
-        </div>
-        <button class="action primary" id="saveWinsBtn">Save Reflection</button>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <h2 class="gold">3 Wins Today</h2>
-          <input id="todayWin1" placeholder="Win #1">
-          <input id="todayWin2" placeholder="Win #2" style="margin-top:10px">
-          <input id="todayWin3" placeholder="Win #3" style="margin-top:10px">
-        </div>
-        <div class="card">
-          <h2 class="blue">3 Wins Tomorrow</h2>
-          <input id="tomorrowWin1" placeholder="Tomorrow Win #1">
-          <input id="tomorrowWin2" placeholder="Tomorrow Win #2" style="margin-top:10px">
-          <input id="tomorrowWin3" placeholder="Tomorrow Win #3" style="margin-top:10px">
-        </div>
-      </div>
-    </section>
+      <section id="training" class="page">
+        <div class="header"><div><div class="eyebrow">Athletic Development</div><h1 class="title">Training</h1><p class="subtitle">Speed, long jog, swim, mobility, gym workouts, and sport practice without burying it inside the schedule.</p></div><button class="action primary" id="saveTrainingLog">Save Training Log</button></div>
+        <div class="grid"><div class="card"><h2 class="blue">Speed Training</h2><div class="list"><label class="list-item"><span>Dynamic warm-up</span><input class="check training-check" type="checkbox"></label><label class="list-item"><span>Sprint mechanics</span><input class="check training-check" type="checkbox"></label><label class="list-item"><span>Acceleration starts</span><input class="check training-check" type="checkbox"></label><label class="list-item"><span>Full recovery between reps</span><input class="check training-check" type="checkbox"></label></div></div><div class="card"><h2 class="gold">Mobility / Stretch</h2><div class="list"><label class="list-item"><span>Ankles</span><input class="check training-check" type="checkbox"></label><label class="list-item"><span>Hips</span><input class="check training-check" type="checkbox"></label><label class="list-item"><span>Hamstrings</span><input class="check training-check" type="checkbox"></label><label class="list-item"><span>Glutes</span><input class="check training-check" type="checkbox"></label></div></div><div class="card"><h2>Training Log</h2><div class="stack"><select id="trainingType"><option>Speed Training</option><option>Long Jog</option><option>Swim</option><option>Mobility</option><option>Gym Workout</option><option>Sport Practice</option></select><input id="trainingMinutes" type="number" placeholder="Minutes"><textarea id="trainingNotes" placeholder="What did you do? How did you feel?"></textarea></div></div><div class="card"><h2>Recent Logs</h2><div id="trainingLogs" class="list"></div></div></div>
+      </section>
 
-    <section id="skills" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Skill Development</div>
-          <h1 class="title">Skills</h1>
-          <p class="subtitle">Workspaces for golf, chess, piano, and drawing. Notes, goals, drawing prompts, and lesson videos save locally.</p>
-        </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="action" id="drawingPromptHeaderBtn">Generate Drawing Idea</button>
-          <button class="action primary" id="saveSkillsBtn">Save Skills</button>
-        </div>
-      </div>
-      <div class="grid" style="margin-bottom:18px">
-        <div class="card">
-          <h2 class="gold">Drawing Idea Generator</h2>
-          <p class="muted" style="line-height:1.7;margin-bottom:14px">Use this when you do not know what to draw.</p>
-          <div id="drawingPromptBox" style="font-size:28px;font-weight:950;letter-spacing:-.5px;margin:18px 0">Knight training at sunrise</div>
-          <button class="action primary" id="drawingPromptBtn">Generate New Idea</button>
-        </div>
-        <div class="card">
-          <h2 class="blue">Prompt Types</h2>
-          <div class="list">
-            <div class="list-item"><span>Characters</span><span class="tag goldtag">People</span></div>
-            <div class="list-item"><span>Scenes</span><span class="tag bluetag">Worlds</span></div>
-            <div class="list-item"><span>Objects</span><span class="tag">Study</span></div>
-            <div class="list-item"><span>Creative combos</span><span class="tag">Fun</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="grid" id="skillCards"></div>
-    </section>
+      <section id="skills" class="page">
+        <div class="header"><div><div class="eyebrow">Skill Development</div><h1 class="title">Skills</h1><p class="subtitle">Golf, chess, piano, and drawing each get goals, notes, videos, and practice logs.</p></div><div class="row"><button class="action" id="drawIdeaBtn">Drawing Idea</button><button class="action primary" id="saveSkillsBtn">Save Skills</button></div></div>
+        <div class="grid" style="margin-bottom:18px;"><div class="card"><h2 class="gold">Drawing Generator</h2><p id="drawingPrompt" class="big" style="font-size:28px;line-height:1.15;">Knight training at sunrise — cinematic</p></div><div class="card"><h2 class="blue">Practice Log</h2><div class="stack"><select id="skillLogType"><option>Golf</option><option>Chess</option><option>Piano</option><option>Drawing</option></select><input id="skillLogMinutes" type="number" placeholder="Minutes"><textarea id="skillLogNote" placeholder="What did you practice?"></textarea><button class="action primary" id="saveSkillLog">Save Practice</button></div></div></div>
+        <div class="grid" id="skillCards"></div>
+      </section>
 
-    <section id="schedule" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Discipline + Athlete Summer System</div>
-          <h1 class="title">Schedule</h1>
-          <p class="subtitle">Built around 6:00 AM wakeup, no phone first hour, speed training, business, skills, Catholic study, and elite recovery.</p>
-        </div>
-        <button class="action" id="resetScheduleBtn">Reset Day</button>
-      </div>
-      <div class="grid" style="margin-bottom:18px">
-        <div class="card">
-          <h2 class="gold">Daily Rules</h2>
-          <div class="list">
-            <div class="list-item"><span>No phone first hour</span><span class="tag goldtag">Required</span></div>
-            <div class="list-item"><span>Wall stare before deep work</span><span class="tag goldtag">Reset</span></div>
-            <div class="list-item"><span>Train hard, recover smart</span><span class="tag bluetag">Athlete</span></div>
-            <div class="list-item"><span>Sleep target: 8.5–9 hours</span><span class="tag bluetag">Recovery</span></div>
-          </div>
-        </div>
-        <div class="card">
-          <h2 class="blue">Daily Priorities</h2>
-          <p class="muted" style="line-height:1.8">Fitness / speed training<br>Business and money work<br>Chess, piano, and drawing<br>Reading + Catholic study<br>Golf course 2 days per week</p>
-        </div>
-      </div>
-      <div class="card" style="margin-bottom:18px"><h2 class="gold">Normal Training Day</h2><div id="routineList"></div></div>
-      <div class="grid">
-        <div class="card"><h2 class="blue">Weekly Training Split</h2><div class="list" id="weeklySplitList"></div></div>
-        <div class="card"><h2 class="gold">Golf Course Day</h2><div class="list" id="golfDayList"></div></div>
-        <div class="card"><h2 class="blue">Recovery Day</h2><div class="list" id="recoveryDayList"></div></div>
-        <div class="card"><h2 class="gold">Sunday Meal Prep</h2><div class="list" id="mealPrepList"></div></div>
-      </div>
-    </section>
+      <section id="business" class="page">
+        <div class="header"><div><div class="eyebrow">Creator + Business</div><h1 class="title">Business</h1><p class="subtitle">A simple page for money skills, YouTube/content, product ideas, and deep work.</p></div><button class="action primary" id="saveBusinessBtn">Save Business Work</button></div>
+        <div class="grid-2"><div class="card"><h2 class="gold">Today’s Business Work</h2><div class="stack"><input id="businessGoal" placeholder="Business goal for today"><textarea id="businessNotes" placeholder="What did you build, learn, sell, research, or plan?"></textarea></div></div><div class="card"><h2 class="blue">Content Pipeline</h2><div class="stack"><input id="videoIdea" placeholder="Video idea"><input id="thumbnailIdea" placeholder="Thumbnail idea"><input id="titleIdea" placeholder="Title idea"><label class="list-item"><span>Recorded?</span><input id="recordedCheck" class="check" type="checkbox"></label><label class="list-item"><span>Edited?</span><input id="editedCheck" class="check" type="checkbox"></label><label class="list-item"><span>Posted?</span><input id="postedCheck" class="check" type="checkbox"></label></div></div></div>
+      </section>
 
+      <section id="faith" class="page">
+        <div class="header"><div><div class="eyebrow">Catholic Study</div><h1 class="title">Faith</h1><p class="subtitle">Prayer, Bible, Catechism, saints, virtue focus, Mass notes, and conscience review.</p></div><button class="action primary" id="saveFaithBtn">Save Faith Study</button></div>
+        <div class="grid"><div class="card"><h2 class="gold">Daily Faith Checklist</h2><div id="faithChecklist" class="list"></div></div><div class="card"><h2 class="blue">Study Notes</h2><div class="stack"><input id="virtueFocus" placeholder="Weekly virtue focus"><input id="saintStudy" placeholder="Saint / topic studying"><textarea id="faithNotes" placeholder="Bible, Catechism, prayer, Mass notes..."></textarea></div></div><div class="card"><h2>Prayer Intentions</h2><textarea id="prayerIntentions" placeholder="Who/what are you praying for?"></textarea><div class="divider"></div><h3>Examination</h3><textarea id="conscienceNotes" placeholder="What did I do well? What needs repentance? What virtue do I need tomorrow?"></textarea></div></div>
+      </section>
 
-    <section id="gym" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Athletic Training Hub</div>
-          <h1 class="title">Gym / Speed</h1>
-          <p class="subtitle">A dedicated section for speed training, stretching/mobility, gym workouts, swim/recovery, and sport practice logs.</p>
-        </div>
-        <button class="action primary" id="saveGymBtn">Save Training Log</button>
-      </div>
+      <section id="wins" class="page">
+        <div class="header"><div><div class="eyebrow">Night Review</div><h1 class="title">Wins</h1><p class="subtitle">Close the loop before bed. Today’s wins become proof; tomorrow’s wins become direction.</p></div><button class="action primary" id="saveWinsBtn">Save Reflection</button></div>
+        <div class="grid-2"><div class="card"><h2 class="gold">3 Wins Today</h2><div class="stack"><input id="todayWin1" placeholder="Win #1"><input id="todayWin2" placeholder="Win #2"><input id="todayWin3" placeholder="Win #3"></div></div><div class="card"><h2 class="blue">3 Wins Tomorrow</h2><div class="stack"><input id="tomorrowWin1" placeholder="Tomorrow win #1"><input id="tomorrowWin2" placeholder="Tomorrow win #2"><input id="tomorrowWin3" placeholder="Tomorrow win #3"></div></div><div class="card"><h2>Lesson</h2><textarea id="dailyLesson" placeholder="What did I learn today?"></textarea></div><div class="card"><h2>Fix Tomorrow</h2><textarea id="fixTomorrow" placeholder="What needs to improve tomorrow?"></textarea></div></div>
+      </section>
 
-      <div class="gym-tabs">
-        <button class="gym-tab active" data-gym-mode="speed">Speed Training</button>
-        <button class="gym-tab" data-gym-mode="mobility">Stretching / Mobility</button>
-        <button class="gym-tab" data-gym-mode="strength">Gym Workout</button>
-        <button class="gym-tab" data-gym-mode="recovery">Swim / Recovery</button>
-        <button class="gym-tab" data-gym-mode="sport">Sport Practice</button>
-      </div>
+      <section id="ideas" class="page">
+        <div class="header"><div><div class="eyebrow">Second Brain</div><h1 class="title">Ideas Vault</h1><p class="subtitle">Capture ideas and turn them into action instead of letting them sit there.</p></div><button class="action primary" id="addIdeaBtn">Add Idea</button></div>
+        <div class="grid"><div class="card"><h2 class="gold">New Idea</h2><div class="stack"><input id="ideaTitle" placeholder="Idea title"><select id="ideaCategory"><option>Business</option><option>YouTube</option><option>School</option><option>Golf</option><option>Chess</option><option>Piano</option><option>Drawing</option><option>Faith</option><option>App Idea</option><option>Lesson Learned</option></select><textarea id="ideaNote" placeholder="Write the idea..."></textarea></div></div><div class="card"><h2 class="blue">Search</h2><input id="ideaSearch" placeholder="Search ideas..."><p class="muted" style="margin-top:12px;line-height:1.6;">Use this for business ideas, content ideas, notes, quotes, lessons, and things to research.</p></div></div><div class="grid" id="ideasList" style="margin-top:18px;"></div>
+      </section>
 
-      <div class="grid" style="margin-bottom:18px">
-        <div class="card">
-          <h2 class="gold" id="gymModeTitle">Speed Training</h2>
-          <p class="muted" id="gymModeDescription" style="line-height:1.8">Acceleration, sprint mechanics, explosive starts, and fast athletic movement.</p>
-        </div>
-        <div class="card">
-          <h2 class="blue">Training Rules</h2>
-          <div class="list">
-            <div class="list-item"><span>Warm up before intensity</span><span class="tag goldtag">Required</span></div>
-            <div class="list-item"><span>Quality reps over junk volume</span><span class="tag bluetag">Speed</span></div>
-            <div class="list-item"><span>Stop if form breaks down</span><span class="tag">Smart</span></div>
-            <div class="list-item"><span>Log what improved after</span><span class="tag goldtag">Review</span></div>
-          </div>
-        </div>
-      </div>
+      <section id="review" class="page">
+        <div class="header"><div><div class="eyebrow">Coach Report</div><h1 class="title">Weekly Review</h1><p class="subtitle">Review what worked, what slipped, and what to attack next week.</p></div><button class="action primary" id="saveReviewBtn">Save Review</button></div>
+        <div class="grid-2"><div class="card"><h2 class="gold">Review Questions</h2><div class="stack"><textarea id="reviewWorked" placeholder="What worked this week?"></textarea><textarea id="reviewFix" placeholder="What needs fixing?"></textarea><textarea id="reviewNext" placeholder="Next week’s mission"></textarea></div></div><div class="card"><h2 class="blue">Auto Coach</h2><div id="autoReport" class="list"></div></div></div>
+      </section>
 
-      <div class="grid" style="margin-bottom:18px">
-        <div class="card">
-          <h2 class="gold">Workout Checklist</h2>
-          <div id="gymWorkoutList"></div>
-        </div>
-        <div class="card gym-log-card">
-          <h2 class="blue">Training Log</h2>
-          <input id="gymFocus" placeholder="Focus today: acceleration, mobility, upper body, recovery...">
-          <input id="gymMinutes" type="number" min="0" placeholder="Minutes trained" style="margin-top:10px">
-          <textarea id="gymNotes" placeholder="What did you do? What felt fast? What felt tight? What should you fix next time?" style="margin-top:10px"></textarea>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <h2 class="gold">Weekly Setup</h2>
-          <div class="list">
-            <div class="list-item"><span>Speed days</span><span class="tag bluetag">Mon / Wed / Fri</span></div>
-            <div class="list-item"><span>Long jog + swim</span><span class="tag">Tue</span></div>
-            <div class="list-item"><span>Recovery + mobility</span><span class="tag goldtag">Thu</span></div>
-            <div class="list-item"><span>Golf / sport practice</span><span class="tag">Sat / Sun</span></div>
-          </div>
-        </div>
-        <div class="card">
-          <h2 class="blue">Recent Logs</h2>
-          <div class="list" id="gymRecentLogs"></div>
-        </div>
-      </div>
-    </section>
-    <section id="punchcards" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Visual Goal Completion</div>
-          <h1 class="title">Punch Cards</h1>
-          <p class="subtitle">Pick a goal and punch a square every time you complete a rep.</p>
-        </div>
-        <button class="action primary" id="addPunchCardBtn">Add Card</button>
-      </div>
-      <div class="grid" id="punchCardGrid"></div>
-    </section>
-
-    <section id="ideas" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Second Brain</div>
-          <h1 class="title">Ideas Vault</h1>
-          <p class="subtitle">Capture business ideas, YouTube ideas, school notes, faith notes, and skill insights.</p>
-        </div>
-        <button class="action primary" id="addIdeaBtn">Add Idea</button>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <h2 class="gold">New Idea</h2>
-          <input id="ideaTitle" placeholder="Idea title">
-          <textarea id="ideaNote" placeholder="Write the idea, lesson, or note..." style="margin-top:10px"></textarea>
-        </div>
-        <div class="card">
-          <h2 class="blue">Categories</h2>
-          <p class="muted" style="line-height:1.8">Business • YouTube • School • Golf • Chess • Piano • Drawing • Faith • Lessons Learned</p>
-        </div>
-      </div>
-      <div class="grid" id="ideasList" style="margin-top:18px"></div>
-    </section>
-
-    <section id="xp" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Gamified Discipline</div>
-          <h1 class="title">XP System</h1>
-          <p class="subtitle">Earn XP for habits, focus sessions, wins, skill practice, and daily execution.</p>
-        </div>
-        <button class="action primary" id="addXPBtn">Add 25 XP</button>
-      </div>
-      <div class="grid">
-        <div class="card"><h2 class="gold">Current Level</h2><div class="xp-ring"><div class="xp-ring-inner"><div id="levelBox" class="big gold">1</div><div class="muted">Level</div></div></div><p id="xpText" class="muted" style="text-align:center"></p></div>
-        <div class="card"><h2 class="blue">XP Rewards</h2><div class="list"><div class="list-item"><span>Complete Habit</span><span class="tag goldtag">+10 XP</span></div><div class="list-item"><span>Save Wins</span><span class="tag goldtag">+20 XP</span></div><div class="list-item"><span>Focus Session</span><span class="tag bluetag">+30 XP</span></div><div class="list-item"><span>Skill Practice</span><span class="tag bluetag">+25 XP</span></div></div></div>
-        <div class="card"><h2>Rank</h2><div id="rankBox" class="big blue">Rookie</div><p class="muted" style="margin-top:10px">Your rank improves as your XP rises.</p></div>
-      </div>
-    </section>
-
-    <section id="catholic" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Faith + Study</div>
-          <h1 class="title">Catholic Study</h1>
-          <p class="subtitle">Track prayer, Bible reading, Catholic learning, saint studies, and reflections.</p>
-        </div>
-        <button class="action primary" id="saveCatholicBtn">Save Study</button>
-      </div>
-      <div class="grid">
-        <div class="card"><h2 class="gold">Daily Faith Checklist</h2><div id="faithChecklist"></div></div>
-        <div class="card"><h2 class="blue">Study Notes</h2><input id="saintStudy" placeholder="Saint / topic studying"><textarea id="faithNotes" placeholder="Bible notes, Catechism notes, prayer reflections..." style="margin-top:10px"></textarea></div>
-        <div class="card"><h2>Weekly Focus</h2><textarea id="faithFocus" placeholder="Example: Humility, discipline, patience, prayer, courage..."></textarea></div>
-      </div>
-    </section>
-
-    <section id="coach" class="page">
-      <div class="header"><div><div class="eyebrow">Future Intelligence</div><h1 class="title">Coach</h1><p class="subtitle">Weekly reviews, performance notes, and future recommendations.</p></div></div>
-      <div class="grid">
-        <div class="card"><h3>Weekly Review</h3><p class="muted">Review what worked, what slipped, and what to attack next week.</p></div>
-        <div class="card"><h3>Performance Notes</h3><textarea id="coachNotes" placeholder="What did I learn this week?"></textarea></div>
-      </div>
-    </section>
-
-    <section id="devlab" class="page">
-      <div class="header"><div><div class="eyebrow">Upgrade Command Center</div><h1 class="title">AI Code Builder</h1><p class="subtitle">One tool makes better prompts. The other turns prompts into safer code requests.</p></div></div>
-      <div class="grid wide">
-        <div class="card"><h2 class="gold">1. Prompt Builder</h2><textarea id="promptIdea" placeholder="Rough idea...">Make the sections way better and more useful.</textarea><button class="action primary" style="margin-top:14px" id="generateElitePromptBtn">Generate Better Prompt</button></div>
-        <div class="card"><h2 class="blue">2. Code Builder</h2><textarea id="codePrompt" placeholder="Paste a prompt here..."></textarea><button class="action primary" style="margin-top:14px" id="generateCodeRequestBtn">Generate Code Request</button></div>
-      </div>
-      <div class="grid wide" style="margin-top:18px">
-        <div class="card"><h2>Generated Better Prompt</h2><textarea id="elitePromptOutput" style="min-height:260px" readonly></textarea></div>
-        <div class="card"><h2>Generated Code Request</h2><textarea id="codeRequestOutput" style="min-height:260px" readonly></textarea></div>
-      </div>
-    </section>
-  </main>
-
-  <div id="focusOverlay" class="focus-overlay">
-    <div class="eyebrow">Deep Work Mode</div>
-    <h1 class="title">Focus Mode</h1>
-    <input id="focusTask" class="focus-input" placeholder="What are you focusing on?">
-    <div id="focusTimer" class="focus-time">25:00</div>
-    <p id="focusStats" class="muted" style="margin-bottom:18px">Sessions completed: 0</p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-      <button class="action primary" id="startFocusBtn">Start</button>
-      <button class="action" id="pauseFocusBtn">Pause</button>
-      <button class="action" id="completeFocusBtn">Complete Session</button>
-      <button class="action" id="resetFocusBtn">Reset</button>
-      <button class="action danger" id="exitFocusBtn">Exit</button>
-    </div>
+      <section id="build" class="page">
+        <div class="header"><div><div class="eyebrow">AI Website + Research Architect</div><h1 class="title">Build Studio</h1><p class="subtitle">Make better prompts, feature plans, bug reports, and safer code requests for this app.</p></div></div>
+        <div class="grid-2"><div class="card"><h2 class="gold">Prompt Builder</h2><textarea id="promptIdea" placeholder="Rough idea..."></textarea><button class="action primary" id="makePrompt" style="margin-top:10px;">Make Better Prompt</button></div><div class="card"><h2 class="blue">Feature Planner</h2><textarea id="featureIdea" placeholder="Example: Add a money tracker..."></textarea><button class="action primary" id="makePlan" style="margin-top:10px;">Make Build Plan</button></div><div class="card"><h2>Code Request</h2><textarea id="codePrompt" placeholder="Paste prompt or plan here..."></textarea><button class="action" id="makeCodeRequest" style="margin-top:10px;">Make Code Request</button></div><div class="card"><h2>Output</h2><textarea id="buildOutput" style="min-height:260px;" readonly></textarea></div></div>
+      </section>
+    </main>
   </div>
 
+  <div id="focusOverlay" class="focus-overlay">
+    <div class="eyebrow">Deep Work Protocol</div>
+    <h1 class="title">Focus Mode</h1>
+    <input id="focusTask" class="focus-input" placeholder="What are you focusing on?">
+    <select id="focusCategory" class="focus-input"><option>Business</option><option>Reading</option><option>Catholic Study</option><option>Chess</option><option>Piano</option><option>Drawing</option><option>School</option><option>Fitness</option></select>
+    <div id="focusTimer" class="focus-time">25:00</div>
+    <p id="focusStats" class="muted">Sessions completed: 0</p>
+    <div class="row" style="justify-content:center;margin-top:16px;"><button class="action" data-focus-min="5">5m Wall Reset</button><button class="action" data-focus-min="25">25m</button><button class="action" data-focus-min="45">45m</button><button class="action" data-focus-min="60">60m</button></div>
+    <div class="row" style="justify-content:center;margin-top:12px;"><button class="action primary" id="startFocus">Start</button><button class="action" id="pauseFocus">Pause</button><button class="action" id="completeFocus">Complete</button><button class="action" id="resetFocus">Reset</button><button class="action danger" id="closeFocus">Exit</button></div>
+  </div>
+  <div class="toast" id="toast">Saved</div>
+
   <script>
-    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    const habits = [
-      { name: 'Meditation', cat: 'Non-Negotiables', color: 'gold', type: 'check' },
-      { name: 'Daily Movement', cat: 'Non-Negotiables', color: 'gold', type: 'check' },
-      { name: 'Journal', cat: 'Non-Negotiables', color: 'gold', type: 'check' },
-      { name: 'Family Time', cat: 'Non-Negotiables', color: 'gold', type: 'minutes' },
-      { name: 'Today Wins', cat: 'Non-Negotiables', color: 'gold', type: 'check' },
-      { name: 'Tomorrow Wins', cat: 'Non-Negotiables', color: 'gold', type: 'check' },
-      { name: 'Bible Passage', cat: 'Non-Negotiables', color: 'gold', type: 'check' },
-      { name: 'Big 3', cat: 'Growth and Development', color: 'blue', type: 'check' },
-      { name: 'Sales Activity', cat: 'Growth and Development', color: 'blue', type: 'check' },
-      { name: 'Content Creation', cat: 'Growth and Development', color: 'blue', type: 'check' },
-      { name: 'Task Delegation', cat: 'Growth and Development', color: 'blue', type: 'check' },
-      { name: 'Read 1 Chapter', cat: 'Growth and Development', color: 'blue', type: 'check' }
+    const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const DEFAULT_HABITS = [
+      { id: uid(), name:'Meditation', category:'Non-Negotiables', color:'gold', type:'check', target:6 },
+      { id: uid(), name:'Daily Movement', category:'Athletic', color:'green', type:'check', target:6 },
+      { id: uid(), name:'Journal', category:'Non-Negotiables', color:'gold', type:'check', target:6 },
+      { id: uid(), name:'Family Time', category:'Non-Negotiables', color:'gold', type:'minutes', target:6 },
+      { id: uid(), name:'Bible Passage', category:'Faith', color:'gold', type:'check', target:6 },
+      { id: uid(), name:'Big 3', category:'Growth', color:'blue', type:'check', target:5 },
+      { id: uid(), name:'Business Work', category:'Growth', color:'blue', type:'minutes', target:5 },
+      { id: uid(), name:'Content Creation', category:'Growth', color:'blue', type:'check', target:5 },
+      { id: uid(), name:'Read 1 Chapter', category:'Growth', color:'blue', type:'check', target:5 },
+      { id: uid(), name:'Skill Practice', category:'Skills', color:'blue', type:'minutes', target:5 }
     ];
-
-    const skills = ['Golf', 'Chess', 'Piano', 'Drawing'];
-    const routine = [
-      ['6:00 AM', 'Wake up, water, make bed, quick prayer — no phone'],
-      ['6:10 AM', 'Wall stare dopamine reset — no music, no phone'],
-      ['6:25 AM', 'Mobility + dynamic warm-up: ankles, hips, hamstrings, glutes'],
-      ['6:45 AM', 'Morning run block: speed, long jog, or recovery walk depending on the day'],
-      ['7:25 AM', 'Breakfast: protein, fruit, whole grain, water'],
-      ['8:00 AM', 'Catholic study + reading part 1: Bible, notes, reflection'],
-      ['8:45 AM', 'Wall stare reset before business'],
-      ['8:50 AM', 'Business / money work: product ideas, selling, learning, content, app building'],
-      ['9:50 AM', 'Break, walk, snack — no scrolling'],
-      ['10:10 AM', 'Chess: study, puzzles, playing, or mistake review'],
-      ['11:00 AM', 'Piano: scales, song practice, hard-part repetition'],
-      ['11:45 AM', 'Lunch: protein + rice/whole grain + vegetables'],
-      ['12:30 PM', 'Rest / reset so you do not burn out'],
-      ['1:00 PM', 'Drawing: prompt, technique practice, or reference drawing'],
-      ['1:30 PM', 'Reading / Catholic study part 2'],
-      ['2:15 PM', 'Sport practice / skill block: agility, coordination, golf practice, or speed technique'],
-      ['3:15 PM', 'Swim / recovery conditioning: easy, technique, or recovery swim'],
-      ['4:00 PM', 'Free time, family time, or recovery'],
-      ['4:45 PM', 'Optional work block: business, YouTube, chess review, golf notes, or app building'],
-      ['5:30 PM', 'Dinner window / family time starts flexible'],
-      ['6:30 PM', 'Light evening block: walk, stretch, faith reading, drawing, or family'],
-      ['7:30 PM', 'Dinner / cleanup / reset for tomorrow'],
-      ['8:30 PM', 'Wind down: light reading, stretch, journal, wins today, wins tomorrow'],
-      ['9:15 PM', 'Night routine: shower, brush teeth, clothes ready, no phone if possible'],
-      ['9:30–10:00 PM', 'Lights out target for 8.5–9 hours of sleep']
-    ];
-
-    const weeklySplit = [
-      ['Monday', 'Speed + Business + Skills', 'Hard'],
-      ['Tuesday', 'Long Jog + Swim', 'Endurance'],
-      ['Wednesday', 'Speed + Sport Practice', 'Hard'],
-      ['Thursday', 'Recovery + Skills', 'Recover'],
-      ['Friday', 'Speed + Competition Day', 'Fast'],
-      ['Saturday', 'Golf Course Day', 'Golf'],
-      ['Sunday', 'Golf + Meal Prep + Weekly Review', 'Plan']
-    ];
-
-    const golfDay = ['2-hour golf course block', 'Light mobility before playing', 'Write 3 swing/strategy notes after', 'Keep other training lighter'];
-    const recoveryDay = ['Mobility', 'Easy swim or walk', 'Extra chess, piano, or drawing', 'Business deep work if energy is good'];
-    const mealPrep = ['Chicken or ground beef', 'Rice + broccoli/carrots', 'Eggs, fruit, Greek yogurt', 'Nuts/snacks packed'];
-
+    const SCHEDULES = {
+      'Normal Training Day': [
+        ['6:00 AM','Wake up, water, make bed, quick prayer — no phone'],['6:10 AM','Wall stare dopamine reset'],['6:25 AM','Mobility + dynamic warm-up'],['6:45 AM','Run block: speed, jog, or recovery'],['7:25 AM','Breakfast: protein, fruit, whole grain'],['8:00 AM','Catholic study + reading part 1'],['8:45 AM','Wall stare reset before business'],['8:50 AM','Business / money work'],['9:50 AM','Break, walk, snack — no scrolling'],['10:10 AM','Chess: study, puzzles, review'],['11:00 AM','Piano practice'],['11:45 AM','Lunch'],['12:30 PM','Rest / reset'],['1:00 PM','Drawing'],['1:30 PM','Reading / Catholic study part 2'],['2:15 PM','Sport practice or skill block'],['3:15 PM','Swim / recovery conditioning'],['4:00 PM','Free / family / recovery'],['4:45 PM','Optional work block'],['8:30 PM','Wind down + wins'],['9:30–10 PM','Lights out target']
+      ],
+      'Golf Course Day': [['6:00 AM','Wake up + prayer + no phone'],['6:20 AM','Mobility warm-up'],['7:00 AM','Breakfast'],['8:00 AM','Catholic study / reading'],['9:00 AM','Golf course block: 2 hours'],['11:15 AM','Golf notes: 3 swing or strategy takeaways'],['12:00 PM','Lunch'],['1:00 PM','Light skills: chess or piano'],['2:00 PM','Recovery walk or swim'],['4:00 PM','Business / content light work'],['8:30 PM','Wins + tomorrow plan'],['9:30–10 PM','Sleep target']],
+      'Recovery Day': [['6:00 AM','Wake up + prayer + no phone'],['6:20 AM','Easy mobility'],['7:00 AM','Breakfast'],['8:00 AM','Catholic study + reading'],['9:00 AM','Business deep work if energy is good'],['10:30 AM','Chess study'],['11:15 AM','Piano'],['12:00 PM','Lunch'],['1:00 PM','Drawing'],['2:00 PM','Easy swim or walk'],['3:00 PM','Stretch and recovery'],['4:00 PM','Ideas Vault / planning'],['8:30 PM','Wins + review'],['9:30–10 PM','Sleep target']],
+      'Sunday Meal Prep Day': [['6:00 AM','Wake up + prayer'],['7:00 AM','Breakfast'],['8:00 AM','Mass / Catholic study'],['10:00 AM','Golf or light movement'],['12:00 PM','Lunch'],['1:00 PM','Weekly Review Coach'],['2:00 PM','Plan next week'],['4:00 PM','Clean / reset room'],['7:00 PM','Meal prep: protein, rice, vegetables, snacks'],['8:30 PM','Set clothes and schedule'],['9:30 PM','Wind down for sleep']]
+    };
+    const SKILLS = ['Golf','Chess','Piano','Drawing'];
+    const FAITH_ITEMS = ['Morning Prayer','Bible Passage','Rosary / Decade','Catechism Study','Examination of Conscience'];
     let state = loadState();
-    let focusSeconds = 1500;
+    let focusSeconds = state.focus.defaultSeconds || 1500;
     let focusInterval = null;
 
-    function defaultState() {
-      return {
-        logs: {},
-        wins: { today: ['', '', ''], tomorrow: ['', '', ''] },
-        skills: {},
-        routine: {},
-        coachNotes: '',
-        punchCards: [
-          { title: 'Golf Swings', target: 50, done: 0 },
-          { title: 'Chess Puzzles', target: 30, done: 0 },
-          { title: 'Piano Practices', target: 20, done: 0 },
-          { title: 'Content Posts', target: 10, done: 0 }
-        ],
-        ideas: [],
-        xp: { total: 0 },
-        faithChecks: {},
-        catholicStudy: { saint: '', notes: '', focus: '' },
-        focusStats: { count: 0, tasks: [] },
-        drawingPrompt: 'Knight training at sunrise — cinematic',
-        gym: { mode: 'speed', checks: {}, logs: [] }
-      };
-    }
+    function uid(){ return 'id_' + Math.random().toString(36).slice(2,10); }
+    function defaultState(){ return { today:{ mission:['','',''], mode:'Normal Training Day', trainingFocus:'', faithFocus:'', noPhone:false, wallReset:false, winsTonight:false }, habits: DEFAULT_HABITS, logs:{}, schedule:{ mode:'Normal Training Day', checks:{} }, trainingLogs:[], skills:{}, skillLogs:[], business:{}, faith:{ checks:{}, virtue:'', saint:'', notes:'', intentions:'', conscience:'' }, wins:{ today:['','',''], tomorrow:['','',''], lesson:'', fix:'' }, ideas:[], review:{ worked:'', fix:'', next:'' }, focus:{ count:0, sessions:[], defaultSeconds:1500 }, drawingPrompt:'Knight training at sunrise — cinematic' }; }
+    function loadState(){ const saved = localStorage.getItem('onePercentBestOS'); const base = defaultState(); if(!saved) return base; try { const parsed = JSON.parse(saved); return merge(base, parsed); } catch { return base; } }
+    function merge(base, parsed){ for(const key in parsed){ if(parsed[key] && typeof parsed[key]==='object' && !Array.isArray(parsed[key]) && base[key]) base[key]=merge(base[key], parsed[key]); else base[key]=parsed[key]; } return base; }
+    function save(){ localStorage.setItem('onePercentBestOS', JSON.stringify(state)); renderDashboard(); toast('Saved'); }
+    function clean(v){ return String(v ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;'); }
+    function toast(msg){ const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); clearTimeout(window.toastTimer); window.toastTimer=setTimeout(()=>el.classList.remove('show'),1400); }
+    function showPage(id){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById(id)?.classList.add('active'); document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.page===id)); window.scrollTo(0,0); }
+    function logKey(habitId, day){ return habitId + '_' + day; }
+    function isDone(habit, day){ const val = state.logs[logKey(habit.id, day)]; return habit.type==='check' ? val===true : Number(val||0)>0; }
+    function dayPercent(day){ let done=0; state.habits.forEach(h=>{ if(isDone(h,day)) done++; }); return state.habits.length ? Math.round(done/state.habits.length*100) : 0; }
+    function categoryPercent(cat){ const habits=state.habits.filter(h=>h.category===cat || (cat==='Athletic / Skills' && ['Athletic','Skills'].includes(h.category))); let done=0,total=habits.length*7; habits.forEach(h=>DAYS.forEach((_,d)=>{ if(isDone(h,d)) done++; })); return total?Math.round(done/total*100):0; }
+    function weeklyPercent(){ let done=0,total=state.habits.length*7; state.habits.forEach(h=>DAYS.forEach((_,d)=>{ if(isDone(h,d)) done++; })); return total?Math.round(done/total*100):0; }
+    function streak(){ let s=0; for(let d=0; d<7; d++){ if(dayPercent(d)>=70) s++; } return s; }
 
-    function loadState() {
-      const saved = localStorage.getItem('onePercentBetterState');
-      const base = defaultState();
-      if (!saved) return base;
-      try {
-        const parsed = JSON.parse(saved);
-        return { ...base, ...parsed, wins: { ...base.wins, ...(parsed.wins || {}) }, xp: { ...base.xp, ...(parsed.xp || {}) } };
-      } catch (error) {
-        return base;
-      }
-    }
+    function renderDashboard(){ const todayIndex = new Date().getDay()===0?6:new Date().getDay()-1; const daily=dayPercent(todayIndex), weekly=weeklyPercent(); document.getElementById('scoreCards').innerHTML = [
+      ['Daily Score', daily+'%', 'gold'], ['Weekly Score', weekly+'%', 'blue'], ['Streak Days', streak(), 'gold'], ['Mode', state.today.mode || state.schedule.mode, 'blue']
+    ].map(c=>`<div class="card"><h3>${c[0]}</h3><div class="big ${c[2]}">${c[1]}</div></div>`).join('');
+    document.getElementById('nonBreakdown').style.width=categoryPercent('Non-Negotiables')+'%'; document.getElementById('growthBreakdown').style.width=categoryPercent('Growth')+'%'; document.getElementById('athBreakdown').style.width=categoryPercent('Athletic / Skills')+'%';
+    document.getElementById('weekChart').innerHTML = DAYS.map((d,i)=>`<div class="chart-bar" style="height:${Math.max(8,dayPercent(i))}%"><small>${d}</small></div>`).join('');
+    document.getElementById('missionPreview').innerHTML = state.today.mission.filter(Boolean).length ? state.today.mission.filter(Boolean).map((m,i)=>`<div class="list-item"><span>${i+1}. ${clean(m)}</span><span class="tag goldtag">Must</span></div>`).join('') : '<p class="muted">Set your Top 3 on the Today page.</p>';
+    document.getElementById('tomorrowPreview').innerHTML = state.wins.tomorrow.filter(Boolean).length ? state.wins.tomorrow.filter(Boolean).map(w=>`<div class="list-item"><span>${clean(w)}</span><span class="tag bluetag">Tomorrow</span></div>`).join('') : '<p class="muted">Add tomorrow’s wins tonight.</p>'; }
 
-    function saveState() {
-      localStorage.setItem('onePercentBetterState', JSON.stringify(state));
-      renderDashboard();
-    }
+    function renderToday(){ ['mission1','mission2','mission3'].forEach((id,i)=>document.getElementById(id).value=state.today.mission[i]||''); document.getElementById('dayMode').value=state.today.mode; document.getElementById('trainingFocus').value=state.today.trainingFocus; document.getElementById('faithFocusToday').value=state.today.faithFocus; document.getElementById('noPhoneCheck').checked=state.today.noPhone; document.getElementById('wallResetCheck').checked=state.today.wallReset; document.getElementById('winsTonightCheck').checked=state.today.winsTonight; }
+    function saveToday(){ state.today={ mission:[mission1.value,mission2.value,mission3.value], mode:dayMode.value, trainingFocus:trainingFocus.value, faithFocus:faithFocusToday.value, noPhone:noPhoneCheck.checked, wallReset:wallResetCheck.checked, winsTonight:winsTonightCheck.checked }; state.schedule.mode=state.today.mode; renderSchedule(); save(); }
 
-    function clean(str) {
-      return String(str || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
-    }
+    function renderTrack(){ document.getElementById('daySummary').innerHTML=DAYS.map((d,i)=>`<div class="day-pill"><strong>${d}</strong><span>${dayPercent(i)}%</span></div>`).join(''); let html='<tr><th>Habit</th>'+DAYS.map(d=>`<th>${d}</th>`).join('')+'<th></th></tr>'; state.habits.forEach(h=>{ html+=`<tr><td class="habit-name">${clean(h.name)}<span class="habit-meta">${clean(h.category)} • ${h.type}</span></td>`; DAYS.forEach((_,day)=>{ const done=isDone(h,day), val=state.logs[logKey(h.id,day)], cellClass=done?`done ${h.color==='gold'?'goldcell':'bluecell'}`:''; html+=`<td><button class="cell ${cellClass}" data-habit="${h.id}" data-day="${day}">${h.type==='check'?'✓':(done?clean(val):'+')}</button></td>`; }); html+=`<td><button class="action danger tiny-delete" data-delete-habit="${h.id}">Delete</button></td></tr>`; }); document.getElementById('habitTable').innerHTML=html; document.querySelectorAll('[data-habit]').forEach(b=>b.addEventListener('click',()=>toggleHabit(b.dataset.habit, Number(b.dataset.day)))); document.querySelectorAll('[data-delete-habit]').forEach(b=>b.addEventListener('click',()=>deleteHabit(b.dataset.deleteHabit))); document.getElementById('categoryCards').innerHTML=['Non-Negotiables','Growth','Athletic / Skills','Faith'].map(cat=>`<div class="card"><h3>${cat}</h3><div class="big ${cat==='Growth'?'blue':'gold'}">${categoryPercent(cat)}%</div></div>`).join(''); }
+    function toggleHabit(id, day){ const habit=state.habits.find(h=>h.id===id); if(!habit)return; const key=logKey(id,day); if(habit.type==='check'){ state.logs[key]=!state.logs[key]; } else { const val=prompt(`${habit.name} ${habit.type}:`, state.logs[key]||''); if(val===null)return; state.logs[key]=Number(val)||0; } save(); renderTrack(); }
+    function addHabit(){ const name=prompt('Habit name:'); if(!name)return; const category=prompt('Category: Non-Negotiables, Growth, Athletic, Skills, Faith', 'Growth') || 'Growth'; const type=prompt('Type: check, minutes, count', 'check') || 'check'; const color=['Growth','Skills'].includes(category)?'blue':'gold'; state.habits.push({id:uid(), name, category, color, type, target:5}); save(); renderTrack(); }
+    function deleteHabit(id){ if(confirm('Delete this habit?')){ state.habits=state.habits.filter(h=>h.id!==id); Object.keys(state.logs).forEach(k=>{if(k.startsWith(id+'_')) delete state.logs[k];}); save(); renderTrack(); } }
+    function resetWeek(){ if(confirm('Reset weekly habit logs?')){ state.logs={}; save(); renderTrack(); } }
 
-    function showPage(id) {
-      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-      const nextPage = document.getElementById(id);
-      if (nextPage) nextPage.classList.add('active');
-      document.querySelectorAll('.nav-btn').forEach(button => button.classList.toggle('active', button.dataset.page === id));
-      window.scrollTo(0, 0);
-    }
+    function renderSchedule(){ const mode=state.schedule.mode || 'Normal Training Day'; document.getElementById('scheduleMode').value=mode; document.getElementById('scheduleTitle').textContent=mode; const list=SCHEDULES[mode]||SCHEDULES['Normal Training Day']; document.getElementById('scheduleList').innerHTML=list.map((row,i)=>`<div class="routine-row"><strong>${row[0]}</strong><span>${row[1]}</span><input class="check schedule-check" type="checkbox" data-schedule-index="${i}" ${state.schedule.checks[mode+'_'+i]?'checked':''}></div>`).join(''); document.querySelectorAll('.schedule-check').forEach(c=>c.addEventListener('change',()=>{ state.schedule.checks[mode+'_'+c.dataset.scheduleIndex]=c.checked; save(); })); }
+    function resetSchedule(){ if(confirm('Reset checks for this schedule mode?')){ const mode=state.schedule.mode; Object.keys(state.schedule.checks).forEach(k=>{ if(k.startsWith(mode+'_')) delete state.schedule.checks[k]; }); save(); renderSchedule(); } }
 
-    function logKey(habitIndex, dayIndex) {
-      return habitIndex + '-' + dayIndex;
-    }
+    function renderTraining(){ document.getElementById('trainingLogs').innerHTML=state.trainingLogs.length?state.trainingLogs.slice(0,6).map(l=>`<div class="list-item"><span><strong>${clean(l.type)}</strong><br><span class="small">${clean(l.minutes)} min • ${clean(l.note)}</span></span><span class="tag bluetag">${clean(l.date)}</span></div>`).join(''):'<p class="muted">No training logs yet.</p>'; }
+    function saveTrainingLog(){ const log={type:trainingType.value, minutes:trainingMinutes.value||0, note:trainingNotes.value, date:new Date().toLocaleDateString()}; state.trainingLogs.unshift(log); trainingMinutes.value=''; trainingNotes.value=''; save(); renderTraining(); }
 
-    function isDone(habitIndex, dayIndex) {
-      const item = state.logs[logKey(habitIndex, dayIndex)];
-      return habits[habitIndex].type === 'minutes' ? Number(item || 0) > 0 : item === true;
-    }
+    function renderSkills(){ document.getElementById('skillCards').innerHTML=SKILLS.map(skill=>{ const key=skill.toLowerCase(); const data=state.skills[key]||{goal:'',notes:'',video:''}; return `<div class="card"><h2 class="${['Chess','Drawing'].includes(skill)?'blue':'gold'}">${skill}</h2><div class="stack"><input id="${key}Goal" placeholder="Current ${skill} goal" value="${clean(data.goal)}"><textarea id="${key}Notes" placeholder="Notes, drills, lessons, schedule...">${clean(data.notes)}</textarea><input id="${key}Video" placeholder="YouTube lesson link" value="${clean(data.video)}"><div id="${key}Preview" class="video-preview">Paste a YouTube link to preview</div></div></div>`; }).join(''); SKILLS.forEach(s=>{ const key=s.toLowerCase(); document.getElementById(key+'Video').addEventListener('input',()=>previewVideo(key)); previewVideo(key); }); document.getElementById('drawingPrompt').textContent=state.drawingPrompt; }
+    function saveSkills(){ SKILLS.forEach(s=>{ const key=s.toLowerCase(); state.skills[key]={goal:document.getElementById(key+'Goal').value, notes:document.getElementById(key+'Notes').value, video:document.getElementById(key+'Video').value}; }); save(); }
+    function previewVideo(key){ const val=document.getElementById(key+'Video').value; const id=getYoutubeId(val); document.getElementById(key+'Preview').innerHTML=id?`<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>`:'Paste a YouTube link to preview'; }
+    function getYoutubeId(url){ if(!url)return''; if(url.includes('youtu.be/')) return url.split('youtu.be/')[1].split(/[?&]/)[0]; if(url.includes('v=')) return url.split('v=')[1].split('&')[0]; return ''; }
+    function generateDrawing(){ const subjects=['Knight','Samurai','Robot','Dragon','Tiger','Wizard','Athlete','Explorer','Saint-inspired hero','Monk','Detective','Supercar','Castle','Spaceship','Warrior']; const actions=['training at sunrise','standing in the rain','walking through a ruined city','protecting hidden treasure','studying an ancient book','fighting through a storm','resting after battle','looking over a mountain valley','entering a dark cathedral','preparing for a race']; const styles=['cinematic','realistic','comic-book style','dark fantasy','minimalist sketch','high-detail pencil study','dramatic lighting','dynamic action pose']; state.drawingPrompt=`${pick(subjects)} ${pick(actions)} — ${pick(styles)}`; save(); renderSkills(); }
+    function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+    function saveSkillLog(){ state.skillLogs.unshift({skill:skillLogType.value, minutes:skillLogMinutes.value||0, note:skillLogNote.value, date:new Date().toLocaleDateString()}); skillLogMinutes.value=''; skillLogNote.value=''; save(); toast('Practice saved'); }
 
-    function percentForDay(dayIndex) {
-      let done = 0;
-      habits.forEach((habit, habitIndex) => {
-        if (isDone(habitIndex, dayIndex)) done++;
-      });
-      return Math.round((done / habits.length) * 100);
-    }
+    function saveBusiness(){ state.business={goal:businessGoal.value, notes:businessNotes.value, videoIdea:videoIdea.value, thumbnail:thumbnailIdea.value, title:titleIdea.value, recorded:recordedCheck.checked, edited:editedCheck.checked, posted:postedCheck.checked}; save(); }
+    function renderBusiness(){ const b=state.business||{}; businessGoal.value=b.goal||''; businessNotes.value=b.notes||''; videoIdea.value=b.videoIdea||''; thumbnailIdea.value=b.thumbnail||''; titleIdea.value=b.title||''; recordedCheck.checked=!!b.recorded; editedCheck.checked=!!b.edited; postedCheck.checked=!!b.posted; }
 
-    function percentForCategory(category) {
-      let total = 0;
-      let done = 0;
-      habits.forEach((habit, habitIndex) => {
-        if (habit.cat === category) {
-          days.forEach((day, dayIndex) => {
-            total++;
-            if (isDone(habitIndex, dayIndex)) done++;
-          });
-        }
-      });
-      return total ? Math.round((done / total) * 100) : 0;
-    }
+    function renderFaith(){ document.getElementById('faithChecklist').innerHTML=FAITH_ITEMS.map((item,i)=>`<label class="list-item"><span>${item}</span><input class="check faith-check" type="checkbox" data-faith="${i}" ${state.faith.checks[i]?'checked':''}></label>`).join(''); document.querySelectorAll('.faith-check').forEach(c=>c.addEventListener('change',()=>{ state.faith.checks[c.dataset.faith]=c.checked; save(); })); virtueFocus.value=state.faith.virtue||''; saintStudy.value=state.faith.saint||''; faithNotes.value=state.faith.notes||''; prayerIntentions.value=state.faith.intentions||''; conscienceNotes.value=state.faith.conscience||''; }
+    function saveFaith(){ state.faith={checks:state.faith.checks, virtue:virtueFocus.value, saint:saintStudy.value, notes:faithNotes.value, intentions:prayerIntentions.value, conscience:conscienceNotes.value}; save(); }
 
-    function weeklyPercent() {
-      let done = 0;
-      const total = habits.length * 7;
-      habits.forEach((habit, habitIndex) => {
-        days.forEach((day, dayIndex) => {
-          if (isDone(habitIndex, dayIndex)) done++;
-        });
-      });
-      return Math.round((done / total) * 100);
-    }
+    function renderWins(){ [1,2,3].forEach(i=>{ document.getElementById('todayWin'+i).value=state.wins.today[i-1]||''; document.getElementById('tomorrowWin'+i).value=state.wins.tomorrow[i-1]||''; }); dailyLesson.value=state.wins.lesson||''; fixTomorrow.value=state.wins.fix||''; }
+    function saveWins(){ state.wins={today:[todayWin1.value,todayWin2.value,todayWin3.value], tomorrow:[tomorrowWin1.value,tomorrowWin2.value,tomorrowWin3.value], lesson:dailyLesson.value, fix:fixTomorrow.value}; save(); }
 
-    function streak() {
-      let count = 0;
-      for (let d = 0; d < 7; d++) {
-        if (percentForDay(d) >= 70) count++;
-      }
-      return count;
-    }
+    function addIdea(){ const idea={id:uid(), title:ideaTitle.value||'Untitled Idea', category:ideaCategory.value, note:ideaNote.value, status:'Idea', starred:false, date:new Date().toLocaleDateString()}; state.ideas.unshift(idea); ideaTitle.value=''; ideaNote.value=''; save(); renderIdeas(); }
+    function renderIdeas(){ const q=(ideaSearch.value||'').toLowerCase(); const ideas=state.ideas.filter(i=>(i.title+i.note+i.category).toLowerCase().includes(q)); document.getElementById('ideasList').innerHTML=ideas.length?ideas.map(i=>`<div class="card"><div class="row" style="justify-content:space-between"><h3>${i.starred?'★ ':''}${clean(i.title)}</h3><span class="tag ${i.category==='Faith'?'goldtag':'bluetag'}">${clean(i.category)}</span></div><p class="muted" style="margin:8px 0">${i.date} • ${i.status}</p><p style="line-height:1.7">${clean(i.note)}</p><div class="row" style="margin-top:12px"><button class="action" data-star="${i.id}">${i.starred?'Unstar':'Star'}</button><button class="action primary" data-action="${i.id}">Next Action</button><button class="action danger" data-delete-idea="${i.id}">Delete</button></div></div>`).join(''):'<div class="card"><p class="muted">No ideas found.</p></div>'; document.querySelectorAll('[data-star]').forEach(b=>b.onclick=()=>{ const it=state.ideas.find(x=>x.id===b.dataset.star); it.starred=!it.starred; save(); renderIdeas(); }); document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{ const it=state.ideas.find(x=>x.id===b.dataset.action); it.status='Next Action'; save(); renderIdeas(); }); document.querySelectorAll('[data-delete-idea]').forEach(b=>b.onclick=()=>{ state.ideas=state.ideas.filter(x=>x.id!==b.dataset.deleteIdea); save(); renderIdeas(); }); }
 
-    function renderDashboard() {
-      const weekly = weeklyPercent();
-      const gold = percentForCategory('Non-Negotiables');
-      const blue = percentForCategory('Growth and Development');
-      const today = new Date().getDay();
-      const dayIndex = today === 0 ? 6 : today - 1;
-      const daily = percentForDay(dayIndex);
-      document.getElementById('scoreCards').innerHTML = `
-        <div class="card"><h3>Daily Score</h3><div class="big gold">${daily}%</div></div>
-        <div class="card"><h3>Weekly Score</h3><div class="big blue">${weekly}%</div></div>
-        <div class="card"><h3>Monthly Score</h3><div class="big">${Math.min(100, weekly + 4)}%</div></div>
-        <div class="card"><h3>Streak</h3><div class="big gold">${streak()}</div></div>
-      `;
-      document.getElementById('goldBreakdown').style.width = gold + '%';
-      document.getElementById('blueBreakdown').style.width = blue + '%';
-      document.getElementById('miniTrend').innerHTML = days.map((day, index) => {
-        const p = percentForDay(index);
-        const color = index % 2 ? 'var(--blue)' : 'var(--gold)';
-        return `<div title="${day} ${p}%" style="height:${Math.max(8, p)}%;flex:1;background:${color};border-radius:12px 12px 0 0"></div>`;
-      }).join('');
-      const wins = state.wins.tomorrow.filter(Boolean);
-      document.getElementById('tomorrowReminder').innerHTML = wins.length
-        ? wins.map(win => `<div class="list-item"><span>${clean(win)}</span><span class="tag bluetag">Tomorrow</span></div>`).join('')
-        : '<p class="muted">Add tomorrow wins on the Wins page.</p>';
-    }
+    function renderReview(){ reviewWorked.value=state.review.worked||''; reviewFix.value=state.review.fix||''; reviewNext.value=state.review.next||''; const best=DAYS.map((d,i)=>({d,p:dayPercent(i)})).sort((a,b)=>b.p-a.p)[0]; const worst=DAYS.map((d,i)=>({d,p:dayPercent(i)})).sort((a,b)=>a.p-b.p)[0]; autoReport.innerHTML=`<div class="list-item"><span>Weekly consistency</span><span class="tag bluetag">${weeklyPercent()}%</span></div><div class="list-item"><span>Best day</span><span class="tag goldtag">${best.d} ${best.p}%</span></div><div class="list-item"><span>Weakest day</span><span class="tag">${worst.d} ${worst.p}%</span></div><div class="list-item"><span>Coach focus</span><span>${weeklyPercent()<70?'Simplify the day and protect sleep.':'Keep stacking consistent days.'}</span></div>`; }
+    function saveReview(){ state.review={worked:reviewWorked.value, fix:reviewFix.value, next:reviewNext.value}; save(); }
 
-    function renderTrack() {
-      document.getElementById('daySummary').innerHTML = days.map((day, index) => `<div class="day-pill"><strong>${day}</strong><span>${percentForDay(index)}%</span></div>`).join('');
-      let html = '<tr><th>Habit</th>' + days.map(day => `<th>${day}</th>`).join('') + '</tr>';
-      habits.forEach((habit, habitIndex) => {
-        html += `<tr><td class="habit-name">${habit.name}<div class="habit-cat ${habit.color}">${habit.cat}</div></td>`;
-        days.forEach((day, dayIndex) => {
-          const done = isDone(habitIndex, dayIndex);
-          const val = state.logs[logKey(habitIndex, dayIndex)];
-          const doneClass = done ? (habit.color === 'gold' ? 'gold-done' : 'blue-done') : '';
-          html += `<td><div class="cell ${doneClass}" data-habit="${habitIndex}" data-day="${dayIndex}">${habit.type === 'minutes' && done ? val : '✓'}</div></td>`;
-        });
-        html += '</tr>';
-      });
-      document.getElementById('habitTable').innerHTML = html;
-      document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', () => toggleHabit(Number(cell.dataset.habit), Number(cell.dataset.day))));
-      const gold = percentForCategory('Non-Negotiables');
-      const blue = percentForCategory('Growth and Development');
-      document.getElementById('categorySummaries').innerHTML = `
-        <div class="card"><h3 class="gold">Non-Negotiables Score</h3><div class="big gold">${gold}%</div></div>
-        <div class="card"><h3 class="blue">Growth and Development Score</h3><div class="big blue">${blue}%</div></div>
-      `;
-    }
+    function buildPrompt(){ const idea=promptIdea.value||'Improve this app.'; buildOutput.value=`Act as an elite website/app builder and product designer. Improve my 1% Better OS with this idea:\n\n${idea}\n\nRequirements: keep the matte black/gold/blue design, preserve all existing pages, make it mobile-friendly, use localStorage, avoid broken interactions, and make the feature useful—not just decorative.`; codePrompt.value=buildOutput.value; }
+    function buildPlan(){ const idea=featureIdea.value||'Add a new feature.'; buildOutput.value=`Feature Plan: ${idea}\n\n1. Best location in app: choose the page where it helps daily execution most.\n2. UI needed: premium card layout, clear inputs, useful stats, save button.\n3. Data to save: store all user-entered fields in localStorage.\n4. Possible bugs: duplicate IDs, broken nav links, overwritten state, missing render functions.\n5. Safe build order: HTML section → CSS → state data → render function → event binding → test nav/buttons.`; codePrompt.value=buildOutput.value; }
+    function codeRequest(){ const txt=codePrompt.value||buildOutput.value||'Improve this app safely.'; buildOutput.value=`You are editing a single-file HTML app called 1% Better OS.\n\nTask:\n${txt}\n\nRules:\n- Do not remove existing pages.\n- Do not break navigation or Focus Mode.\n- Keep the premium dark design.\n- Use clean HTML/CSS/vanilla JS.\n- Save user data with localStorage.\n- Test mentally for duplicate IDs and JavaScript syntax errors.\n- Return the safest updated code.`; }
 
-    function toggleHabit(habitIndex, dayIndex) {
-      const habit = habits[habitIndex];
-      if (habit.type === 'minutes') {
-        const current = state.logs[logKey(habitIndex, dayIndex)] || '';
-        const minutes = prompt('Family Time minutes:', current);
-        if (minutes === null) return;
-        state.logs[logKey(habitIndex, dayIndex)] = Number(minutes) || 0;
-      } else {
-        state.logs[logKey(habitIndex, dayIndex)] = !state.logs[logKey(habitIndex, dayIndex)];
-        if (state.logs[logKey(habitIndex, dayIndex)]) addXP(10, false);
-      }
-      saveState();
-      renderTrack();
-      renderXP();
-    }
+    function focusSet(min){ focusSeconds=min*60; state.focus.defaultSeconds=focusSeconds; updateFocus(); save(); }
+    function updateFocus(){ focusTimer.textContent=String(Math.floor(focusSeconds/60)).padStart(2,'0')+':'+String(focusSeconds%60).padStart(2,'0'); focusStats.textContent=`Sessions completed: ${state.focus.count}`; }
+    function toggleFocus(){ focusOverlay.classList.toggle('active'); updateFocus(); }
+    function startFocusTimer(){ clearInterval(focusInterval); focusInterval=setInterval(()=>{ if(focusSeconds>0){ focusSeconds--; updateFocus(); } },1000); }
+    function pauseFocusTimer(){ clearInterval(focusInterval); }
+    function resetFocusTimer(){ pauseFocusTimer(); focusSeconds=state.focus.defaultSeconds||1500; updateFocus(); }
+    function completeFocus(){ pauseFocusTimer(); state.focus.count++; state.focus.sessions.unshift({task:focusTask.value||'Focus Session', category:focusCategory.value, date:new Date().toLocaleString()}); save(); resetFocusTimer(); }
 
-    function resetWeek() {
-      if (confirm('Reset this weekly habit grid?')) {
-        state.logs = {};
-        saveState();
-        renderTrack();
-      }
-    }
-
-    function saveWins() {
-      state.wins.today = [1, 2, 3].map(i => document.getElementById('todayWin' + i).value);
-      state.wins.tomorrow = [1, 2, 3].map(i => document.getElementById('tomorrowWin' + i).value);
-      addXP(20, false);
-      saveState();
-      renderXP();
-      alert('Reflection saved.');
-    }
-
-    function loadWins() {
-      [1, 2, 3].forEach(i => {
-        document.getElementById('todayWin' + i).value = state.wins.today[i - 1] || '';
-        document.getElementById('tomorrowWin' + i).value = state.wins.tomorrow[i - 1] || '';
-      });
-    }
-
-    function renderSkills() {
-      document.getElementById('drawingPromptBox').innerText = state.drawingPrompt || 'Knight training at sunrise — cinematic';
-      document.getElementById('skillCards').innerHTML = skills.map(skill => {
-        const key = skill.toLowerCase();
-        const data = state.skills[key] || { goal: '', notes: '', video: '' };
-        const color = skill === 'Chess' || skill === 'Drawing' ? 'blue' : 'gold';
-        return `
-          <div class="card">
-            <h2 class="${color}">${skill}</h2>
-            <input id="${key}Goal" placeholder="Current goal" value="${clean(data.goal)}">
-            <textarea id="${key}Notes" placeholder="Notes, drills, lessons, schedule..." style="margin-top:10px">${clean(data.notes)}</textarea>
-            <input id="${key}Video" placeholder="YouTube lesson link" value="${clean(data.video)}" style="margin-top:10px">
-            <div id="${key}Preview" class="video-preview">Paste a YouTube link to preview</div>
-          </div>
-        `;
-      }).join('');
-      skills.forEach(skill => {
-        const key = skill.toLowerCase();
-        const input = document.getElementById(key + 'Video');
-        input.addEventListener('input', () => previewVideo(key));
-        previewVideo(key);
-      });
-    }
-
-    function saveSkills() {
-      skills.forEach(skill => {
-        const key = skill.toLowerCase();
-        state.skills[key] = {
-          goal: document.getElementById(key + 'Goal').value,
-          notes: document.getElementById(key + 'Notes').value,
-          video: document.getElementById(key + 'Video').value
-        };
-      });
-      addXP(25, false);
-      saveState();
-      renderXP();
-      alert('Skills saved.');
-    }
-
-    function generateDrawingPrompt() {
-      const subjects = ['Knight', 'Samurai', 'Robot', 'Dragon', 'Tiger', 'Wizard', 'Athlete', 'Explorer', 'Angel', 'Monk', 'Detective', 'Supercar', 'Castle', 'Spaceship', 'Warrior'];
-      const actions = ['training at sunrise', 'standing in the rain', 'walking through a ruined city', 'protecting a hidden treasure', 'studying an ancient book', 'fighting through a storm', 'resting after battle', 'looking over a mountain valley', 'entering a dark cathedral', 'preparing for a race'];
-      const styles = ['cinematic', 'realistic', 'comic-book style', 'dark fantasy', 'minimalist sketch', 'high-detail pencil study', 'dramatic lighting', 'dynamic action pose'];
-      const prompt = `${randomFrom(subjects)} ${randomFrom(actions)} — ${randomFrom(styles)}`;
-      state.drawingPrompt = prompt;
-      document.getElementById('drawingPromptBox').innerText = prompt;
-      saveState();
-    }
-
-    function randomFrom(list) {
-      return list[Math.floor(Math.random() * list.length)];
-    }
-
-    function previewVideo(key) {
-      const input = document.getElementById(key + 'Video');
-      const box = document.getElementById(key + 'Preview');
-      if (!input || !box) return;
-      const id = getYoutubeId(input.value);
-      box.innerHTML = id ? `<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>` : 'Paste a YouTube link to preview';
-    }
-
-    function getYoutubeId(url) {
-      if (!url) return '';
-      if (url.includes('youtu.be/')) return url.split('youtu.be/')[1].split('?')[0].split('&')[0];
-      if (url.includes('v=')) return url.split('v=')[1].split('&')[0];
-      return '';
-    }
-
-    function renderRoutine() {
-      document.getElementById('routineList').innerHTML = routine.map((item, index) => `
-        <div class="routine-row">
-          <strong>${item[0]}</strong>
-          <span>${item[1]}</span>
-          <input class="routine-check" type="checkbox" ${state.routine[index] ? 'checked' : ''} data-routine="${index}">
-        </div>
-      `).join('');
-      document.querySelectorAll('.routine-check').forEach(box => {
-        box.addEventListener('change', () => {
-          state.routine[box.dataset.routine] = box.checked;
-          saveState();
-        });
-      });
-    }
-
-    function renderScheduleLists() {
-      document.getElementById('weeklySplitList').innerHTML = weeklySplit.map(item => `<div class="list-item"><span><strong>${item[0]}</strong> — ${item[1]}</span><span class="tag bluetag">${item[2]}</span></div>`).join('');
-      document.getElementById('golfDayList').innerHTML = golfDay.map(item => `<div class="list-item"><span>${item}</span><span class="tag goldtag">Golf</span></div>`).join('');
-      document.getElementById('recoveryDayList').innerHTML = recoveryDay.map(item => `<div class="list-item"><span>${item}</span><span class="tag bluetag">Recover</span></div>`).join('');
-      document.getElementById('mealPrepList').innerHTML = mealPrep.map(item => `<div class="list-item"><span>${item}</span><span class="tag goldtag">Prep</span></div>`).join('');
-    }
-
-    function resetSchedule() {
-      if (confirm('Reset today schedule?')) {
-        state.routine = {};
-        saveState();
-        renderRoutine();
-      }
-    }
-
-    function renderPunchCards() {
-      document.getElementById('punchCardGrid').innerHTML = state.punchCards.map((card, cardIndex) => {
-        let dots = '';
-        for (let i = 0; i < card.target; i++) {
-          dots += `<div class="punch-dot ${i < card.done ? 'done' : ''}" data-card="${cardIndex}" data-dot="${i}">${i + 1}</div>`;
-        }
-        return `<div class="card"><h2 class="gold">${clean(card.title)}</h2><p class="muted">${card.done} / ${card.target} completed</p><div class="punch-grid">${dots}</div></div>`;
-      }).join('');
-      document.querySelectorAll('.punch-dot').forEach(dot => dot.addEventListener('click', () => togglePunch(Number(dot.dataset.card), Number(dot.dataset.dot))));
-    }
-
-    function togglePunch(cardIndex, dotIndex) {
-      const card = state.punchCards[cardIndex];
-      card.done = dotIndex < card.done ? dotIndex : dotIndex + 1;
-      saveState();
-      renderPunchCards();
-    }
-
-    function addPunchCard() {
-      const title = prompt('Punch card name:', 'New Goal');
-      if (!title) return;
-      const target = Number(prompt('How many punches?', 30)) || 30;
-      state.punchCards.push({ title, target, done: 0 });
-      saveState();
-      renderPunchCards();
-    }
-
-    function addIdea() {
-      const title = document.getElementById('ideaTitle').value.trim();
-      const note = document.getElementById('ideaNote').value.trim();
-      if (!title && !note) return;
-      state.ideas.unshift({ title: title || 'Untitled Idea', note, date: new Date().toLocaleDateString() });
-      document.getElementById('ideaTitle').value = '';
-      document.getElementById('ideaNote').value = '';
-      saveState();
-      renderIdeas();
-    }
-
-    function renderIdeas() {
-      document.getElementById('ideasList').innerHTML = state.ideas.length
-        ? state.ideas.map((idea, index) => `
-          <div class="card">
-            <h3>${clean(idea.title)}</h3>
-            <p class="muted" style="margin-bottom:10px">${idea.date}</p>
-            <p style="line-height:1.7">${clean(idea.note)}</p>
-            <button class="action danger delete-idea" data-idea="${index}" style="margin-top:14px">Delete</button>
-          </div>
-        `).join('')
-        : '<div class="card"><p class="muted">No ideas saved yet.</p></div>';
-      document.querySelectorAll('.delete-idea').forEach(button => {
-        button.addEventListener('click', () => {
-          state.ideas.splice(Number(button.dataset.idea), 1);
-          saveState();
-          renderIdeas();
-        });
-      });
-    }
-
-    function addXP(amount, shouldRender = true) {
-      state.xp.total += amount;
-      saveState();
-      if (shouldRender) renderXP();
-    }
-
-    function renderXP() {
-      const total = state.xp.total;
-      const level = Math.floor(total / 100) + 1;
-      const current = total % 100;
-      const ranks = ['Rookie', 'Disciplined', 'Builder', 'Operator', 'High Performer', 'Elite'];
-      const rank = ranks[Math.min(ranks.length - 1, Math.floor(level / 3))];
-      document.getElementById('levelBox').innerText = level;
-      document.getElementById('xpText').innerText = current + ' / 100 XP to next level';
-      document.getElementById('rankBox').innerText = rank;
-      const ring = document.querySelector('.xp-ring');
-      if (ring) ring.style.background = `conic-gradient(var(--gold) ${current}%, #252525 0)`;
-    }
-
-    function renderFaithChecklist() {
-      const items = ['Morning Prayer', 'Bible Passage', 'Rosary / Decade', 'Catechism Study', 'Examination of Conscience'];
-      document.getElementById('faithChecklist').innerHTML = items.map((item, index) => `<div class="study-row"><span>${item}</span><span></span><input type="checkbox" ${state.faithChecks[index] ? 'checked' : ''} data-faith="${index}"></div>`).join('');
-      document.querySelectorAll('[data-faith]').forEach(box => {
-        box.addEventListener('change', () => {
-          state.faithChecks[box.dataset.faith] = box.checked;
-          saveState();
-        });
-      });
-      document.getElementById('saintStudy').value = state.catholicStudy.saint || '';
-      document.getElementById('faithNotes').value = state.catholicStudy.notes || '';
-      document.getElementById('faithFocus').value = state.catholicStudy.focus || '';
-    }
-
-    function saveCatholicStudy() {
-      state.catholicStudy = {
-        saint: document.getElementById('saintStudy').value,
-        notes: document.getElementById('faithNotes').value,
-        focus: document.getElementById('faithFocus').value
-      };
-      saveState();
-      alert('Catholic study saved.');
-    }
-
-    function saveCoachNotes() {
-      state.coachNotes = document.getElementById('coachNotes').value;
-      saveState();
-    }
-
-
-    function gymTemplates() {
-      return {
-        speed: {
-          title: 'Speed Training',
-          description: 'Acceleration, sprint mechanics, explosive starts, and fast athletic movement.',
-          items: ['Dynamic warm-up', 'A-skips / sprint mechanics', 'Acceleration starts', 'Short sprints', 'Full rest between reps', 'Cooldown walk']
-        },
-        mobility: {
-          title: 'Stretching / Mobility',
-          description: 'Hips, ankles, hamstrings, glutes, back, shoulders, and recovery movement.',
-          items: ['Ankle mobility', 'Hip flexor stretch', 'Hamstring stretch', 'Glute activation', 'Deep squat hold', 'Breathing reset']
-        },
-        strength: {
-          title: 'Gym Workout',
-          description: 'Strength work that supports speed, athleticism, posture, and injury resistance.',
-          items: ['Warm-up sets', 'Lower-body strength', 'Upper-body strength', 'Core work', 'Explosive movement', 'Stretch after lifting']
-        },
-        recovery: {
-          title: 'Swim / Recovery',
-          description: 'Easy conditioning, technique, recovery swim, breathing, and low-impact movement.',
-          items: ['Easy swim warm-up', 'Technique laps', 'Breathing control', 'Light conditioning', 'Cooldown', 'Mobility after swim']
-        },
-        sport: {
-          title: 'Sport Practice',
-          description: 'Skill work, agility, coordination, footwork, reaction, and sport-specific practice.',
-          items: ['Footwork', 'Agility', 'Coordination', 'Sport skill reps', 'Reaction work', 'Review notes']
-        }
-      };
-    }
-
-    function renderGym() {
-      if (!state.gym) state.gym = { mode: 'speed', checks: {}, logs: [] };
-      const templates = gymTemplates();
-      const mode = state.gym.mode || 'speed';
-      const current = templates[mode];
-      const title = document.getElementById('gymModeTitle');
-      const desc = document.getElementById('gymModeDescription');
-      if (title) title.innerText = current.title;
-      if (desc) desc.innerText = current.description;
-
-      document.querySelectorAll('.gym-tab').forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.gymMode === mode);
-      });
-
-      const list = document.getElementById('gymWorkoutList');
-      if (list) {
-        list.innerHTML = current.items.map((item, index) => {
-          const key = mode + '-' + index;
-          const checked = state.gym.checks[key] ? 'checked' : '';
-          return `<div class="workout-row"><input type="checkbox" ${checked} data-gym-check="${key}"><span>${item}</span><span class="tag ${index % 2 ? 'bluetag' : 'goldtag'}">${mode}</span></div>`;
-        }).join('');
-        document.querySelectorAll('[data-gym-check]').forEach(box => {
-          box.addEventListener('change', () => {
-            state.gym.checks[box.dataset.gymCheck] = box.checked;
-            saveState();
-          });
-        });
-      }
-
-      const recent = document.getElementById('gymRecentLogs');
-      if (recent) {
-        const logs = state.gym.logs || [];
-        recent.innerHTML = logs.length ? logs.slice(0, 5).map(log => {
-          return `<div class="list-item"><span><strong>${clean(log.mode)}</strong><br><span class="muted">${clean(log.focus)} • ${clean(log.minutes)} min</span></span><span class="tag">${clean(log.date)}</span></div>`;
-        }).join('') : '<p class="muted">No gym logs yet. Save your first training log.</p>';
-      }
-    }
-
-    function setGymMode(mode) {
-      if (!state.gym) state.gym = { mode: 'speed', checks: {}, logs: [] };
-      state.gym.mode = mode;
-      saveState();
-      renderGym();
-    }
-
-    function saveGymLog() {
-      if (!state.gym) state.gym = { mode: 'speed', checks: {}, logs: [] };
-      const templates = gymTemplates();
-      const mode = state.gym.mode || 'speed';
-      const focus = document.getElementById('gymFocus').value.trim() || templates[mode].title;
-      const minutes = document.getElementById('gymMinutes').value.trim() || '0';
-      const notes = document.getElementById('gymNotes').value.trim();
-      state.gym.logs.unshift({ mode: templates[mode].title, focus, minutes, notes, date: new Date().toLocaleDateString() });
-      document.getElementById('gymFocus').value = '';
-      document.getElementById('gymMinutes').value = '';
-      document.getElementById('gymNotes').value = '';
-      addXP(25, false);
-      saveState();
-      renderGym();
-      renderXP();
-      alert('Training log saved.');
-    }
-
-    function generateElitePrompt() {
-      const idea = document.getElementById('promptIdea').value.trim() || 'Improve the app sections and make them more useful.';
-      const output = `You are an elite senior front-end engineer and UI/UX designer improving a premium single-file HTML app called 1% Better Tracker.\n\nMission:\nTurn this rough idea into a polished, useful, production-quality feature that fits the app perfectly.\n\nRough Idea:\n${idea}\n\nRequirements:\n- Keep the dark matte black, gold, and blue design.\n- Preserve all existing pages and interactions.\n- Use localStorage if data should be saved.\n- Make it mobile and desktop optimized.\n- Avoid clutter and broken buttons.\n- Make it feel like a polished paid productivity app.`;
-      document.getElementById('elitePromptOutput').value = output;
-      document.getElementById('codePrompt').value = output;
-    }
-
-    function generateCodeRequest() {
-      const prompt = document.getElementById('codePrompt').value.trim() || 'Improve the app while preserving all existing functionality.';
-      const output = `You are an elite senior front-end engineer and UI/UX designer. You are editing a single-file HTML app called 1% Better Tracker.\n\nCurrent App Context:\n- The app is one index.html file.\n- It uses HTML, CSS, and vanilla JavaScript.\n- It has Dashboard, Track, Wins, Skills, Schedule, Punch Cards, Ideas Vault, XP System, Catholic Study, Coach, AI Code Builder, and Focus Mode.\n- It saves data with localStorage.\n\nCode Task:\n${prompt}\n\nStrict Rules:\n1. Do not remove existing pages.\n2. Do not break navigation or Focus Mode.\n3. Preserve the premium dark design system.\n4. Use scalable JavaScript functions.\n5. Make it work on mobile and desktop.\n6. Return the safest updated code.`;
-      document.getElementById('codeRequestOutput').value = output;
-    }
-
-    function toggleFocusMode() {
-      document.getElementById('focusOverlay').classList.toggle('active');
-    }
-
-    function updateFocus() {
-      const minutes = String(Math.floor(focusSeconds / 60)).padStart(2, '0');
-      const seconds = String(focusSeconds % 60).padStart(2, '0');
-      document.getElementById('focusTimer').innerText = minutes + ':' + seconds;
-    }
-
-    function startFocus() {
-      clearInterval(focusInterval);
-      focusInterval = setInterval(() => {
-        if (focusSeconds > 0) {
-          focusSeconds--;
-          updateFocus();
-        }
-      }, 1000);
-    }
-
-    function pauseFocus() {
-      clearInterval(focusInterval);
-    }
-
-    function resetFocus() {
-      pauseFocus();
-      focusSeconds = 1500;
-      updateFocus();
-    }
-
-    function completeFocusSession() {
-      pauseFocus();
-      state.focusStats.count++;
-      state.focusStats.tasks.unshift({ task: document.getElementById('focusTask').value || 'Focus Session', date: new Date().toLocaleString() });
-      addXP(30, false);
-      saveState();
-      renderXP();
-      renderFocusStats();
-      resetFocus();
-    }
-
-    function renderFocusStats() {
-      document.getElementById('focusStats').innerText = 'Sessions completed: ' + state.focusStats.count;
-    }
-
-    function bindEvents() {
-      document.querySelectorAll('[data-page]').forEach(button => button.addEventListener('click', () => showPage(button.dataset.page)));
-      document.querySelectorAll('[data-page-link]').forEach(button => button.addEventListener('click', () => showPage(button.dataset.pageLink)));
-      document.getElementById('focusOpenBtn').addEventListener('click', toggleFocusMode);
-      document.getElementById('resetWeekBtn').addEventListener('click', resetWeek);
-      document.getElementById('saveWinsBtn').addEventListener('click', saveWins);
-      document.getElementById('saveSkillsBtn').addEventListener('click', saveSkills);
-      document.getElementById('drawingPromptBtn').addEventListener('click', generateDrawingPrompt);
-      document.getElementById('drawingPromptHeaderBtn').addEventListener('click', generateDrawingPrompt);
-      document.getElementById('resetScheduleBtn').addEventListener('click', resetSchedule);
-      document.querySelectorAll('[data-gym-mode]').forEach(button => button.addEventListener('click', () => setGymMode(button.dataset.gymMode)));
-      document.getElementById('saveGymBtn').addEventListener('click', saveGymLog);
-      document.getElementById('addPunchCardBtn').addEventListener('click', addPunchCard);
-      document.getElementById('addIdeaBtn').addEventListener('click', addIdea);
-      document.getElementById('addXPBtn').addEventListener('click', () => addXP(25));
-      document.getElementById('saveCatholicBtn').addEventListener('click', saveCatholicStudy);
-      document.getElementById('coachNotes').addEventListener('input', saveCoachNotes);
-      document.getElementById('generateElitePromptBtn').addEventListener('click', generateElitePrompt);
-      document.getElementById('generateCodeRequestBtn').addEventListener('click', generateCodeRequest);
-      document.getElementById('startFocusBtn').addEventListener('click', startFocus);
-      document.getElementById('pauseFocusBtn').addEventListener('click', pauseFocus);
-      document.getElementById('completeFocusBtn').addEventListener('click', completeFocusSession);
-      document.getElementById('resetFocusBtn').addEventListener('click', resetFocus);
-      document.getElementById('exitFocusBtn').addEventListener('click', toggleFocusMode);
-    }
-
-    function init() {
-      bindEvents();
-      renderDashboard();
-      renderTrack();
-      loadWins();
-      renderSkills();
-      renderRoutine();
-      renderScheduleLists();
-      renderGym();
-      renderPunchCards();
-      renderIdeas();
-      renderXP();
-      renderFaithChecklist();
-      renderFocusStats();
-      document.getElementById('coachNotes').value = state.coachNotes || '';
-      updateFocus();
-    }
-
+    function bind(){ document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page))); document.querySelectorAll('[data-page-link]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.pageLink))); openFocus.onclick=toggleFocus; closeFocus.onclick=toggleFocus; startFocus.onclick=startFocusTimer; pauseFocus.onclick=pauseFocusTimer; resetFocus.onclick=resetFocusTimer; completeFocus.onclick=completeFocus; document.querySelectorAll('[data-focus-min]').forEach(b=>b.onclick=()=>focusSet(Number(b.dataset.focusMin))); saveToday.onclick=saveToday; sendCapture.onclick=()=>{ if(quickCapture.value.trim()){ state.ideas.unshift({id:uid(), title:'Quick Capture', category:'Lesson Learned', note:quickCapture.value, status:'Idea', starred:false, date:new Date().toLocaleDateString()}); quickCapture.value=''; save(); renderIdeas(); toast('Sent to Ideas'); }}; addHabitBtn.onclick=addHabit; resetWeekBtn.onclick=resetWeek; scheduleMode.onchange=()=>{ state.schedule.mode=scheduleMode.value; state.today.mode=scheduleMode.value; save(); renderSchedule(); }; resetScheduleBtn.onclick=resetSchedule; saveTrainingLog.onclick=saveTrainingLog; drawIdeaBtn.onclick=generateDrawing; saveSkillsBtn.onclick=saveSkills; saveSkillLog.onclick=saveSkillLog; saveBusinessBtn.onclick=saveBusiness; saveFaithBtn.onclick=saveFaith; saveWinsBtn.onclick=saveWins; addIdeaBtn.onclick=addIdea; ideaSearch.oninput=renderIdeas; saveReviewBtn.onclick=saveReview; makePrompt.onclick=buildPrompt; makePlan.onclick=buildPlan; makeCodeRequest.onclick=codeRequest; }
+    function init(){ bind(); renderDashboard(); renderToday(); renderTrack(); renderSchedule(); renderTraining(); renderSkills(); renderBusiness(); renderFaith(); renderWins(); renderIdeas(); renderReview(); updateFocus(); }
     init();
   </script>
 </body>
