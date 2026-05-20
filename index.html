@@ -9,31 +9,39 @@
       --bg: #090909;
       --panel: #141414;
       --panel2: #1b1b1b;
+      --card: #111111;
       --border: #282828;
-      --muted: #a3a3a3;
-      --text: #f4f4f4;
+      --muted: #9b9b9b;
+      --text: #f5f5f5;
       --gold: #d4af37;
       --blue: #4f8cff;
-      --red: #bb5555;
+      --red: #b95656;
+      --green: #6ed17a;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Inter, Arial, sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at top right, #171717, #090909 55%);
+      background:
+        radial-gradient(circle at top right, rgba(79, 140, 255, 0.09), transparent 30%),
+        radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 28%),
+        var(--bg);
       color: var(--text);
       display: flex;
     }
 
-    button,
-    input,
-    textarea {
+    button, input, textarea, select {
       font: inherit;
     }
 
@@ -44,46 +52,61 @@
     }
 
     .sidebar {
-      width: 260px;
+      width: 286px;
       height: 100vh;
       position: fixed;
       left: 0;
       top: 0;
-      background: rgba(15, 15, 15, 0.96);
+      background: rgba(13, 13, 13, 0.96);
       border-right: 1px solid var(--border);
-      padding: 24px;
-      overflow: auto;
+      padding: 22px;
+      overflow-y: auto;
       z-index: 50;
+      backdrop-filter: blur(18px);
     }
 
     .logo {
       font-size: 29px;
-      font-weight: 900;
-      margin-bottom: 28px;
-      letter-spacing: -1px;
+      font-weight: 950;
+      letter-spacing: -1.2px;
+      margin-bottom: 18px;
     }
 
     .logo span {
       color: var(--gold);
     }
 
+    .sidebar-tip {
+      background: linear-gradient(180deg, #171717, #111111);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-tip strong {
+      display: block;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .sidebar-tip p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
     .nav-group {
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
 
     .nav-label {
-      color: #6f6f6f;
+      color: #777;
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 1.4px;
+      letter-spacing: 1.2px;
       font-weight: 800;
-      margin: 0 0 9px 4px;
-    }
-
-    .nav-divider {
-      height: 1px;
-      background: #242424;
-      margin: 18px 0;
+      margin: 12px 0 8px;
     }
 
     .nav-btn {
@@ -91,50 +114,47 @@
       align-items: center;
       gap: 10px;
       width: 100%;
-      padding: 12px;
-      border-radius: 14px;
-      background: #171717;
+      padding: 11px;
+      border-radius: 15px;
+      background: transparent;
       color: white;
-      margin-bottom: 9px;
+      margin-bottom: 8px;
       text-align: left;
       border: 1px solid transparent;
-      font-size: 14px;
     }
 
     .nav-btn:hover,
     .nav-btn.active {
-      background: #222;
-      border-color: #3a3a3a;
+      background: #1a1a1a;
+      border-color: #333;
       transform: translateX(3px);
     }
 
     .nav-icon {
       width: 32px;
       height: 32px;
-      border-radius: 11px;
-      background: #222;
-      display: inline-flex;
+      border-radius: 12px;
+      background: #202020;
+      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 13px;
       flex: 0 0 auto;
-    }
-
-    .nav-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      line-height: 1.1;
+      font-weight: 900;
     }
 
     .nav-title {
-      font-weight: 800;
+      display: block;
+      font-weight: 850;
+      font-size: 13px;
     }
 
     .nav-desc {
+      display: block;
       color: #777;
       font-size: 11px;
-      font-weight: 600;
+      margin-top: 2px;
+      font-weight: 650;
     }
 
     .nav-btn.active .nav-icon {
@@ -142,55 +162,30 @@
       color: var(--gold);
     }
 
-    .nav-btn.active .nav-desc {
-      color: #aaa;
-    }
-
-    .sidebar-tip {
-      background: #151515;
-      border: 1px solid #282828;
-      border-radius: 18px;
-      padding: 14px;
-      margin-bottom: 22px;
-    }
-
-    .sidebar-tip strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--gold);
-    }
-
-    .sidebar-tip p {
-      color: #8f8f8f;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
     .focus-nav-btn {
       width: 100%;
-      margin-top: 4px;
-      padding: 14px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.95), rgba(143, 112, 28, 0.95));
+      padding: 13px 14px;
+      border-radius: 15px;
+      background: var(--gold);
       color: #080808;
-      font-weight: 900;
-      text-align: center;
+      font-weight: 950;
+      margin-top: 10px;
     }
 
     .focus-nav-btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.08);
+      background: #e2bf54;
+      transform: translateY(-1px);
     }
 
     .main {
-      margin-left: 260px;
-      width: calc(100% - 260px);
+      margin-left: 286px;
+      width: calc(100% - 286px);
       padding: 30px;
     }
 
     .page {
       display: none;
-      animation: fade 0.25s ease;
+      animation: fade 0.22s ease;
     }
 
     .page.active {
@@ -198,14 +193,8 @@
     }
 
     @keyframes fade {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .header {
@@ -220,19 +209,22 @@
     .eyebrow {
       color: var(--muted);
       font-size: 14px;
+      font-weight: 700;
       margin-bottom: 8px;
     }
 
     .title {
-      font-size: 38px;
-      letter-spacing: -1.5px;
+      font-size: clamp(30px, 5vw, 44px);
+      letter-spacing: -1.7px;
+      line-height: 1;
+      font-weight: 950;
     }
 
     .subtitle {
       color: var(--muted);
       line-height: 1.6;
-      margin-top: 8px;
-      max-width: 850px;
+      margin-top: 10px;
+      max-width: 880px;
     }
 
     .grid {
@@ -241,18 +233,22 @@
       gap: 18px;
     }
 
+    .grid.wide {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
     .card {
-      background: linear-gradient(180deg, #191919, #101010);
+      background: linear-gradient(180deg, rgba(25, 25, 25, 0.98), rgba(12, 12, 12, 0.98));
       border: 1px solid var(--border);
       border-radius: 24px;
       padding: 22px;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+      box-shadow: var(--shadow);
       transition: 0.22s ease;
     }
 
     .card:hover {
       transform: translateY(-2px);
-      border-color: #3e3e3e;
+      border-color: #3d3d3d;
     }
 
     .card h2,
@@ -262,21 +258,14 @@
 
     .big {
       font-size: 44px;
-      font-weight: 900;
-      letter-spacing: -1.5px;
+      font-weight: 950;
+      letter-spacing: -1.8px;
+      line-height: 1;
     }
 
-    .gold {
-      color: var(--gold);
-    }
-
-    .blue {
-      color: var(--blue);
-    }
-
-    .muted {
-      color: var(--muted);
-    }
+    .gold { color: var(--gold); }
+    .blue { color: var(--blue); }
+    .muted { color: var(--muted); }
 
     .action {
       padding: 12px 16px;
@@ -284,37 +273,37 @@
       background: #252525;
       color: white;
       border: 1px solid #363636;
+      font-weight: 800;
     }
 
     .action:hover {
       background: #303030;
+      transform: translateY(-1px);
     }
 
     .primary {
       background: var(--gold);
-      color: #080808;
-      font-weight: 900;
+      color: #090909;
+      border-color: transparent;
+      font-weight: 950;
     }
 
-    .primary:hover {
-      background: #e2bf54;
-    }
+    .primary:hover { background: #e2bf54; }
 
     .danger {
       background: #351919;
       color: white;
     }
 
-    .danger:hover {
-      background: #4a2020;
-    }
+    .danger:hover { background: #4a2020; }
 
     input,
-    textarea {
+    textarea,
+    select {
       width: 100%;
       background: #101010;
       color: white;
-      border: 1px solid #2b2b2b;
+      border: 1px solid #2c2c2c;
       border-radius: 14px;
       padding: 13px;
       outline: none;
@@ -326,7 +315,8 @@
     }
 
     input:focus,
-    textarea:focus {
+    textarea:focus,
+    select:focus {
       border-color: #555;
     }
 
@@ -344,13 +334,8 @@
       transition: 0.25s ease;
     }
 
-    .fill.goldfill {
-      background: var(--gold);
-    }
-
-    .fill.bluefill {
-      background: var(--blue);
-    }
+    .goldfill { background: var(--gold); }
+    .bluefill { background: var(--blue); }
 
     .day-summary {
       display: grid;
@@ -402,7 +387,7 @@
 
     .habit-name {
       text-align: left;
-      font-weight: 800;
+      font-weight: 850;
     }
 
     .habit-cat {
@@ -422,6 +407,12 @@
       justify-content: center;
       cursor: pointer;
       user-select: none;
+      transition: 0.15s ease;
+    }
+
+    .cell:hover {
+      border-color: #555;
+      transform: scale(1.05);
     }
 
     .cell.gold-done {
@@ -457,14 +448,15 @@
       border-radius: 999px;
       font-size: 12px;
       background: #222;
+      white-space: nowrap;
     }
 
-    .tag.goldtag {
+    .goldtag {
       background: var(--gold);
       color: #0b0b0b;
     }
 
-    .tag.bluetag {
+    .bluetag {
       background: var(--blue);
       color: white;
     }
@@ -494,7 +486,7 @@
     .routine-row,
     .study-row {
       display: grid;
-      grid-template-columns: 110px 1fr auto;
+      grid-template-columns: 120px 1fr auto;
       gap: 12px;
       align-items: center;
       padding: 13px;
@@ -530,6 +522,12 @@
       justify-content: center;
       font-size: 12px;
       cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    .punch-dot:hover {
+      transform: scale(1.06);
+      border-color: #555;
     }
 
     .punch-dot.done {
@@ -563,7 +561,9 @@
     .focus-overlay {
       position: fixed;
       inset: 0;
-      background: #050505;
+      background:
+        radial-gradient(circle at center, rgba(212, 175, 55, 0.08), transparent 38%),
+        #050505;
       display: none;
       align-items: center;
       justify-content: center;
@@ -578,8 +578,8 @@
     }
 
     .focus-time {
-      font-size: 84px;
-      font-weight: 900;
+      font-size: clamp(58px, 12vw, 92px);
+      font-weight: 950;
       letter-spacing: -4px;
       margin: 18px 0;
     }
@@ -589,30 +589,8 @@
       margin: 14px auto;
     }
 
-    .custom-row {
-      display: grid;
-      grid-template-columns: 110px 1fr auto;
-      gap: 10px;
-      align-items: center;
-      background: #151515;
-      border: 1px solid #282828;
-      border-radius: 16px;
-      padding: 12px;
-      margin-top: 10px;
-    }
-
-    .small-label {
-      color: var(--muted);
-      font-size: 13px;
-      margin: 12px 0 7px;
-      display: block;
-    }
-
-    @media (max-width: 860px) {
-      body {
-        display: block;
-      }
-
+    @media (max-width: 900px) {
+      body { display: block; }
       .sidebar {
         position: sticky;
         top: 0;
@@ -620,71 +598,19 @@
         height: auto;
         display: flex;
         gap: 8px;
-        overflow: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
         padding: 14px;
-        align-items: center;
       }
-
-      .logo {
-        min-width: 130px;
-        margin: 0;
-        font-size: 22px;
-      }
-
-      .nav-group {
-        display: flex;
-        gap: 8px;
-        margin: 0;
-      }
-
-      .nav-label,
-      .nav-divider {
-        display: none;
-      }
-
-      .nav-btn {
-        min-width: max-content;
-        margin: 0;
-        text-align: center;
-        padding: 11px 12px;
-      }
-
-      .nav-desc,
-      .sidebar-tip {
-        display: none;
-      }
-
-      .nav-text {
-        display: block;
-      }
-
-      .focus-nav-btn {
-        min-width: max-content;
-        margin: 0;
-      }
-
-      .main {
-        margin-left: 0;
-        width: 100%;
-        padding: 18px;
-      }
-
-      .title {
-        font-size: 30px;
-      }
-
-      .day-summary {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .routine-row,
-      .study-row {
-        grid-template-columns: 1fr;
-      }
-
-      .focus-time {
-        font-size: 58px;
-      }
+      .logo { min-width: 132px; margin: 0; font-size: 22px; align-self: center; }
+      .sidebar-tip, .nav-label, .nav-desc { display: none; }
+      .nav-group { display: flex; gap: 8px; margin: 0; }
+      .nav-btn { min-width: max-content; margin: 0; padding: 10px 12px; }
+      .nav-icon { width: 28px; height: 28px; }
+      .focus-nav-btn { min-width: max-content; margin: 0; padding: 10px 14px; }
+      .main { margin-left: 0; width: 100%; padding: 18px; }
+      .day-summary { grid-template-columns: repeat(2, 1fr); }
+      .routine-row, .study-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -699,69 +625,31 @@
 
     <div class="nav-group">
       <div class="nav-label">Start Here</div>
-      <button class="nav-btn active" data-page="dashboard">
-        <span class="nav-icon">⌂</span>
-        <span class="nav-text"><span class="nav-title">Dashboard</span><span class="nav-desc">Scores, streaks, trends</span></span>
-      </button>
-      <button class="nav-btn" data-page="track">
-        <span class="nav-icon">✓</span>
-        <span class="nav-text"><span class="nav-title">Track</span><span class="nav-desc">Weekly habit grid</span></span>
-      </button>
-      <button class="nav-btn" data-page="wins">
-        <span class="nav-icon">★</span>
-        <span class="nav-text"><span class="nav-title">Wins</span><span class="nav-desc">Daily reflection</span></span>
-      </button>
+      <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span><span><span class="nav-title">Dashboard</span><span class="nav-desc">Scores, streaks, trends</span></span></button>
+      <button class="nav-btn" data-page="track"><span class="nav-icon">✓</span><span><span class="nav-title">Track</span><span class="nav-desc">Weekly habit grid</span></span></button>
+      <button class="nav-btn" data-page="wins"><span class="nav-icon">★</span><span><span class="nav-title">Wins</span><span class="nav-desc">Daily reflection</span></span></button>
     </div>
 
     <div class="nav-group">
       <div class="nav-label">Daily Execution</div>
-      <button class="nav-btn" data-page="schedule">
-        <span class="nav-icon">☼</span>
-        <span class="nav-text"><span class="nav-title">Schedule</span><span class="nav-desc">Time blocks + routine</span></span>
-      </button>
-      <button class="nav-btn" data-page="punchcards">
-        <span class="nav-icon">▦</span>
-        <span class="nav-text"><span class="nav-title">Punch Cards</span><span class="nav-desc">Reps, goals, streak cards</span></span>
-      </button>
-      <button class="nav-btn" data-page="xp">
-        <span class="nav-icon">XP</span>
-        <span class="nav-text"><span class="nav-title">XP System</span><span class="nav-desc">Levels, ranks, rewards</span></span>
-      </button>
+      <button class="nav-btn" data-page="schedule"><span class="nav-icon">☼</span><span><span class="nav-title">Schedule</span><span class="nav-desc">Routine + training split</span></span></button>
+      <button class="nav-btn" data-page="punchcards"><span class="nav-icon">▦</span><span><span class="nav-title">Punch Cards</span><span class="nav-desc">Reps, goals, streak cards</span></span></button>
+      <button class="nav-btn" data-page="xp"><span class="nav-icon">XP</span><span><span class="nav-title">XP System</span><span class="nav-desc">Levels, ranks, rewards</span></span></button>
     </div>
 
     <div class="nav-group">
       <div class="nav-label">Learning</div>
-      $1<button class="nav-btn" data-page="speaking">
-        <span class="nav-icon">🎙</span>
-        <span class="nav-text"><span class="nav-title">Speaking Practice</span><span class="nav-desc">Voice, confidence, speeches</span></span>
-      </button>
-      <button class="nav-btn" data-page="catholic">
-        <span class="nav-icon">✚</span>
-        <span class="nav-text"><span class="nav-title">Catholic Study</span><span class="nav-desc">Faith, notes, study focus</span></span>
-      </button>
-      <button class="nav-btn" data-page="customize">
-        <span class="nav-icon">⚙</span>
-        <span class="nav-text"><span class="nav-title">Customize</span><span class="nav-desc">Edit prompts + schedule</span></span>
-      </button>
-      <button class="nav-btn" data-page="ideas">
-        <span class="nav-icon">✎</span>
-        <span class="nav-text"><span class="nav-title">Ideas Vault</span><span class="nav-desc">Business, content, notes</span></span>
-      </button>
+      <button class="nav-btn" data-page="skills"><span class="nav-icon">◆</span><span><span class="nav-title">Skills</span><span class="nav-desc">Golf, chess, piano, drawing</span></span></button>
+      <button class="nav-btn" data-page="catholic"><span class="nav-icon">✚</span><span><span class="nav-title">Catholic Study</span><span class="nav-desc">Faith, notes, study focus</span></span></button>
+      <button class="nav-btn" data-page="ideas"><span class="nav-icon">✎</span><span><span class="nav-title">Ideas Vault</span><span class="nav-desc">Business, content, notes</span></span></button>
     </div>
 
     <div class="nav-group">
-      <div class="nav-label">Improve The App</div>
-      <button class="nav-btn" data-page="coach">
-        <span class="nav-icon">◉</span>
-        <span class="nav-text"><span class="nav-title">Coach</span><span class="nav-desc">Reviews + performance notes</span></span>
-      </button>
-      <button class="nav-btn" data-page="devlab">
-        <span class="nav-icon">⌘</span>
-        <span class="nav-text"><span class="nav-title">AI Code Builder</span><span class="nav-desc">Prompts + safe code requests</span></span>
-      </button>
+      <div class="nav-label">Improve</div>
+      <button class="nav-btn" data-page="coach"><span class="nav-icon">◉</span><span><span class="nav-title">Coach</span><span class="nav-desc">Review + notes</span></span></button>
+      <button class="nav-btn" data-page="devlab"><span class="nav-icon">⌘</span><span><span class="nav-title">AI Code Builder</span><span class="nav-desc">Prompts + code requests</span></span></button>
     </div>
 
-    <div class="nav-divider"></div>
     <button class="focus-nav-btn" id="focusOpenBtn">Enter Focus Mode</button>
   </aside>
 
@@ -800,10 +688,35 @@
         <div>
           <div class="eyebrow">Weekly Execution Grid</div>
           <h1 class="title">Track</h1>
-          <p class="subtitle">Click cells to mark habits complete. Family Time logs minutes. Everything saves automatically.</p>
+          <p class="subtitle">Click cells to mark habits complete. Add your own habits, set categories, and watch your consistency rise.</p>
         </div>
         <button class="action" id="resetWeekBtn">Reset Week</button>
       </div>
+
+      <div class="grid" style="margin-bottom:18px">
+        <div class="card">
+          <h2 class="gold">Add Custom Habit</h2>
+          <div class="compact-form">
+            <input id="newHabitName" placeholder="Habit name">
+            <select id="newHabitCategory">
+              <option value="Non-Negotiables">Non-Negotiables</option>
+              <option value="Growth and Development">Growth and Development</option>
+            </select>
+            <select id="newHabitType">
+              <option value="check">Checkbox</option>
+              <option value="minutes">Minutes</option>
+            </select>
+            <button class="action primary" id="addHabitBtn">Add Habit</button>
+          </div>
+          <p class="muted">Examples: Speed Training, Catholic Study, Golf Practice, Business Outreach, Mobility.</p>
+        </div>
+        <div class="card">
+          <h2 class="blue">Consistency Graph</h2>
+          <p class="muted">Shows how strong each day of your week is.</p>
+          <div class="mini-bars" id="trackConsistencyGraph"></div>
+        </div>
+      </div>
+
       <div class="day-summary" id="daySummary"></div>
       <div class="table-wrap"><table id="habitTable"></table></div>
       <div class="grid" style="margin-top:18px" id="categorySummaries"></div>
@@ -839,17 +752,19 @@
         <div>
           <div class="eyebrow">Skill Development</div>
           <h1 class="title">Skills</h1>
-          <p class="subtitle">Workspaces for golf, chess, piano, and drawing. Notes, goals, and lesson videos save locally.</p>
+          <p class="subtitle">Workspaces for golf, chess, piano, and drawing. Notes, goals, drawing prompts, and lesson videos save locally.</p>
         </div>
-        <button class="action primary" id="saveSkillsBtn">Save Skills</button>
-        <button class="action" id="drawingPromptBtn">Generate Drawing Idea</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="action" id="drawingPromptHeaderBtn">Generate Drawing Idea</button>
+          <button class="action primary" id="saveSkillsBtn">Save Skills</button>
+        </div>
       </div>
       <div class="grid" style="margin-bottom:18px">
         <div class="card">
           <h2 class="gold">Drawing Idea Generator</h2>
-          <p class="muted" style="line-height:1.7;margin-bottom:14px">Use this when you do not know what to draw. Generate a prompt, then save notes in the Drawing card below.</p>
-          <div id="drawingPromptBox" style="font-size:28px;font-weight:900;letter-spacing:-.5px;margin:18px 0">Knight training at sunrise</div>
-          <button class="action primary" id="drawingPromptBtn2">Generate New Idea</button>
+          <p class="muted" style="line-height:1.7;margin-bottom:14px">Use this when you do not know what to draw.</p>
+          <div id="drawingPromptBox" style="font-size:28px;font-weight:950;letter-spacing:-.5px;margin:18px 0">Knight training at sunrise</div>
+          <button class="action primary" id="drawingPromptBtn">Generate New Idea</button>
         </div>
         <div class="card">
           <h2 class="blue">Prompt Types</h2>
@@ -864,59 +779,21 @@
       <div class="grid" id="skillCards"></div>
     </section>
 
-    <section id="speaking" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">CEO Communication Training</div>
-          <h1 class="title">Speaking Practice</h1>
-          <p class="subtitle">Practice clear speaking, confidence, vocal variety, posture, and strong message structure.</p>
-        </div>
-        <button class="action primary" id="saveSpeechBtn">Save Speaking Practice</button>
-      </div>
-
-      <div class="grid" style="margin-bottom:18px">
-        <div class="card">
-          <h2 class="gold">Speech Builder</h2>
-          <input id="speechTopic" placeholder="Speech topic: example, Why discipline matters">
-          <textarea id="speechHook" placeholder="Hook: first sentence that grabs attention" style="margin-top:10px"></textarea>
-          <textarea id="speechPoints" placeholder="3 main points, one per line" style="margin-top:10px"></textarea>
-          <textarea id="speechClose" placeholder="Closing line / call to action" style="margin-top:10px"></textarea>
-        </div>
-
-        <div class="card">
-          <h2 class="blue">Delivery Checklist</h2>
-          <div id="speechChecklist"></div>
-        </div>
-
-        <div class="card">
-          <h2>Practice Score</h2>
-          <div class="big gold" id="speechScore">0%</div>
-          <p class="muted" style="margin-top:10px">Score updates from your delivery checklist.</p>
-          <button class="action" style="margin-top:14px" id="speechPromptBtn">Generate Practice Topic</button>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <h2 class="gold">Recording Review</h2>
-          <textarea id="speechReview" placeholder="After recording yourself, write what sounded good, what felt weak, and what to fix next time."></textarea>
-        </div>
-        <div class="card">
-          <h2 class="blue">Next Drill</h2>
-          <div id="speechDrillBox" style="font-size:24px;font-weight:900;margin:16px 0">30-second story with strong eye contact</div>
-          <p class="muted">Use this as a quick daily rep before business, school, or content practice.</p>
-        </div>
-      </div>
-    </section>
-
     <section id="schedule" class="page">
       <div class="header">
         <div>
           <div class="eyebrow">Discipline + Athlete Summer System</div>
           <h1 class="title">Schedule</h1>
-          <p class="subtitle">Built around waking up at 6:00 AM, no phone for the first hour, speed training, business, skills, Catholic study, and elite recovery.</p>
+          <p class="subtitle">Switch between Normal Training Day, Golf Course Day, Recovery Day, and Sunday Meal Prep. Each mode saves separately.</p>
         </div>
         <button class="action" id="resetScheduleBtn">Reset Day</button>
+      </div>
+
+      <div class="mode-tabs">
+        <button class="mode-tab active" data-schedule-mode="normal">Normal Day</button>
+        <button class="mode-tab" data-schedule-mode="golf">Golf Day</button>
+        <button class="mode-tab" data-schedule-mode="recovery">Recovery Day</button>
+        <button class="mode-tab" data-schedule-mode="sunday">Sunday Prep</button>
       </div>
 
       <div class="grid" style="margin-bottom:18px">
@@ -929,68 +806,22 @@
             <div class="list-item"><span>Sleep target: 8.5–9 hours</span><span class="tag bluetag">Recovery</span></div>
           </div>
         </div>
-
         <div class="card">
-          <h2 class="blue">Daily Priorities</h2>
-          <p class="muted" style="line-height:1.8">
-            Fitness / speed training<br>
-            Business and money work<br>
-            Chess, piano, and drawing<br>
-            Reading + Catholic study<br>
-            Golf course 2 days per week
-          </p>
+          <h2 class="blue" id="scheduleModeTitle">Normal Training Day</h2>
+          <p class="muted" id="scheduleModeDescription" style="line-height:1.8">Speed, business, skills, Catholic study, swim, and recovery.</p>
         </div>
       </div>
 
       <div class="card" style="margin-bottom:18px">
-        <h2 class="gold">Normal Training Day</h2>
+        <h2 class="gold">Today's Checklist</h2>
         <div id="routineList"></div>
       </div>
 
-      <div class="grid" style="margin-bottom:18px">
-        <div class="card">
-          <h2 class="blue">Weekly Training Split</h2>
-          <div class="list">
-            <div class="list-item"><span><strong>Monday</strong> — Speed + Business + Skills</span><span class="tag bluetag">Hard</span></div>
-            <div class="list-item"><span><strong>Tuesday</strong> — Long Jog + Swim</span><span class="tag">Endurance</span></div>
-            <div class="list-item"><span><strong>Wednesday</strong> — Speed + Sport Practice</span><span class="tag bluetag">Hard</span></div>
-            <div class="list-item"><span><strong>Thursday</strong> — Recovery + Skills</span><span class="tag goldtag">Recover</span></div>
-            <div class="list-item"><span><strong>Friday</strong> — Speed + Competition Day</span><span class="tag bluetag">Fast</span></div>
-            <div class="list-item"><span><strong>Saturday</strong> — Golf Course Day</span><span class="tag goldtag">Golf</span></div>
-            <div class="list-item"><span><strong>Sunday</strong> — Golf + Meal Prep + Weekly Review</span><span class="tag goldtag">Plan</span></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 class="gold">Golf Course Day</h2>
-          <div class="list">
-            <div class="list-item"><span>2-hour golf course block</span><span class="tag goldtag">Main</span></div>
-            <div class="list-item"><span>Light mobility before playing</span><span class="tag">Warm-up</span></div>
-            <div class="list-item"><span>Write 3 swing/strategy notes after</span><span class="tag bluetag">Review</span></div>
-            <div class="list-item"><span>Keep other training lighter</span><span class="tag">Smart</span></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 class="blue">Recovery Day</h2>
-          <div class="list">
-            <div class="list-item"><span>Mobility</span><span class="tag goldtag">Required</span></div>
-            <div class="list-item"><span>Easy swim or walk</span><span class="tag">Light</span></div>
-            <div class="list-item"><span>Extra chess, piano, or drawing</span><span class="tag bluetag">Skills</span></div>
-            <div class="list-item"><span>Business deep work if energy is good</span><span class="tag">Optional</span></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 class="gold">Sunday Meal Prep</h2>
-          <p class="muted" style="line-height:1.8;margin-bottom:12px">Sunday night, prep the week so discipline is easier.</p>
-          <div class="list">
-            <div class="list-item"><span>Chicken or ground beef</span><span class="tag goldtag">Protein</span></div>
-            <div class="list-item"><span>Rice + broccoli/carrots</span><span class="tag">Meals</span></div>
-            <div class="list-item"><span>Eggs, fruit, Greek yogurt</span><span class="tag bluetag">Ready</span></div>
-            <div class="list-item"><span>Nuts/snacks packed</span><span class="tag">Prep</span></div>
-          </div>
-        </div>
+      <div class="grid">
+        <div class="card"><h2 class="blue">Weekly Training Split</h2><div class="list" id="weeklySplitList"></div></div>
+        <div class="card"><h2 class="gold">Golf Course Day Rules</h2><div class="list" id="golfDayList"></div></div>
+        <div class="card"><h2 class="blue">Recovery Day Rules</h2><div class="list" id="recoveryDayList"></div></div>
+        <div class="card"><h2 class="gold">Sunday Meal Prep</h2><div class="list" id="mealPrepList"></div></div>
       </div>
     </section>
 
@@ -1011,7 +842,7 @@
         <div>
           <div class="eyebrow">Second Brain</div>
           <h1 class="title">Ideas Vault</h1>
-          <p class="subtitle">Capture business ideas, YouTube ideas, school notes, faith notes, and skill insights.</p>
+          <p class="subtitle">Capture ideas, tag them, star the best ones, and turn them into action instead of letting them sit.</p>
         </div>
         <button class="action primary" id="addIdeaBtn">Add Idea</button>
       </div>
@@ -1020,11 +851,49 @@
           <h2 class="gold">New Idea</h2>
           <input id="ideaTitle" placeholder="Idea title">
           <textarea id="ideaNote" placeholder="Write the idea, lesson, or note..." style="margin-top:10px"></textarea>
+          <div class="compact-form" style="margin-top:10px;margin-bottom:0">
+            <select id="ideaCategory">
+              <option>Business</option>
+              <option>YouTube</option>
+              <option>School</option>
+              <option>Golf</option>
+              <option>Chess</option>
+              <option>Piano</option>
+              <option>Drawing</option>
+              <option>Faith</option>
+              <option>Lessons Learned</option>
+            </select>
+            <select id="ideaStatus">
+              <option>Idea</option>
+              <option>Next Action</option>
+              <option>In Progress</option>
+              <option>Done</option>
+            </select>
+          </div>
         </div>
         <div class="card">
-          <h2 class="blue">Categories</h2>
-          <p class="muted" style="line-height:1.8">Business • YouTube • School • Golf • Chess • Piano • Drawing • Faith • Lessons Learned</p>
+          <h2 class="blue">Idea System</h2>
+          <div class="list">
+            <div class="list-item"><span>Star the best ideas</span><span class="tag goldtag">Priority</span></div>
+            <div class="list-item"><span>Move ideas to Next Action</span><span class="tag bluetag">Execute</span></div>
+            <div class="list-item"><span>Use categories to stay organized</span><span class="tag">Clean</span></div>
+          </div>
         </div>
+      </div>
+      <div class="compact-form" style="margin-top:18px">
+        <input id="ideaSearch" placeholder="Search ideas...">
+        <select id="ideaFilter">
+          <option value="All">All Categories</option>
+          <option>Business</option>
+          <option>YouTube</option>
+          <option>School</option>
+          <option>Golf</option>
+          <option>Chess</option>
+          <option>Piano</option>
+          <option>Drawing</option>
+          <option>Faith</option>
+          <option>Lessons Learned</option>
+        </select>
       </div>
       <div class="grid" id="ideasList" style="margin-top:18px"></div>
     </section>
@@ -1032,31 +901,29 @@
     <section id="xp" class="page">
       <div class="header">
         <div>
-          <div class="eyebrow">Gamified Discipline</div>
-          <h1 class="title">XP System</h1>
-          <p class="subtitle">Earn XP for habits, focus sessions, wins, skill practice, and daily execution.</p>
+          <div class="eyebrow">Consistency Analytics</div>
+          <h1 class="title">Consistency Graph</h1>
+          <p class="subtitle">Instead of just XP, this page shows how consistent you are across the week and which areas need more attention.</p>
         </div>
         <button class="action primary" id="addXPBtn">Add 25 XP</button>
       </div>
       <div class="grid">
         <div class="card">
-          <h2 class="gold">Current Level</h2>
+          <h2 class="gold">Weekly Consistency</h2>
+          <div class="mini-bars" id="weeklyConsistencyGraph"></div>
+        </div>
+        <div class="card">
+          <h2 class="blue">Category Consistency</h2>
+          <p class="muted">Non-Negotiables</p>
+          <div class="bar"><div id="consistencyGoldBar" class="fill goldfill"></div></div>
+          <p class="muted" style="margin-top:16px">Growth and Development</p>
+          <div class="bar"><div id="consistencyBlueBar" class="fill bluefill"></div></div>
+        </div>
+        <div class="card">
+          <h2>Discipline Level</h2>
           <div class="xp-ring"><div class="xp-ring-inner"><div id="levelBox" class="big gold">1</div><div class="muted">Level</div></div></div>
           <p id="xpText" class="muted" style="text-align:center"></p>
-        </div>
-        <div class="card">
-          <h2 class="blue">XP Rewards</h2>
-          <div class="list">
-            <div class="list-item"><span>Complete Habit</span><span class="tag goldtag">+10 XP</span></div>
-            <div class="list-item"><span>Save Wins</span><span class="tag goldtag">+20 XP</span></div>
-            <div class="list-item"><span>Focus Session</span><span class="tag bluetag">+30 XP</span></div>
-            <div class="list-item"><span>Skill Practice</span><span class="tag bluetag">+25 XP</span></div>
-          </div>
-        </div>
-        <div class="card">
-          <h2>Rank</h2>
-          <div id="rankBox" class="big blue">Rookie</div>
-          <p class="muted" style="margin-top:10px">Your rank improves as your XP rises.</p>
+          <div id="rankBox" class="big blue" style="text-align:center;margin-top:10px">Rookie</div>
         </div>
       </div>
     </section>
@@ -1066,7 +933,7 @@
         <div>
           <div class="eyebrow">Faith + Study</div>
           <h1 class="title">Catholic Study</h1>
-          <p class="subtitle">Track prayer, Bible reading, Catholic learning, saint studies, and reflections.</p>
+          <p class="subtitle">Track prayer, Bible reading, Catholic learning, saint studies, virtues, Mass notes, and intentions.</p>
         </div>
         <button class="action primary" id="saveCatholicBtn">Save Study</button>
       </div>
@@ -1077,92 +944,51 @@
           <input id="saintStudy" placeholder="Saint / topic studying">
           <textarea id="faithNotes" placeholder="Bible notes, Catechism notes, prayer reflections..." style="margin-top:10px"></textarea>
         </div>
-        <div class="card"><h2>Weekly Focus</h2><textarea id="faithFocus" placeholder="Example: Humility, discipline, patience, prayer, courage..."></textarea></div>
-      </div>
-    </section>
-
-    <section id="customize" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Make It Yours</div>
-          <h1 class="title">Customize</h1>
-          <p class="subtitle">Edit parts of the app and save them permanently: drawing prompt words, schedule blocks, and your app name.</p>
-        </div>
-        <button class="action primary" id="saveCustomizeBtn">Save Customizations</button>
-      </div>
-
-      <div class="grid" style="margin-bottom:18px">
         <div class="card">
-          <h2 class="gold">App Name</h2>
-          <label class="small-label">Sidebar title</label>
-          <input id="customAppName" placeholder="1% Better">
-          <p class="muted" style="margin-top:12px;line-height:1.7">This changes the name shown in the sidebar.</p>
+          <h2>Weekly Virtue Focus</h2>
+          <input id="virtueFocus" placeholder="Virtue: humility, courage, patience, charity...">
+          <textarea id="faithFocus" placeholder="How will you practice this virtue this week?" style="margin-top:10px"></textarea>
         </div>
-
         <div class="card">
-          <h2 class="blue">Drawing Prompt Words</h2>
-          <label class="small-label">Subjects — one per line</label>
-          <textarea id="customSubjects" placeholder="Knight
-Samurai
-Robot"></textarea>
-          <label class="small-label">Actions — one per line</label>
-          <textarea id="customActions" placeholder="training at sunrise
-standing in the rain"></textarea>
-          <label class="small-label">Styles — one per line</label>
-          <textarea id="customStyles" placeholder="cinematic
-realistic
-dark fantasy"></textarea>
+          <h2 class="gold">Prayer Intentions</h2>
+          <textarea id="prayerIntentions" placeholder="Who/what are you praying for?"></textarea>
         </div>
-      </div>
-
-      <div class="card">
-        <h2 class="gold">Schedule Block Editor</h2>
-        <p class="muted" style="line-height:1.7;margin-bottom:14px">Add your own blocks. These will replace the default normal training day schedule after saving.</p>
-        <div class="grid">
-          <input id="customScheduleTime" placeholder="Time, ex: 6:00 AM">
-          <input id="customScheduleTask" placeholder="Task, ex: Wake up + prayer">
-          <button class="action primary" id="addScheduleBlockBtn">Add Block</button>
+        <div class="card">
+          <h2 class="blue">Mass / Homily Notes</h2>
+          <textarea id="massNotes" placeholder="Mass notes, homily takeaways, questions..."></textarea>
         </div>
-        <div id="customScheduleList" style="margin-top:14px"></div>
-        <button class="action danger" id="resetCustomScheduleBtn" style="margin-top:14px">Use Default Schedule</button>
+        <div class="card">
+          <h2>Examination of Conscience</h2>
+          <textarea id="conscienceNotes" placeholder="What did I do well? Where did I fall? What should I repair tomorrow?"></textarea>
+        </div>
       </div>
     </section>
 
     <section id="coach" class="page">
       <div class="header">
         <div>
-          <div class="eyebrow">Future Intelligence</div>
+          <div class="eyebrow">Weekly Review System</div>
           <h1 class="title">Coach</h1>
-          <p class="subtitle">Weekly reviews, performance notes, and future recommendations.</p>
+          <p class="subtitle">Review your week, find what is weak, and create a better attack plan for next week.</p>
         </div>
+        <button class="action primary" id="generateReviewBtn">Generate Weekly Report</button>
       </div>
       <div class="grid">
-        <div class="card"><h3>Weekly Review</h3><p class="muted">Review what worked, what slipped, and what to attack next week.</p></div>
-        <div class="card"><h3>Performance Notes</h3><textarea id="coachNotes" placeholder="What did I learn this week?"></textarea></div>
+        <div class="card"><h3>Weekly Report</h3><div id="weeklyReport" class="review-box">Click Generate Weekly Report.</div></div>
+        <div class="card"><h3>What Worked?</h3><textarea id="coachWorked" placeholder="What went well this week?"></textarea></div>
+        <div class="card"><h3>What Needs Fixing?</h3><textarea id="coachFix" placeholder="What slipped or needs improvement?"></textarea></div>
+        <div class="card"><h3>Next Week Focus</h3><textarea id="coachNext" placeholder="What is the main mission next week?"></textarea></div>
+        <div class="card"><h3>Performance Notes</h3><textarea id="coachNotes" placeholder="Extra notes..." ></textarea></div>
       </div>
     </section>
 
     <section id="devlab" class="page">
-      <div class="header">
-        <div>
-          <div class="eyebrow">Upgrade Command Center</div>
-          <h1 class="title">AI Code Builder</h1>
-          <p class="subtitle">One tool makes better prompts. The other turns prompts into safer code requests.</p>
-        </div>
+      <div class="header"><div><div class="eyebrow">Upgrade Command Center</div><h1 class="title">AI Code Builder</h1><p class="subtitle">One tool makes better prompts. The other turns prompts into safer code requests.</p></div></div>
+      <div class="grid wide">
+        <div class="card"><h2 class="gold">1. Prompt Builder</h2><textarea id="promptIdea" placeholder="Rough idea...">Make the sections way better and more useful.</textarea><button class="action primary" style="margin-top:14px" id="generateElitePromptBtn">Generate Better Prompt</button></div>
+        <div class="card"><h2 class="blue">2. Code Builder</h2><textarea id="codePrompt" placeholder="Paste a prompt here..."></textarea><button class="action primary" style="margin-top:14px" id="generateCodeRequestBtn">Generate Code Request</button></div>
       </div>
-      <div class="grid">
-        <div class="card">
-          <h2 class="gold">1. Prompt Builder</h2>
-          <textarea id="promptIdea" placeholder="Rough idea...">Make the sections way better and more useful.</textarea>
-          <button class="action primary" style="margin-top:14px" id="generateElitePromptBtn">Generate Better Prompt</button>
-        </div>
-        <div class="card">
-          <h2 class="blue">2. Code Builder</h2>
-          <textarea id="codePrompt" placeholder="Paste a prompt here..."></textarea>
-          <button class="action primary" style="margin-top:14px" id="generateCodeRequestBtn">Generate Code Request</button>
-        </div>
-      </div>
-      <div class="grid" style="margin-top:18px">
+      <div class="grid wide" style="margin-top:18px">
         <div class="card"><h2>Generated Better Prompt</h2><textarea id="elitePromptOutput" style="min-height:260px" readonly></textarea></div>
         <div class="card"><h2>Generated Code Request</h2><textarea id="codeRequestOutput" style="min-height:260px" readonly></textarea></div>
       </div>
@@ -1186,7 +1012,7 @@ dark fantasy"></textarea>
 
   <script>
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    const habits = [
+    let baseHabits = [
       { name: 'Meditation', cat: 'Non-Negotiables', color: 'gold', type: 'check' },
       { name: 'Daily Movement', cat: 'Non-Negotiables', color: 'gold', type: 'check' },
       { name: 'Journal', cat: 'Non-Negotiables', color: 'gold', type: 'check' },
@@ -1201,36 +1027,108 @@ dark fantasy"></textarea>
       { name: 'Read 1 Chapter', cat: 'Growth and Development', color: 'blue', type: 'check' }
     ];
 
+
+    function allHabits() {
+      return baseHabits.concat(state.customHabits || []);
+    }
+
     const skills = ['Golf', 'Chess', 'Piano', 'Drawing'];
-    const routine = [
-      ['6:00 AM', 'Wake up, water, make bed, quick prayer — no phone'],
-      ['6:10 AM', 'Wall stare dopamine reset — no music, no phone'],
-      ['6:25 AM', 'Mobility + dynamic warm-up: ankles, hips, hamstrings, glutes'],
-      ['6:45 AM', 'Morning run block: speed, long jog, or recovery walk depending on the day'],
-      ['7:25 AM', 'Breakfast: protein, fruit, whole grain, water'],
-      ['8:00 AM', 'Catholic study + reading part 1: Bible, notes, reflection'],
-      ['8:45 AM', 'Wall stare reset before business'],
-      ['8:50 AM', 'Business / money work: product ideas, selling, learning, content, app building'],
-      ['9:50 AM', 'Break, walk, snack — no scrolling'],
-      ['10:10 AM', 'Chess: study, puzzles, playing, or mistake review'],
-      ['11:00 AM', 'Piano: scales, song practice, hard-part repetition'],
-      ['11:45 AM', 'Lunch: protein + rice/whole grain + vegetables'],
-      ['12:30 PM', 'Rest / reset so you do not burn out'],
-      ['1:00 PM', 'Drawing: prompt, technique practice, or reference drawing'],
-      ['1:30 PM', 'Reading / Catholic study part 2'],
-      ['2:15 PM', 'Sport practice / skill block: agility, coordination, golf practice, or speed technique'],
-      ['3:15 PM', 'Swim / recovery conditioning: easy, technique, or recovery swim'],
-      ['4:00 PM', 'Free time, family time, or recovery'],
-      ['4:45 PM', 'Optional work block: business, YouTube, chess review, golf notes, or app building'],
-      ['5:30 PM', 'Dinner window / family time starts flexible'],
-      ['6:30 PM', 'Light evening block: walk, stretch, faith reading, drawing, or family'],
-      ['7:30 PM', 'Dinner / cleanup / reset for tomorrow'],
-      ['8:30 PM', 'Wind down: light reading, stretch, journal, wins today, wins tomorrow'],
-      ['9:15 PM', 'Night routine: shower, brush teeth, clothes ready, no phone if possible'],
-      ['9:30–10:00 PM', 'Lights out target for 8.5–9 hours of sleep']
+    const routineSets = {
+      normal: {
+        title: 'Normal Training Day',
+        description: 'Speed, business, skills, Catholic study, swim, and recovery.',
+        items: [
+          ['6:00 AM', 'Wake up, water, make bed, quick prayer — no phone'],
+          ['6:10 AM', 'Wall stare dopamine reset — no music, no phone'],
+          ['6:25 AM', 'Mobility + dynamic warm-up'],
+          ['6:45 AM', 'Morning run block: speed, jog, or recovery walk'],
+          ['7:25 AM', 'Breakfast: protein, fruit, whole grain, water'],
+          ['8:00 AM', 'Catholic study + reading part 1'],
+          ['8:45 AM', 'Wall stare reset before business'],
+          ['8:50 AM', 'Business / money work'],
+          ['10:10 AM', 'Chess: study, puzzles, game review'],
+          ['11:00 AM', 'Piano: scales, songs, hard part reps'],
+          ['11:45 AM', 'Lunch'],
+          ['1:00 PM', 'Drawing'],
+          ['1:30 PM', 'Reading / Catholic study part 2'],
+          ['2:15 PM', 'Sport practice / skill block'],
+          ['3:15 PM', 'Swim / recovery conditioning'],
+          ['8:30 PM', 'Wind down, wins, tomorrow plan'],
+          ['9:30–10:00 PM', 'Lights out target']
+        ]
+      },
+      golf: {
+        title: 'Golf Course Day',
+        description: '2-hour course block, lighter training, and post-round review.',
+        items: [
+          ['6:00 AM', 'Wake up, prayer, water — no phone'],
+          ['6:15 AM', 'Mobility and light warm-up'],
+          ['7:00 AM', 'Breakfast'],
+          ['8:00 AM', 'Catholic study / reading'],
+          ['9:00 AM', 'Golf course block — 2 hours'],
+          ['11:15 AM', 'Post-round notes: 3 swing thoughts + 1 strategy fix'],
+          ['12:00 PM', 'Lunch'],
+          ['1:00 PM', 'Easy chess or piano practice'],
+          ['2:00 PM', 'Recovery swim or walk'],
+          ['4:00 PM', 'Business light work / content ideas'],
+          ['8:30 PM', 'Wins + tomorrow plan'],
+          ['9:30–10:00 PM', 'Lights out target']
+        ]
+      },
+      recovery: {
+        title: 'Recovery Day',
+        description: 'Protect your body, keep skills sharp, and avoid burnout.',
+        items: [
+          ['6:00 AM', 'Wake up, prayer, water — no phone'],
+          ['6:20 AM', 'Long mobility session'],
+          ['7:00 AM', 'Breakfast'],
+          ['8:00 AM', 'Catholic study + reading'],
+          ['9:00 AM', 'Easy business / learning block'],
+          ['10:00 AM', 'Chess study or puzzles'],
+          ['11:00 AM', 'Piano practice'],
+          ['12:00 PM', 'Lunch'],
+          ['1:00 PM', 'Drawing / creative work'],
+          ['2:00 PM', 'Easy swim or walk'],
+          ['3:00 PM', 'Free recovery / family time'],
+          ['8:30 PM', 'Wind down'],
+          ['9:30–10:00 PM', 'Lights out target']
+        ]
+      },
+      sunday: {
+        title: 'Sunday Meal Prep + Weekly Review',
+        description: 'Prepare food, review the week, and set the next mission.',
+        items: [
+          ['6:00 AM', 'Wake up, prayer, water'],
+          ['7:00 AM', 'Breakfast'],
+          ['8:00 AM', 'Catholic study / Mass notes'],
+          ['9:00 AM', 'Golf course block or light activity'],
+          ['12:00 PM', 'Lunch'],
+          ['1:00 PM', 'Weekly review in Coach page'],
+          ['2:00 PM', 'Plan next week schedule'],
+          ['4:00 PM', 'Family / recovery time'],
+          ['7:00 PM', 'Meal prep: protein, rice, vegetables, snacks'],
+          ['8:30 PM', 'Set clothes and goals for Monday'],
+          ['9:30–10:00 PM', 'Lights out target']
+        ]
+      }
+    };
+
+    const weeklySplit = [
+      ['Monday', 'Speed + Business + Skills', 'Hard'],
+      ['Tuesday', 'Long Jog + Swim', 'Endurance'],
+      ['Wednesday', 'Speed + Sport Practice', 'Hard'],
+      ['Thursday', 'Recovery + Skills', 'Recover'],
+      ['Friday', 'Speed + Competition Day', 'Fast'],
+      ['Saturday', 'Golf Course Day', 'Golf'],
+      ['Sunday', 'Golf + Meal Prep + Weekly Review', 'Plan']
     ];
 
+    const golfDay = ['2-hour golf course block', 'Light mobility before playing', 'Write 3 swing/strategy notes after', 'Keep other training lighter'];
+    const recoveryDay = ['Mobility', 'Easy swim or walk', 'Extra chess, piano, or drawing', 'Business deep work if energy is good'];
+    const mealPrep = ['Chicken or ground beef', 'Rice + broccoli/carrots', 'Eggs, fruit, Greek yogurt', 'Nuts/snacks packed'];
+
     let state = loadState();
+    let habits = allHabits();
     let focusSeconds = 1500;
     let focusInterval = null;
 
@@ -1251,7 +1149,12 @@ dark fantasy"></textarea>
         xp: { total: 0 },
         faithChecks: {},
         catholicStudy: { saint: '', notes: '', focus: '' },
-        focusStats: { count: 0, tasks: [] }
+        focusStats: { count: 0, tasks: [] },
+        drawingPrompt: 'Knight training at sunrise — cinematic',
+        customHabits: [],
+        scheduleMode: 'normal',
+        skillLogs: {},
+        coachReview: { worked: '', fix: '', next: '' }
       };
     }
 
@@ -1260,7 +1163,8 @@ dark fantasy"></textarea>
       const base = defaultState();
       if (!saved) return base;
       try {
-        return { ...base, ...JSON.parse(saved) };
+        const parsed = JSON.parse(saved);
+        return { ...base, ...parsed, wins: { ...base.wins, ...(parsed.wins || {}) }, xp: { ...base.xp, ...(parsed.xp || {}) } };
       } catch (error) {
         return base;
       }
@@ -1340,23 +1244,19 @@ dark fantasy"></textarea>
       const today = new Date().getDay();
       const dayIndex = today === 0 ? 6 : today - 1;
       const daily = percentForDay(dayIndex);
-
       document.getElementById('scoreCards').innerHTML = `
         <div class="card"><h3>Daily Score</h3><div class="big gold">${daily}%</div></div>
         <div class="card"><h3>Weekly Score</h3><div class="big blue">${weekly}%</div></div>
         <div class="card"><h3>Monthly Score</h3><div class="big">${Math.min(100, weekly + 4)}%</div></div>
         <div class="card"><h3>Streak</h3><div class="big gold">${streak()}</div></div>
       `;
-
       document.getElementById('goldBreakdown').style.width = gold + '%';
       document.getElementById('blueBreakdown').style.width = blue + '%';
-
       document.getElementById('miniTrend').innerHTML = days.map((day, index) => {
         const p = percentForDay(index);
         const color = index % 2 ? 'var(--blue)' : 'var(--gold)';
         return `<div title="${day} ${p}%" style="height:${Math.max(8, p)}%;flex:1;background:${color};border-radius:12px 12px 0 0"></div>`;
       }).join('');
-
       const wins = state.wins.tomorrow.filter(Boolean);
       document.getElementById('tomorrowReminder').innerHTML = wins.length
         ? wins.map(win => `<div class="list-item"><span>${clean(win)}</span><span class="tag bluetag">Tomorrow</span></div>`).join('')
@@ -1364,9 +1264,12 @@ dark fantasy"></textarea>
     }
 
     function renderTrack() {
+      habits = allHabits();
       document.getElementById('daySummary').innerHTML = days.map((day, index) => {
         return `<div class="day-pill"><strong>${day}</strong><span>${percentForDay(index)}%</span></div>`;
       }).join('');
+
+      renderConsistencyGraphs();
 
       let html = '<tr><th>Habit</th>' + days.map(day => `<th>${day}</th>`).join('') + '</tr>';
       habits.forEach((habit, habitIndex) => {
@@ -1391,6 +1294,39 @@ dark fantasy"></textarea>
         <div class="card"><h3 class="gold">Non-Negotiables Score</h3><div class="big gold">${gold}%</div></div>
         <div class="card"><h3 class="blue">Growth and Development Score</h3><div class="big blue">${blue}%</div></div>
       `;
+    }
+
+    function addCustomHabit() {
+      const name = document.getElementById('newHabitName').value.trim();
+      const cat = document.getElementById('newHabitCategory').value;
+      const type = document.getElementById('newHabitType').value;
+      if (!name) return;
+      state.customHabits.push({
+        name,
+        cat,
+        color: cat === 'Non-Negotiables' ? 'gold' : 'blue',
+        type
+      });
+      document.getElementById('newHabitName').value = '';
+      saveState();
+      renderTrack();
+    }
+
+    function renderConsistencyGraphs() {
+      const graphIds = ['trackConsistencyGraph', 'weeklyConsistencyGraph'];
+      graphIds.forEach(id => {
+        const graph = document.getElementById(id);
+        if (!graph) return;
+        graph.innerHTML = days.map((day, index) => {
+          const p = percentForDay(index);
+          return `<div class="mini-bar" style="height:${Math.max(8, p)}%">${p}%</div>`;
+        }).join('');
+      });
+
+      const goldBar = document.getElementById('consistencyGoldBar');
+      const blueBar = document.getElementById('consistencyBlueBar');
+      if (goldBar) goldBar.style.width = percentForCategory('Non-Negotiables') + '%';
+      if (blueBar) blueBar.style.width = percentForCategory('Growth and Development') + '%';
     }
 
     function toggleHabit(habitIndex, dayIndex) {
@@ -1433,90 +1369,36 @@ dark fantasy"></textarea>
       });
     }
 
-    function renderSpeechPractice() {
-      const speech = state.speech || { topic: '', hook: '', points: '', close: '', review: '', checks: {}, drill: '30-second story with strong eye contact' };
-      if (!state.speech) state.speech = speech;
-      const topic = document.getElementById('speechTopic');
-      if (!topic) return;
-      topic.value = speech.topic || '';
-      document.getElementById('speechHook').value = speech.hook || '';
-      document.getElementById('speechPoints').value = speech.points || '';
-      document.getElementById('speechClose').value = speech.close || '';
-      document.getElementById('speechReview').value = speech.review || '';
-      document.getElementById('speechDrillBox').innerText = speech.drill || '30-second story with strong eye contact';
-      const items = ['Clear hook', 'Strong posture', 'Eye contact', 'Vocal variety', 'No filler words', 'Clear 3 points', 'Strong close'];
-      document.getElementById('speechChecklist').innerHTML = items.map((item, index) => {
-        return '<div class="study-row"><span>' + item + '</span><span></span><input type="checkbox" ' + (speech.checks[index] ? 'checked' : '') + ' data-speech-check="' + index + '"></div>';
-      }).join('');
-      document.querySelectorAll('[data-speech-check]').forEach(box => {
-        box.addEventListener('change', () => {
-          state.speech.checks[box.dataset.speechCheck] = box.checked;
-          updateSpeechScore();
-          saveState();
-        });
-      });
-      updateSpeechScore();
-    }
-
-    function updateSpeechScore() {
-      const speech = state.speech || { checks: {} };
-      const total = 7;
-      let done = 0;
-      for (let i = 0; i < total; i++) if (speech.checks && speech.checks[i]) done++;
-      const score = Math.round((done / total) * 100);
-      const box = document.getElementById('speechScore');
-      if (box) box.innerText = score + '%';
-    }
-
-    function saveSpeechPractice() {
-      if (!state.speech) state.speech = { checks: {} };
-      state.speech.topic = document.getElementById('speechTopic').value;
-      state.speech.hook = document.getElementById('speechHook').value;
-      state.speech.points = document.getElementById('speechPoints').value;
-      state.speech.close = document.getElementById('speechClose').value;
-      state.speech.review = document.getElementById('speechReview').value;
-      state.speech.drill = document.getElementById('speechDrillBox').innerText;
-      addXP(25, false);
-      saveState();
-      renderXP();
-      alert('Speaking practice saved.');
-    }
-
-    function generateSpeechPrompt() {
-      const topics = ['Explain why discipline matters', 'Sell a simple business idea', 'Teach one lesson from your Catholic study', 'Tell a story about overcoming laziness', 'Explain your golf improvement plan', 'Pitch your YouTube channel idea', 'Give a 60-second motivational talk', 'Explain one thing you learned today'];
-      const drills = ['30-second story with strong eye contact', '60-second speech with no filler words', 'Explain one idea using only 3 points', 'Practice vocal variety: quiet, normal, powerful', 'Record yourself and review posture', 'Give a confident business pitch', 'Teach a lesson like a coach'];
-      const topic = topics[Math.floor(Math.random() * topics.length)];
-      const drill = drills[Math.floor(Math.random() * drills.length)];
-      document.getElementById('speechTopic').value = topic;
-      document.getElementById('speechDrillBox').innerText = drill;
-      if (!state.speech) state.speech = { checks: {} };
-      state.speech.topic = topic;
-      state.speech.drill = drill;
-      saveState();
-    }
-
     function renderSkills() {
-      const templates = {
-        Golf: { color: 'gold', focus: 'Swing, short game, putting, course strategy', drills: ['10 slow tempo swings', '20 putts from 5 feet', 'Chipping landing spot practice', 'Post-round notes'] },
-        Chess: { color: 'blue', focus: 'Tactics, openings, endgames, mistake review', drills: ['15 puzzles', 'Review one lost game', 'Study one opening line', 'Play one focused game'] },
-        Piano: { color: 'gold', focus: 'Scales, slow practice, hard sections, musicality', drills: ['5 min scales', '10 min slow practice', 'Repeat hardest 4 bars', 'Record one attempt'] },
-        Drawing: { color: 'blue', focus: 'Prompt, reference, construction, shading, review', drills: ['Generate a prompt', '10 min shape study', 'Draw from reference', 'Write one improvement note'] }
-      };
       document.getElementById('skillCards').innerHTML = skills.map(skill => {
         const key = skill.toLowerCase();
         const data = state.skills[key] || { goal: '', notes: '', video: '' };
-        const template = templates[skill];
+        const logs = state.skillLogs[key] || [];
+        const color = skill === 'Chess' || skill === 'Drawing' ? 'blue' : 'gold';
+        const logHtml = logs.slice(0, 3).map(log => `
+          <div class="log-card">
+            <strong>${clean(log.date)}</strong>
+            <p class="muted">${clean(log.minutes)} min • ${clean(log.focus)}</p>
+            <p>${clean(log.notes)}</p>
+          </div>
+        `).join('') || '<p class="muted" style="margin-top:10px">No practice logs yet.</p>';
         return `
           <div class="card">
-            <h2 class="${template.color}">${skill}</h2>
-            <p class="muted" style="line-height:1.6;margin-bottom:12px">${template.focus}</p>
-            <input id="${key}Goal" placeholder="Current measurable goal" value="${clean(data.goal)}">
-            <div class="list" style="margin-top:12px">
-              ${template.drills.map(drill => `<div class="list-item"><span>${drill}</span><span class="tag ${template.color === 'gold' ? 'goldtag' : 'bluetag'}">Drill</span></div>`).join('')}
-            </div>
-            <textarea id="${key}Notes" placeholder="What did I practice? What improved? What is the next weak point?" style="margin-top:12px">${clean(data.notes)}</textarea>
+            <h2 class="${color}">${skill}</h2>
+            <input id="${key}Goal" placeholder="Current goal" value="${clean(data.goal)}">
+            <textarea id="${key}Notes" placeholder="Notes, drills, lessons, schedule..." style="margin-top:10px">${clean(data.notes)}</textarea>
             <input id="${key}Video" placeholder="YouTube lesson link" value="${clean(data.video)}" style="margin-top:10px">
             <div id="${key}Preview" class="video-preview">Paste a YouTube link to preview</div>
+            <div style="margin-top:14px">
+              <h3>Practice Log</h3>
+              <div class="compact-form">
+                <input id="${key}Minutes" placeholder="Minutes">
+                <input id="${key}Focus" placeholder="Focus area">
+              </div>
+              <textarea id="${key}PracticeNotes" placeholder="What did you practice? What improved?"></textarea>
+              <button class="action primary add-skill-log" data-skill="${key}" style="margin-top:10px">Add Practice Log</button>
+              <div id="${key}Logs">${logHtml}</div>
+            </div>
           </div>
         `;
       }).join('');
@@ -1527,6 +1409,28 @@ dark fantasy"></textarea>
         input.addEventListener('input', () => previewVideo(key));
         previewVideo(key);
       });
+
+      document.querySelectorAll('.add-skill-log').forEach(button => {
+        button.addEventListener('click', () => addSkillLog(button.dataset.skill));
+      });
+    }
+
+    function addSkillLog(key) {
+      const minutes = document.getElementById(key + 'Minutes').value.trim();
+      const focus = document.getElementById(key + 'Focus').value.trim();
+      const notes = document.getElementById(key + 'PracticeNotes').value.trim();
+      if (!minutes && !focus && !notes) return;
+      if (!state.skillLogs[key]) state.skillLogs[key] = [];
+      state.skillLogs[key].unshift({
+        date: new Date().toLocaleDateString(),
+        minutes,
+        focus,
+        notes
+      });
+      addXP(25, false);
+      saveState();
+      renderSkills();
+      renderXP();
     }
 
     function saveSkills() {
@@ -1542,6 +1446,20 @@ dark fantasy"></textarea>
       saveState();
       renderXP();
       alert('Skills saved.');
+    }
+
+    function generateDrawingPrompt() {
+      const subjects = ['Knight', 'Samurai', 'Robot', 'Dragon', 'Tiger', 'Wizard', 'Athlete', 'Explorer', 'Angel', 'Monk', 'Detective', 'Supercar', 'Castle', 'Spaceship', 'Warrior'];
+      const actions = ['training at sunrise', 'standing in the rain', 'walking through a ruined city', 'protecting a hidden treasure', 'studying an ancient book', 'fighting through a storm', 'resting after battle', 'looking over a mountain valley', 'entering a dark cathedral', 'preparing for a race'];
+      const styles = ['cinematic', 'realistic', 'comic-book style', 'dark fantasy', 'minimalist sketch', 'high-detail pencil study', 'dramatic lighting', 'dynamic action pose'];
+      const prompt = `${randomFrom(subjects)} ${randomFrom(actions)} — ${randomFrom(styles)}`;
+      state.drawingPrompt = prompt;
+      document.getElementById('drawingPromptBox').innerText = prompt;
+      saveState();
+    }
+
+    function randomFrom(list) {
+      return list[Math.floor(Math.random() * list.length)];
     }
 
     function previewVideo(key) {
@@ -1560,12 +1478,24 @@ dark fantasy"></textarea>
     }
 
     function renderRoutine() {
-      document.getElementById('routineList').innerHTML = getScheduleBlocks().map((item, index) => {
+      const mode = state.scheduleMode || 'normal';
+      const routineSet = routineSets[mode] || routineSets.normal;
+      const title = document.getElementById('scheduleModeTitle');
+      const desc = document.getElementById('scheduleModeDescription');
+      if (title) title.innerText = routineSet.title;
+      if (desc) desc.innerText = routineSet.description;
+
+      document.querySelectorAll('[data-schedule-mode]').forEach(button => {
+        button.classList.toggle('active', button.dataset.scheduleMode === mode);
+      });
+
+      document.getElementById('routineList').innerHTML = routineSet.items.map((item, index) => {
+        const key = mode + '-' + index;
         return `
           <div class="routine-row">
             <strong>${item[0]}</strong>
             <span>${item[1]}</span>
-            <input class="routine-check" type="checkbox" ${state.routine[index] ? 'checked' : ''} data-routine="${index}">
+            <input class="routine-check" type="checkbox" ${state.routine[key] ? 'checked' : ''} data-routine="${key}">
           </div>
         `;
       }).join('');
@@ -1578,9 +1508,18 @@ dark fantasy"></textarea>
       });
     }
 
+    function setScheduleMode(mode) {
+      state.scheduleMode = mode;
+      saveState();
+      renderRoutine();
+    }
+
     function resetSchedule() {
-      if (confirm('Reset today schedule?')) {
-        state.routine = {};
+      if (confirm('Reset this schedule mode checklist?')) {
+        const mode = state.scheduleMode || 'normal';
+        Object.keys(state.routine).forEach(key => {
+          if (key.startsWith(mode + '-')) delete state.routine[key];
+        });
         saveState();
         renderRoutine();
       }
@@ -1594,10 +1533,7 @@ dark fantasy"></textarea>
         }
         return `<div class="card"><h2 class="gold">${clean(card.title)}</h2><p class="muted">${card.done} / ${card.target} completed</p><div class="punch-grid">${dots}</div></div>`;
       }).join('');
-
-      document.querySelectorAll('.punch-dot').forEach(dot => {
-        dot.addEventListener('click', () => togglePunch(Number(dot.dataset.card), Number(dot.dataset.dot)));
-      });
+      document.querySelectorAll('.punch-dot').forEach(dot => dot.addEventListener('click', () => togglePunch(Number(dot.dataset.card), Number(dot.dataset.dot))));
     }
 
     function togglePunch(cardIndex, dotIndex) {
@@ -1619,8 +1555,17 @@ dark fantasy"></textarea>
     function addIdea() {
       const title = document.getElementById('ideaTitle').value.trim();
       const note = document.getElementById('ideaNote').value.trim();
+      const category = document.getElementById('ideaCategory').value;
+      const status = document.getElementById('ideaStatus').value;
       if (!title && !note) return;
-      state.ideas.unshift({ title: title || 'Untitled Idea', note, date: new Date().toLocaleDateString() });
+      state.ideas.unshift({
+        title: title || 'Untitled Idea',
+        note,
+        category,
+        status,
+        starred: false,
+        date: new Date().toLocaleDateString()
+      });
       document.getElementById('ideaTitle').value = '';
       document.getElementById('ideaNote').value = '';
       saveState();
@@ -1628,20 +1573,54 @@ dark fantasy"></textarea>
     }
 
     function renderIdeas() {
-      document.getElementById('ideasList').innerHTML = state.ideas.length
-        ? state.ideas.map((idea, index) => `
+      const search = (document.getElementById('ideaSearch')?.value || '').toLowerCase();
+      const filter = document.getElementById('ideaFilter')?.value || 'All';
+      const filtered = state.ideas.filter(idea => {
+        const matchesSearch = (idea.title + ' ' + idea.note + ' ' + (idea.category || '')).toLowerCase().includes(search);
+        const matchesFilter = filter === 'All' || idea.category === filter;
+        return matchesSearch && matchesFilter;
+      });
+
+      document.getElementById('ideasList').innerHTML = filtered.length
+        ? filtered.map((idea, index) => {
+          const realIndex = state.ideas.indexOf(idea);
+          return `
           <div class="card">
-            <h3>${clean(idea.title)}</h3>
-            <p class="muted" style="margin-bottom:10px">${idea.date}</p>
+            <div style="display:flex;justify-content:space-between;gap:10px;align-items:start">
+              <div>
+                <h3>${idea.starred ? '★ ' : ''}${clean(idea.title)}</h3>
+                <p class="muted" style="margin-bottom:10px">${idea.date} • ${clean(idea.category || 'Idea')}</p>
+              </div>
+              <span class="tag ${idea.status === 'Next Action' ? 'bluetag' : idea.status === 'Done' ? 'goldtag' : ''}">${clean(idea.status || 'Idea')}</span>
+            </div>
             <p style="line-height:1.7">${clean(idea.note)}</p>
-            <button class="action danger delete-idea" data-idea="${index}" style="margin-top:14px">Delete</button>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+              <button class="action star-idea" data-idea="${realIndex}">${idea.starred ? 'Unstar' : 'Star'}</button>
+              <button class="action next-idea" data-idea="${realIndex}">Make Next Action</button>
+              <button class="action danger delete-idea" data-idea="${realIndex}">Delete</button>
+            </div>
           </div>
-        `).join('')
-        : '<div class="card"><p class="muted">No ideas saved yet.</p></div>';
+        `}).join('')
+        : '<div class="card"><p class="muted">No ideas found yet.</p></div>';
 
       document.querySelectorAll('.delete-idea').forEach(button => {
         button.addEventListener('click', () => {
           state.ideas.splice(Number(button.dataset.idea), 1);
+          saveState();
+          renderIdeas();
+        });
+      });
+      document.querySelectorAll('.star-idea').forEach(button => {
+        button.addEventListener('click', () => {
+          const idea = state.ideas[Number(button.dataset.idea)];
+          idea.starred = !idea.starred;
+          saveState();
+          renderIdeas();
+        });
+      });
+      document.querySelectorAll('.next-idea').forEach(button => {
+        button.addEventListener('click', () => {
+          state.ideas[Number(button.dataset.idea)].status = 'Next Action';
           saveState();
           renderIdeas();
         });
@@ -1680,19 +1659,55 @@ dark fantasy"></textarea>
         });
       });
 
-      document.getElementById('saintStudy').value = state.catholicStudy.saint || '';
-      document.getElementById('faithNotes').value = state.catholicStudy.notes || '';
-      document.getElementById('faithFocus').value = state.catholicStudy.focus || '';
+      const study = state.catholicStudy || {};
+      document.getElementById('saintStudy').value = study.saint || '';
+      document.getElementById('faithNotes').value = study.notes || '';
+      document.getElementById('faithFocus').value = study.focus || '';
+      document.getElementById('virtueFocus').value = study.virtue || '';
+      document.getElementById('prayerIntentions').value = study.intentions || '';
+      document.getElementById('massNotes').value = study.mass || '';
+      document.getElementById('conscienceNotes').value = study.conscience || '';
     }
 
     function saveCatholicStudy() {
       state.catholicStudy = {
         saint: document.getElementById('saintStudy').value,
         notes: document.getElementById('faithNotes').value,
-        focus: document.getElementById('faithFocus').value
+        focus: document.getElementById('faithFocus').value,
+        virtue: document.getElementById('virtueFocus').value,
+        intentions: document.getElementById('prayerIntentions').value,
+        mass: document.getElementById('massNotes').value,
+        conscience: document.getElementById('conscienceNotes').value
       };
       saveState();
       alert('Catholic study saved.');
+    }
+
+    function saveCoachNotes() {
+      state.coachNotes = document.getElementById('coachNotes').value;
+      state.coachReview = {
+        worked: document.getElementById('coachWorked')?.value || '',
+        fix: document.getElementById('coachFix')?.value || '',
+        next: document.getElementById('coachNext')?.value || ''
+      };
+      saveState();
+    }
+
+    function generateWeeklyReport() {
+      const weekly = weeklyPercent();
+      const gold = percentForCategory('Non-Negotiables');
+      const blue = percentForCategory('Growth and Development');
+      const bestDayIndex = days.map((day, i) => percentForDay(i)).reduce((best, score, i, arr) => score > arr[best] ? i : best, 0);
+      const worstDayIndex = days.map((day, i) => percentForDay(i)).reduce((worst, score, i, arr) => score < arr[worst] ? i : worst, 0);
+      const message = `
+        <strong>Weekly Score:</strong> ${weekly}%<br>
+        <strong>Best Day:</strong> ${days[bestDayIndex]} (${percentForDay(bestDayIndex)}%)<br>
+        <strong>Weakest Day:</strong> ${days[worstDayIndex]} (${percentForDay(worstDayIndex)}%)<br>
+        <strong>Non-Negotiables:</strong> ${gold}%<br>
+        <strong>Growth and Development:</strong> ${blue}%<br><br>
+        <strong>Coach Note:</strong> ${weekly >= 80 ? 'Strong week. Keep the system and raise the standard slightly.' : weekly >= 50 ? 'Decent effort. Pick one weak habit and attack it next week.' : 'Reset the system. Make next week simpler and win the basics first.'}
+      `;
+      document.getElementById('weeklyReport').innerHTML = message;
     }
 
     function saveCoachNotes() {
@@ -1746,10 +1761,7 @@ dark fantasy"></textarea>
     function completeFocusSession() {
       pauseFocus();
       state.focusStats.count++;
-      state.focusStats.tasks.unshift({
-        task: document.getElementById('focusTask').value || 'Focus Session',
-        date: new Date().toLocaleString()
-      });
+      state.focusStats.tasks.unshift({ task: document.getElementById('focusTask').value || 'Focus Session', date: new Date().toLocaleString() });
       addXP(30, false);
       saveState();
       renderXP();
@@ -1761,142 +1773,29 @@ dark fantasy"></textarea>
       document.getElementById('focusStats').innerText = 'Sessions completed: ' + state.focusStats.count;
     }
 
-    function getScheduleBlocks() {
-      return state.customSchedule && state.customSchedule.length ? state.customSchedule : routine;
-    }
-
-    function applyAppName() {
-      const savedName = state.customAppName || '1% Better';
-      const logo = document.querySelector('.logo');
-      if (logo) {
-        const parts = savedName.split(' ');
-        logo.innerHTML = parts.length > 1 ? parts[0] + ' <span>' + parts.slice(1).join(' ') + '</span>' : savedName;
-      }
-    }
-
-    function getPromptLines(value, fallback) {
-      const lines = String(value || '').split(String.fromCharCode(10)).map(item => item.trim()).filter(Boolean);
-      return lines.length ? lines : fallback;
-    }
-
-    function generateDrawingPrompt() {
-      const custom = state.customDrawingPrompts || {};
-      const subjects = getPromptLines(custom.subjects, ['Knight', 'Samurai', 'Robot', 'Dragon', 'Tiger', 'Wizard', 'Athlete', 'Explorer', 'Angel', 'Monk', 'Detective', 'Supercar', 'Castle', 'Spaceship', 'Warrior']);
-      const actions = getPromptLines(custom.actions, ['training at sunrise', 'standing in the rain', 'walking through a ruined city', 'protecting a hidden treasure', 'studying an ancient book', 'fighting through a storm', 'resting after battle', 'looking over a mountain valley', 'entering a dark cathedral', 'preparing for a race']);
-      const styles = getPromptLines(custom.styles, ['cinematic', 'realistic', 'comic-book style', 'dark fantasy', 'minimalist sketch', 'high-detail pencil study', 'dramatic lighting', 'dynamic action pose']);
-      const subject = subjects[Math.floor(Math.random() * subjects.length)];
-      const action = actions[Math.floor(Math.random() * actions.length)];
-      const style = styles[Math.floor(Math.random() * styles.length)];
-      const prompt = subject + ' ' + action + ' — ' + style;
-      const box = document.getElementById('drawingPromptBox');
-      if (box) box.innerText = prompt;
-      state.skills.drawingPrompt = prompt;
-      saveState();
-    }
-
-    function renderCustomize() {
-      const appName = document.getElementById('customAppName');
-      const subjects = document.getElementById('customSubjects');
-      const actions = document.getElementById('customActions');
-      const styles = document.getElementById('customStyles');
-      if (!appName || !subjects || !actions || !styles) return;
-      const custom = state.customDrawingPrompts || {};
-      appName.value = state.customAppName || '1% Better';
-      subjects.value = custom.subjects || ['Knight','Samurai','Robot','Dragon','Tiger','Wizard','Athlete','Explorer','Angel','Monk'].join(String.fromCharCode(10));
-      actions.value = custom.actions || ['training at sunrise','standing in the rain','walking through a ruined city','protecting a hidden treasure','studying an ancient book','fighting through a storm'].join(String.fromCharCode(10));
-      styles.value = custom.styles || ['cinematic','realistic','comic-book style','dark fantasy','minimalist sketch','high-detail pencil study'].join(String.fromCharCode(10));
-      renderCustomScheduleList();
-    }
-
-    function renderCustomScheduleList() {
-      const list = document.getElementById('customScheduleList');
-      if (!list) return;
-      const blocks = getScheduleBlocks();
-      list.innerHTML = blocks.map((block, index) => `
-        <div class="custom-row">
-          <strong>${clean(block[0])}</strong>
-          <span>${clean(block[1])}</span>
-          <button class="action danger custom-delete" data-index="${index}">Delete</button>
-        </div>
-      `).join('');
-      document.querySelectorAll('.custom-delete').forEach(button => {
-        button.addEventListener('click', () => removeScheduleBlock(Number(button.dataset.index)));
-      });
-    }
-
-    function addScheduleBlock() {
-      const time = document.getElementById('customScheduleTime').value.trim();
-      const task = document.getElementById('customScheduleTask').value.trim();
-      if (!time || !task) return;
-      if (!state.customSchedule || !state.customSchedule.length) state.customSchedule = [...routine];
-      state.customSchedule.push([time, task]);
-      document.getElementById('customScheduleTime').value = '';
-      document.getElementById('customScheduleTask').value = '';
-      saveState();
-      renderCustomScheduleList();
-      renderRoutine();
-    }
-
-    function removeScheduleBlock(index) {
-      if (!state.customSchedule || !state.customSchedule.length) state.customSchedule = [...routine];
-      state.customSchedule.splice(index, 1);
-      saveState();
-      renderCustomScheduleList();
-      renderRoutine();
-    }
-
-    function resetCustomSchedule() {
-      if (!confirm('Reset to the default schedule?')) return;
-      state.customSchedule = [];
-      saveState();
-      renderCustomScheduleList();
-      renderRoutine();
-    }
-
-    function saveCustomizations() {
-      state.customAppName = document.getElementById('customAppName').value.trim() || '1% Better';
-      state.customDrawingPrompts = {
-        subjects: document.getElementById('customSubjects').value,
-        actions: document.getElementById('customActions').value,
-        styles: document.getElementById('customStyles').value
-      };
-      saveState();
-      applyAppName();
-      alert('Customizations saved.');
-    }
-
     function bindEvents() {
-      document.querySelectorAll('[data-page]').forEach(button => {
-        button.addEventListener('click', () => showPage(button.dataset.page));
-      });
-      document.querySelectorAll('[data-page-link]').forEach(button => {
-        button.addEventListener('click', () => showPage(button.dataset.pageLink));
-      });
-
+      document.querySelectorAll('[data-page]').forEach(button => button.addEventListener('click', () => showPage(button.dataset.page)));
+      document.querySelectorAll('[data-page-link]').forEach(button => button.addEventListener('click', () => showPage(button.dataset.pageLink)));
       document.getElementById('focusOpenBtn').addEventListener('click', toggleFocusMode);
       document.getElementById('resetWeekBtn').addEventListener('click', resetWeek);
+      document.getElementById('addHabitBtn').addEventListener('click', addCustomHabit);
       document.getElementById('saveWinsBtn').addEventListener('click', saveWins);
       document.getElementById('saveSkillsBtn').addEventListener('click', saveSkills);
-      const saveSpeechBtn = document.getElementById('saveSpeechBtn');
-      if (saveSpeechBtn) saveSpeechBtn.addEventListener('click', saveSpeechPractice);
-      const speechPromptBtn = document.getElementById('speechPromptBtn');
-      if (speechPromptBtn) speechPromptBtn.addEventListener('click', generateSpeechPrompt);
-      const drawingPromptBtn = document.getElementById('drawingPromptBtn');
-      if (drawingPromptBtn) drawingPromptBtn.addEventListener('click', generateDrawingPrompt);
-      const drawingPromptBtn2 = document.getElementById('drawingPromptBtn2');
-      if (drawingPromptBtn2) drawingPromptBtn2.addEventListener('click', generateDrawingPrompt);
+      document.getElementById('drawingPromptBtn').addEventListener('click', generateDrawingPrompt);
+      document.getElementById('drawingPromptHeaderBtn').addEventListener('click', generateDrawingPrompt);
       document.getElementById('resetScheduleBtn').addEventListener('click', resetSchedule);
+      document.querySelectorAll('[data-schedule-mode]').forEach(button => button.addEventListener('click', () => setScheduleMode(button.dataset.scheduleMode)));
       document.getElementById('addPunchCardBtn').addEventListener('click', addPunchCard);
       document.getElementById('addIdeaBtn').addEventListener('click', addIdea);
+      document.getElementById('ideaSearch').addEventListener('input', renderIdeas);
+      document.getElementById('ideaFilter').addEventListener('change', renderIdeas);
       document.getElementById('addXPBtn').addEventListener('click', () => addXP(25));
       document.getElementById('saveCatholicBtn').addEventListener('click', saveCatholicStudy);
-      const saveCustomizeBtn = document.getElementById('saveCustomizeBtn');
-      if (saveCustomizeBtn) saveCustomizeBtn.addEventListener('click', saveCustomizations);
-      const addScheduleBlockBtn = document.getElementById('addScheduleBlockBtn');
-      if (addScheduleBlockBtn) addScheduleBlockBtn.addEventListener('click', addScheduleBlock);
-      const resetCustomScheduleBtn = document.getElementById('resetCustomScheduleBtn');
-      if (resetCustomScheduleBtn) resetCustomScheduleBtn.addEventListener('click', resetCustomSchedule);
       document.getElementById('coachNotes').addEventListener('input', saveCoachNotes);
+      document.getElementById('coachWorked').addEventListener('input', saveCoachNotes);
+      document.getElementById('coachFix').addEventListener('input', saveCoachNotes);
+      document.getElementById('coachNext').addEventListener('input', saveCoachNotes);
+      document.getElementById('generateReviewBtn').addEventListener('click', generateWeeklyReport);
       document.getElementById('generateElitePromptBtn').addEventListener('click', generateElitePrompt);
       document.getElementById('generateCodeRequestBtn').addEventListener('click', generateCodeRequest);
       document.getElementById('startFocusBtn').addEventListener('click', startFocus);
@@ -1912,19 +1811,18 @@ dark fantasy"></textarea>
       renderTrack();
       loadWins();
       renderSkills();
-      renderSpeechPractice();
-      if (state.skills.drawingPrompt && document.getElementById('drawingPromptBox')) {
-        document.getElementById('drawingPromptBox').innerText = state.skills.drawingPrompt;
-      }
       renderRoutine();
+      renderScheduleLists();
       renderPunchCards();
       renderIdeas();
       renderXP();
+      renderConsistencyGraphs();
       renderFaithChecklist();
-      renderCustomize();
-      applyAppName();
       renderFocusStats();
       document.getElementById('coachNotes').value = state.coachNotes || '';
+      document.getElementById('coachWorked').value = state.coachReview?.worked || '';
+      document.getElementById('coachFix').value = state.coachReview?.fix || '';
+      document.getElementById('coachNext').value = state.coachReview?.next || '';
       updateFocus();
     }
 
@@ -1932,4 +1830,3 @@ dark fantasy"></textarea>
   </script>
 </body>
 </html>
- 
