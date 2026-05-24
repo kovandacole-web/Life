@@ -101,6 +101,22 @@
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .settings-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; min-height: 180px; }
 
+    .command-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .chip { border-radius: 999px; padding: 10px 13px; background: #171717; border: 1px solid #303030; color: #ddd; font-weight: 850; }
+    .chip:hover, .chip.active { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,.12); }
+    .chip.blue:hover, .chip.blue.active { border-color: var(--blue); color: var(--blue); background: rgba(110,162,255,.12); }
+    .mini-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 15px; }
+    .mini-metric { background: #111; border: 1px solid #292929; border-radius: 16px; padding: 13px; }
+    .mini-metric strong { display: block; font-size: 22px; color: var(--gold); margin-bottom: 4px; }
+    .next-block { border: 1px solid rgba(212,175,55,.45); background: linear-gradient(180deg,rgba(212,175,55,.09),#111); }
+    .focus-overlay { position: fixed; inset: 0; background: #050505; z-index: 100; display: none; align-items: center; justify-content: center; padding: 24px; text-align: center; }
+    .focus-overlay.active { display: flex; }
+    .focus-panel { width: min(620px, 100%); background: linear-gradient(180deg,#191919,#0d0d0d); border: 1px solid #333; border-radius: 30px; padding: 28px; box-shadow: var(--shadow); }
+    .focus-timer { font-size: clamp(58px, 13vw, 110px); font-weight: 950; letter-spacing: -4px; margin: 18px 0; }
+    .skill-mode-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 9px; margin-top: 12px; }
+    .skill-mode { background: #141414; border: 1px solid #2d2d2d; border-radius: 14px; padding: 10px; color: #ddd; font-weight: 800; }
+    .skill-mode:hover { border-color: var(--gold); color: var(--gold); }
+
     @media (max-width: 900px) {
       body { display: block; }
       .sidebar { position: relative; width: 100%; height: auto; display: block; padding: 16px; }
@@ -143,24 +159,32 @@
           <h1 class="title">Win today.</h1>
           <p class="subtitle">Mission, schedule, training, faith, business, skill work, food reminders, sleep, and consistency.</p>
         </div>
-        <button class="btn gold" data-page-link="schedule">Open Today’s Schedule</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn gold" data-page-link="schedule">Open Today’s Schedule</button><button class="btn" id="openFocusBtn">Start Focus</button></div>
       </div>
 
       <div class="grid">
-        <div class="card">
+        <div class="card next-block">
           <h2 class="gold">Today’s Mission</h2>
-          <input id="missionInput" placeholder="What is the main mission today?">
-          <button class="btn gold section-gap" id="saveMissionBtn">Save Mission</button>
+          <p class="muted">Pick the main lane for today, then write the mission in one sentence.</p>
+          <div class="command-row">
+            <button class="chip active" data-mission-chip="Training">Training</button>
+            <button class="chip" data-mission-chip="Faith">Faith</button>
+            <button class="chip" data-mission-chip="Business">Business</button>
+            <button class="chip" data-mission-chip="Skills">Skills</button>
+            <button class="chip" data-mission-chip="Recovery">Recovery</button>
+          </div>
+          <input id="missionInput" placeholder="Example: finish speed work, Catholic study, and business deep work" style="margin-top:14px">
+          <button class="btn gold section-gap" id="saveMissionBtn">Lock Mission</button>
           <p class="muted section-gap" id="missionDisplay">No mission set yet.</p>
         </div>
         <div class="card"><h2 class="blue">Today’s Mode</h2><div class="big" id="homeMode">Normal</div><p class="muted section-gap" id="homeModeNote">Auto-picked from today.</p></div>
         <div class="card"><h2 class="gold">Consistency</h2><div class="big" id="homeConsistency">0%</div><div class="bar section-gap"><div class="fill" id="homeConsistencyFill" style="width:0%"></div></div></div>
-        <div class="card"><h2>Today’s Reminders</h2><div class="list"><div class="list-item"><span>No phone first hour</span><span class="tag goldtag">Locked</span></div><div class="list-item"><span>Breakfast around 6:35</span><span class="tag">Fuel</span></div><div class="list-item"><span>Sleep 9:30–10:00</span><span class="tag bluetag">Recover</span></div></div></div>
+        <div class="card"><h2>Next Moves</h2><div class="list"><div class="list-item"><span>No phone first hour</span><span class="tag goldtag">Locked</span></div><div class="list-item"><span>Breakfast around 6:35</span><span class="tag">Fuel</span></div><div class="list-item"><span>Sleep 9:30–10:00</span><span class="tag bluetag">Recover</span></div></div><div class="command-row"><button class="chip" data-page-link="training">Log Training</button><button class="chip" data-page-link="faith">Faith Block</button><button class="chip" data-page-link="business">Business Task</button><button class="chip" data-page-link="review">Night Review</button></div></div>
       </div>
 
       <div class="grid section-gap">
         <div class="card"><h2>Quick Launch</h2><div class="home-buttons"><button class="home-link" data-page-link="training"><strong>Training</strong><span>Speed, gym, recovery</span></button><button class="home-link" data-page-link="faith"><strong>Catholic Study</strong><span>Prayer, notes, virtue</span></button><button class="home-link" data-page-link="business"><strong>Business</strong><span>Money, tasks, ideas</span></button><button class="home-link" data-page-link="skills"><strong>Skills</strong><span>Golf, chess, piano, drawing</span></button></div></div>
-        <div class="card"><h2>Consistency Graph</h2><div class="chart" id="homeChart"></div></div>
+        <div class="card"><h2>Consistency Graph</h2><div class="chart" id="homeChart"></div><div class="mini-metrics"><div class="mini-metric"><strong id="miniSchedule">0%</strong><span class="muted">Schedule</span></div><div class="mini-metric"><strong id="miniTraining">0%</strong><span class="muted">Training</span></div><div class="mini-metric"><strong id="miniFaith">0%</strong><span class="muted">Faith</span></div></div></div>
       </div>
     </section>
 
@@ -177,7 +201,7 @@
 
     <section id="skills" class="page">
       <div class="header"><div><div class="eyebrow">Skill Development</div><h1 class="title">Skills</h1><p class="subtitle">Golf, chess, piano, drawing, reading/speaking, and school studies.</p></div><button class="btn gold" id="saveSkillsBtn">Save Skills</button></div>
-      <div class="grid"><div class="card"><h2 class="gold">Drawing Idea Generator</h2><div class="prompt-box" id="drawingPromptBox">Knight training at sunrise — cinematic</div><button class="btn gold section-gap" id="drawingPromptBtn">Generate Idea</button></div><div class="card"><h2 class="blue">Skill Focus</h2><p class="muted">Each skill has a goal, notes, and practice logs. Keep it simple and consistent.</p></div></div>
+      <div class="grid"><div class="card"><h2 class="gold">Drawing Idea Generator</h2><div class="prompt-box" id="drawingPromptBox">Knight training at sunrise — cinematic</div><button class="btn gold section-gap" id="drawingPromptBtn">Generate Idea</button></div><div class="card"><h2 class="blue">Skill Focus</h2><p class="muted">Tap a mode, log a session, and keep notes short. This section is for reps, not essays.</p><div class="skill-mode-grid"><button class="skill-mode" data-skill-jump="Golf">Golf</button><button class="skill-mode" data-skill-jump="Chess">Chess</button><button class="skill-mode" data-skill-jump="Piano">Piano</button><button class="skill-mode" data-skill-jump="Drawing">Drawing</button><button class="skill-mode" data-skill-jump="Reading">Reading</button><button class="skill-mode" data-skill-jump="School">School</button></div></div></div>
       <div class="grid section-gap" id="skillCards"></div>
     </section>
 
@@ -206,6 +230,27 @@
       <div class="grid"><div class="card"><h2 class="gold">Backup</h2><button class="btn gold" id="exportBtn">Export Data</button><button class="btn section-gap" id="importBtn">Import Data</button><button class="btn danger section-gap" id="clearBtn">Clear All Data</button></div><div class="card"><h2 class="blue">Data Box</h2><textarea id="backupBox" class="settings-code" placeholder="Exported data appears here. Paste backup here to import."></textarea></div></div>
     </section>
   </main>
+
+  <div class="focus-overlay" id="focusOverlay">
+    <div class="focus-panel">
+      <div class="eyebrow">Locked In Mode</div>
+      <h1 class="title">Focus</h1>
+      <input id="focusTask" placeholder="What are you focusing on?" style="margin-top:18px">
+      <div class="command-row" style="justify-content:center">
+        <button class="chip active" data-focus-min="25">25 min</button>
+        <button class="chip" data-focus-min="45">45 min</button>
+        <button class="chip" data-focus-min="60">60 min</button>
+      </div>
+      <div class="focus-timer" id="focusTimer">25:00</div>
+      <p class="muted">Do the wall stare reset first. Then start deep work.</p>
+      <div class="command-row" style="justify-content:center">
+        <button class="btn gold" id="startFocusBtn">Start</button>
+        <button class="btn" id="pauseFocusBtn">Pause</button>
+        <button class="btn" id="resetFocusBtn">Reset</button>
+        <button class="btn danger" id="closeFocusBtn">Exit</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     const STORE_KEY = 'onePercentBetterCleanV1';
@@ -236,6 +281,8 @@
 
     function defaultState(){ return { mission:'', statuses:{}, selectedScheduleMode:'', selectedTrainingDay:(new Date().getDay()===0?6:new Date().getDay()-1), skillData:{}, faith:{}, business:{products:[]}, ideas:[], review:{}, trainingLogs:[] }; }
     let state = loadState();
+    let focusSeconds = 1500;
+    let focusInterval = null;
     function loadState(){ try { return Object.assign(defaultState(), JSON.parse(localStorage.getItem(STORE_KEY)||'{}')); } catch(e){ return defaultState(); } }
     function saveState(){ localStorage.setItem(STORE_KEY, JSON.stringify(state)); renderHome(); }
     function $(id){ return document.getElementById(id); }
@@ -251,12 +298,19 @@
     function statusCard(area,key,index,time,title,note){ const s=getStatus(area,key,index); return `<div class="status-card ${statusClass(s)}" data-status-area="${area}" data-status-key="${key}" data-status-index="${index}"><div class="status-time">${clean(time)}</div><div><div class="status-title">${clean(title)}</div><div class="status-note">${clean(note)}</div></div><div class="status-pill">${statusNames[s]}</div></div>`; }
     function progressFor(area,key,count){ let done=0; for(let i=0;i<count;i++) if(getStatus(area,key,i)===2) done++; return count?Math.round(done/count*100):0; }
     function renderChart(id){ const box=$(id); if(!box)return; const keys=['speed','lower','recovery','normal','speed','golf','sunday']; box.innerHTML=days.map((day,i)=>{ const key=keys[i]; const p=progressFor('schedule',key,scheduleModes[key].blocks.length); return `<div class="chart-bar" style="height:${Math.max(8,p)}%"><span>${day}</span></div>`; }).join(''); }
-    function renderHome(){ const mode=scheduleModes[currentModeKey()]; if($('homeMode'))$('homeMode').textContent=mode.label; if($('homeModeNote'))$('homeModeNote').textContent=mode.note; if($('missionDisplay'))$('missionDisplay').textContent=state.mission||'No mission set yet.'; const p=progressFor('schedule',currentModeKey(),mode.blocks.length); if($('homeConsistency'))$('homeConsistency').textContent=p+'%'; if($('homeConsistencyFill'))$('homeConsistencyFill').style.width=p+'%'; renderChart('homeChart'); renderChart('reviewChart'); if($('reviewScore'))$('reviewScore').textContent=p+'%'; }
+    function renderHome(){ const mode=scheduleModes[currentModeKey()]; if($('homeMode'))$('homeMode').textContent=mode.label; if($('homeModeNote'))$('homeModeNote').textContent=mode.note; if($('missionDisplay'))$('missionDisplay').textContent=state.mission||'No mission set yet.'; const p=progressFor('schedule',currentModeKey(),mode.blocks.length); if($('homeConsistency'))$('homeConsistency').textContent=p+'%'; if($('homeConsistencyFill'))$('homeConsistencyFill').style.width=p+'%'; if($('miniSchedule'))$('miniSchedule').textContent=p+'%'; const train=trainingWeek[state.selectedTrainingDay]||trainingWeek[0]; const trainP=(progressFor('training-speed',train.day,train.speed.length)+progressFor('training-lift',train.day,train.lift.length))/2; if($('miniTraining'))$('miniTraining').textContent=Math.round(trainP)+'%'; if($('miniFaith'))$('miniFaith').textContent=progressFor('faith','daily',faithPath.length)+'%'; renderChart('homeChart'); renderChart('reviewChart'); if($('reviewScore'))$('reviewScore').textContent=p+'%'; }
     function renderSchedule(){ const select=$('scheduleModeSelect'); if(select){ select.innerHTML=Object.keys(scheduleModes).map(k=>`<option value="${k}">${scheduleModes[k].label}</option>`).join(''); select.value=currentModeKey(); } const key=currentModeKey(); const mode=scheduleModes[key]; if($('scheduleTitle'))$('scheduleTitle').textContent=mode.label; if($('scheduleBlocks'))$('scheduleBlocks').innerHTML=mode.blocks.map((b,i)=>statusCard('schedule',key,i,b[0],b[1],b[2])).join(''); const p=progressFor('schedule',key,mode.blocks.length); if($('scheduleProgressFill'))$('scheduleProgressFill').style.width=p+'%'; if($('scheduleProgressText'))$('scheduleProgressText').textContent=p+'% done'; const t=scheduleModes[tomorrowModeKey()]; if($('tomorrowPreview'))$('tomorrowPreview').innerHTML=t.blocks.slice(0,5).map(b=>`<div class="list-item"><span><strong>${clean(b[0])}</strong><br>${clean(b[1])}</span><span class="tag goldtag">${clean(t.label)}</span></div>`).join(''); }
     function renderTraining(){ const tabs=$('trainingTabs'); if(tabs)tabs.innerHTML=trainingWeek.map((d,i)=>`<button class="tab ${i===state.selectedTrainingDay?'active':''}" data-training-tab="${i}">${d.day}</button>`).join(''); const day=trainingWeek[state.selectedTrainingDay]; if($('trainingDayTitle'))$('trainingDayTitle').textContent=day.day+' — '+day.mode; if($('trainingWhy'))$('trainingWhy').textContent=day.why; if($('speedList'))$('speedList').innerHTML=day.speed.map((x,i)=>statusCard('training-speed',day.day,i,'Speed',x,'Fast reps only.')).join(''); if($('liftList'))$('liftList').innerHTML=day.lift.map((x,i)=>statusCard('training-lift',day.day,i,'Gym',x,'Controlled reps.')).join(''); renderTrainingLogs(); }
     function saveTrainingLog(){ const focus=$('trainingFocus').value.trim(), duration=$('trainingDuration').value.trim(), notes=$('trainingNotes').value.trim(); if(!focus&&!duration&&!notes)return; state.trainingLogs.unshift({focus:focus||trainingWeek[state.selectedTrainingDay].mode,duration,notes,date:new Date().toLocaleDateString()}); state.trainingLogs=state.trainingLogs.slice(0,10); $('trainingFocus').value=''; $('trainingDuration').value=''; $('trainingNotes').value=''; saveState(); renderTrainingLogs(); }
     function renderTrainingLogs(){ if(!$('trainingLogs'))return; $('trainingLogs').innerHTML=state.trainingLogs.length?state.trainingLogs.slice(0,5).map(log=>`<div class="list-item"><span><strong>${clean(log.focus)}</strong><br><span class="muted">${clean(log.duration)} • ${clean(log.date)}</span><br>${clean(log.notes)}</span></div>`).join(''):'<p class="muted">No training logs yet.</p>'; }
     function renderSkills(){ const box=$('skillCards'); if(!box)return; box.innerHTML=skills.map(skill=>{ const key=skill.toLowerCase().replaceAll(' ','_').replaceAll('/','_'); const data=state.skillData[key]||{goal:'',notes:'',logs:[]}; return `<div class="card"><h2 class="${skill==='Chess'||skill==='Drawing'?'blue':'gold'}">${clean(skill)}</h2><input id="${key}Goal" placeholder="Goal" value="${clean(data.goal)}"><textarea id="${key}Notes" placeholder="Notes, mistakes, lessons, schedule..." style="margin-top:10px">${clean(data.notes)}</textarea><div class="form-row section-gap"><input id="${key}LogFocus" placeholder="Practice focus"><input id="${key}LogMinutes" placeholder="Minutes"></div><textarea id="${key}LogNotes" placeholder="Practice log notes..." style="margin-top:10px"></textarea><button class="btn section-gap" data-skill-log="${key}">Add Practice Log</button><div class="list section-gap" id="${key}Logs"></div></div>`; }).join(''); skills.forEach(skill=>renderSkillLogs(skill.toLowerCase().replaceAll(' ','_').replaceAll('/','_'))); }
+    function setFocusMinutes(minutes){ focusSeconds=minutes*60; document.querySelectorAll('[data-focus-min]').forEach(btn=>btn.classList.toggle('active',Number(btn.dataset.focusMin)===minutes)); updateFocusTimer(); }
+    function updateFocusTimer(){ if(!$('focusTimer'))return; const m=String(Math.floor(focusSeconds/60)).padStart(2,'0'); const s=String(focusSeconds%60).padStart(2,'0'); $('focusTimer').textContent=m+':'+s; }
+    function openFocus(){ if($('focusOverlay'))$('focusOverlay').classList.add('active'); }
+    function closeFocus(){ if($('focusOverlay'))$('focusOverlay').classList.remove('active'); clearInterval(focusInterval); }
+    function startFocus(){ clearInterval(focusInterval); focusInterval=setInterval(()=>{ if(focusSeconds>0){ focusSeconds--; updateFocusTimer(); } },1000); }
+    function pauseFocus(){ clearInterval(focusInterval); }
+    function resetFocus(){ clearInterval(focusInterval); const active=document.querySelector('[data-focus-min].active'); setFocusMinutes(active?Number(active.dataset.focusMin):25); }
     function saveSkills(){ skills.forEach(skill=>{ const key=skill.toLowerCase().replaceAll(' ','_').replaceAll('/','_'); const old=state.skillData[key]||{logs:[]}; state.skillData[key]={goal:$(key+'Goal')?.value||'',notes:$(key+'Notes')?.value||'',logs:old.logs||[]}; }); saveState(); }
     function addSkillLog(key){ if(!state.skillData[key])state.skillData[key]={logs:[]}; state.skillData[key].logs.unshift({focus:$(key+'LogFocus')?.value||'',minutes:$(key+'LogMinutes')?.value||'',notes:$(key+'LogNotes')?.value||'',date:new Date().toLocaleDateString()}); state.skillData[key].logs=state.skillData[key].logs.slice(0,6); saveState(); renderSkillLogs(key); }
     function renderSkillLogs(key){ const box=$(key+'Logs'); if(!box)return; const logs=(state.skillData[key]&&state.skillData[key].logs)||[]; box.innerHTML=logs.length?logs.map(log=>`<div class="list-item"><span><strong>${clean(log.focus)}</strong><br><span class="muted">${clean(log.minutes)} min • ${clean(log.date)}</span><br>${clean(log.notes)}</span></div>`).join(''):'<p class="muted">No logs yet.</p>'; }
@@ -276,9 +330,9 @@
     function exportData(){ $('backupBox').value=JSON.stringify(state,null,2); }
     function importData(){ try{ state=Object.assign(defaultState(),JSON.parse($('backupBox').value)); saveState(); renderAll(); alert('Data imported.'); }catch(e){ alert('That backup data is not valid JSON.'); } }
     function clearData(){ if(confirm('Clear all app data?')){ state=defaultState(); saveState(); renderAll(); } }
-    function bindEvents(){ document.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.page))); document.querySelectorAll('[data-page-link]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.pageLink))); document.body.addEventListener('click',e=>{ const status=e.target.closest('[data-status-area]'); if(status)cycleStatus(status.dataset.statusArea,status.dataset.statusKey,Number(status.dataset.statusIndex)); const tab=e.target.closest('[data-training-tab]'); if(tab){state.selectedTrainingDay=Number(tab.dataset.trainingTab); saveState(); renderTraining();} const skillLog=e.target.closest('[data-skill-log]'); if(skillLog)addSkillLog(skillLog.dataset.skillLog); const star=e.target.closest('[data-star]'); if(star){ const idea=state.ideas[Number(star.dataset.star)]; if(idea)idea.starred=!idea.starred; saveState(); renderIdeas(); } const action=e.target.closest('[data-action]'); if(action){ const idea=state.ideas[Number(action.dataset.action)]; if(idea)idea.status='Next Action'; saveState(); renderIdeas(); } }); $('saveMissionBtn').addEventListener('click',()=>{state.mission=$('missionInput').value.trim(); saveState(); renderHome();}); $('scheduleModeSelect').addEventListener('change',e=>{state.selectedScheduleMode=e.target.value; saveState(); renderSchedule(); renderHome();}); $('saveTrainingLogBtn').addEventListener('click',saveTrainingLog); $('saveSkillsBtn').addEventListener('click',saveSkills); $('drawingPromptBtn').addEventListener('click',generateDrawingPrompt); $('saveFaithBtn').addEventListener('click',saveFaith); $('saveBusinessBtn').addEventListener('click',saveBusiness); $('moneyGoal').addEventListener('input',saveBusiness); $('moneyMade').addEventListener('input',saveBusiness); $('addProductIdeaBtn').addEventListener('click',addProductIdea); $('addIdeaBtn').addEventListener('click',addIdea); $('ideaSearch').addEventListener('input',renderIdeas); $('saveReviewBtn').addEventListener('click',saveReview); $('exportBtn').addEventListener('click',exportData); $('importBtn').addEventListener('click',importData); $('clearBtn').addEventListener('click',clearData); }
+    function bindEvents(){ document.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.page))); document.querySelectorAll('[data-page-link]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.pageLink))); document.body.addEventListener('click',e=>{ const status=e.target.closest('[data-status-area]'); if(status)cycleStatus(status.dataset.statusArea,status.dataset.statusKey,Number(status.dataset.statusIndex)); const tab=e.target.closest('[data-training-tab]'); if(tab){state.selectedTrainingDay=Number(tab.dataset.trainingTab); saveState(); renderTraining();} const skillLog=e.target.closest('[data-skill-log]'); if(skillLog)addSkillLog(skillLog.dataset.skillLog); const star=e.target.closest('[data-star]'); if(star){ const idea=state.ideas[Number(star.dataset.star)]; if(idea)idea.starred=!idea.starred; saveState(); renderIdeas(); } const action=e.target.closest('[data-action]'); if(action){ const idea=state.ideas[Number(action.dataset.action)]; if(idea)idea.status='Next Action'; saveState(); renderIdeas(); } const mission=e.target.closest('[data-mission-chip]'); if(mission){ document.querySelectorAll('[data-mission-chip]').forEach(b=>b.classList.remove('active')); mission.classList.add('active'); if($('missionInput')&&!$('missionInput').value) $('missionInput').value=mission.dataset.missionChip+': '; } const f=e.target.closest('[data-focus-min]'); if(f)setFocusMinutes(Number(f.dataset.focusMin)); const jump=e.target.closest('[data-skill-jump]'); if(jump){ const input=$('missionInput'); if(input)input.value='Skill focus: '+jump.dataset.skillJump; showPage('home'); } }); $('saveMissionBtn').addEventListener('click',()=>{state.mission=$('missionInput').value.trim(); saveState(); renderHome();}); if($('openFocusBtn'))$('openFocusBtn').addEventListener('click',openFocus); if($('startFocusBtn'))$('startFocusBtn').addEventListener('click',startFocus); if($('pauseFocusBtn'))$('pauseFocusBtn').addEventListener('click',pauseFocus); if($('resetFocusBtn'))$('resetFocusBtn').addEventListener('click',resetFocus); if($('closeFocusBtn'))$('closeFocusBtn').addEventListener('click',closeFocus); $('scheduleModeSelect').addEventListener('change',e=>{state.selectedScheduleMode=e.target.value; saveState(); renderSchedule(); renderHome();}); $('saveTrainingLogBtn').addEventListener('click',saveTrainingLog); $('saveSkillsBtn').addEventListener('click',saveSkills); $('drawingPromptBtn').addEventListener('click',generateDrawingPrompt); $('saveFaithBtn').addEventListener('click',saveFaith); $('saveBusinessBtn').addEventListener('click',saveBusiness); $('moneyGoal').addEventListener('input',saveBusiness); $('moneyMade').addEventListener('input',saveBusiness); $('addProductIdeaBtn').addEventListener('click',addProductIdea); $('addIdeaBtn').addEventListener('click',addIdea); $('ideaSearch').addEventListener('input',renderIdeas); $('saveReviewBtn').addEventListener('click',saveReview); $('exportBtn').addEventListener('click',exportData); $('importBtn').addEventListener('click',importData); $('clearBtn').addEventListener('click',clearData); }
     function renderAll(){ renderHome(); renderSchedule(); renderTraining(); renderSkills(); renderFaith(); renderBusiness(); renderIdeas(); loadReview(); }
-    function init(){ bindEvents(); if($('missionInput'))$('missionInput').value=state.mission||''; renderAll(); }
+    function init(){ bindEvents(); if($('missionInput'))$('missionInput').value=state.mission||''; setFocusMinutes(25); renderAll(); }
     document.addEventListener('DOMContentLoaded',init);
   </script>
 </body>
