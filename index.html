@@ -143,7 +143,7 @@
     .details-list summary { cursor: pointer; font-weight: 950; color: var(--text); }
     .details-list p { margin-top: 9px; color: var(--muted); line-height: 1.55; }
 
-    .accordion-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+    .accordion-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
     .accordion-grid.two { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
     .accordion-card { background: linear-gradient(180deg, var(--panel2), var(--panel)); border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--shadow); overflow: hidden; }
     .accordion-card[open] { border-color: var(--border2); background: linear-gradient(180deg, var(--gold-softer), var(--panel)); }
@@ -158,6 +158,21 @@
     .accordion-body { padding: 0 20px 20px; }
     .accordion-tools { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; margin-top: 12px; }
 
+    .workout-list { display: grid; gap: 10px; }
+    .workout-row { display: grid; grid-template-columns: 42px minmax(0, 1fr) auto; gap: 12px; align-items: center; background: #141414; border: 1px solid #292929; border-radius: 18px; padding: 12px; }
+    .workout-row:hover { border-color: #444; transform: translateY(-1px); }
+    .workout-row.started { border-color: rgba(141,167,216,.58); background: rgba(141,167,216,.08); }
+    .workout-row.done { border-color: rgba(200,169,106,.65); background: var(--gold-softer); }
+    .workout-number { width: 36px; height: 36px; border-radius: 14px; display: grid; place-items: center; background: #202020; color: var(--gold); font-weight: 950; font-size: 13px; }
+    .workout-main { min-width: 0; }
+    .workout-name { font-weight: 950; color: var(--text); line-height: 1.2; }
+    .workout-sub { color: var(--muted2); font-size: 12px; font-weight: 800; margin-top: 4px; }
+    .workout-prescription { justify-self: end; text-align: right; color: var(--gold); background: var(--gold-soft); border: 1px solid var(--border2); border-radius: 999px; padding: 8px 10px; font-weight: 950; font-size: 12px; max-width: 220px; white-space: normal; }
+    .workout-row.started .workout-prescription { color: var(--blue); background: rgba(141,167,216,.14); border-color: rgba(141,167,216,.42); }
+    .workout-row.done .workout-prescription { color: var(--gold); background: rgba(200,169,106,.22); }
+    .workout-status { justify-self: end; color: var(--muted2); font-size: 11px; font-weight: 950; text-transform: uppercase; letter-spacing: .6px; margin-top: 5px; }
+    .section-empty { background: #141414; border: 1px dashed #333; border-radius: 18px; padding: 14px; color: var(--muted); }
+
     @media (max-width: 950px) {
       body { display: block; }
       .sidebar { position: sticky; width: 100%; height: auto; padding: 16px; }
@@ -168,6 +183,9 @@
       .nav-desc { display: none; }
       .main { margin-left: 0; width: 100%; padding: 18px; }
       .grid-2, .form-row, .status-card, .evidence-row { grid-template-columns: 1fr; }
+      .workout-row { grid-template-columns: 34px 1fr; align-items: start; }
+      .workout-prescription { grid-column: 2; justify-self: start; text-align: left; margin-top: 2px; }
+      .workout-status { justify-self: start; }
       .chart { height: 135px; }
     }
   </style>
@@ -306,7 +324,20 @@
     function renderChart(id){const box=$(id);if(!box)return;const keys=['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];box.innerHTML=days.map((day,i)=>{const key=keys[i];const p=progressFor('schedule',key,scheduleModes[key].blocks.length);return`<div class="chart-bar" style="height:${Math.max(8,p)}%"><span>${day}</span></div>`;}).join('');}
     function renderHome(){const key=currentModeKey(),mode=scheduleModes[key],p=progressFor('schedule',key,mode.blocks.length),train=trainingWeek[state.selectedTrainingDay]||trainingWeek[0],trainP=trainingProgress(train),faithP=progressFor('faith','daily',faithPathItems.length);if($('missionDisplay'))$('missionDisplay').textContent=state.mission||'No mission set yet.';if($('homeConsistency'))$('homeConsistency').textContent=p+'%';if($('homeConsistencyFill'))$('homeConsistencyFill').style.width=p+'%';if($('miniSchedule'))$('miniSchedule').textContent=p+'%';if($('miniTraining'))$('miniTraining').textContent=trainP+'%';if($('miniFaith'))$('miniFaith').textContent=faithP+'%';if($('homeTrainingMode'))$('homeTrainingMode').textContent=train.mode;if($('homeTrainingWhy'))$('homeTrainingWhy').textContent=train.why;if($('homeNextBlock')){const next=mode.blocks.find((b,i)=>getStatus('schedule',key,i)!==2)||mode.blocks[0];$('homeNextBlock').innerHTML=`<div class="list-item"><span><strong>${clean(next[0])}</strong><br>${clean(next[1])}<br><span class="muted">${clean(next[2])}</span></span><span class="tag goldtag">Next</span></div>`;}if($('tomorrowPreviewHome')){const t=scheduleModes[tomorrowModeKey()];$('tomorrowPreviewHome').innerHTML=t.blocks.slice(0,5).map(b=>`<div class="list-item"><span><strong>${clean(b[0])}</strong><br>${clean(b[1])}</span><span class="tag goldtag">${clean(t.label)}</span></div>`).join('');}renderChart('homeChart');renderChart('reviewChart');}
     function renderSchedule(){const select=$('scheduleModeSelect');if(select){select.innerHTML=Object.keys(scheduleModes).map(k=>`<option value="${k}">${scheduleModes[k].label}</option>`).join('');select.value=currentModeKey();}const key=currentModeKey(),mode=scheduleModes[key],p=progressFor('schedule',key,mode.blocks.length);if($('scheduleTitle'))$('scheduleTitle').textContent=mode.label;if($('scheduleBlocks'))$('scheduleBlocks').innerHTML=mode.blocks.map((b,i)=>statusCard('schedule',key,i,b[0],b[1],b[2])).join('');if($('scheduleProgressFill'))$('scheduleProgressFill').style.width=p+'%';if($('scheduleProgressText'))$('scheduleProgressText').textContent=p+'% done';}
-    function sectionCards(section,day,label,note){const items=day[section]||[];return items.length?items.map((x,i)=>statusCard('training-'+section,day.day,i,label,x,note)).join(''):'<p class="muted">Nothing required here today.</p>';}
+    function splitExerciseLine(text){
+      const raw=String(text||'');
+      const parts=raw.split(' — ');
+      if(parts.length>1)return {name:parts[0],prescription:parts.slice(1).join(' — ')};
+      return {name:raw,prescription:'Complete'};
+    }
+    function sectionCards(section,day,label,note){
+      const items=day[section]||[];
+      if(!items.length)return '<div class="section-empty">Nothing required here today.</div>';
+      return '<div class="workout-list">'+items.map((x,i)=>{
+        const item=splitExerciseLine(x), s=getStatus('training-'+section,day.day,i), status=statusNames[s];
+        return `<div class="workout-row ${statusClass(s)}" data-status-area="training-${section}" data-status-key="${clean(day.day)}" data-status-index="${i}"><div class="workout-number">${i+1}</div><div class="workout-main"><div class="workout-name">${clean(item.name)}</div><div class="workout-sub">${clean(label)} • tap to mark ${status==='Done'?'planned':'next status'}</div><div class="workout-status">${status}</div></div><div class="workout-prescription">${clean(item.prescription)}</div></div>`;
+      }).join('')+'</div>';
+    }
     function compactLines(items){return (items||[]).map(x=>`<div class="compact-line">${clean(x)}</div>`).join('');}
     function detailLines(items){return (items||[]).map(x=>`<details><summary>${clean(x[0])}</summary><p>${clean(x[1])}</p></details>`).join('');}
     function renderTraining(){if($('trainingTabs'))$('trainingTabs').innerHTML=trainingWeek.map((d,i)=>`<button class="tab ${i===state.selectedTrainingDay?'active':''}" data-training-tab="${i}">${d.day}</button>`).join('');const day=trainingWeek[state.selectedTrainingDay]||trainingWeek[0];if($('trainingTitle'))$('trainingTitle').textContent=day.day+' — '+day.mode;if($('trainingWhy'))$('trainingWhy').textContent=day.why;if($('trainingRules'))$('trainingRules').innerHTML=mainTrainingRules.slice(0,4).map(x=>`<div class="rule-line">${clean(x)}</div>`).join('');if($('speedSectionTitle'))$('speedSectionTitle').textContent=day.speedTitle||'Speed / Athletic Work';if($('liftSectionTitle'))$('liftSectionTitle').textContent=day.liftTitle||'Gym Work';if($('warmupSummary'))$('warmupSummary').textContent=(day.warmup||[]).length+' items • open when ready';if($('speedSummary'))$('speedSummary').textContent=(day.speed||[]).length+' items • fast reps, full rest';if($('liftSummary'))$('liftSummary').textContent=(day.lift||[]).length+' items • controlled reps';if($('stretchSummary'))$('stretchSummary').textContent=(day.stretches||[]).length+' items • after training';if($('warmupList'))$('warmupList').innerHTML=sectionCards('warmup',day,'Warm-Up','Prep quality movement.');if($('speedList'))$('speedList').innerHTML=sectionCards('speed',day,day.speedTitle||'Speed','Fast reps. Full rest. Stop if form gets sloppy.');if($('liftList'))$('liftList').innerHTML=sectionCards('lift',day,day.liftTitle||'Gym','Controlled reps. Leave 1–2 reps in the tank on heavy sets.');if($('stretchList'))$('stretchList').innerHTML=sectionCards('stretches',day,'Stretch','Easy static stretch after training.');if($('restTimesList'))$('restTimesList').innerHTML=compactLines(restTimes);if($('resetList'))$('resetList').innerHTML='<div class="compact-line"><strong>Between sprint reps</strong><br>'+sprintResets.map(clean).join('<br>')+'</div><div class="compact-line"><strong>Between heavy leg sets</strong><br>'+legSetResets.map(clean).join('<br>')+'</div>';if($('exerciseHowToList'))$('exerciseHowToList').innerHTML=detailLines(exerciseHowTos);if($('stretchHowToList'))$('stretchHowToList').innerHTML=detailLines(stretchHowTos);renderTrainingLogs();}
