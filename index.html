@@ -129,6 +129,16 @@
     .focus-panel { width: min(620px, 100%); background: linear-gradient(180deg,#191919,#0d0d0d); border: 1px solid #333; border-radius: 30px; padding: 28px; box-shadow: var(--shadow); }
     .focus-timer { font-size: clamp(58px, 13vw, 110px); font-weight: 950; letter-spacing: -4px; margin: 18px 0; }
     .settings-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; min-height: 180px; }
+    .save-health { display: grid; grid-template-columns: 18px 1fr; gap: 12px; align-items: start; background: #101010; border: 1px solid var(--border2); border-radius: 18px; padding: 14px; }
+    .save-health strong { display: block; margin-bottom: 4px; }
+    .save-dot { width: 12px; height: 12px; border-radius: 999px; background: var(--gold); box-shadow: 0 0 0 6px var(--gold-softer); margin-top: 5px; }
+    .save-health.warn { border-color: rgba(198,107,107,.42); }
+    .save-health.warn .save-dot { background: var(--red); box-shadow: 0 0 0 6px rgba(198,107,107,.10); }
+    .backup-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+    .save-steps { display: grid; gap: 10px; }
+    .save-steps div { display: grid; grid-template-columns: 34px 1fr; gap: 11px; align-items: start; background: #151515; border: 1px solid #292929; border-radius: 16px; padding: 12px; }
+    .save-steps strong { width: 34px; height: 34px; border-radius: 13px; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold); border: 1px solid var(--border2); }
+    .save-steps span { color: var(--muted); line-height: 1.45; }
 
 
     .training-rule-box { background: #101010; border: 1px solid var(--border2); border-radius: 18px; padding: 14px; display: grid; gap: 8px; }
@@ -173,6 +183,104 @@
     .workout-status { justify-self: end; color: var(--muted2); font-size: 11px; font-weight: 950; text-transform: uppercase; letter-spacing: .6px; margin-top: 5px; }
     .section-empty { background: #141414; border: 1px dashed #333; border-radius: 18px; padding: 14px; color: var(--muted); }
 
+
+
+    .command-shell { display: grid; gap: 16px; }
+    .hero-strip { background: linear-gradient(135deg, rgba(200,169,106,.16), rgba(18,18,18,.95)); border: 1px solid var(--border2); border-radius: 28px; padding: 22px; box-shadow: var(--shadow); }
+    .hero-strip h2 { margin-bottom: 8px; }
+    .hero-strip p { color: var(--muted); line-height: 1.6; max-width: 900px; }
+    .skill-pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+    .skill-pick { text-align: left; color: var(--text); background: #141414; border: 1px solid #303030; border-radius: 20px; padding: 15px; }
+    .skill-pick:hover, .skill-pick.active { border-color: var(--gold); background: var(--gold-softer); transform: translateY(-2px); }
+    .skill-pick strong { display: block; font-size: 16px; margin-bottom: 5px; }
+    .skill-pick span { display: block; color: var(--muted2); font-size: 12px; font-weight: 800; line-height: 1.35; }
+    .skill-workspace { border-color: var(--border2); }
+    .drill-hero { background: linear-gradient(180deg, rgba(200,169,106,.12), #101010); border: 1px solid var(--border2); border-radius: 22px; padding: 18px; }
+    .drill-hero-title { font-size: clamp(22px, 3vw, 34px); font-weight: 950; letter-spacing: -1px; margin-top: 6px; line-height: 1.1; }
+    .drill-bank-list { display: grid; gap: 8px; margin-top: 12px; }
+    .drill-chip { display: flex; justify-content: space-between; gap: 10px; align-items: center; background: #151515; border: 1px solid #2c2c2c; border-radius: 14px; padding: 10px 12px; font-weight: 800; }
+    .drill-chip span { color: var(--muted); font-size: 12px; font-weight: 900; white-space: nowrap; }
+    .field-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .field-card { background: #111; border: 1px solid #292929; border-radius: 18px; padding: 14px; }
+    .field-label { color: var(--gold); font-size: 11px; font-weight: 950; letter-spacing: .7px; text-transform: uppercase; margin-bottom: 8px; }
+    .mini-note { color: var(--muted2); font-size: 12px; line-height: 1.45; margin-top: 8px; }
+    .log-timeline { display: grid; gap: 10px; }
+    .log-card { background: #141414; border: 1px solid #292929; border-radius: 16px; padding: 13px; line-height: 1.45; }
+    .log-card strong { color: var(--text); }
+    .log-card .date { color: var(--muted2); font-size: 12px; font-weight: 800; margin-top: 3px; }
+    .mission-stack { display: grid; gap: 10px; }
+    .mission-row { display: grid; grid-template-columns: 120px 1fr; gap: 12px; align-items: start; background: #141414; border: 1px solid #292929; border-radius: 18px; padding: 13px; }
+    .mission-row strong { color: var(--gold); }
+    .mission-row span { color: var(--muted); line-height: 1.45; }
+    .lean-card { background: #111; border: 1px solid #292929; border-radius: 22px; padding: 18px; }
+    .lean-card h3 { margin-bottom: 8px; }
+    .simple-check { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; background: #151515; border: 1px solid #292929; border-radius: 16px; padding: 13px; }
+    .simple-check strong { display: block; }
+    .simple-check span { color: var(--muted2); font-size: 12px; font-weight: 750; }
+
+
+
+    .faith-command { display: grid; gap: 18px; }
+    .faith-hero { background: linear-gradient(135deg, rgba(200,169,106,.18), rgba(18,18,18,.96)); border: 1px solid var(--border2); border-radius: 30px; padding: 24px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .faith-hero::after { content: "✚"; position: absolute; right: 18px; top: 10px; color: rgba(200,169,106,.08); font-size: 112px; font-weight: 950; line-height: 1; }
+    .faith-hero h2 { font-size: clamp(26px, 3vw, 40px); letter-spacing: -1.4px; line-height: 1; margin-bottom: 10px; position: relative; z-index: 1; }
+    .faith-hero p { color: var(--muted); line-height: 1.6; max-width: 900px; position: relative; z-index: 1; }
+    .faith-rule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-top: 16px; position: relative; z-index: 1; }
+    .faith-rule { background: rgba(10,10,10,.62); border: 1px solid rgba(200,169,106,.22); border-radius: 18px; padding: 14px; }
+    .faith-rule strong { display: block; color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: .7px; margin-bottom: 6px; }
+    .faith-rule span { color: var(--text); font-weight: 850; line-height: 1.35; }
+    .faith-dashboard { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(320px,.95fr); gap: 18px; }
+    .reverent-card { border-color: var(--border2); background: linear-gradient(180deg, rgba(200,169,106,.08), var(--panel)); }
+    .faith-path-grid { display: grid; gap: 10px; }
+    .faith-path-card { display: grid; grid-template-columns: 54px 1fr auto; gap: 12px; align-items: center; background: #141414; border: 1px solid #292929; border-radius: 18px; padding: 13px; }
+    .faith-path-card:hover { border-color: #444; transform: translateY(-1px); }
+    .faith-path-card.started { border-color: rgba(141,167,216,.58); background: rgba(141,167,216,.08); }
+    .faith-path-card.done { border-color: rgba(200,169,106,.65); background: var(--gold-softer); }
+    .faith-step-icon { width: 44px; height: 44px; border-radius: 16px; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold); font-weight: 950; border: 1px solid var(--border2); }
+    .faith-step-title { font-weight: 950; }
+    .faith-step-note { color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 4px; }
+    .faith-small { color: var(--muted2); font-size: 12px; font-weight: 850; }
+    .faith-challenge-box { background: linear-gradient(180deg, rgba(141,167,216,.12), #101010); border: 1px solid rgba(141,167,216,.35); border-radius: 22px; padding: 18px; }
+    .faith-challenge-text { font-size: clamp(20px, 2.5vw, 30px); font-weight: 950; letter-spacing: -.7px; line-height: 1.15; margin: 10px 0; }
+    .faith-accordions { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .faith-log-entry { background: #141414; border: 1px solid #292929; border-radius: 16px; padding: 13px; line-height: 1.45; }
+    .faith-log-entry strong { color: var(--text); }
+    .faith-log-entry .date { color: var(--muted2); font-size: 12px; font-weight: 800; margin-top: 3px; }
+    .faith-log-entry p { color: var(--muted); margin-top: 8px; }
+
+    .quote-entry { background: linear-gradient(180deg,#151515,#101010); border: 1px solid #2d2d2d; border-radius: 18px; padding: 15px; display: grid; gap: 10px; }
+    .quote-entry:hover { border-color: rgba(200,169,106,.42); }
+    .quote-text { font-size: 15px; line-height: 1.6; color: var(--text); font-weight: 750; }
+    .quote-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--muted); font-size: 12px; font-weight: 850; }
+    .quote-meta span { background: #222; border: 1px solid #333; border-radius: 999px; padding: 5px 8px; }
+
+    .drill-card { background: linear-gradient(180deg, rgba(200,169,106,.10), #101010); border: 1px solid rgba(200,169,106,.30); border-radius: 26px; padding: 20px; box-shadow: var(--shadow); }
+    .drill-topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+    .drill-question { background: #0F0F0F; border: 1px solid #303030; border-radius: 22px; padding: 18px; font-size: clamp(20px, 2.6vw, 30px); font-weight: 950; line-height: 1.22; letter-spacing: -.75px; }
+    .drill-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .drill-answer-box { display: grid; gap: 10px; margin-top: 14px; }
+    .drill-feedback { border-radius: 18px; padding: 14px; line-height: 1.55; background: #111; border: 1px solid #303030; color: var(--muted); min-height: 52px; }
+    .drill-feedback.good { border-color: rgba(135,179,122,.55); background: rgba(135,179,122,.10); color: #d9f1d1; }
+    .drill-feedback.bad { border-color: rgba(198,107,107,.55); background: rgba(198,107,107,.10); color: #ffd2d2; }
+    .drill-stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(115px, 1fr)); gap: 10px; margin-top: 14px; }
+    .drill-stat { background: #111; border: 1px solid #292929; border-radius: 16px; padding: 12px; }
+    .drill-stat strong { display: block; color: var(--gold); font-size: 25px; letter-spacing: -1px; }
+    .drill-log { display: grid; gap: 8px; }
+    .drill-log-item { background: #141414; border: 1px solid #292929; border-radius: 14px; padding: 11px; line-height: 1.35; }
+    .drill-log-item strong { display: block; color: var(--text); margin-bottom: 4px; }
+
+
+
+    .business-lab-grid { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(310px,.9fr); gap: 18px; }
+    .business-path-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 12px; }
+    .business-path { background: #111; border: 1px solid #2d2d2d; border-radius: 18px; padding: 14px; }
+    .business-path strong { display: block; color: var(--gold); margin-bottom: 5px; }
+    .opportunity-card { background: #151515; border: 1px solid #2c2c2c; border-radius: 18px; padding: 14px; }
+    .opportunity-card h3 { margin-bottom: 8px; }
+    .opportunity-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .lesson-card { background: #111; border: 1px solid #2b2b2b; border-radius: 16px; padding: 13px; line-height: 1.45; }
+    .small-label { color: var(--muted2); font-size: 11px; font-weight: 950; letter-spacing: .7px; text-transform: uppercase; margin-bottom: 7px; }
+
     @media (max-width: 950px) {
       body { display: block; }
       .sidebar { position: sticky; width: 100%; height: auto; padding: 16px; }
@@ -182,8 +290,8 @@
       .nav-btn { min-width: 155px; }
       .nav-desc { display: none; }
       .main { margin-left: 0; width: 100%; padding: 18px; }
-      .grid-2, .form-row, .status-card, .evidence-row { grid-template-columns: 1fr; }
-      .workout-row { grid-template-columns: 34px 1fr; align-items: start; }
+      .grid-2, .form-row, .status-card, .evidence-row, .faith-dashboard { grid-template-columns: 1fr; }
+      .workout-row, .faith-path-card { grid-template-columns: 34px 1fr; align-items: start; }
       .workout-prescription { grid-column: 2; justify-self: start; text-align: left; margin-top: 2px; }
       .workout-status { justify-self: start; }
       .chart { height: 135px; }
@@ -193,14 +301,15 @@
 <body>
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark">1%</div><div class="logo">Better <span>OS</span></div></div>
-    <p class="side-sub">A calm, locked-in life operating system. Data creates confidence.</p>
+    <p class="side-sub">Disciplined. Athletic. Wise. Consistent. Locked in.</p>
     <div class="nav-label">System</div>
     <div class="nav-stack">
       <button class="nav-btn active" data-page="home"><span class="nav-icon">⌂</span><span><span class="nav-title">Home</span><span class="nav-desc">Mission + overview</span></span></button>
       <button class="nav-btn" data-page="execution"><span class="nav-icon">▶</span><span><span class="nav-title">Execution</span><span class="nav-desc">Schedule + training</span></span></button>
-      <button class="nav-btn" data-page="growth"><span class="nav-icon">◆</span><span><span class="nav-title">Growth</span><span class="nav-desc">Skills + study + faith</span></span></button>
-      <button class="nav-btn" data-page="business"><span class="nav-icon">$</span><span><span class="nav-title">Business</span><span class="nav-desc">Money + products</span></span></button>
-      <button class="nav-btn" data-page="vault"><span class="nav-icon">✎</span><span><span class="nav-title">Vault</span><span class="nav-desc">Ideas + actions</span></span></button>
+      <button class="nav-btn" data-page="skills"><span class="nav-icon">◆</span><span><span class="nav-title">Skills</span><span class="nav-desc">Soccer + speaking + reading</span></span></button>
+      <button class="nav-btn" data-page="leadership"><span class="nav-icon">♛</span><span><span class="nav-title">Leadership</span><span class="nav-desc">Talk + confidence</span></span></button>
+      <button class="nav-btn" data-page="faith"><span class="nav-icon">✚</span><span><span class="nav-title">Catholic</span><span class="nav-desc">Faith command</span></span></button>
+      <button class="nav-btn" data-page="business"><span class="nav-icon">$</span><span><span class="nav-title">Business Lab</span><span class="nav-desc">Learn + test ideas</span></span></button>
       <button class="nav-btn" data-page="review"><span class="nav-icon">↻</span><span><span class="nav-title">Review</span><span class="nav-desc">Evidence + reset</span></span></button>
       <button class="nav-btn" data-page="settings"><span class="nav-icon">⚙</span><span><span class="nav-title">Settings</span><span class="nav-desc">Backup + reset</span></span></button>
     </div>
@@ -208,9 +317,9 @@
 
   <main class="main">
     <section id="home" class="page active">
-      <div class="header"><div><div class="eyebrow">Life Operating System</div><h1 class="title">Home</h1><p class="subtitle">Mission, next move, and proof of progress. Less clutter. More execution.</p></div><div class="chip-row"><button class="btn gold" data-page-link="execution">Open Execution</button><button class="btn" id="openFocusBtn">Start Focus</button></div></div>
+      <div class="header"><div><div class="eyebrow">Life Operating System</div><h1 class="title">Home</h1><p class="subtitle">Mission, next move, training, faith, skills, leadership, and proof of progress. Built to execute the day.</p></div><div class="chip-row"><button class="btn gold" data-page-link="execution">Open Execution</button><button class="btn" id="openFocusBtn">Start Focus</button></div></div>
       <div class="grid">
-        <div class="card featured"><h2 class="gold">Today’s Mission</h2><p class="muted">Pick the lane, then lock the mission.</p><div class="chip-row"><button class="chip active" data-mission-chip="Training">Training</button><button class="chip" data-mission-chip="Faith">Faith</button><button class="chip" data-mission-chip="Business">Business</button><button class="chip" data-mission-chip="Skills">Skills</button><button class="chip" data-mission-chip="Recovery">Recovery</button></div><input id="missionInput" placeholder="Example: finish speed work, Catholic study, and business deep work" class="section-gap" /><button class="btn gold section-gap" id="saveMissionBtn">Lock Mission</button><p class="muted section-gap" id="missionDisplay">No mission set yet.</p></div>
+        <div class="card featured"><h2 class="gold">Today’s Mission</h2><p class="muted">Pick the lane, then lock the mission.</p><div class="chip-row"><button class="chip active" data-mission-chip="Training">Training</button><button class="chip" data-mission-chip="Faith">Faith</button><button class="chip" data-mission-chip="Business">Business</button><button class="chip" data-mission-chip="Skills">Skills</button><button class="chip" data-mission-chip="Recovery">Recovery</button></div><input id="missionInput" placeholder="Example: train hard, study smart, pray, build money, and win the day" class="section-gap" /><button class="btn gold section-gap" id="saveMissionBtn">Lock Mission</button><p class="muted section-gap" id="missionDisplay">No mission set yet.</p></div>
         <div class="card"><h2 class="gold">Next Block</h2><div id="homeNextBlock" class="list"></div></div>
         <div class="card"><h2 class="gold">Training Today</h2><div class="big" id="homeTrainingMode">—</div><p class="muted section-gap" id="homeTrainingWhy">Today’s training appears here.</p></div>
         <div class="card"><h2 class="gold">Progress</h2><div class="big" id="homeConsistency">0%</div><div class="bar section-gap"><div class="fill" id="homeConsistencyFill" style="width:0%"></div></div><div class="mini-metrics section-gap"><div class="mini-metric"><strong id="miniSchedule">0%</strong><span class="muted">Schedule</span></div><div class="mini-metric"><strong id="miniTraining">0%</strong><span class="muted">Training</span></div><div class="mini-metric"><strong id="miniFaith">0%</strong><span class="muted">Faith</span></div></div></div>
@@ -219,66 +328,1065 @@
     </section>
 
     <section id="execution" class="page">
-      <div class="header"><div><div class="eyebrow">Do The Work</div><h1 class="title">Execution</h1><p class="subtitle">Clean daily schedule plus organized training cards. Tap cards: Planned → Started → Done.</p></div><select id="scheduleModeSelect"></select></div>
+      <div class="header"><div><div class="eyebrow">Do The Work</div><h1 class="title">Execution</h1><p class="subtitle">Your locked-in day: schedule, athlete block, light study, skills, flex time, recovery, and night routine. Tap cards: Planned → Started → Done.</p></div><select id="scheduleModeSelect"></select></div>
       <div class="grid-2"><details class="accordion-card" open><summary><span class="accordion-head"><span class="accordion-icon">☰</span><span><span class="accordion-title gold" id="scheduleTitle">Today’s Schedule</span><span class="accordion-sub">Tap blocks: Planned → Started → Done</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div class="bar"><div class="fill" id="scheduleProgressFill" style="width:0%"></div></div><p class="muted thin-gap" id="scheduleProgressText">0% done</p><div class="status-list section-gap" id="scheduleBlocks"></div></div></details><div class="card"><h2 class="gold" id="trainingTitle">Training</h2><div class="tabs" id="trainingTabs"></div><p class="muted" id="trainingWhy"></p><div class="training-rule-box section-gap" id="trainingRules"></div><div class="accordion-tools"><button class="btn small gold" data-accordion-action="open">Open Training Groups</button><button class="btn small" data-accordion-action="close">Close Training Groups</button></div><div class="chip-row"><button class="btn gold" id="openFocusBtn2">Start Focus</button><button class="btn" id="saveTrainingLogBtn">Save Training Log</button></div><input id="trainingFocus" placeholder="Training focus" class="section-gap" /><input id="trainingDuration" placeholder="Duration, ex: 75 min" class="thin-gap" /><textarea id="trainingNotes" placeholder="Notes: speed, lifting, recovery..." class="thin-gap"></textarea></div></div>
       <div class="accordion-grid section-gap" id="trainingAccordion"><details class="accordion-card" open><summary><span class="accordion-head"><span class="accordion-icon">WU</span><span><span class="accordion-title blue">Warm-Up</span><span class="accordion-sub" id="warmupSummary">Prep quality movement</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div id="warmupList" class="status-list"></div></div></details><details class="accordion-card" open><summary><span class="accordion-head"><span class="accordion-icon">⚡</span><span><span class="accordion-title blue" id="speedSectionTitle">Speed / Athletic Work</span><span class="accordion-sub" id="speedSummary">Fast reps, full rest</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div id="speedList" class="status-list"></div></div></details><details class="accordion-card"><summary><span class="accordion-head"><span class="accordion-icon">GY</span><span><span class="accordion-title gold" id="liftSectionTitle">Gym Work</span><span class="accordion-sub" id="liftSummary">Controlled reps</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div id="liftList" class="status-list"></div></div></details><details class="accordion-card"><summary><span class="accordion-head"><span class="accordion-icon">↯</span><span><span class="accordion-title gold">After Training / Recovery</span><span class="accordion-sub" id="stretchSummary">Static stretches and recovery</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div id="stretchList" class="status-list"></div></div></details></div>
       <div class="accordion-grid two section-gap" id="resourceAccordion"><details class="accordion-card"><summary><span class="accordion-head"><span class="accordion-icon">⏱</span><span><span class="accordion-title blue">Rest Times</span><span class="accordion-sub">Sprint and jump recovery rules</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div id="restTimesList" class="compact-list"></div></div></details><details class="accordion-card"><summary><span class="accordion-head"><span class="accordion-icon">↺</span><span><span class="accordion-title gold">During-Workout Resets</span><span class="accordion-sub">Short resets between hard sets</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div id="resetList" class="compact-list"></div></div></details><details class="accordion-card"><summary><span class="accordion-head"><span class="accordion-icon">?</span><span><span class="accordion-title blue">Exercise How-To Notes</span><span class="accordion-sub">Open only what you need</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div id="exerciseHowToList" class="details-list"></div></div></details><details class="accordion-card"><summary><span class="accordion-head"><span class="accordion-icon">↙</span><span><span class="accordion-title gold">Stretch How-To Notes</span><span class="accordion-sub">Quick form reminders</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div id="stretchHowToList" class="details-list"></div></div></details></div>
       <div class="card section-gap"><h2 class="gold">Recent Training Logs</h2><div id="trainingLogs" class="list"></div></div>
     </section>
 
-    <section id="growth" class="page">
-      <div class="header"><div><div class="eyebrow">Learning + Formation</div><h1 class="title">Growth</h1><p class="subtitle">Skills, school subjects, and Catholic formation in one clean learning hub.</p></div></div>
-      <div class="tabs"><button class="tab active" data-growth-tab="skillsPanel">Skills</button><button class="tab" data-growth-tab="studyPanel">Study Folders</button><button class="tab" data-growth-tab="faithPanel">Catholic Study</button></div>
-      <div id="skillsPanel" class="subpanel active"><div class="grid"><div class="card featured"><h2 class="gold">Drawing Idea Generator</h2><div class="prompt-box" id="drawingPromptBox">Knight training at sunrise — cinematic</div><button class="btn gold section-gap" id="drawingPromptBtn">Generate Idea</button></div><div class="card"><h2 class="blue">Skill Focus</h2><p class="muted">Log reps, not essays. Each skill has goals, notes, and session history.</p></div></div><div class="grid section-gap" id="skillCards"></div><button class="btn gold section-gap" id="saveSkillsBtn">Save Skills</button></div>
-      <div id="studyPanel" class="subpanel"><div class="card"><h2 class="gold">Create Subject Folder</h2><div class="form-row"><input id="newStudyFolderName" placeholder="Example: Algebra, Biology, English, History"><button class="btn gold" id="addStudyFolderBtn">Create Folder</button></div></div><div class="folder-grid section-gap" id="studyFolderGrid"></div><div class="grid-2 section-gap"><div class="card"><h2 class="gold" id="activeStudyTitle">Subject Folder</h2><p class="muted" id="activeStudyMeta">Pick or create a folder.</p><div class="form-row section-gap"><input id="studyTaskInput" placeholder="Task"><select id="studyTaskType"><option>Homework</option><option>Test Prep</option><option>Reading</option><option>Project</option><option>Review</option></select></div><button class="btn gold section-gap" id="addStudyTaskBtn">Add Task</button><div class="list section-gap" id="studyTaskList"></div><textarea id="studyQuickNote" placeholder="Quick note..." class="section-gap"></textarea><button class="btn gold section-gap" id="addStudyNoteBtn">Save Note</button><div class="list section-gap" id="studyNotesList"></div></div><div class="card"><h2 class="blue">Utilities</h2><div class="list"><div class="list-item"><span>Start focus for this subject</span><button class="btn small" id="studyFocusBtn">Focus</button></div><div class="list-item"><span>Log one study session</span><button class="btn small" id="studySessionBtn">Log</button></div></div><h3 class="section-gap">Flashcards</h3><input id="flashFront" placeholder="Question / front"><input id="flashBack" placeholder="Answer / back" class="thin-gap"><button class="btn gold section-gap" id="addFlashcardBtn">Add Flashcard</button><div class="flashcard section-gap" id="flashcardViewer">No flashcards yet.</div><div class="chip-row"><button class="chip" id="prevFlashBtn">Previous</button><button class="chip" id="flipFlashBtn">Flip</button><button class="chip" id="nextFlashBtn">Next</button></div></div></div></div>
-      <div id="faithPanel" class="subpanel"><div class="grid"><div class="card"><h2 class="gold">Daily Faith Path</h2><div class="status-list" id="faithPath"></div></div><div class="card"><h2 class="blue">Study Notes</h2><input id="faithTopic" placeholder="Saint / Bible passage / Catechism topic"><textarea id="faithNotes" placeholder="Notes, questions, reflections..." class="thin-gap"></textarea><textarea id="prayerIntentions" placeholder="Prayer intentions..." class="thin-gap"></textarea></div><div class="card"><h2>Virtue + Mass</h2><input id="virtueFocus" placeholder="Virtue: humility, courage, temperance..."><textarea id="massNotes" placeholder="Mass / homily notes..." class="thin-gap"></textarea><textarea id="conscienceNotes" placeholder="Examination of conscience..." class="thin-gap"></textarea><button class="btn gold section-gap" id="saveFaithBtn">Save Faith Notes</button></div></div></div>
+
+    <section id="skills" class="page">
+      <div class="header"><div><div class="eyebrow">Skill Mastery</div><h1 class="title">Skills</h1><p class="subtitle">No messy Growth dump. This is your daily skill command center: speaking, reading, soccer, plus the optional skills that build confidence and range.</p></div><button class="btn gold" id="saveSkillsBtn">Save Skill Notes</button></div>
+      <div class="command-shell">
+        <div class="hero-strip"><h2 class="gold">Daily Core</h2><p>Hit these often: <strong>speaking</strong> to become dangerous with words, <strong>reading</strong> to get smarter and wiser, and <strong>soccer</strong> to sharpen athletic skill. Use the focus timer when you want a timed session.</p></div>
+        <div class="grid-2">
+          <div class="card"><h2 class="gold">Choose Skill</h2><p class="muted">One clean workspace. Pick a skill, record what needs work, what is going well, mistakes, drills, challenge, and history.</p><div class="skill-pick-grid section-gap" id="skillSelectorGrid"></div></div>
+          <div class="card featured"><h2 class="blue">Today’s Skill Rules</h2><div class="mission-stack"><div class="mission-row"><strong>Speak</strong><span>Say something clearly, ask better questions, or practice telling a story.</span></div><div class="mission-row"><strong>Read</strong><span>Read for wisdom, vocabulary, focus, and better thinking.</span></div><div class="mission-row"><strong>Soccer</strong><span>Touch the ball, improve weak foot, first touch, control, or finishing.</span></div></div><button class="btn section-gap" id="openFocusSkillsBtn">Start Focus Timer</button></div>
+        </div>
+        <div id="skillWorkspace"></div>
+        <div class="card"><h2 class="gold">Drawing Idea Generator</h2><div class="prompt-box" id="drawingPromptBox">Knight training at sunrise — cinematic</div><button class="btn gold section-gap" id="drawingPromptBtn">Generate Idea</button></div>
+      </div>
     </section>
 
-    <section id="business" class="page"><div class="header"><div><div class="eyebrow">Build Value</div><h1 class="title">Business</h1><p class="subtitle">Money goal, daily business task, product ideas, and progress.</p></div><button class="btn gold" id="saveBusinessBtn">Save Business</button></div><div class="grid"><div class="card featured"><h2 class="gold">Money Tracker</h2><input id="moneyGoal" placeholder="Money goal, ex: $500"><input id="moneyMade" placeholder="Money made, ex: $75" class="thin-gap"><div class="bar section-gap"><div class="fill" id="moneyFill" style="width:0%"></div></div><p class="muted section-gap" id="moneyText">Set a goal and amount made.</p></div><div class="card"><h2 class="blue">Daily Business Task</h2><input id="businessTask" placeholder="One task that moves business forward"><textarea id="businessNotes" placeholder="Product ideas, selling, websites, dropshipping notes..." class="thin-gap"></textarea></div><div class="card"><h2>Product Ideas</h2><input id="productIdeaInput" placeholder="New product / offer idea"><button class="btn gold section-gap" id="addProductIdeaBtn">Add Product Idea</button><div class="list section-gap" id="productIdeasList"></div></div></div></section>
+    <section id="leadership" class="page">
+      <div class="header"><div><div class="eyebrow">Talking + Character</div><h1 class="title">Leadership</h1><p class="subtitle">A simple daily system for speaking, confidence, wisdom, humor, and strong-willed leadership. Practice real conversations, not fake motivation.</p></div><button class="btn gold" id="saveLeadershipBtn">Save Leadership</button></div>
+      <div class="grid">
+        <div class="card featured"><h2 class="gold">Today’s Conversation Mission</h2><input id="leaderMission" placeholder="Example: tell one better story, ask 3 better questions, speak slower"><textarea id="leaderNotes" placeholder="Notes from today: what happened, what I learned, what to try tomorrow..." class="thin-gap"></textarea><button class="btn section-gap" id="leadershipFocusBtn">Start Focus Timer</button></div>
+        <div class="card"><h2 class="blue">What I Need To Improve</h2><textarea id="leaderImprove" placeholder="Examples: speak slower, better eye contact, less filler words, tell better stories, be funnier..."></textarea></div>
+        <div class="card"><h2 class="gold">What I’m Doing Good</h2><textarea id="leaderGood" placeholder="Examples: better confidence, asking questions, staying calm, making people laugh..."></textarea></div>
+      </div>
+      <div class="grid-2 section-gap">
+        <div class="card"><h2 class="gold">Daily Leadership Challenges</h2><div class="status-list" id="leadershipChallengeList"></div></div>
+        <div class="card"><h2 class="blue">Practice History</h2><div class="form-row"><input id="leaderLogFocus" placeholder="What did you practice?"><input id="leaderLogResult" placeholder="Result / lesson"></div><button class="btn gold section-gap" id="addLeadershipLogBtn">Add Leadership Log</button><div class="log-timeline section-gap" id="leadershipLogs"></div></div>
+      </div>
+    </section>
 
-    <section id="vault" class="page"><div class="header"><div><div class="eyebrow">Second Brain</div><h1 class="title">Vault</h1><p class="subtitle">Capture ideas, favorite them, search them, and turn them into next actions.</p></div><button class="btn gold" id="addIdeaBtn">Add Idea</button></div><div class="grid"><div class="card"><h2 class="gold">New Idea</h2><input id="ideaTitle" placeholder="Idea title"><select id="ideaCategory" class="thin-gap"><option>Business</option><option>Golf</option><option>Chess</option><option>Piano</option><option>Drawing</option><option>Catholic</option><option>School</option><option>App Ideas</option><option>Quotes</option><option>Lessons Learned</option></select><textarea id="ideaNote" placeholder="Write the idea..." class="thin-gap"></textarea></div><div class="card"><h2 class="blue">Search</h2><input id="ideaSearch" placeholder="Search ideas..."></div></div><div class="grid section-gap" id="ideasList"></div></section>
+    <section id="faith" class="page">
+      <div class="header">
+        <div>
+          <div class="eyebrow">Catholic Formation</div>
+          <h1 class="title">Catholic Command Center</h1>
+          <p class="subtitle">A serious, simple faith system: pray, learn, save important quotes, test your knowledge, and keep a faith journal.</p>
+        </div>
+        <div class="chip-row"><button class="btn gold" id="saveFaithBtn">Save Faith</button><button class="btn" id="faithFocusBtn">Start Prayer Focus</button></div>
+      </div>
 
-    <section id="review" class="page"><div class="header"><div><div class="eyebrow">Evidence + Reset</div><h1 class="title">Review</h1><p class="subtitle">Data builds confidence. Weekly review builds direction.</p></div><button class="btn gold" id="saveReviewBtn">Save Review</button></div><div class="data-grid" id="progressDataCards"></div><div class="grid-2 section-gap"><div class="card"><h2 class="gold">Weekly Consistency</h2><div class="chart" id="reviewChart"></div><h3 class="section-gap">Category Evidence</h3><div id="progressEvidence"></div></div><div class="card"><h2 class="blue">Weekly Review</h2><textarea id="reviewWentWell" placeholder="What went well?"></textarea><textarea id="reviewFix" placeholder="What needs fixing?" class="thin-gap"></textarea><textarea id="reviewMission" placeholder="Next week’s mission?" class="thin-gap"></textarea><textarea id="reviewFaith" placeholder="How was my faith?" class="thin-gap"></textarea><textarea id="reviewTraining" placeholder="How was my training?" class="thin-gap"></textarea><textarea id="reviewBusiness" placeholder="How was my business progress?" class="thin-gap"></textarea></div></div></section>
+      <div class="faith-command">
+        <div class="faith-hero">
+          <div class="eyebrow">Rule of Life</div>
+          <h2>Pray. Study. Repent. Live it.</h2>
+          <p>This page is for becoming stronger in the faith: disciplined prayer, Catholic knowledge, saved quotes, honest questions, and daily reflection.</p>
+          <div class="faith-rule-grid">
+            <div class="faith-rule"><strong>Prayer</strong><span>Talk to God before the world gets your attention.</span></div>
+            <div class="faith-rule"><strong>Truth</strong><span>Scripture + Catechism so your faith has roots.</span></div>
+            <div class="faith-rule"><strong>Questions</strong><span>Write what you do not understand yet, then learn it.</span></div>
+            <div class="faith-rule"><strong>Memory</strong><span>Keep quotes and page numbers so you can find them again.</span></div>
+          </div>
+        </div>
 
-    <section id="settings" class="page"><div class="header"><div><div class="eyebrow">Backup + Reset</div><h1 class="title">Settings</h1><p class="subtitle">Export/import your progress so you do not lose your data.</p></div></div><div class="grid"><div class="card"><h2 class="gold">Backup</h2><button class="btn gold" id="exportBtn">Export Data</button><button class="btn section-gap" id="importBtn">Import Data</button><button class="btn danger section-gap" id="clearBtn">Clear All Data</button></div><div class="card"><h2 class="blue">Data Box</h2><textarea id="backupBox" class="settings-code" placeholder="Exported data appears here. Paste backup here to import."></textarea></div></div></section>
+        <div class="faith-dashboard">
+          <div class="card reverent-card">
+            <h2 class="gold">Daily Faith Path</h2>
+            <p class="muted">Tap each item: Planned → Started → Done. Keep it simple enough to actually do.</p>
+            <div class="faith-path-grid section-gap" id="faithPath"></div>
+          </div>
+
+          <div class="card">
+            <h2 class="blue">Today’s Catholic Challenge</h2>
+            <div class="faith-challenge-box">
+              <div class="faith-small">Reroll when you need a better mission</div>
+              <div class="faith-challenge-text" id="catholicChallengeDisplay">Do one hidden act of charity without telling anyone.</div>
+              <div class="chip-row"><button class="btn gold" id="randomCatholicChallengeBtn">Random Challenge</button><button class="btn" id="useCatholicChallengeBtn">Use As Today’s Action</button></div>
+            </div>
+            <textarea id="faithChallenge" class="section-gap" placeholder="Today’s faith action: charity, courage, humility, discipline..."></textarea>
+          </div>
+        </div>
+
+
+        <div class="grid-2">
+          <div class="drill-card">
+            <div class="drill-topline">
+              <div>
+                <div class="eyebrow">Faith Knowledge Drill</div>
+                <h2 class="gold">Catholic Quiz Trainer</h2>
+                <p class="muted">Random questions to test what you know. Answer, check it, learn the reason, then reroll.</p>
+              </div>
+              <select id="catholicDrillCategory" style="max-width:230px">
+                <option value="All">All Categories</option>
+                <option value="Basics">Basics</option>
+                <option value="Sacraments">Sacraments</option>
+                <option value="Mass">Mass</option>
+                <option value="Prayer">Prayer</option>
+                <option value="Bible">Bible</option>
+                <option value="Virtue">Virtue</option>
+                <option value="Saints">Saints</option>
+              </select>
+            </div>
+            <div class="drill-question" id="catholicDrillQuestion">Click New Question to start.</div>
+            <div class="drill-meta"><span class="tag goldtag" id="catholicDrillCategoryTag">Ready</span><span class="tag" id="catholicDrillDifficultyTag">Drill</span></div>
+            <div class="drill-answer-box">
+              <input id="catholicDrillAnswer" placeholder="Type your answer here...">
+              <div class="chip-row"><button class="btn gold" id="checkCatholicAnswerBtn">Check Answer</button><button class="btn" id="newCatholicQuestionBtn">New Question</button><button class="btn" id="hintCatholicQuestionBtn">Hint</button><button class="btn" id="showCatholicAnswerBtn">Show Answer</button></div>
+              <div class="drill-feedback" id="catholicDrillFeedback">Train your Catholic knowledge like reps. Misses become notes to improve.</div>
+            </div>
+            <div class="drill-stat-row">
+              <div class="drill-stat"><strong id="catholicDrillStreak">0</strong><span class="muted">Streak</span></div>
+              <div class="drill-stat"><strong id="catholicDrillCorrect">0</strong><span class="muted">Correct</span></div>
+              <div class="drill-stat"><strong id="catholicDrillAttempted">0</strong><span class="muted">Attempts</span></div>
+              <div class="drill-stat"><strong id="catholicDrillAccuracy">0%</strong><span class="muted">Accuracy</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="blue">Other Faith Drills</h2>
+            <p class="muted">Use these when you want more than questions. Keep it short and serious.</p>
+            <div class="status-list section-gap" id="catholicMiniDrills"></div>
+            <h3 class="section-gap">Missed Questions / Review</h3>
+            <div class="drill-log section-gap" id="catholicMissLog"></div>
+          </div>
+        </div>
+
+
+        <div class="grid-2">
+          <div class="card featured">
+            <h2 class="gold">Today’s Faith Focus</h2>
+            <div class="field-grid">
+              <div class="field-card"><div class="field-label">Intention</div><input id="faithIntention" placeholder="Who/what am I praying for today?"></div>
+              <div class="field-card"><div class="field-label">Reading Source</div><input id="faithScripture" placeholder="Bible, Catechism, saint book, apologetics book..."></div>
+              <div class="field-card"><div class="field-label">Page / Paragraph</div><input id="faithCatechism" placeholder="Page, paragraph, CCC number, or section..."></div>
+              <div class="field-card"><div class="field-label">Question / Topic</div><input id="faithVirtue" placeholder="Question, Catholic topic, or thing I want to understand..."></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="blue">Prayer + Gratitude</h2>
+            <textarea id="prayerIntentions" placeholder="Prayer intentions: family, friends, struggles, people who need help..."></textarea>
+            <textarea id="gratitudeNotes" placeholder="Gratitude: what did God give me today?" class="thin-gap"></textarea>
+          </div>
+        </div>
+
+        <div class="faith-accordions">
+          <details class="accordion-card" open>
+            <summary><span class="accordion-head"><span class="accordion-icon">01</span><span><span class="accordion-title gold">Catholic Quote Keeper</span><span class="accordion-sub">Save quotes, sources, pages, topics, and why they matter</span></span></span><span class="accordion-chevron">›</span></summary>
+            <div class="accordion-body">
+              <div class="grid-2">
+                <div class="field-card">
+                  <div class="field-label">Quote / Passage</div>
+                  <textarea id="faithQuoteText" placeholder="Write the exact quote or summarize the passage you want to remember..."></textarea>
+                </div>
+                <div class="field-card">
+                  <div class="field-label">Source + Page</div>
+                  <input id="faithQuoteSource" placeholder="Book/source: Bible, Catechism, saint book...">
+                  <input id="faithQuotePage" class="thin-gap" placeholder="Page, paragraph, chapter, verse, or CCC number">
+                  <input id="faithQuoteTopic" class="thin-gap" placeholder="Topic: prayer, virtue, Mass, courage, humility...">
+                </div>
+              </div>
+              <textarea id="faithQuoteNote" class="section-gap" placeholder="Why does this matter? How can I live it today?"></textarea>
+              <div class="chip-row">
+                <button class="btn gold" id="addFaithQuoteBtn">Save Quote</button>
+                <button class="btn" id="clearFaithQuoteDraftBtn">Clear Draft</button>
+              </div>
+              <div class="field-card section-gap">
+                <div class="field-label">Search Quotes</div>
+                <input id="faithQuoteSearch" placeholder="Search by quote, source, page, topic, or note...">
+              </div>
+              <div class="log-timeline section-gap" id="faithQuoteList"></div>
+            </div>
+          </details>
+
+          <details class="accordion-card">
+            <summary><span class="accordion-head"><span class="accordion-icon">02</span><span><span class="accordion-title gold">Faith Journal</span><span class="accordion-sub">Save lessons worth remembering</span></span></span><span class="accordion-chevron">›</span></summary>
+            <div class="accordion-body">
+              <div class="form-row"><input id="faithLogFocus" placeholder="Focus: prayer, Gospel, virtue, Mass, confession"><input id="faithLogLesson" placeholder="Lesson / action"></div>
+              <button class="btn gold section-gap" id="addFaithLogBtn">Add Faith Log</button>
+              <div class="log-timeline section-gap" id="faithLogs"></div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="business" class="page">
+      <div class="header">
+        <div>
+          <div class="eyebrow">Build Value Slowly</div>
+          <h1 class="title">Business Lab</h1>
+          <p class="subtitle">This is not a fake CEO page. It is a learning and testing lab to help you figure out what business to start over the next couple years.</p>
+        </div>
+        <button class="btn gold" id="saveBusinessBtn">Save Business Lab</button>
+      </div>
+
+      <div class="business-lab-grid">
+        <div class="card featured">
+          <h2 class="gold">Business Direction</h2>
+          <p class="muted">Start broad. Learn. Test small. Keep what works.</p>
+          <div class="business-path-grid section-gap">
+            <div class="business-path"><strong>Learn</strong><span class="muted">Sales, offers, value, markets, money.</span></div>
+            <div class="business-path"><strong>Notice</strong><span class="muted">Problems people have and things they buy.</span></div>
+            <div class="business-path"><strong>Test</strong><span class="muted">Tiny experiments before big commitments.</span></div>
+            <div class="business-path"><strong>Build</strong><span class="muted">Double down only when there is proof.</span></div>
+          </div>
+          <div class="field-grid section-gap">
+            <div class="field-card"><div class="field-label">Current Business Question</div><textarea id="businessDirection" placeholder="Example: What kind of business fits me: reselling, service, digital product, app, or local business?"></textarea></div>
+            <div class="field-card"><div class="field-label">Learning Focus</div><textarea id="businessLearningFocus" placeholder="Example: learn sales, offers, pricing, marketing, or how to spot products people actually want."></textarea></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="blue">Today’s Business Move</h2>
+          <p class="muted">One small move. Not ten random ideas.</p>
+          <input id="businessTask" placeholder="Today: learn, research, list, message, test, or build...">
+          <textarea id="businessNotes" class="thin-gap" placeholder="What did I learn? What looks promising? What should I avoid?"></textarea>
+          <button class="btn gold section-gap" id="addBusinessLessonBtn">Save Lesson</button>
+          <div class="list section-gap" id="businessLessonsList"></div>
+        </div>
+      </div>
+
+      <div class="grid-2 section-gap">
+        <div class="card">
+          <h2 class="gold">Opportunity Tester</h2>
+          <p class="muted">Use this instead of a messy vault. Every idea must have a first step.</p>
+          <div class="form-row section-gap">
+            <input id="productIdeaInput" placeholder="Business idea / opportunity">
+            <select id="businessIdeaType">
+              <option>Learning</option>
+              <option>Reselling / Flipping</option>
+              <option>Local Service</option>
+              <option>Digital Product</option>
+              <option>Website / App</option>
+              <option>Sports / Fishing / Golf</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <textarea id="businessIdeaWhy" class="thin-gap" placeholder="Why could this work? Who would pay? What problem does it solve?"></textarea>
+          <div class="form-row thin-gap">
+            <input id="businessIdeaFirstStep" placeholder="First tiny test step">
+            <select id="businessIdeaStatus">
+              <option>Idea</option>
+              <option>Researching</option>
+              <option>Testing</option>
+              <option>Promising</option>
+              <option>Paused</option>
+            </select>
+          </div>
+          <div class="form-row thin-gap">
+            <select id="businessIdeaDifficulty"><option>Easy</option><option>Medium</option><option>Hard</option></select>
+            <select id="businessIdeaPotential"><option>Small Potential</option><option>Medium Potential</option><option>Big Potential</option></select>
+          </div>
+          <button class="btn gold section-gap" id="addProductIdeaBtn">Add Opportunity</button>
+        </div>
+
+        <div class="card">
+          <h2 class="blue">Money Tracker</h2>
+          <p class="muted">Optional. Use this when you actually start testing ways to make money.</p>
+          <input id="moneyGoal" placeholder="Money goal, ex: $500">
+          <input id="moneyMade" placeholder="Money made, ex: $75" class="thin-gap">
+          <div class="bar section-gap"><div class="fill" id="moneyFill" style="width:0%"></div></div>
+          <p class="muted section-gap" id="moneyText">Set a goal and amount made.</p>
+        </div>
+      </div>
+
+      <div class="card section-gap">
+        <h2 class="gold">Opportunity Board</h2>
+        <p class="muted">This replaces the Vault. Ideas live here only if they could become a real business test.</p>
+        <div class="grid section-gap" id="productIdeasList"></div>
+      </div>
+    </section>
+
+<section id="review" class="page"><div class="header"><div><div class="eyebrow">Evidence + Reset</div><h1 class="title">Review</h1><p class="subtitle">Data builds confidence. Weekly review builds direction.</p></div><button class="btn gold" id="saveReviewBtn">Save Review</button></div><div class="data-grid" id="progressDataCards"></div><div class="grid-2 section-gap"><div class="card"><h2 class="gold">Weekly Consistency</h2><div class="chart" id="reviewChart"></div><h3 class="section-gap">Category Evidence</h3><div id="progressEvidence"></div></div><div class="card"><h2 class="blue">Weekly Review</h2><textarea id="reviewWentWell" placeholder="What went well?"></textarea><textarea id="reviewFix" placeholder="What needs fixing?" class="thin-gap"></textarea><textarea id="reviewMission" placeholder="Next week’s mission?" class="thin-gap"></textarea><textarea id="reviewFaith" placeholder="How was my faith?" class="thin-gap"></textarea><textarea id="reviewTraining" placeholder="How was my training?" class="thin-gap"></textarea><textarea id="reviewBusiness" placeholder="How was my business progress?" class="thin-gap"></textarea></div></div></section>
+
+    <section id="settings" class="page">
+      <div class="header">
+        <div>
+          <div class="eyebrow">Save System</div>
+          <h1 class="title">Settings</h1>
+          <p class="subtitle">Your progress auto-saves on this device. Back it up like a real app so you can restore it if your browser, phone, or file changes.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card featured">
+          <h2 class="gold">Save Status</h2>
+          <div class="save-health" id="saveHealthCard">
+            <div class="save-dot"></div>
+            <div>
+              <strong id="saveHealthTitle">Checking save system...</strong>
+              <p id="saveHealthNote" class="muted">Your backup status appears here.</p>
+            </div>
+          </div>
+          <div class="data-grid section-gap">
+            <div class="data-card"><strong id="lastSavedText">—</strong><span class="muted">Last Saved</span></div>
+            <div class="data-card"><strong id="lastBackupText">—</strong><span class="muted">Last Backup</span></div>
+            <div class="data-card"><strong id="storageSizeText">—</strong><span class="muted">Data Size</span></div>
+          </div>
+          <p class="mini-note section-gap">This version saves to this browser/device. For true cross-device cloud sync later, connect Firebase or Supabase.</p>
+        </div>
+
+        <div class="card">
+          <h2 class="gold">Backup Actions</h2>
+          <div class="backup-actions">
+            <button class="btn gold" id="downloadBackupBtn">Download Backup File</button>
+            <button class="btn" id="copyBackupBtn">Copy Backup Text</button>
+            <button class="btn" id="exportBtn">Show Backup Text</button>
+            <button class="btn" id="importFileBtn">Import Backup File</button>
+            <button class="btn" id="importBtn">Restore Pasted Backup</button>
+            <button class="btn danger" id="clearBtn">Clear All Data</button>
+          </div>
+          <input type="file" id="backupFileInput" accept="application/json,.json" style="display:none">
+        </div>
+      </div>
+
+      <div class="grid-2 section-gap">
+        <div class="card">
+          <h2 class="blue">Backup Box</h2>
+          <p class="muted">Use this if you want to copy/paste a backup manually. Downloading a backup file is safer.</p>
+          <textarea id="backupBox" class="settings-code section-gap" placeholder="Click Show Backup Text or paste a backup here to restore."></textarea>
+        </div>
+        <div class="card">
+          <h2 class="gold">How To Keep It Safe</h2>
+          <div class="save-steps">
+            <div><strong>1</strong><span>Download a backup file at least once a week.</span></div>
+            <div><strong>2</strong><span>Save that file in iCloud Drive, Google Drive, or your computer.</span></div>
+            <div><strong>3</strong><span>Before switching phones/browsers, export first, then import on the new device.</span></div>
+            <div><strong>4</strong><span>Do not clear browser/site data unless you already have a backup.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <div class="focus-overlay" id="focusOverlay"><div class="focus-panel"><div class="eyebrow">Locked In Mode</div><h1 class="title">Focus</h1><input id="focusTask" placeholder="What are you focusing on?" class="section-gap"><div class="chip-row" style="justify-content:center"><button class="chip active" data-focus-min="25">25 min</button><button class="chip" data-focus-min="45">45 min</button><button class="chip" data-focus-min="60">60 min</button></div><div class="focus-timer" id="focusTimer">25:00</div><p class="muted">Wall stare reset first. Then deep work.</p><div class="chip-row" style="justify-content:center"><button class="btn gold" id="startFocusBtn">Start</button><button class="btn" id="pauseFocusBtn">Pause</button><button class="btn" id="resetFocusBtn">Reset</button><button class="btn danger" id="closeFocusBtn">Exit</button></div></div></div>
 
   <script>
-    const STORE_KEY = 'onePercentBetterRedesignV2';
+    const STORE_KEY = 'onePercentBetterRedesignV3';
     const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    const skills = ['Golf','Chess','Piano','Drawing','Reading / Speaking','School Studies'];
-    const faithPathItems = ['Morning Prayer','Bible Reading','Catechism / Catholic Learning','Rosary / Decade','Examination of Conscience'];
+    const skills = ['Speaking','Reading','Soccer','Golf','Chess','Piano','Drawing'];
+    const faithPathItems = [
+      {icon:'☀', title:'Morning Offering', note:'Give the day to God before the world gets your attention.'},
+      {icon:'✝', title:'Scripture / Gospel', note:'Read a short passage and pull one lesson for today.'},
+      {icon:'📖', title:'Catechism / Catholic Learning', note:'Learn one truth so your faith is not shallow.'},
+      {icon:'◉', title:'Rosary / Decade', note:'Pray slowly and intentionally, not rushed.'},
+      {icon:'☾', title:'Night Examen', note:'Review the day: gratitude, failure, virtue, and tomorrow.'}
+    ];
+    const catholicChallengeBank = [
+      'Do one hidden act of charity without telling anyone.',
+      'Read the daily Gospel and write one sentence on how to live it.',
+      'Pray one decade of the Rosary slowly and without rushing.',
+      'Practice humility: let someone else get credit or attention today.',
+      'Practice courage: do the right thing even if it is awkward.',
+      'Pray for someone you are annoyed with.',
+      'Write one thing God gave you today and thank Him for it.',
+      'Choose one small sacrifice: no complaining for one hour.',
+      'Ask God for help before your hardest task today.',
+      'Do an examination of conscience before bed and pick one fix for tomorrow.'
+    ];
+
+    const catholicQuestionBank = [
+      {category:'Basics', difficulty:'Easy', q:'How many Persons are in the Holy Trinity?', answers:['three','3'], hint:'Father, Son, and Holy Spirit.', explanation:'The Holy Trinity is one God in three divine Persons: Father, Son, and Holy Spirit.'},
+      {category:'Basics', difficulty:'Easy', q:'Name the three Persons of the Holy Trinity.', answers:['father son and holy spirit','the father the son and the holy spirit','father son holy spirit'], hint:'The sign of the cross names them.', explanation:'The three Persons are the Father, the Son, and the Holy Spirit.'},
+      {category:'Basics', difficulty:'Easy', q:'Who is Jesus Christ?', answers:['the son of god','god the son','true god and true man','god and man'], hint:'He is divine and became man.', explanation:'Jesus Christ is the Son of God, true God and true man.'},
+      {category:'Basics', difficulty:'Easy', q:'What prayer begins with “Our Father”?', answers:['the our father','our father','the lord’s prayer','the lords prayer','lord’s prayer','lords prayer'], hint:'Jesus taught this prayer.', explanation:'The Our Father is also called the Lord’s Prayer.'},
+      {category:'Basics', difficulty:'Medium', q:'What are the two great commandments Jesus teaches?', answers:['love god and love your neighbor','love god love neighbor','love the lord your god and love your neighbor'], hint:'Love God first, then love others rightly.', explanation:'Jesus summarizes the law as loving God with all your heart and loving your neighbor as yourself.'},
+      {category:'Sacraments', difficulty:'Easy', q:'How many sacraments are there?', answers:['seven','7'], hint:'Baptism, Eucharist, and five more.', explanation:'The Catholic Church has seven sacraments.'},
+      {category:'Sacraments', difficulty:'Medium', q:'Name the seven sacraments.', answers:['baptism confirmation eucharist penance anointing of the sick holy orders matrimony','baptism confirmation eucharist reconciliation anointing of the sick holy orders matrimony','baptism confirmation holy eucharist penance anointing of the sick holy orders marriage'], hint:'Three initiation, two healing, two service.', explanation:'The seven sacraments are Baptism, Confirmation, Eucharist, Penance/Reconciliation, Anointing of the Sick, Holy Orders, and Matrimony.'},
+      {category:'Sacraments', difficulty:'Easy', q:'Which sacrament washes away original sin and makes someone a Christian?', answers:['baptism'], hint:'Usually the first sacrament received.', explanation:'Baptism washes away original sin and brings a person into the Church.'},
+      {category:'Sacraments', difficulty:'Easy', q:'Which sacrament gives us the Body and Blood of Christ?', answers:['eucharist','holy eucharist','communion','holy communion'], hint:'You receive this at Mass.', explanation:'In the Eucharist, Catholics receive the Body and Blood of Christ.'},
+      {category:'Sacraments', difficulty:'Medium', q:'What sacrament forgives sins after Baptism?', answers:['confession','reconciliation','penance','sacrament of reconciliation','sacrament of penance'], hint:'You confess sins to a priest.', explanation:'The Sacrament of Penance/Reconciliation forgives sins committed after Baptism.'},
+      {category:'Mass', difficulty:'Easy', q:'What is the first major part of Mass focused on Scripture readings?', answers:['liturgy of the word','the liturgy of the word'], hint:'It includes readings, Psalm, Gospel, and homily.', explanation:'The Liturgy of the Word is the part of Mass focused on Scripture.'},
+      {category:'Mass', difficulty:'Easy', q:'What is the second major part of Mass centered on the Eucharist?', answers:['liturgy of the eucharist','the liturgy of the eucharist'], hint:'It includes the altar, consecration, and Communion.', explanation:'The Liturgy of the Eucharist is centered on the Eucharistic sacrifice and Communion.'},
+      {category:'Mass', difficulty:'Medium', q:'What happens at the consecration during Mass?', answers:['bread and wine become the body and blood of christ','the bread and wine become the body and blood of christ','transubstantiation'], hint:'The substance changes, though appearances remain.', explanation:'At the consecration, the bread and wine become the Body and Blood of Christ.'},
+      {category:'Prayer', difficulty:'Easy', q:'What prayer asks Mary to pray for us “now and at the hour of our death”?', answers:['hail mary','the hail mary'], hint:'It starts with “Hail Mary, full of grace.”', explanation:'The Hail Mary asks Mary to pray for us now and at the hour of our death.'},
+      {category:'Prayer', difficulty:'Easy', q:'How many decades are in a full Rosary?', answers:['five','5'], hint:'Each decade has ten Hail Marys.', explanation:'A standard Rosary has five decades.'},
+      {category:'Prayer', difficulty:'Medium', q:'What is an examination of conscience?', answers:['reviewing your sins','reviewing your day and sins','thinking about sins before confession','reviewing where you failed and need grace'], hint:'You do this before Confession or at night.', explanation:'An examination of conscience is an honest review of sins, choices, and where you need God’s grace.'},
+      {category:'Bible', difficulty:'Easy', q:'What are the first four books of the New Testament called?', answers:['the gospels','gospels'], hint:'Matthew, Mark, Luke, and John.', explanation:'The first four books of the New Testament are the Gospels.'},
+      {category:'Bible', difficulty:'Medium', q:'Name the four Gospels.', answers:['matthew mark luke john','matthew mark luke and john'], hint:'Two start with M, then Luke and John.', explanation:'The four Gospels are Matthew, Mark, Luke, and John.'},
+      {category:'Bible', difficulty:'Medium', q:'What does “Gospel” mean?', answers:['good news','the good news'], hint:'It announces salvation in Christ.', explanation:'Gospel means “good news.”'},
+      {category:'Virtue', difficulty:'Easy', q:'What virtue means giving God and others their due?', answers:['justice'], hint:'It is one of the cardinal virtues.', explanation:'Justice is the virtue of giving God and neighbor what is due to them.'},
+      {category:'Virtue', difficulty:'Easy', q:'Name the three theological virtues.', answers:['faith hope and charity','faith hope charity','faith hope and love','faith hope love'], hint:'They connect us directly to God.', explanation:'The theological virtues are faith, hope, and charity/love.'},
+      {category:'Virtue', difficulty:'Medium', q:'Name the four cardinal virtues.', answers:['prudence justice fortitude temperance','prudence justice courage temperance'], hint:'Prudence, justice, strength, self-control.', explanation:'The cardinal virtues are prudence, justice, fortitude, and temperance.'},
+      {category:'Virtue', difficulty:'Easy', q:'Which virtue helps you control desires and avoid excess?', answers:['temperance'], hint:'It is self-control.', explanation:'Temperance moderates desires and helps you avoid excess.'},
+      {category:'Saints', difficulty:'Easy', q:'Who is the mother of Jesus?', answers:['mary','the blessed virgin mary','blessed virgin mary'], hint:'Catholics honor her as Mother of God.', explanation:'Mary is the mother of Jesus and is honored as the Blessed Virgin Mary.'},
+      {category:'Saints', difficulty:'Medium', q:'Who was the first pope?', answers:['saint peter','peter','st peter'], hint:'Jesus said, “You are Peter...”', explanation:'Saint Peter is recognized as the first pope.'},
+      {category:'Saints', difficulty:'Medium', q:'Which saint is known for saying “Pray, hope, and don’t worry”?', answers:['padre pio','saint padre pio','st padre pio'], hint:'A modern Italian saint.', explanation:'Saint Padre Pio is known for the phrase “Pray, hope, and don’t worry.”'}
+    ];
+    const catholicMiniDrillBank = [
+      'Explain one sacrament out loud in 60 seconds.',
+      'Write one question you have about the faith, then look for the answer later.',
+      'Summarize today’s Gospel in one sentence.',
+      'Name one virtue you failed today and one concrete fix.',
+      'Teach one Catholic truth as if explaining it to a younger kid.',
+      'Pray slowly for 3 minutes without multitasking.',
+      'Review one missed question and turn it into a note.'
+    ];
+
+    const leadershipChallenges = ['Ask 3 better questions today','Tell one short story clearly','Speak slower and stronger','Make one person laugh without forcing it','Write one wisdom lesson from today'];
     const statusNames = ['Planned','Started','Done'];
     const mainTrainingRules = [
-      'Speed work goes before lifting, never after.',
-      'Best setup: speed/field work → 5–10 minute break → gym workout.',
-      'Even better: speed earlier in the day and lifting 4–6 hours later.',
-      'Sprint reps should feel fast, not like conditioning.',
-      'If form gets sloppy or speed drops, stop the speed block.',
-      'Do not take heavy squats, RDLs, deadlifts, or leg press to absolute failure.',
-      'Leave 1–2 reps in the tank on most heavy sets.',
-      'Dynamic stretching before training. Static stretching after training.'
-    ];
+      "Speed work goes before lifting, never after.",
+      "Dynamic warm-up before training. Static stretching after training.",
+      "Sprint reps should feel fast. Stop if speed drops or form gets sloppy.",
+      "Heavy squats, RDLs, deadlifts, and leg press stay 1–2 reps short of failure.",
+      "Hard lower body does not happen every day.",
+      "Light study after training: optional 10-minute summer math, reading, speaking notes, or chess.",
+      "Skill/flex blocks are productive, but not secret extra leg workouts.",
+      "Bed by 10:15 PM. Recovery is part of becoming dangerous."
+];
     const scheduleModes = {
-      monday:{label:'Monday — Acceleration + Upper',note:'Speed block before upper workout.',blocks:[['6:00 AM','Wake + morning routine','No phone. Prayer, shower, brush teeth, make bed.'],['6:35 AM','Breakfast','Protein, carbs, fruit, and water.'],['7:00 AM','Dynamic warm-up','Jog/bike, leg swings, lunges, hips, ankles, skips, build-ups.'],['7:20 AM','Acceleration speed block','Starts, short sprints, hill/sled sprints, broad jumps, pogo jumps.'],['After speed','5–10 minute break','Breathe, walk, hydrate, then lift.'],['Gym','Upper workout','Incline press, shoulder press, pull-ups, rows, laterals, triceps, curls.'],['After training','Static stretches','Couch, hamstring, calf, doorway chest stretch.'],['Later','Catholic study + business + skills','Faith first, then one money task, then skill practice.'],['8:30 PM','Wind down','Review wins and set tomorrow plan.'],['9:30–10:00 PM','Sleep target','Recover so speed stays fast.']]},
-      tuesday:{label:'Tuesday — Lower Strength',note:'Normal gym time. No sprinting.',blocks:[['6:00 AM','Wake + morning routine','No phone. Prayer, shower, brush teeth, make bed.'],['6:35 AM','Breakfast','Fuel for lower strength.'],['Training prep','Pre-lift warm-up','Bike/walk, leg swings, ankle rocks, lunges, glute bridges, bodyweight squats.'],['Gym','Lower strength workout','Squat pattern, RDL, hamstring curl, leg extension, calves, cable crunch.'],['Rule','Do not max out heavy legs','Leave 1–2 reps in the tank on heavy sets.'],['After training','Static stretches','Couch, hamstring, figure-4 glute, calf stretch.'],['Later','Catholic study + business + skills','Faith, one business task, then skill work.'],['8:30 PM','Recovery night','Stretch, hydrate, sleep prep.']]},
-      wednesday:{label:'Wednesday — Recovery + Mobility',note:'No hard sprinting. No hard lifting.',blocks:[['6:00 AM','Wake + morning routine','No phone. Prayer, shower, brush teeth, make bed.'],['6:35 AM','Breakfast','Hydrate and eat enough to recover.'],['Recovery','Easy movement','Walk, bike, or light jog for 15–25 minutes.'],['Mobility','Hips, ankles, hamstrings, calves','90/90 switches, deep squat hold, couch, hamstring, calf, child’s pose.'],['Core / stability','Light strength only','Glute bridges and side planks.'],['Later','Catholic study + business + skills','Longer reflection, light work, piano/chess/drawing.'],['8:30 PM','Recovery wind down','Prepare for Thursday max speed.']]},
-      thursday:{label:'Thursday — Max Speed + Push',note:'Top-speed block before push workout.',blocks:[['6:00 AM','Wake + morning routine','No phone. Prayer, shower, brush teeth, make bed.'],['6:35 AM','Breakfast','Fuel for speed.'],['7:00 AM','Dynamic warm-up','Jog/bike, leg swings, lunges, hips, ankles, skips, build-ups.'],['7:20 AM','Max speed block','Build-ups, flying 10s, wickets, box jumps, med-ball chest pass or explosive push-ups.'],['After speed','5–10 minute break','Breathe, walk, hydrate, then lift.'],['Gym','Push workout','Bench, dips/machine press, shoulder press, laterals, triceps.'],['After training','Static stretches','Couch, calf, doorway chest, cross-body shoulder.'],['Later','Catholic study + business + skills','Faith first, then deep work and skill reps.'],['8:30 PM','Wind down','Review speed quality and sleep.']]},
-      friday:{label:'Friday — Pull',note:'Normal gym time. No hard speed work.',blocks:[['6:00 AM','Wake + morning routine','No phone. Prayer, shower, brush teeth, make bed.'],['6:35 AM','Breakfast','Protein and water.'],['Training prep','Upper warm-up','Arm circles, pull-aparts/face pulls, cat-cow, child’s pose lat stretch.'],['Gym','Pull workout','Pull-ups/lat pulldown, rows, rear delts, face pulls, curls, hanging leg raise.'],['Optional after','Light mobility or easy walk','Keep it easy: 10–15 minutes.'],['After training','Static stretches','Lat, shoulder, forearm, and hamstring if tight.'],['Later','Catholic study + business + skills','Faith, one business task, then skill practice.'],['8:30 PM','Wind down','Save legs for Saturday.']]},
-      saturday:{label:'Saturday — Agility + Explosive Legs',note:'Athletic block before leg workout.',blocks:[['6:00 AM','Wake + morning routine','No phone. Prayer, shower, brush teeth, make bed.'],['6:35 AM','Breakfast','Fuel for athletic work.'],['7:00 AM','Dynamic warm-up','Jog/bike, leg swings, lunges, hips, ankles, skips, build-ups.'],['7:20 AM','Agility / explosive block','Deceleration stops, 5-10-5 shuttle, lateral bounds, single-leg broad jumps.'],['After athletic block','5–10 minute break','Breathe, walk, hydrate, then lift.'],['Gym','Explosive legs workout','Leg press, split squat/lunges, RDL/curl, leg extension, calves, core.'],['After training','Static stretches','Couch, hamstring, figure-4 glute, calf stretch.'],['Later','Catholic study + skills','Keep quality high and recover.'],['8:30 PM','Wind down','Recovery, food, sleep.']]},
-      sunday:{label:'Sunday — Full Rest',note:'No gym. No sprinting. No hard training.',blocks:[['Morning','Wake + prayer','Easy start. Keep the day calm.'],['Optional','Easy walk','15–30 minutes only if it helps recovery.'],['Optional mobility','Static recovery stretches','Couch, hamstring, figure-4, calf, child’s pose.'],['Faith','Mass / Catholic study','Review notes, pray, reset.'],['Planning','Weekly review','What went well, what needs fixing, next week’s mission.'],['Prep','Meal prep + schedule prep','Set up food, clothes, training plan, and school/business priorities.'],['Night','Early wind down','Sleep and recover for Monday.']]}
-    };
+      "monday": {
+            "label": "Monday — Acceleration + Upper",
+            "note": "First-step speed, acceleration, and upper-body strength.",
+            "blocks": [
+                  [
+                        "6:30 AM",
+                        "Wake-Up Routine",
+                        "Wake up, shower, brush teeth, skincare, make bed/clean room, drink water, quick prayer."
+                  ],
+                  [
+                        "7:00 AM",
+                        "Breakfast + Water",
+                        "Eat a solid breakfast, hydrate, and get ready for training."
+                  ],
+                  [
+                        "7:30–9:15 AM",
+                        "Athlete Block: Acceleration + Upper",
+                        "Dynamic warm-up → acceleration speed → 5–10 minute break → upper lift → post-training stretch."
+                  ],
+                  [
+                        "9:15–10:00 AM",
+                        "Post-Training Reset",
+                        "Stretch if needed, shower if needed, protein + carbs, water, log the workout."
+                  ],
+                  [
+                        "10:30 AM–12:00 PM",
+                        "Study / Reading Block",
+                        "Optional 10-minute summer math review + reading or speaking practice."
+                  ],
+                  [
+                        "12:00–1:00 PM",
+                        "Lunch + Break",
+                        "Eat, drink water, relax without wasting the whole day on your phone."
+                  ],
+                  [
+                        "1:00–4:00 PM",
+                        "Skill / Summer Block",
+                        "Pick 1: piano 20 min, chess 20 min, or light soccer touches 20 min."
+                  ],
+                  [
+                        "4:00–6:00 PM",
+                        "Flex Block",
+                        "Homework, chores, laundry, extra skill work, family stuff, easy walk, or recovery. No extra hard leg work."
+                  ],
+                  [
+                        "6:00–7:00 PM",
+                        "Dinner",
+                        "Protein + carbs. Chicken and rice works well. Hydrate so your body can recover."
+                  ],
+                  [
+                        "7:30–9:15 PM",
+                        "Evening Lock-In",
+                        "Light stretch/mobility, reading 30+ min, review tomorrow’s workout, pack gym stuff. No intense training."
+                  ],
+                  [
+                        "9:15–10:15 PM",
+                        "Night Routine",
+                        "Brush teeth, skincare if needed, set clothes out, phone away, bed by 10:15 PM."
+                  ]
+            ]
+      },
+      "tuesday": {
+            "label": "Tuesday — Lower Strength",
+            "note": "Build leg strength without sprinting.",
+            "blocks": [
+                  [
+                        "6:30 AM",
+                        "Wake-Up Routine",
+                        "Wake up, shower, brush teeth, skincare, make bed/clean room, drink water, quick prayer."
+                  ],
+                  [
+                        "7:00 AM",
+                        "Breakfast + Water",
+                        "Eat a solid breakfast, hydrate, and get ready for training."
+                  ],
+                  [
+                        "7:30–9:00 AM",
+                        "Athlete Block: Lower Strength",
+                        "No sprinting. Pre-lift warm-up → lower lift → post-training stretch."
+                  ],
+                  [
+                        "9:15–10:00 AM",
+                        "Post-Training Reset",
+                        "Stretch if needed, shower if needed, protein + carbs, water, log the workout."
+                  ],
+                  [
+                        "10:30 AM–12:00 PM",
+                        "Study / Reading Block",
+                        "Study/homework + speed reading or chess for 20 min."
+                  ],
+                  [
+                        "12:00–1:00 PM",
+                        "Lunch + Break",
+                        "Eat, drink water, relax without wasting the whole day on your phone."
+                  ],
+                  [
+                        "1:00–4:00 PM",
+                        "Skill / Summer Block",
+                        "Light option only: piano, chess, golf short game, or easy walk."
+                  ],
+                  [
+                        "4:00–6:00 PM",
+                        "Flex Block",
+                        "Homework, chores, laundry, extra skill work, family stuff, easy walk, or recovery. No extra hard leg work."
+                  ],
+                  [
+                        "6:00–7:00 PM",
+                        "Dinner",
+                        "Protein + carbs. Chicken and rice works well. Hydrate so your body can recover."
+                  ],
+                  [
+                        "7:30–9:15 PM",
+                        "Evening Lock-In",
+                        "Light stretch/mobility, reading 30+ min, review tomorrow’s workout, pack gym stuff. No intense training."
+                  ],
+                  [
+                        "9:15–10:15 PM",
+                        "Night Routine",
+                        "Brush teeth, skincare if needed, set clothes out, phone away, bed by 10:15 PM."
+                  ]
+            ]
+      },
+      "wednesday": {
+            "label": "Wednesday — Recovery + Mobility",
+            "note": "Recover so Thursday speed is actually fast.",
+            "blocks": [
+                  [
+                        "6:30 AM",
+                        "Wake-Up Routine",
+                        "Wake up, shower, brush teeth, skincare, make bed/clean room, drink water, quick prayer."
+                  ],
+                  [
+                        "7:00 AM",
+                        "Breakfast + Water",
+                        "Eat a solid breakfast, hydrate, and get ready for training."
+                  ],
+                  [
+                        "7:30–8:30 AM",
+                        "Recovery + Mobility Block",
+                        "Easy walk, bike, or light jog plus mobility. No hard sprinting. No hard lifting."
+                  ],
+                  [
+                        "9:15–10:00 AM",
+                        "Post-Training Reset",
+                        "Stretch if needed, shower if needed, protein + carbs, water, log the workout."
+                  ],
+                  [
+                        "10:30 AM–12:00 PM",
+                        "Study / Reading Block",
+                        "Bigger light study day: optional math review + reading or speaking notes."
+                  ],
+                  [
+                        "12:00–1:00 PM",
+                        "Lunch + Break",
+                        "Eat, drink water, relax without wasting the whole day on your phone."
+                  ],
+                  [
+                        "1:00–4:00 PM",
+                        "Skill / Summer Block",
+                        "Pick 1–2: piano, chess, golf, fishing, or reading."
+                  ],
+                  [
+                        "4:00–6:00 PM",
+                        "Flex Block",
+                        "Homework, chores, laundry, extra skill work, family stuff, easy walk, or recovery. No extra hard leg work."
+                  ],
+                  [
+                        "6:00–7:00 PM",
+                        "Dinner",
+                        "Protein + carbs. Chicken and rice works well. Hydrate so your body can recover."
+                  ],
+                  [
+                        "7:30–9:15 PM",
+                        "Evening Lock-In",
+                        "Light stretch/mobility, reading 30+ min, review tomorrow’s workout, pack gym stuff. No intense training."
+                  ],
+                  [
+                        "9:15–10:15 PM",
+                        "Night Routine",
+                        "Brush teeth, skincare if needed, set clothes out, phone away, bed by 10:15 PM."
+                  ]
+            ]
+      },
+      "thursday": {
+            "label": "Thursday — Max Speed + Push",
+            "note": "Top speed, sprint mechanics, and push strength.",
+            "blocks": [
+                  [
+                        "6:30 AM",
+                        "Wake-Up Routine",
+                        "Wake up, shower, brush teeth, skincare, make bed/clean room, drink water, quick prayer."
+                  ],
+                  [
+                        "7:00 AM",
+                        "Breakfast + Water",
+                        "Eat a solid breakfast, hydrate, and get ready for training."
+                  ],
+                  [
+                        "7:30–9:15 AM",
+                        "Athlete Block: Max Speed + Push",
+                        "Dynamic warm-up → max speed work → 5–10 minute break → push lift → post-training stretch."
+                  ],
+                  [
+                        "9:15–10:00 AM",
+                        "Post-Training Reset",
+                        "Stretch if needed, shower if needed, protein + carbs, water, log the workout."
+                  ],
+                  [
+                        "10:30 AM–12:00 PM",
+                        "Study / Reading Block",
+                        "Study/homework + speed reading 20 min."
+                  ],
+                  [
+                        "12:00–1:00 PM",
+                        "Lunch + Break",
+                        "Eat, drink water, relax without wasting the whole day on your phone."
+                  ],
+                  [
+                        "1:00–4:00 PM",
+                        "Skill / Summer Block",
+                        "Light option: piano, chess, light soccer touches, or reading."
+                  ],
+                  [
+                        "4:00–6:00 PM",
+                        "Flex Block",
+                        "Homework, chores, laundry, extra skill work, family stuff, easy walk, or recovery. No extra hard leg work."
+                  ],
+                  [
+                        "6:00–7:00 PM",
+                        "Dinner",
+                        "Protein + carbs. Chicken and rice works well. Hydrate so your body can recover."
+                  ],
+                  [
+                        "7:30–9:15 PM",
+                        "Evening Lock-In",
+                        "Light stretch/mobility, reading 30+ min, review tomorrow’s workout, pack gym stuff. No intense training."
+                  ],
+                  [
+                        "9:15–10:15 PM",
+                        "Night Routine",
+                        "Brush teeth, skincare if needed, set clothes out, phone away, bed by 10:15 PM."
+                  ]
+            ]
+      },
+      "friday": {
+            "label": "Friday — Pull",
+            "note": "Back, rear delts, biceps, core, and no hard speed work.",
+            "blocks": [
+                  [
+                        "6:30 AM",
+                        "Wake-Up Routine",
+                        "Wake up, shower, brush teeth, skincare, make bed/clean room, drink water, quick prayer."
+                  ],
+                  [
+                        "7:00 AM",
+                        "Breakfast + Water",
+                        "Eat a solid breakfast, hydrate, and get ready for training."
+                  ],
+                  [
+                        "7:30–9:00 AM",
+                        "Athlete Block: Pull",
+                        "No hard speed. Upper warm-up → pull lift → optional easy walk or mobility."
+                  ],
+                  [
+                        "9:15–10:00 AM",
+                        "Post-Training Reset",
+                        "Stretch if needed, shower if needed, protein + carbs, water, log the workout."
+                  ],
+                  [
+                        "10:30 AM–12:00 PM",
+                        "Study / Reading Block",
+                        "Optional 10-minute summer math review + reading or speaking practice."
+                  ],
+                  [
+                        "12:00–1:00 PM",
+                        "Lunch + Break",
+                        "Eat, drink water, relax without wasting the whole day on your phone."
+                  ],
+                  [
+                        "1:00–4:00 PM",
+                        "Skill / Summer Block",
+                        "Pick 1–2: piano, chess, golf, fishing, or light soccer technical work."
+                  ],
+                  [
+                        "4:00–6:00 PM",
+                        "Flex Block",
+                        "Homework, chores, laundry, extra skill work, family stuff, easy walk, or recovery. No extra hard leg work."
+                  ],
+                  [
+                        "6:00–7:00 PM",
+                        "Dinner",
+                        "Protein + carbs. Chicken and rice works well. Hydrate so your body can recover."
+                  ],
+                  [
+                        "7:30–9:15 PM",
+                        "Evening Lock-In",
+                        "Light stretch/mobility, reading 30+ min, review tomorrow’s workout, pack gym stuff. No intense training."
+                  ],
+                  [
+                        "9:15–10:15 PM",
+                        "Night Routine",
+                        "Brush teeth, skincare if needed, set clothes out, phone away, bed by 10:15 PM."
+                  ]
+            ]
+      },
+      "saturday": {
+            "label": "Saturday — Agility + Explosive Legs",
+            "note": "Cutting, braking, lateral power, single-leg explosiveness, and legs.",
+            "blocks": [
+                  [
+                        "6:30 AM",
+                        "Wake-Up Routine",
+                        "Wake up, shower, brush teeth, skincare, make bed/clean room, drink water, quick prayer."
+                  ],
+                  [
+                        "7:00 AM",
+                        "Breakfast + Water",
+                        "Eat a solid breakfast, hydrate, and get ready for training."
+                  ],
+                  [
+                        "7:30–9:15 AM",
+                        "Athlete Block: Agility + Explosive Legs",
+                        "Dynamic warm-up → agility/explosive work → 5–10 minute break → leg lift → post-training stretch."
+                  ],
+                  [
+                        "9:15–10:00 AM",
+                        "Post-Training Reset",
+                        "Stretch if needed, shower if needed, protein + carbs, water, log the workout."
+                  ],
+                  [
+                        "10:30 AM–12:00 PM",
+                        "Study / Reading Block",
+                        "Pick 1–2: reading 30 min, optional math review 10 min, speaking notes, or chess 20 min."
+                  ],
+                  [
+                        "12:00–1:00 PM",
+                        "Lunch + Break",
+                        "Eat, drink water, relax without wasting the whole day on your phone."
+                  ],
+                  [
+                        "1:00–4:00 PM",
+                        "Skill / Summer Block",
+                        "Pick 1: golf, fishing, piano, light walk, or relax and recover."
+                  ],
+                  [
+                        "4:00–6:00 PM",
+                        "Flex Block",
+                        "Homework, chores, laundry, extra skill work, family stuff, easy walk, or recovery. No extra hard leg work."
+                  ],
+                  [
+                        "6:00–7:00 PM",
+                        "Dinner",
+                        "Protein + carbs. Chicken and rice works well. Hydrate so your body can recover."
+                  ],
+                  [
+                        "7:30–9:15 PM",
+                        "Evening Lock-In",
+                        "Light stretch/mobility, reading 30+ min, review tomorrow’s workout, pack gym stuff. No intense training."
+                  ],
+                  [
+                        "9:15–10:15 PM",
+                        "Night Routine",
+                        "Brush teeth, skincare if needed, set clothes out, phone away, bed by 10:15 PM."
+                  ]
+            ]
+      },
+      "sunday": {
+            "label": "Sunday — Full Rest + Weekly Reset",
+            "note": "Recover, church, clean, review, and plan the next week.",
+            "blocks": [
+                  [
+                        "Morning",
+                        "Morning Routine",
+                        "Wake up, brush teeth, skincare, make bed/clean room, breakfast, water, prayer."
+                  ],
+                  [
+                        "Faith",
+                        "Church / Catholic Study",
+                        "Go to Church if scheduled. Pray, reflect, and keep Sunday centered."
+                  ],
+                  [
+                        "Reset",
+                        "Weekly Review",
+                        "Review the week: what went well, what needs fixing, and next week’s mission."
+                  ],
+                  [
+                        "Prep",
+                        "Plan Next Week",
+                        "Look at training, school, business, faith, skills, and recovery before Monday hits."
+                  ],
+                  [
+                        "Chores",
+                        "Laundry + Clean Room",
+                        "Reset your environment so the week starts disciplined."
+                  ],
+                  [
+                        "Optional",
+                        "Easy Recovery",
+                        "Walk 15–30 min or do light stretching only if it helps recovery."
+                  ],
+                  [
+                        "Rule",
+                        "Full Rest",
+                        "No gym. No sprinting. No hard running. No secret leg day."
+                  ],
+                  [
+                        "Evening",
+                        "Dinner + Reading",
+                        "Dinner, reading 30+ min, brush teeth, phone away, bed by 10:15 PM."
+                  ]
+            ]
+      }
+};
     const trainingWeek = [
-      {day:'Monday',mode:'Acceleration + Upper',why:'Speed block before upper workout. Sprint reps should be fast, not conditioning.',warmup:['Light jog or bike — 2–3 minutes','Leg swings forward/back — 10 each leg','Leg swings side-to-side — 10 each leg','Walking lunges with reach — 10 each leg','World’s greatest stretch — 5 each side','Hip circles — 10 each direction','Ankle rocks — 10 each side','A-skips — 2 × 15 yards','High knees — 2 × 15 yards','Butt kicks — 2 × 15 yards','Build-up runs — 2 × 20 yards'],speedTitle:'Speed Block',speed:['Wall drives — 2 × 5 each leg','Falling starts — 3 × 10 yards','10-yard starts — 4–6 reps','20-yard sprints — 3–4 reps','Hill sprints or light sled sprints — 4 × 10–15 yards','Broad jumps — 3 × 3','Pogo jumps — 2 × 20 seconds'],liftTitle:'Upper Workout',lift:['Incline Dumbbell Press — 4 × 6–10','Machine Shoulder Press — 3–4 × 8–12','Weighted Pull-Ups or Lat Pulldown — 4 × 6–10','Chest-Supported Row — 3–4 × 8–12','Cable Lateral Raise — 3–4 × 10–15','Overhead Cable Triceps Extension — 3 × 10–12','Bayesian Cable Curl — 3 × 10–15'],stretches:['Couch stretch — 30–60 seconds each side','Hamstring stretch — 30–60 seconds each side','Calf stretch — 30–60 seconds each side','Doorway chest stretch — 30–60 seconds each side']},
-      {day:'Tuesday',mode:'Lower Strength',why:'Normal gym time. No sprinting. Leave 1–2 reps in the tank on heavy leg work.',warmup:['Light bike or walk — 3–5 minutes','Leg swings — 10 each way','Ankle rocks — 10 each side','Walking lunges — 10 each leg','Glute bridges — 2 × 10','Bodyweight squats — 2 × 10'],speedTitle:'Speed Work',speed:['No sprinting today','Easy warm-up only'],liftTitle:'Lower Workout',lift:['Smith Machine Squat / Hack Squat / Pendulum Squat — 4 × 6–10','Romanian Deadlift — 3–4 × 8–12','Seated Leg Curl — 3 × 10–15','Leg Extension — 2–3 × 10–15','Standing Calf Raise — 4 × 12–20','Cable Crunch — 3 × 10–15'],stretches:['Couch stretch — 30–60 seconds each side','Hamstring stretch — 30–60 seconds each side','Figure-4 glute stretch — 30–60 seconds each side','Calf stretch — 30–60 seconds each side']},
-      {day:'Wednesday',mode:'Recovery + Mobility',why:'No hard sprinting. No hard lifting. Recover so Thursday speed is actually fast.',warmup:['Easy walk, bike, or light jog — 15–25 minutes'],speedTitle:'Recovery Work',speed:['90/90 hip switches — 2 × 10 each side','Deep squat hold — 2 × 45 seconds','Couch stretch — 1 minute each side','Hamstring stretch — 1 minute each side','Calf stretch — 1 minute each side','Child’s pose — 1 minute','Glute bridges — 2 × 15','Side plank — 2 × 30 seconds each side'],liftTitle:'Gym Work',lift:['No hard lifting today','No hard sprinting today','Recovery only'],stretches:[]},
-      {day:'Thursday',mode:'Max Speed + Push',why:'Top-speed day before push workout. Stay tall, relaxed, and fast.',warmup:['Light jog or bike — 2–3 minutes','Leg swings forward/back — 10 each leg','Leg swings side-to-side — 10 each leg','Walking lunges with reach — 10 each leg','World’s greatest stretch — 5 each side','Hip circles — 10 each direction','Ankle rocks — 10 each side','A-skips — 2 × 15 yards','High knees — 2 × 15 yards','Butt kicks — 2 × 15 yards','Build-up runs — 2–3 × 20 yards'],speedTitle:'Speed Block',speed:['A-skips — 2 × 15 yards','30-yard build-ups — 3 reps','Flying 10s — 4–5 reps','Wicket runs — 4 reps','Box jumps — 3 × 3','Med-ball chest pass or explosive push-ups — 3 × 5'],liftTitle:'Push Workout',lift:['Flat or Incline Barbell Bench Press — 4 × 6–10','Dips or Machine Chest Press — 3 × 8–12','Machine Shoulder Press — 3–4 × 8–12','Cable Lateral Raise — 4 × 12–15','Overhead Cable Triceps Extension — 3–4 × 10–15','Tricep Kickback or Pushdown — 3 × 12–15'],stretches:['Couch stretch — 30–60 seconds each side','Calf stretch — 30–60 seconds each side','Doorway chest stretch — 30–60 seconds each side','Cross-body shoulder stretch — 30–60 seconds each side']},
-      {day:'Friday',mode:'Pull',why:'Normal gym time. No hard speed work. Save legs for Saturday.',warmup:['Arm circles — 15 forward, 15 backward','Band pull-aparts or light face pulls — 2 × 15','Cat-cow stretch — 10 reps','Child’s pose lat stretch — 30 seconds'],speedTitle:'Optional After',speed:['Light mobility — 10 minutes','Easy walk — 10–15 minutes'],liftTitle:'Pull Workout',lift:['Pull-Ups or Lat Pulldown — 4 × 6–10','Chest-Supported Row or Cable Row — 3–4 × 8–12','Reverse Pec Deck or Reverse Cable Crossover — 3–4 × 12–15','Face Pulls — 3 × 12–15','Bayesian Cable Curl or Incline DB Curl — 3–4 × 10–15','Hanging Leg Raise — 3 × 10–15'],stretches:['Child’s pose lat stretch — 30–60 seconds','Cross-body shoulder stretch — 30–60 seconds each side','Forearm stretch — 30–60 seconds each side','Hamstring stretch if legs feel tight — 30–60 seconds each side']},
-      {day:'Saturday',mode:'Agility + Explosive Legs',why:'Athletic block before leg workout. Change direction, brake, and produce power.',warmup:['Light jog or bike — 2–3 minutes','Leg swings forward/back — 10 each leg','Leg swings side-to-side — 10 each leg','Walking lunges with reach — 10 each leg','World’s greatest stretch — 5 each side','Hip circles — 10 each direction','Ankle rocks — 10 each side','A-skips — 2 × 15 yards','High knees — 2 × 15 yards','Butt kicks — 2 × 15 yards','Build-up runs — 2 × 20 yards'],speedTitle:'Athletic Block',speed:['Deceleration stops — 4 reps','5-10-5 shuttle — 4 reps','Lateral bounds — 3 × 4 each side','Single-leg broad jumps — 3 × 3 each leg'],liftTitle:'Leg Workout',lift:['Leg Press — 4 × 8–12','Bulgarian Split Squat or Walking Lunges — 3 × 8–10 each leg','Romanian Deadlift or Lying Leg Curl — 3 × 8–12','Leg Extension — 2 × 12–15','Seated Calf Raise — 3–4 × 12–20','Cable Crunch + Hanging Leg Raise — 3 sets each'],stretches:['Couch stretch — 30–60 seconds each side','Hamstring stretch — 30–60 seconds each side','Figure-4 glute stretch — 30–60 seconds each side','Calf stretch — 30–60 seconds each side']},
-      {day:'Sunday',mode:'Full Rest',why:'No gym. No sprinting. No hard training. Recover and prep the week.',warmup:[],speedTitle:'Optional Easy Recovery',speed:['Walk — 15–30 minutes','Couch stretch — 1 minute each side','Hamstring stretch — 1 minute each side','Figure-4 stretch — 1 minute each side','Calf stretch — 1 minute each side','Child’s pose — 1 minute'],liftTitle:'Gym Work',lift:['No gym','No sprinting','No hard training'],stretches:[]}
-    ];
+      {
+            "day": "Monday",
+            "mode": "Acceleration + Upper",
+            "why": "First-step speed, acceleration, and upper-body strength. Speed block before upper workout.",
+            "warmup": [
+                  "Light jog or bike — 2–3 minutes",
+                  "Leg swings forward/back — 10 each leg",
+                  "Leg swings side-to-side — 10 each leg",
+                  "Walking lunges with reach — 10 each leg",
+                  "World’s greatest stretch — 5 each side",
+                  "Hip circles — 10 each direction",
+                  "Ankle rocks — 10 each side",
+                  "A-skips — 2 × 15 yards",
+                  "High knees — 2 × 15 yards",
+                  "Butt kicks — 2 × 15 yards",
+                  "Build-up runs — 2 × 20 yards"
+            ],
+            "speedTitle": "Speed Block",
+            "speed": [
+                  "Wall drives — 2 × 5 each leg",
+                  "Falling starts — 3 × 10 yards",
+                  "10-yard starts — 4–6 reps",
+                  "20-yard sprints — 3–4 reps",
+                  "Hill sprints or light sled sprints — 4 × 10–15 yards",
+                  "Broad jumps — 3 × 3",
+                  "Pogo jumps — 2 × 20 seconds"
+            ],
+            "liftTitle": "Upper Workout",
+            "lift": [
+                  "Incline Dumbbell Press — 4 × 6–10",
+                  "Machine Shoulder Press — 3–4 × 8–12",
+                  "Weighted Pull-Ups or Lat Pulldown — 4 × 6–10",
+                  "Chest-Supported Row — 3–4 × 8–12",
+                  "Cable Lateral Raise — 3–4 × 10–15",
+                  "Overhead Cable Triceps Extension — 3 × 10–12",
+                  "Bayesian Cable Curl — 3 × 10–15"
+            ],
+            "stretches": [
+                  "Couch stretch — 30–60 seconds each side",
+                  "Hamstring stretch — 30–60 seconds each side",
+                  "Calf stretch — 30–60 seconds each side",
+                  "Doorway chest stretch — 30–60 seconds each side"
+            ]
+      },
+      {
+            "day": "Tuesday",
+            "mode": "Lower Strength",
+            "why": "Build leg strength without sprinting. Leave 1–2 reps in the tank on heavy leg work.",
+            "warmup": [
+                  "Light bike or walk — 3–5 minutes",
+                  "Leg swings — 10 each way",
+                  "Ankle rocks — 10 each side",
+                  "Walking lunges — 10 each leg",
+                  "Glute bridges — 2 × 10",
+                  "Bodyweight squats — 2 × 10"
+            ],
+            "speedTitle": "Speed Work",
+            "speed": [
+                  "No sprinting today",
+                  "Easy warm-up only"
+            ],
+            "liftTitle": "Lower Workout",
+            "lift": [
+                  "Smith Machine Squat / Hack Squat / Pendulum Squat — 4 × 6–10",
+                  "Romanian Deadlift — 3–4 × 8–12",
+                  "Seated Leg Curl — 3 × 10–15",
+                  "Leg Extension — 2–3 × 10–15",
+                  "Standing Calf Raise — 4 × 12–20",
+                  "Cable Crunch — 3 × 10–15"
+            ],
+            "stretches": [
+                  "Couch stretch — 30–60 seconds each side",
+                  "Hamstring stretch — 30–60 seconds each side",
+                  "Figure-4 glute stretch — 30–60 seconds each side",
+                  "Calf stretch — 30–60 seconds each side"
+            ]
+      },
+      {
+            "day": "Wednesday",
+            "mode": "Recovery + Mobility",
+            "why": "Recover so Thursday speed is actually fast. No hard sprinting and no hard lifting.",
+            "warmup": [
+                  "Easy walk — 15–25 minutes OR easy bike — 15–25 minutes OR light jog — 10–15 minutes"
+            ],
+            "speedTitle": "Mobility",
+            "speed": [
+                  "90/90 hip switches — 2 × 10 each side",
+                  "Deep squat hold — 2 × 45 seconds",
+                  "Couch stretch — 1 minute each side",
+                  "Hamstring stretch — 1 minute each side",
+                  "Calf stretch — 1 minute each side",
+                  "Child’s pose — 1 minute",
+                  "Glute bridges — 2 × 15",
+                  "Side plank — 2 × 30 seconds each side"
+            ],
+            "liftTitle": "Strength Work",
+            "lift": [
+                  "No hard lifting today",
+                  "No hard sprinting today",
+                  "Recovery only"
+            ],
+            "stretches": []
+      },
+      {
+            "day": "Thursday",
+            "mode": "Max Speed + Push",
+            "why": "Top speed, sprint mechanics, and push strength. Speed block before push workout.",
+            "warmup": [
+                  "Light jog or bike — 2–3 minutes",
+                  "Leg swings forward/back — 10 each leg",
+                  "Leg swings side-to-side — 10 each leg",
+                  "Walking lunges with reach — 10 each leg",
+                  "World’s greatest stretch — 5 each side",
+                  "Hip circles — 10 each direction",
+                  "Ankle rocks — 10 each side",
+                  "A-skips — 2 × 15 yards",
+                  "High knees — 2 × 15 yards",
+                  "Butt kicks — 2 × 15 yards",
+                  "Build-up runs — 2–3 × 20 yards"
+            ],
+            "speedTitle": "Speed Block",
+            "speed": [
+                  "A-skips — 2 × 15 yards",
+                  "30-yard build-ups — 3 reps",
+                  "Flying 10s — 4–5 reps",
+                  "Wicket runs — 4 reps",
+                  "Box jumps — 3 × 3",
+                  "Med-ball chest pass or explosive push-ups — 3 × 5"
+            ],
+            "liftTitle": "Push Workout",
+            "lift": [
+                  "Flat or Incline Barbell Bench Press — 4 × 6–10",
+                  "Dips or Machine Chest Press — 3 × 8–12",
+                  "Machine Shoulder Press — 3–4 × 8–12",
+                  "Cable Lateral Raise — 4 × 12–15",
+                  "Overhead Cable Triceps Extension — 3–4 × 10–15",
+                  "Tricep Kickback or Pushdown — 3 × 12–15"
+            ],
+            "stretches": [
+                  "Couch stretch — 30–60 seconds each side",
+                  "Calf stretch — 30–60 seconds each side",
+                  "Doorway chest stretch — 30–60 seconds each side",
+                  "Cross-body shoulder stretch — 30–60 seconds each side"
+            ]
+      },
+      {
+            "day": "Friday",
+            "mode": "Pull",
+            "why": "Back, rear delts, biceps, and core. No hard speed work. Save legs for Saturday.",
+            "warmup": [
+                  "Arm circles — 15 forward, 15 backward",
+                  "Band pull-aparts or light face pulls — 2 × 15",
+                  "Cat-cow stretch — 10 reps",
+                  "Child’s pose lat stretch — 30 seconds"
+            ],
+            "speedTitle": "Optional After",
+            "speed": [
+                  "Light mobility — 10 minutes",
+                  "Easy walk — 10–15 minutes"
+            ],
+            "liftTitle": "Pull Workout",
+            "lift": [
+                  "Pull-Ups or Lat Pulldown — 4 × 6–10",
+                  "Chest-Supported Row or Cable Row — 3–4 × 8–12",
+                  "Reverse Pec Deck or Reverse Cable Crossover — 3–4 × 12–15",
+                  "Face Pulls — 3 × 12–15",
+                  "Bayesian Cable Curl or Incline DB Curl — 3–4 × 10–15",
+                  "Hanging Leg Raise — 3 × 10–15"
+            ],
+            "stretches": [
+                  "Child’s pose lat stretch — 30–60 seconds",
+                  "Cross-body shoulder stretch — 30–60 seconds each side",
+                  "Forearm stretch — 30–60 seconds each side",
+                  "Hamstring stretch if legs feel tight — 30–60 seconds each side"
+            ]
+      },
+      {
+            "day": "Saturday",
+            "mode": "Agility + Explosive Legs",
+            "why": "Cutting, braking, lateral power, single-leg explosiveness, and legs.",
+            "warmup": [
+                  "Light jog or bike — 2–3 minutes",
+                  "Leg swings forward/back — 10 each leg",
+                  "Leg swings side-to-side — 10 each leg",
+                  "Walking lunges with reach — 10 each leg",
+                  "World’s greatest stretch — 5 each side",
+                  "Hip circles — 10 each direction",
+                  "Ankle rocks — 10 each side",
+                  "A-skips — 2 × 15 yards",
+                  "High knees — 2 × 15 yards",
+                  "Butt kicks — 2 × 15 yards",
+                  "Build-up runs — 2 × 20 yards"
+            ],
+            "speedTitle": "Athletic Block",
+            "speed": [
+                  "Deceleration stops — 4 reps",
+                  "5-10-5 shuttle — 4 reps",
+                  "Lateral bounds — 3 × 4 each side",
+                  "Single-leg broad jumps — 3 × 3 each leg"
+            ],
+            "liftTitle": "Leg Workout",
+            "lift": [
+                  "Leg Press — 4 × 8–12",
+                  "Bulgarian Split Squat or Walking Lunges — 3 × 8–10 each leg",
+                  "Romanian Deadlift or Lying Leg Curl — 3 × 8–12",
+                  "Leg Extension — 2 × 12–15",
+                  "Seated Calf Raise — 3–4 × 12–20",
+                  "Cable Crunch + Hanging Leg Raise — 3 sets each"
+            ],
+            "stretches": [
+                  "Couch stretch — 30–60 seconds each side",
+                  "Hamstring stretch — 30–60 seconds each side",
+                  "Figure-4 glute stretch — 30–60 seconds each side",
+                  "Calf stretch — 30–60 seconds each side"
+            ]
+      },
+      {
+            "day": "Sunday",
+            "mode": "Full Rest + Weekly Reset",
+            "why": "Recover, church, clean, review, and plan the next week. No gym and no hard training.",
+            "warmup": [],
+            "speedTitle": "Optional Easy Recovery",
+            "speed": [
+                  "Walk — 15–30 minutes",
+                  "Couch stretch — 1 minute each side",
+                  "Hamstring stretch — 1 minute each side",
+                  "Figure-4 stretch — 1 minute each side",
+                  "Calf stretch — 1 minute each side",
+                  "Child’s pose — 1 minute"
+            ],
+            "liftTitle": "Gym Work",
+            "lift": [
+                  "No gym",
+                  "No sprinting",
+                  "No hard running",
+                  "No secret leg day"
+            ],
+            "stretches": []
+      }
+];
     const restTimes = ['10-yard starts — rest 60–90 seconds','20-yard sprints — rest 90–120 seconds','Flying 10s — rest 2–3 minutes','Hill or sled sprints — rest 90–120 seconds','5-10-5 shuttle — rest about 2 minutes','Jumps — rest enough that every rep is explosive'];
     const sprintResets = ['Walk back slowly','Shake legs out','Light ankle bounces — 10 seconds','Deep breaths','Reset posture'];
     const legSetResets = ['Hip flexor pulse stretch — 10 seconds each side','Calf rocks — 10 each side','Bodyweight squat hold — 10–15 seconds','Hamstring scoop walk — 10 yards','Glute bridge — 10 reps'];
@@ -309,10 +1417,17 @@
       ['Doorway Chest Stretch','Forearm on doorway, step forward slightly, keep shoulder down, and feel stretch across chest.'],
       ['Cross-Body Shoulder Stretch','Bring one arm across your body and gently pull it closer with the other arm.']
     ];
-    function defaultState(){return{mission:'',missionLane:'Training',statuses:{},selectedScheduleMode:'',selectedTrainingDay:(new Date().getDay()===0?6:new Date().getDay()-1),skillData:{},studyFolders:[{name:'Math',tasks:[],notes:[],flashcards:[],sessions:0},{name:'Science',tasks:[],notes:[],flashcards:[],sessions:0},{name:'English',tasks:[],notes:[],flashcards:[],sessions:0},{name:'History',tasks:[],notes:[],flashcards:[],sessions:0}],selectedStudyFolder:0,currentFlash:0,flashFlipped:false,faith:{},business:{products:[]},ideas:[],review:{},trainingLogs:[]};}
+    function defaultState(){return{mission:'',missionLane:'Training',statuses:{},selectedScheduleMode:'',selectedTrainingDay:(new Date().getDay()===0?6:new Date().getDay()-1),selectedSkill:'Speaking',skillData:{},studyFolders:[{name:'Math',tasks:[],notes:[],flashcards:[],sessions:0}],selectedStudyFolder:0,currentFlash:0,flashFlipped:false,faith:{},leadership:{logs:[]},business:{products:[]},ideas:[],review:{},trainingLogs:[],backupMeta:{lastSavedAt:'',lastBackupAt:''}};}
     let state = loadState(); let focusSeconds=1500; let focusInterval=null;
     function loadState(){try{return Object.assign(defaultState(),JSON.parse(localStorage.getItem(STORE_KEY)||'{}'));}catch(e){return defaultState();}}
-    function saveState(){localStorage.setItem(STORE_KEY,JSON.stringify(state));renderHome();renderProgress();}
+    function saveState(){
+      state.backupMeta=state.backupMeta||{};
+      state.backupMeta.lastSavedAt=new Date().toISOString();
+      localStorage.setItem(STORE_KEY,JSON.stringify(state));
+      renderHome();
+      renderProgress();
+      updateSaveStatus();
+    }
     function $(id){return document.getElementById(id);} function clean(v){return String(v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
     function autoScheduleMode(){const d=new Date().getDay();return ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][d];}
     function currentModeKey(){return scheduleModes[state.selectedScheduleMode]?state.selectedScheduleMode:autoScheduleMode();} function tomorrowModeKey(){const d=(new Date().getDay()+1)%7;return ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][d];}
@@ -322,7 +1437,7 @@
     function statusCard(a,k,i,time,title,note){const s=getStatus(a,k,i);return`<div class="status-card ${statusClass(s)}" data-status-area="${a}" data-status-key="${k}" data-status-index="${i}"><div class="status-time">${clean(time)}</div><div><div class="status-title">${clean(title)}</div><div class="status-note">${clean(note)}</div></div><div class="status-pill">${statusNames[s]}</div></div>`;}
     function trainingProgress(day){const sections=['warmup','speed','lift','stretches'];let done=0,total=0;sections.forEach(sec=>{const items=day[sec]||[];total+=items.length;for(let i=0;i<items.length;i++)if(getStatus('training-'+sec,day.day,i)===2)done++;});return total?Math.round(done/total*100):0;}
     function renderChart(id){const box=$(id);if(!box)return;const keys=['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];box.innerHTML=days.map((day,i)=>{const key=keys[i];const p=progressFor('schedule',key,scheduleModes[key].blocks.length);return`<div class="chart-bar" style="height:${Math.max(8,p)}%"><span>${day}</span></div>`;}).join('');}
-    function renderHome(){const key=currentModeKey(),mode=scheduleModes[key],p=progressFor('schedule',key,mode.blocks.length),train=trainingWeek[state.selectedTrainingDay]||trainingWeek[0],trainP=trainingProgress(train),faithP=progressFor('faith','daily',faithPathItems.length);if($('missionDisplay'))$('missionDisplay').textContent=state.mission||'No mission set yet.';if($('homeConsistency'))$('homeConsistency').textContent=p+'%';if($('homeConsistencyFill'))$('homeConsistencyFill').style.width=p+'%';if($('miniSchedule'))$('miniSchedule').textContent=p+'%';if($('miniTraining'))$('miniTraining').textContent=trainP+'%';if($('miniFaith'))$('miniFaith').textContent=faithP+'%';if($('homeTrainingMode'))$('homeTrainingMode').textContent=train.mode;if($('homeTrainingWhy'))$('homeTrainingWhy').textContent=train.why;if($('homeNextBlock')){const next=mode.blocks.find((b,i)=>getStatus('schedule',key,i)!==2)||mode.blocks[0];$('homeNextBlock').innerHTML=`<div class="list-item"><span><strong>${clean(next[0])}</strong><br>${clean(next[1])}<br><span class="muted">${clean(next[2])}</span></span><span class="tag goldtag">Next</span></div>`;}if($('tomorrowPreviewHome')){const t=scheduleModes[tomorrowModeKey()];$('tomorrowPreviewHome').innerHTML=t.blocks.slice(0,5).map(b=>`<div class="list-item"><span><strong>${clean(b[0])}</strong><br>${clean(b[1])}</span><span class="tag goldtag">${clean(t.label)}</span></div>`).join('');}renderChart('homeChart');renderChart('reviewChart');}
+    function renderHome(){const key=currentModeKey(),mode=scheduleModes[key],p=progressFor('schedule',key,mode.blocks.length),todayIndex=['monday','tuesday','wednesday','thursday','friday','saturday','sunday'].indexOf(key),train=trainingWeek[todayIndex>=0?todayIndex:state.selectedTrainingDay]||trainingWeek[0],trainP=trainingProgress(train),faithP=progressFor('faith','daily',faithPathItems.length);if($('missionDisplay'))$('missionDisplay').textContent=state.mission||'No mission set yet.';if($('homeConsistency'))$('homeConsistency').textContent=p+'%';if($('homeConsistencyFill'))$('homeConsistencyFill').style.width=p+'%';if($('miniSchedule'))$('miniSchedule').textContent=p+'%';if($('miniTraining'))$('miniTraining').textContent=trainP+'%';if($('miniFaith'))$('miniFaith').textContent=faithP+'%';if($('homeTrainingMode'))$('homeTrainingMode').textContent=train.mode;if($('homeTrainingWhy'))$('homeTrainingWhy').textContent=train.why;if($('homeNextBlock')){const next=mode.blocks.find((b,i)=>getStatus('schedule',key,i)!==2)||mode.blocks[0];$('homeNextBlock').innerHTML=`<div class="list-item"><span><strong>${clean(next[0])}</strong><br>${clean(next[1])}<br><span class="muted">${clean(next[2])}</span></span><span class="tag goldtag">Next</span></div>`;}if($('tomorrowPreviewHome')){const t=scheduleModes[tomorrowModeKey()];$('tomorrowPreviewHome').innerHTML=t.blocks.slice(0,5).map(b=>`<div class="list-item"><span><strong>${clean(b[0])}</strong><br>${clean(b[1])}</span><span class="tag goldtag">${clean(t.label)}</span></div>`).join('');}renderChart('homeChart');renderChart('reviewChart');}
     function renderSchedule(){const select=$('scheduleModeSelect');if(select){select.innerHTML=Object.keys(scheduleModes).map(k=>`<option value="${k}">${scheduleModes[k].label}</option>`).join('');select.value=currentModeKey();}const key=currentModeKey(),mode=scheduleModes[key],p=progressFor('schedule',key,mode.blocks.length);if($('scheduleTitle'))$('scheduleTitle').textContent=mode.label;if($('scheduleBlocks'))$('scheduleBlocks').innerHTML=mode.blocks.map((b,i)=>statusCard('schedule',key,i,b[0],b[1],b[2])).join('');if($('scheduleProgressFill'))$('scheduleProgressFill').style.width=p+'%';if($('scheduleProgressText'))$('scheduleProgressText').textContent=p+'% done';}
     function splitExerciseLine(text){
       const raw=String(text||'');
@@ -343,12 +1458,59 @@
     function renderTraining(){if($('trainingTabs'))$('trainingTabs').innerHTML=trainingWeek.map((d,i)=>`<button class="tab ${i===state.selectedTrainingDay?'active':''}" data-training-tab="${i}">${d.day}</button>`).join('');const day=trainingWeek[state.selectedTrainingDay]||trainingWeek[0];if($('trainingTitle'))$('trainingTitle').textContent=day.day+' — '+day.mode;if($('trainingWhy'))$('trainingWhy').textContent=day.why;if($('trainingRules'))$('trainingRules').innerHTML=mainTrainingRules.slice(0,4).map(x=>`<div class="rule-line">${clean(x)}</div>`).join('');if($('speedSectionTitle'))$('speedSectionTitle').textContent=day.speedTitle||'Speed / Athletic Work';if($('liftSectionTitle'))$('liftSectionTitle').textContent=day.liftTitle||'Gym Work';if($('warmupSummary'))$('warmupSummary').textContent=(day.warmup||[]).length+' items • open when ready';if($('speedSummary'))$('speedSummary').textContent=(day.speed||[]).length+' items • fast reps, full rest';if($('liftSummary'))$('liftSummary').textContent=(day.lift||[]).length+' items • controlled reps';if($('stretchSummary'))$('stretchSummary').textContent=(day.stretches||[]).length+' items • after training';if($('warmupList'))$('warmupList').innerHTML=sectionCards('warmup',day,'Warm-Up','Prep quality movement.');if($('speedList'))$('speedList').innerHTML=sectionCards('speed',day,day.speedTitle||'Speed','Fast reps. Full rest. Stop if form gets sloppy.');if($('liftList'))$('liftList').innerHTML=sectionCards('lift',day,day.liftTitle||'Gym','Controlled reps. Leave 1–2 reps in the tank on heavy sets.');if($('stretchList'))$('stretchList').innerHTML=sectionCards('stretches',day,'Stretch','Easy static stretch after training.');if($('restTimesList'))$('restTimesList').innerHTML=compactLines(restTimes);if($('resetList'))$('resetList').innerHTML='<div class="compact-line"><strong>Between sprint reps</strong><br>'+sprintResets.map(clean).join('<br>')+'</div><div class="compact-line"><strong>Between heavy leg sets</strong><br>'+legSetResets.map(clean).join('<br>')+'</div>';if($('exerciseHowToList'))$('exerciseHowToList').innerHTML=detailLines(exerciseHowTos);if($('stretchHowToList'))$('stretchHowToList').innerHTML=detailLines(stretchHowTos);renderTrainingLogs();}
     function saveTrainingLog(){const focus=$('trainingFocus').value.trim(),duration=$('trainingDuration').value.trim(),notes=$('trainingNotes').value.trim();if(!focus&&!duration&&!notes)return;state.trainingLogs.unshift({focus:focus||trainingWeek[state.selectedTrainingDay].mode,duration,notes,date:new Date().toLocaleDateString()});state.trainingLogs=state.trainingLogs.slice(0,10);['trainingFocus','trainingDuration','trainingNotes'].forEach(id=>$(id).value='');saveState();renderTrainingLogs();}
     function renderTrainingLogs(){if(!$('trainingLogs'))return;$('trainingLogs').innerHTML=state.trainingLogs.length?state.trainingLogs.slice(0,5).map(log=>`<div class="list-item"><span><strong>${clean(log.focus)}</strong><br><span class="muted">${clean(log.duration)} • ${clean(log.date)}</span><br>${clean(log.notes)}</span></div>`).join(''):'<p class="muted">No training logs yet.</p>';}
-    function renderSkills(){if(!$('skillCards'))return;$('skillCards').innerHTML=skills.map(skill=>{const key=skill.toLowerCase().replaceAll(' ','_').replaceAll('/','_'),data=state.skillData[key]||{goal:'',notes:'',logs:[]};return`<div class="card"><h2 class="${skill==='Chess'||skill==='Drawing'?'blue':'gold'}">${clean(skill)}</h2><input id="${key}Goal" placeholder="Goal" value="${clean(data.goal)}"><textarea id="${key}Notes" placeholder="Notes, mistakes, lessons..." class="thin-gap">${clean(data.notes)}</textarea><div class="form-row section-gap"><input id="${key}LogFocus" placeholder="Practice focus"><input id="${key}LogMinutes" placeholder="Minutes"></div><textarea id="${key}LogNotes" placeholder="Practice log notes..." class="thin-gap"></textarea><button class="btn section-gap" data-skill-log="${key}">Add Practice Log</button><div class="list section-gap" id="${key}Logs"></div></div>`;}).join('');skills.forEach(skill=>renderSkillLogs(skill.toLowerCase().replaceAll(' ','_').replaceAll('/','_')));}
-    function saveSkills(){skills.forEach(skill=>{const key=skill.toLowerCase().replaceAll(' ','_').replaceAll('/','_'),old=state.skillData[key]||{logs:[]};state.skillData[key]={goal:$(key+'Goal')?.value||'',notes:$(key+'Notes')?.value||'',logs:old.logs||[]};});saveState();}
-    function addSkillLog(key){if(!state.skillData[key])state.skillData[key]={logs:[]};state.skillData[key].logs.unshift({focus:$(key+'LogFocus')?.value||'',minutes:$(key+'LogMinutes')?.value||'',notes:$(key+'LogNotes')?.value||'',date:new Date().toLocaleDateString()});state.skillData[key].logs=state.skillData[key].logs.slice(0,6);saveState();renderSkillLogs(key);}
-    function renderSkillLogs(key){const box=$(key+'Logs');if(!box)return;const logs=(state.skillData[key]&&state.skillData[key].logs)||[];box.innerHTML=logs.length?logs.map(log=>`<div class="list-item"><span><strong>${clean(log.focus)}</strong><br><span class="muted">${clean(log.minutes)} min • ${clean(log.date)}</span><br>${clean(log.notes)}</span></div>`).join(''):'<p class="muted">No logs yet.</p>';}
+    function skillKey(skill){return skill.toLowerCase().replaceAll(' ','_').replaceAll('/','_');}
+    function skillPurpose(skill){return ({Speaking:'Conversation, confidence, stories, questions, and leadership presence.',Reading:'Wisdom, vocabulary, focus, discipline, and better thinking.',Soccer:'Touches, weak foot, control, first touch, finishing, and game sharpness.',Golf:'Swing feel, short game, putting, course strategy, and calm focus.',Chess:'Calculation, patience, pattern recognition, and strategic thinking.',Piano:'Coordination, rhythm, discipline, and calm skill practice.',Drawing:'Creativity, observation, patience, and visual control.'})[skill]||'Skill practice.';}
+    function parseDrillBank(value){return String(value||'').split('\n').map(x=>x.trim()).filter(Boolean);} 
+    function ensureSkillData(key){
+      if(!state.skillData)state.skillData={};
+      if(!state.skillData[key])state.skillData[key]={improve:'',good:'',mistakes:'',drill:'',challenge:'',notes:'',logs:[],drillBank:[],currentDrill:''};
+      const data=state.skillData[key];
+      if(!Array.isArray(data.logs))data.logs=[];
+      if(!Array.isArray(data.drillBank))data.drillBank=parseDrillBank(data.drillBank);
+      if(!data.drillBank.length && data.drill)data.drillBank=[data.drill];
+      if(typeof data.currentDrill!=='string')data.currentDrill='';
+      return data;
+    }
+    function renderSkills(){
+      if(!$('skillSelectorGrid')||!$('skillWorkspace'))return;
+      if(!state.selectedSkill||!skills.includes(state.selectedSkill))state.selectedSkill='Speaking';
+      $('skillSelectorGrid').innerHTML=skills.map(skill=>{const key=skillKey(skill),data=ensureSkillData(key),core=['Speaking','Reading','Soccer'].includes(skill),drillCount=(data.drillBank||[]).length;return`<button class="skill-pick ${skill===state.selectedSkill?'active':''}" data-skill-select="${clean(skill)}"><strong>${clean(skill)}</strong><span>${core?'Daily Core':'Optional'} • ${data.logs.length} logs • ${drillCount} drills</span></button>`;}).join('');
+      const skill=state.selectedSkill,key=skillKey(skill),data=ensureSkillData(key),logs=data.logs||[],bank=data.drillBank||[],current=data.currentDrill||data.drill||'';
+      const drillPreview=bank.length?bank.slice(0,6).map((drill,i)=>`<div class="drill-chip"><strong>${clean(drill)}</strong><span>#${i+1}</span></div>`).join('')+(bank.length>6?`<div class="section-empty">+ ${bank.length-6} more drills saved</div>`:''):'<div class="section-empty">Add drills below, one per line. Then hit Randomize Drill.</div>';
+      $('skillWorkspace').innerHTML=`<div class="card skill-workspace"><div class="header" style="margin-bottom:12px"><div><div class="eyebrow">Current Skill</div><h2 class="gold">${clean(skill)}</h2><p class="muted">${clean(skillPurpose(skill))}</p></div><span class="tag ${['Speaking','Reading','Soccer'].includes(skill)?'goldtag':'bluetag'}">${['Speaking','Reading','Soccer'].includes(skill)?'Daily Core':'Optional'}</span></div><div class="drill-hero"><div class="eyebrow">Random Drill Picker</div><p class="muted">Click randomize whenever you want a fresh drill from your saved drill bank.</p><div class="drill-hero-title">${current?clean(current):'No drill picked yet.'}</div><div class="chip-row"><button class="btn gold" data-random-drill="${key}">Randomize Drill</button><button class="btn" data-copy-drill-to-log="${key}">Use For Practice Log</button></div></div><div class="data-grid section-gap"><div class="data-card"><strong>${logs.length}</strong><span class="muted">Practice Logs</span></div><div class="data-card"><strong>${bank.length}</strong><span class="muted">Saved Drills</span></div><div class="data-card"><strong>${clean(data.challenge?'Set':'—')}</strong><span class="muted">Challenge</span></div></div><div class="accordion-grid section-gap"><details class="accordion-card" open><summary><span class="accordion-head"><span class="accordion-icon">01</span><span><span class="accordion-title">Improve + Strengths</span><span class="accordion-sub">What to fix and what is working</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div class="field-grid"><div class="field-card"><div class="field-label">Need to improve</div><textarea id="${key}Improve" placeholder="What needs work?">${clean(data.improve)}</textarea></div><div class="field-card"><div class="field-label">Doing good</div><textarea id="${key}Good" placeholder="What is improving or working?">${clean(data.good)}</textarea></div><div class="field-card"><div class="field-label">Mistakes to fix</div><textarea id="${key}Mistakes" placeholder="Repeated mistake, bad habit, weak area...">${clean(data.mistakes)}</textarea></div></div></div></details><details class="accordion-card" open><summary><span class="accordion-head"><span class="accordion-icon">02</span><span><span class="accordion-title">Drill Bank + Challenge</span><span class="accordion-sub">Save drills and reroll one whenever you want</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div class="field-grid"><div class="field-card"><div class="field-label">Drill bank — one per line</div><textarea id="${key}DrillBank" placeholder="Example:\nWeak-foot wall passes — 100 reps\nRead 10 pages and write 3 lessons\nTell a 60-second story out loud">${clean(bank.join('\n'))}</textarea><button class="btn gold section-gap" data-save-drill-bank="${key}">Save Drill Bank</button></div><div class="field-card"><div class="field-label">Current challenge</div><textarea id="${key}Challenge" placeholder="A challenge that pushes you today or this week...">${clean(data.challenge)}</textarea></div><div class="field-card"><div class="field-label">Notes</div><textarea id="${key}Notes" placeholder="Extra notes, ideas, lessons...">${clean(data.notes)}</textarea></div></div><div class="drill-bank-list">${drillPreview}</div></div></details><details class="accordion-card"><summary><span class="accordion-head"><span class="accordion-icon">03</span><span><span class="accordion-title">Practice Log</span><span class="accordion-sub">No timer here — use Focus Mode</span></span></span><span class="accordion-chevron">›</span></summary><div class="accordion-body"><div class="form-row"><input id="${key}LogFocus" placeholder="What did you practice?"><input id="${key}LogResult" placeholder="Result / lesson"></div><textarea id="${key}LogNotes" placeholder="Quick notes from the session..." class="thin-gap"></textarea><button class="btn gold section-gap" data-skill-log="${key}">Add Practice Log</button><div class="log-timeline section-gap" id="${key}Logs"></div></div></details></div></div>`;
+      renderSkillLogs(key);
+    }
+    function saveSkills(shouldRender=true){
+      const skill=state.selectedSkill||'Speaking',key=skillKey(skill),data=ensureSkillData(key);
+      ['Improve','Good','Mistakes','Challenge','Notes'].forEach(part=>{const el=$(key+part);if(el)data[part.toLowerCase()]=el.value;});
+      const bankEl=$(key+'DrillBank');
+      if(bankEl)data.drillBank=parseDrillBank(bankEl.value);
+      if(!data.currentDrill && data.drillBank.length){data.currentDrill=data.drillBank[0];data.drill=data.currentDrill;}
+      saveState();
+      if(shouldRender)renderSkills();
+    }
+    function randomizeSkillDrill(key){
+      const data=ensureSkillData(key),bankEl=$(key+'DrillBank');
+      if(bankEl)data.drillBank=parseDrillBank(bankEl.value);
+      const bank=data.drillBank||[];
+      if(!bank.length){alert('Add a few drills first, one per line.');return;}
+      let next=bank[Math.floor(Math.random()*bank.length)];
+      if(bank.length>1){let guard=0;while(next===data.currentDrill&&guard<8){next=bank[Math.floor(Math.random()*bank.length)];guard++;}}
+      data.currentDrill=next;
+      data.drill=next;
+      saveState();
+      renderSkills();
+    }
+    function copyCurrentDrillToLog(key){
+      const data=ensureSkillData(key),drill=data.currentDrill||data.drill||'';
+      if(!drill){alert('Randomize a drill first.');return;}
+      const focusEl=$(key+'LogFocus');
+      if(focusEl)focusEl.value=drill;
+    }
+    function addSkillLog(key){const data=ensureSkillData(key);const focus=$(key+'LogFocus')?.value||'',result=$(key+'LogResult')?.value||'',notes=$(key+'LogNotes')?.value||'';if(!focus&&!result&&!notes)return;data.logs.unshift({focus,result,notes,date:new Date().toLocaleDateString()});data.logs=data.logs.slice(0,8);['LogFocus','LogResult','LogNotes'].forEach(part=>{const el=$(key+part);if(el)el.value='';});saveState();renderSkillLogs(key);renderSkills();}
+    function renderSkillLogs(key){const box=$(key+'Logs');if(!box)return;const logs=(state.skillData[key]&&state.skillData[key].logs)||[];box.innerHTML=logs.length?logs.map(log=>`<div class="log-card"><strong>${clean(log.focus||'Practice')}</strong><div class="date">${clean(log.date)}${log.result?' • '+clean(log.result):''}</div>${log.notes?'<p class="muted thin-gap">'+clean(log.notes)+'</p>':''}</div>`).join(''):'<div class="section-empty">No practice logs yet.</div>';}
     function generateDrawingPrompt(){const subjects=['Knight','Samurai','Robot','Dragon','Tiger','Wizard','Athlete','Explorer','Angel','Monk','Detective','Supercar','Castle','Spaceship'];const actions=['training at sunrise','standing in the rain','walking through a ruined city','protecting treasure','studying an ancient book','fighting through a storm','resting after battle','entering a dark cathedral'];const styles=['cinematic','realistic','comic-book style','dark fantasy','minimalist sketch','high-detail pencil study','dramatic lighting'];$('drawingPromptBox').textContent=subjects[Math.floor(Math.random()*subjects.length)]+' '+actions[Math.floor(Math.random()*actions.length)]+' — '+styles[Math.floor(Math.random()*styles.length)];}
-    function activeFolder(){state.studyFolders=Array.isArray(state.studyFolders)?state.studyFolders:[];if(!state.studyFolders[state.selectedStudyFolder])state.selectedStudyFolder=0;return state.studyFolders[state.selectedStudyFolder];}
+    function activeFolder(){state.studyFolders=Array.isArray(state.studyFolders)?state.studyFolders:[];if(!state.studyFolders.length)state.studyFolders=[{name:'Math',tasks:[],notes:[],flashcards:[],sessions:0}];if(!state.studyFolders[state.selectedStudyFolder])state.selectedStudyFolder=0;return state.studyFolders[state.selectedStudyFolder];}
     function renderStudyFolders(){const grid=$('studyFolderGrid');if(!grid)return;state.studyFolders=Array.isArray(state.studyFolders)?state.studyFolders:[];grid.innerHTML=state.studyFolders.map((folder,i)=>{const done=(folder.tasks||[]).filter(t=>t.done).length,total=(folder.tasks||[]).length,p=total?Math.round(done/total*100):0;return`<div class="folder-card ${i===state.selectedStudyFolder?'active':''}"><button style="all:unset;display:block;width:100%;cursor:pointer" data-study-folder="${i}"><strong>${clean(folder.name)}</strong><span class="muted">${p}% tasks • ${folder.sessions||0} sessions</span><div class="bar section-gap"><div class="fill" style="width:${p}%"></div></div></button><button class="delete-mini section-gap" data-delete-folder="${i}">Delete Folder</button></div>`;}).join('');renderActiveStudyFolder();}
     function renderActiveStudyFolder(){const folder=activeFolder();if(!folder)return;if($('activeStudyTitle'))$('activeStudyTitle').textContent=folder.name;if($('activeStudyMeta'))$('activeStudyMeta').textContent=(folder.tasks||[]).length+' tasks • '+(folder.notes||[]).length+' notes • '+(folder.flashcards||[]).length+' flashcards';if($('studyTaskList'))$('studyTaskList').innerHTML=(folder.tasks||[]).length?folder.tasks.map((task,i)=>`<div class="list-item"><span><strong>${clean(task.text)}</strong><br><span class="muted">${clean(task.type)}</span></span><span><button class="btn small ${task.done?'gold':''}" data-study-task="${i}">${task.done?'Done':'Mark Done'}</button> <button class="delete-mini" data-delete-study-task="${i}">Delete</button></span></div>`).join(''):'<p class="muted">No tasks yet.</p>';if($('studyNotesList'))$('studyNotesList').innerHTML=(folder.notes||[]).length?folder.notes.slice(0,5).map((note,i)=>`<div class="list-item"><span>${clean(note.text)}<br><span class="muted">${clean(note.date)}</span></span><button class="delete-mini" data-delete-study-note="${i}">Delete</button></div>`).join(''):'<p class="muted">No notes yet.</p>';renderFlashcard();}
     function addStudyFolder(){const typed=$('newStudyFolderName')?.value.trim()||'',name=typed||prompt('Subject folder name:','New Subject');if(!name)return;state.studyFolders.push({name,tasks:[],notes:[],flashcards:[],sessions:0});state.selectedStudyFolder=state.studyFolders.length-1;if($('newStudyFolderName'))$('newStudyFolderName').value='';saveState();renderStudyFolders();}
@@ -357,22 +1519,405 @@
     function addFlashcard(){const folder=activeFolder(),front=$('flashFront')?.value.trim(),back=$('flashBack')?.value.trim();if(!folder||!front||!back)return;folder.flashcards.unshift({front,back});state.currentFlash=0;state.flashFlipped=false;$('flashFront').value='';$('flashBack').value='';saveState();renderStudyFolders();}
     function renderFlashcard(){const box=$('flashcardViewer'),folder=activeFolder(),cards=(folder&&folder.flashcards)||[];if(!box)return;if(!cards.length){box.textContent='No flashcards yet.';return;}if(state.currentFlash>=cards.length)state.currentFlash=0;const card=cards[state.currentFlash];box.innerHTML='<div>'+clean(state.flashFlipped?card.back:card.front)+'</div><button class="delete-mini section-gap" data-delete-flashcard="'+state.currentFlash+'">Delete Flashcard</button>';}
     function moveFlash(dir){const folder=activeFolder(),cards=(folder&&folder.flashcards)||[];if(!cards.length)return;state.currentFlash=(state.currentFlash+dir+cards.length)%cards.length;state.flashFlipped=false;renderFlashcard();}
-    function renderFaith(){if($('faithPath'))$('faithPath').innerHTML=faithPathItems.map((x,i)=>statusCard('faith','daily',i,'Faith',x,'Tap to move Planned → Started → Done')).join('');['faithTopic','faithNotes','prayerIntentions','virtueFocus','massNotes','conscienceNotes'].forEach(id=>{if($(id))$(id).value=state.faith[id]||'';});}
-    function saveFaith(){['faithTopic','faithNotes','prayerIntentions','virtueFocus','massNotes','conscienceNotes'].forEach(id=>{if($(id))state.faith[id]=$(id).value;});saveState();}
-    function renderBusiness(){const b=state.business;['moneyGoal','moneyMade','businessTask','businessNotes'].forEach(id=>{if($(id))$(id).value=b[id]||'';});updateMoneyBar();renderProductIdeas();}
-    function saveBusiness(){['moneyGoal','moneyMade','businessTask','businessNotes'].forEach(id=>{if($(id))state.business[id]=$(id).value;});saveState();updateMoneyBar();}
-    function moneyNumber(v){const n=Number(String(v||'').replace(/[^0-9.]/g,''));return isNaN(n)?0:n;} function updateMoneyBar(){const goal=moneyNumber(state.business.moneyGoal),made=moneyNumber(state.business.moneyMade),p=goal?Math.min(100,Math.round(made/goal*100)):0;if($('moneyFill'))$('moneyFill').style.width=p+'%';if($('moneyText'))$('moneyText').textContent=goal?made+' / '+goal+' ('+p+'%)':'Set a goal and amount made.';}
-    function addProductIdea(){const v=$('productIdeaInput').value.trim();if(!v)return;state.business.products=state.business.products||[];state.business.products.unshift({title:v,date:new Date().toLocaleDateString()});$('productIdeaInput').value='';saveState();renderProductIdeas();}
-    function renderProductIdeas(){if(!$('productIdeasList'))return;const items=state.business.products||[];$('productIdeasList').innerHTML=items.length?items.map((x,i)=>`<div class="list-item"><span>${clean(x.title)}<br><span class="muted">${clean(x.date)}</span></span><span><span class="tag goldtag">Product</span> <button class="delete-mini" data-delete-product="${i}">Delete</button></span></div>`).join(''):'<p class="muted">No product ideas yet.</p>';}
-    function addIdea(){const title=$('ideaTitle').value.trim(),category=$('ideaCategory').value,note=$('ideaNote').value.trim();if(!title&&!note)return;state.ideas.unshift({title:title||'Untitled Idea',category,note,starred:false,status:'Saved',date:new Date().toLocaleDateString()});$('ideaTitle').value='';$('ideaNote').value='';saveState();renderIdeas();}
-    function renderIdeas(){const search=($('ideaSearch')?.value||'').toLowerCase();const filtered=state.ideas.map((idea,index)=>({idea,index})).filter(item=>!search||(item.idea.title+item.idea.category+item.idea.note).toLowerCase().includes(search));if(!$('ideasList'))return;$('ideasList').innerHTML=filtered.length?filtered.map(({idea,index})=>`<div class="card"><h3>${idea.starred?'★ ':''}${clean(idea.title)}</h3><p class="muted">${clean(idea.category)} • ${clean(idea.status)} • ${clean(idea.date)}</p><p style="line-height:1.7;margin-top:10px">${clean(idea.note)}</p><button class="btn small section-gap" data-star="${index}">Star</button> <button class="btn small section-gap" data-action="${index}">Next Action</button> <button class="delete-mini section-gap" data-delete-idea="${index}">Delete</button></div>`).join(''):'<div class="card"><p class="muted">No ideas yet.</p></div>';}
-    function renderProgress(){const box=$('progressDataCards'),evidence=$('progressEvidence');if(!box&&!evidence)return;const mode=scheduleModes[currentModeKey()],scheduleP=progressFor('schedule',currentModeKey(),mode.blocks.length),train=trainingWeek[state.selectedTrainingDay]||trainingWeek[0],trainingP=trainingProgress(train),faithP=progressFor('faith','daily',faithPathItems.length),studySessions=(state.studyFolders||[]).reduce((s,f)=>s+(f.sessions||0),0),skillLogs=Object.values(state.skillData||{}).reduce((s,x)=>s+((x.logs||[]).length),0),nextActions=(state.ideas||[]).filter(i=>i.status==='Next Action').length;if(box)box.innerHTML=`<div class="data-card"><strong>${scheduleP}%</strong><span class="muted">Schedule</span></div><div class="data-card"><strong>${trainingP}%</strong><span class="muted">Training</span></div><div class="data-card"><strong>${faithP}%</strong><span class="muted">Faith</span></div><div class="data-card"><strong>${studySessions}</strong><span class="muted">Study Sessions</span></div><div class="data-card"><strong>${skillLogs}</strong><span class="muted">Skill Logs</span></div><div class="data-card"><strong>${nextActions}</strong><span class="muted">Next Actions</span></div>`;if(evidence)evidence.innerHTML=[['Schedule',scheduleP],['Training',trainingP],['Faith',faithP],['Study Sessions',Math.min(100,studySessions*10)],['Skill Logs',Math.min(100,skillLogs*8)]].map(r=>`<div class="evidence-row"><strong>${r[0]}</strong><div class="bar"><div class="fill" style="width:${r[1]}%"></div></div><span class="muted">${r[1]}%</span></div>`).join('');}
+    function faithFields(){return ['faithIntention','faithScripture','faithCatechism','faithVirtue','faithChallenge','prayerIntentions','gratitudeNotes','faithNotes','saintNotes','faithQuestions'];}
+    function renderFaith(){
+      if(!state.faith)state.faith={logs:[]};
+      if($('faithPath'))$('faithPath').innerHTML=faithPathItems.map((x,i)=>{
+        const s=getStatus('faith','daily',i);
+        return `<div class="faith-path-card ${statusClass(s)}" data-status-area="faith" data-status-key="daily" data-status-index="${i}"><div class="faith-step-icon">${clean(x.icon)}</div><div><div class="faith-step-title">${clean(x.title)}</div><div class="faith-step-note">${clean(x.note)}</div></div><div class="status-pill">${statusNames[s]}</div></div>`;
+      }).join('');
+      faithFields().forEach(id=>{if($(id))$(id).value=state.faith[id]||'';});
+      if($('catholicChallengeDisplay'))$('catholicChallengeDisplay').textContent=state.faith.currentChallenge||catholicChallengeBank[0];
+      renderFaithLogs();
+      renderFaithQuotes();
+      renderCatholicDrill();
+    }
+    function saveFaith(){
+      if(!state.faith)state.faith={logs:[]};
+      faithFields().forEach(id=>{if($(id))state.faith[id]=$(id).value;});
+      saveState();
+      renderFaithLogs();
+    }
+    function randomCatholicChallenge(){
+      if(!state.faith)state.faith={logs:[]};
+      const next=catholicChallengeBank[Math.floor(Math.random()*catholicChallengeBank.length)]||catholicChallengeBank[0];
+      state.faith.currentChallenge=next;
+      if($('catholicChallengeDisplay'))$('catholicChallengeDisplay').textContent=next;
+      saveState();
+    }
+    function useCatholicChallenge(){
+      if(!state.faith)state.faith={logs:[]};
+      const challenge=state.faith.currentChallenge||catholicChallengeBank[0];
+      if($('faithChallenge'))$('faithChallenge').value=challenge;
+      state.faith.faithChallenge=challenge;
+      saveState();
+    }
+    function addFaithLog(){
+      if(!state.faith)state.faith={logs:[]};
+      const focus=$('faithLogFocus')?.value.trim()||'';
+      const lesson=$('faithLogLesson')?.value.trim()||'';
+      if(!focus&&!lesson)return;
+      state.faith.logs=state.faith.logs||[];
+      state.faith.logs.unshift({focus:focus||'Faith practice',lesson,date:new Date().toLocaleDateString()});
+      state.faith.logs=state.faith.logs.slice(0,12);
+      if($('faithLogFocus'))$('faithLogFocus').value='';
+      if($('faithLogLesson'))$('faithLogLesson').value='';
+      saveState();
+      renderFaithLogs();
+    }
+    function renderFaithLogs(){
+      if(!$('faithLogs'))return;
+      const logs=(state.faith&&state.faith.logs)||[];
+      $('faithLogs').innerHTML=logs.length?logs.map(log=>`<div class="faith-log-entry"><strong>${clean(log.focus)}</strong><div class="date">${clean(log.date)}${log.lesson?' • '+clean(log.lesson):''}</div></div>`).join(''):'<div class="section-empty">No faith logs yet. Add one lesson after prayer, Mass, Scripture, or virtue work.</div>';
+    }
+    function clearFaithQuoteDraft(){
+      ['faithQuoteText','faithQuoteSource','faithQuotePage','faithQuoteTopic','faithQuoteNote'].forEach(id=>{if($(id))$(id).value='';});
+    }
+    function addFaithQuote(){
+      if(!state.faith)state.faith={logs:[]};
+      state.faith.quotes=Array.isArray(state.faith.quotes)?state.faith.quotes:[];
+      const quote=$('faithQuoteText')?.value.trim()||'';
+      const source=$('faithQuoteSource')?.value.trim()||'';
+      const page=$('faithQuotePage')?.value.trim()||'';
+      const topic=$('faithQuoteTopic')?.value.trim()||'';
+      const note=$('faithQuoteNote')?.value.trim()||'';
+      if(!quote&&!source&&!page&&!topic&&!note)return;
+      state.faith.quotes.unshift({quote,source,page,topic,note,date:new Date().toLocaleDateString()});
+      state.faith.quotes=state.faith.quotes.slice(0,80);
+      clearFaithQuoteDraft();
+      saveState();
+      renderFaithQuotes();
+    }
+    function deleteFaithQuote(index){
+      if(!state.faith||!Array.isArray(state.faith.quotes))return;
+      state.faith.quotes.splice(index,1);
+      saveState();
+      renderFaithQuotes();
+    }
+    function renderFaithQuotes(){
+      const box=$('faithQuoteList');
+      if(!box)return;
+      if(!state.faith)state.faith={logs:[]};
+      const search=($('faithQuoteSearch')?.value||'').toLowerCase();
+      const quotes=(state.faith.quotes||[]).map((q,index)=>({q,index})).filter(({q})=>{
+        const text=[q.quote,q.source,q.page,q.topic,q.note,q.date].join(' ').toLowerCase();
+        return !search||text.includes(search);
+      });
+      box.innerHTML=quotes.length?quotes.map(({q,index})=>`<div class="quote-entry"><div class="quote-text">“${clean(q.quote||'Saved note')}”</div><div class="quote-meta">${q.source?`<span>${clean(q.source)}</span>`:''}${q.page?`<span>Page/Ref: ${clean(q.page)}</span>`:''}${q.topic?`<span>${clean(q.topic)}</span>`:''}<span>${clean(q.date||'')}</span></div>${q.note?`<p class="muted">${clean(q.note)}</p>`:''}<div><button class="delete-mini" data-delete-faith-quote="${index}">Delete</button></div></div>`).join(''):'<div class="section-empty">No saved quotes yet. Save quotes with the page, paragraph, verse, or CCC number so you can find them again later.</div>';
+    }
+
+    function normalizeAnswer(value){return String(value||'').toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();}
+    function ensureCatholicDrill(){
+      if(!state.faith)state.faith={logs:[]};
+      if(!state.faith.drill)state.faith.drill={current:null,streak:0,correct:0,attempted:0,misses:[],currentMini:''};
+      if(!Array.isArray(state.faith.drill.misses))state.faith.drill.misses=[];
+      return state.faith.drill;
+    }
+    function getCatholicQuestionPool(){
+      const category=$('catholicDrillCategory')?.value||'All';
+      const pool=category==='All'?catholicQuestionBank:catholicQuestionBank.filter(q=>q.category===category);
+      return pool.length?pool:catholicQuestionBank;
+    }
+    function setCatholicFeedback(message,type=''){
+      const box=$('catholicDrillFeedback');
+      if(!box)return;
+      box.classList.remove('good','bad');
+      if(type)box.classList.add(type);
+      box.innerHTML=message;
+    }
+    function newCatholicQuestion(){
+      const drill=ensureCatholicDrill();
+      const pool=getCatholicQuestionPool();
+      const question=pool[Math.floor(Math.random()*pool.length)]||pool[0];
+      drill.current=question;
+      if($('catholicDrillQuestion'))$('catholicDrillQuestion').textContent=question.q;
+      if($('catholicDrillCategoryTag'))$('catholicDrillCategoryTag').textContent=question.category;
+      if($('catholicDrillDifficultyTag'))$('catholicDrillDifficultyTag').textContent=question.difficulty;
+      if($('catholicDrillAnswer'))$('catholicDrillAnswer').value='';
+      setCatholicFeedback('Answer from memory first. Then check it and learn the reason.');
+      saveState();
+      renderCatholicDrillStats();
+    }
+    function checkCatholicAnswer(){
+      const drill=ensureCatholicDrill();
+      if(!drill.current){newCatholicQuestion();return;}
+      const typed=normalizeAnswer($('catholicDrillAnswer')?.value||'');
+      if(!typed){setCatholicFeedback('Type an answer first. Do the rep before checking.','bad');return;}
+      const acceptable=(drill.current.answers||[]).map(normalizeAnswer);
+      const correct=acceptable.some(ans=>typed===ans || typed.includes(ans) || ans.includes(typed));
+      drill.attempted=(drill.attempted||0)+1;
+      if(correct){
+        drill.correct=(drill.correct||0)+1;
+        drill.streak=(drill.streak||0)+1;
+        setCatholicFeedback(`<strong>Correct.</strong><br>${clean(drill.current.explanation)}`,'good');
+      }else{
+        drill.streak=0;
+        drill.misses=drill.misses||[];
+        drill.misses.unshift({q:drill.current.q,answer:(drill.current.answers||[])[0]||'',date:new Date().toLocaleDateString()});
+        drill.misses=drill.misses.slice(0,8);
+        setCatholicFeedback(`<strong>Not quite.</strong><br>Answer: <span class="gold">${clean((drill.current.answers||[])[0]||'')}</span><br>${clean(drill.current.explanation)}`,'bad');
+      }
+      saveState();
+      renderCatholicDrillStats();
+      renderCatholicMissLog();
+    }
+    function showCatholicHint(){
+      const drill=ensureCatholicDrill();
+      if(!drill.current){newCatholicQuestion();return;}
+      setCatholicFeedback(`<strong>Hint:</strong> ${clean(drill.current.hint||'Think of the basic Catholic teaching connected to this question.')}`);
+    }
+    function showCatholicAnswer(){
+      const drill=ensureCatholicDrill();
+      if(!drill.current){newCatholicQuestion();return;}
+      setCatholicFeedback(`<strong>Answer:</strong> <span class="gold">${clean((drill.current.answers||[])[0]||'')}</span><br>${clean(drill.current.explanation)}`);
+    }
+    function randomCatholicMiniDrill(){
+      const drill=ensureCatholicDrill();
+      drill.currentMini=catholicMiniDrillBank[Math.floor(Math.random()*catholicMiniDrillBank.length)]||catholicMiniDrillBank[0];
+      saveState();
+      renderCatholicMiniDrills();
+    }
+    function renderCatholicMiniDrills(){
+      const drill=ensureCatholicDrill();
+      if($('catholicMiniDrills'))$('catholicMiniDrills').innerHTML=`<div class="list-item"><span><strong>${clean(drill.currentMini||catholicMiniDrillBank[0])}</strong><br><span class="muted">Quick drill for prayer, knowledge, virtue, or teaching.</span></span><button class="btn small" id="randomCatholicMiniDrillBtn">Random Drill</button></div>`;
+    }
+    function renderCatholicDrillStats(){
+      const drill=ensureCatholicDrill();
+      const attempted=drill.attempted||0, correct=drill.correct||0, accuracy=attempted?Math.round(correct/attempted*100):0;
+      if($('catholicDrillStreak'))$('catholicDrillStreak').textContent=drill.streak||0;
+      if($('catholicDrillCorrect'))$('catholicDrillCorrect').textContent=correct;
+      if($('catholicDrillAttempted'))$('catholicDrillAttempted').textContent=attempted;
+      if($('catholicDrillAccuracy'))$('catholicDrillAccuracy').textContent=accuracy+'%';
+      if(drill.current){
+        if($('catholicDrillQuestion'))$('catholicDrillQuestion').textContent=drill.current.q;
+        if($('catholicDrillCategoryTag'))$('catholicDrillCategoryTag').textContent=drill.current.category;
+        if($('catholicDrillDifficultyTag'))$('catholicDrillDifficultyTag').textContent=drill.current.difficulty;
+      }
+    }
+    function renderCatholicMissLog(){
+      const drill=ensureCatholicDrill();
+      if(!$('catholicMissLog'))return;
+      const misses=drill.misses||[];
+      $('catholicMissLog').innerHTML=misses.length?misses.map(m=>`<div class="drill-log-item"><strong>${clean(m.q)}</strong><span class="muted">Answer: ${clean(m.answer)} • ${clean(m.date)}</span></div>`).join(''):'<div class="section-empty">No missed questions yet. Misses will show here so you know what to review.</div>';
+    }
+    function renderCatholicDrill(){
+      ensureCatholicDrill();
+      renderCatholicDrillStats();
+      renderCatholicMiniDrills();
+      renderCatholicMissLog();
+    }
+
+    function renderLeadership(){
+      if(!state.leadership)state.leadership={logs:[]};
+      ['leaderMission','leaderNotes','leaderImprove','leaderGood'].forEach(id=>{if($(id))$(id).value=state.leadership[id]||'';});
+      if($('leadershipChallengeList'))$('leadershipChallengeList').innerHTML=leadershipChallenges.map((x,i)=>statusCard('leadership','daily',i,'Challenge',x,'Tap to move Planned → Started → Done')).join('');
+      renderLeadershipLogs();
+    }
+    function saveLeadership(){if(!state.leadership)state.leadership={logs:[]};['leaderMission','leaderNotes','leaderImprove','leaderGood'].forEach(id=>{if($(id))state.leadership[id]=$(id).value;});saveState();renderLeadershipLogs();}
+    function addLeadershipLog(){if(!state.leadership)state.leadership={logs:[]};const focus=$('leaderLogFocus')?.value||'',result=$('leaderLogResult')?.value||'';if(!focus&&!result)return;state.leadership.logs=state.leadership.logs||[];state.leadership.logs.unshift({focus,result,date:new Date().toLocaleDateString()});state.leadership.logs=state.leadership.logs.slice(0,10);if($('leaderLogFocus'))$('leaderLogFocus').value='';if($('leaderLogResult'))$('leaderLogResult').value='';saveState();renderLeadershipLogs();}
+    function renderLeadershipLogs(){if(!$('leadershipLogs'))return;const logs=(state.leadership&&state.leadership.logs)||[];$('leadershipLogs').innerHTML=logs.length?logs.map(log=>`<div class="log-card"><strong>${clean(log.focus)}</strong><div class="date">${clean(log.date)}${log.result?' • '+clean(log.result):''}</div></div>`).join(''):'<div class="section-empty">No leadership logs yet.</div>';}
+
+    
+    function ensureBusiness(){
+      if(!state.business)state.business={};
+      if(!Array.isArray(state.business.products))state.business.products=[];
+      if(!Array.isArray(state.business.lessons))state.business.lessons=[];
+      return state.business;
+    }
+    function businessFields(){return ['moneyGoal','moneyMade','businessTask','businessNotes','businessDirection','businessLearningFocus'];}
+    function renderBusiness(){
+      const b=ensureBusiness();
+      businessFields().forEach(id=>{if($(id))$(id).value=b[id]||'';});
+      updateMoneyBar();
+      renderProductIdeas();
+      renderBusinessLessons();
+    }
+    function saveBusiness(){
+      const b=ensureBusiness();
+      businessFields().forEach(id=>{if($(id))b[id]=$(id).value;});
+      saveState();
+      updateMoneyBar();
+      renderBusinessLessons();
+    }
+    function moneyNumber(v){const n=Number(String(v||'').replace(/[^0-9.]/g,''));return isNaN(n)?0:n;}
+    function updateMoneyBar(){
+      const b=ensureBusiness(),goal=moneyNumber(b.moneyGoal),made=moneyNumber(b.moneyMade),p=goal?Math.min(100,Math.round(made/goal*100)):0;
+      if($('moneyFill'))$('moneyFill').style.width=p+'%';
+      if($('moneyText'))$('moneyText').textContent=goal?made+' / '+goal+' ('+p+'%)':'Set a goal and amount made.';
+    }
+    function addBusinessLesson(){
+      const b=ensureBusiness();
+      const task=$('businessTask')?.value.trim()||'';
+      const notes=$('businessNotes')?.value.trim()||'';
+      if(!task&&!notes)return;
+      b.lessons.unshift({task:task||'Business lesson',notes,date:new Date().toLocaleDateString()});
+      b.lessons=b.lessons.slice(0,12);
+      if($('businessNotes'))$('businessNotes').value='';
+      b.businessNotes='';
+      saveState();
+      renderBusinessLessons();
+    }
+    function renderBusinessLessons(){
+      const box=$('businessLessonsList');
+      if(!box)return;
+      const items=ensureBusiness().lessons||[];
+      box.innerHTML=items.length?items.slice(0,4).map((x,i)=>`<div class="lesson-card"><strong>${clean(x.task)}</strong><br><span class="muted">${clean(x.date)}</span><p class="thin-gap">${clean(x.notes)}</p><button class="delete-mini section-gap" data-delete-business-lesson="${i}">Delete</button></div>`).join(''):'<p class="muted">No business lessons saved yet.</p>';
+    }
+    function addProductIdea(){
+      const b=ensureBusiness();
+      const title=$('productIdeaInput')?.value.trim()||'';
+      const why=$('businessIdeaWhy')?.value.trim()||'';
+      const firstStep=$('businessIdeaFirstStep')?.value.trim()||'';
+      if(!title&&!why)return;
+      b.products.unshift({
+        title:title||'Untitled opportunity',
+        type:$('businessIdeaType')?.value||'Learning',
+        why,
+        firstStep,
+        status:$('businessIdeaStatus')?.value||'Idea',
+        difficulty:$('businessIdeaDifficulty')?.value||'Medium',
+        potential:$('businessIdeaPotential')?.value||'Medium Potential',
+        date:new Date().toLocaleDateString()
+      });
+      ['productIdeaInput','businessIdeaWhy','businessIdeaFirstStep'].forEach(id=>{if($(id))$(id).value='';});
+      saveState();
+      renderProductIdeas();
+    }
+    function renderProductIdeas(){
+      const box=$('productIdeasList');
+      if(!box)return;
+      const items=ensureBusiness().products||[];
+      box.innerHTML=items.length?items.map((x,i)=>`<div class="opportunity-card"><h3>${clean(x.title)}</h3><p class="muted">${clean(x.why||'No reason written yet.')}</p><p class="thin-gap"><strong>First step:</strong> ${clean(x.firstStep||'Pick one tiny test step.')}</p><div class="opportunity-meta"><span class="tag goldtag">${clean(x.type||'Learning')}</span><span class="tag">${clean(x.status||'Idea')}</span><span class="tag">${clean(x.difficulty||'Medium')}</span><span class="tag bluetag">${clean(x.potential||'Potential')}</span></div><button class="delete-mini section-gap" data-delete-product="${i}">Delete</button></div>`).join(''):'<div class="card"><p class="muted">No opportunities yet. Add one thing you might learn, test, or build.</p></div>';
+    }
+    function renderIdeas(){}
+function renderProgress(){
+      const box=$('progressDataCards'),evidence=$('progressEvidence');
+      if(!box&&!evidence)return;
+      const mode=scheduleModes[currentModeKey()],scheduleP=progressFor('schedule',currentModeKey(),mode.blocks.length),train=trainingWeek[state.selectedTrainingDay]||trainingWeek[0],trainingP=trainingProgress(train),faithP=progressFor('faith','daily',faithPathItems.length),skillLogs=Object.values(state.skillData||{}).reduce((s,x)=>s+((x.logs||[]).length),0),leadershipLogs=(state.leadership&&state.leadership.logs?state.leadership.logs.length:0),businessIdeas=(state.business&&state.business.products?state.business.products.length:0),businessLessons=(state.business&&state.business.lessons?state.business.lessons.length:0);
+      if(box)box.innerHTML=`<div class="data-card"><strong>${scheduleP}%</strong><span class="muted">Schedule</span></div><div class="data-card"><strong>${trainingP}%</strong><span class="muted">Training</span></div><div class="data-card"><strong>${faithP}%</strong><span class="muted">Faith</span></div><div class="data-card"><strong>${skillLogs}</strong><span class="muted">Skill Logs</span></div><div class="data-card"><strong>${leadershipLogs}</strong><span class="muted">Leadership Logs</span></div><div class="data-card"><strong>${businessIdeas}</strong><span class="muted">Business Ideas</span></div>`;
+      if(evidence)evidence.innerHTML=[['Schedule',scheduleP],['Training',trainingP],['Faith',faithP],['Skill Logs',Math.min(100,skillLogs*8)],['Leadership Logs',Math.min(100,leadershipLogs*12)],['Business Lessons',Math.min(100,businessLessons*15)]].map(r=>`<div class="evidence-row"><strong>${r[0]}</strong><div class="bar"><div class="fill" style="width:${r[1]}%"></div></div><span class="muted">${r[1]}%</span></div>`).join('');
+    }
     function saveReview(){['reviewWentWell','reviewFix','reviewMission','reviewFaith','reviewTraining','reviewBusiness'].forEach(id=>{state.review[id]=$(id).value;});saveState();}
     function loadReview(){['reviewWentWell','reviewFix','reviewMission','reviewFaith','reviewTraining','reviewBusiness'].forEach(id=>{if($(id))$(id).value=state.review[id]||'';});}
-    function exportData(){$('backupBox').value=JSON.stringify(state,null,2);} function importData(){try{state=Object.assign(defaultState(),JSON.parse($('backupBox').value));saveState();renderAll();alert('Data imported.');}catch(e){alert('That backup data is not valid JSON.');}} function clearData(){if(confirm('Clear all app data?')){state=defaultState();saveState();renderAll();}}
+    function backupPayload(){
+      return {
+        app:'1% Better Life OS',
+        backupVersion:'1.0',
+        createdAt:new Date().toISOString(),
+        storeKey:STORE_KEY,
+        state
+      };
+    }
+    function backupJSON(){return JSON.stringify(backupPayload(),null,2);}
+    function formatDateTime(value){
+      if(!value)return 'Never';
+      try{return new Date(value).toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}catch(e){return 'Saved';}
+    }
+    function getStateBytes(){
+      try{return new Blob([JSON.stringify(state)]).size;}catch(e){return JSON.stringify(state).length;}
+    }
+    function formatBytes(bytes){
+      if(bytes<1024)return bytes+' B';
+      if(bytes<1024*1024)return Math.round(bytes/1024)+' KB';
+      return (bytes/1024/1024).toFixed(1)+' MB';
+    }
+    function updateSaveStatus(){
+      const meta=state.backupMeta||{};
+      const lastSaved=meta.lastSavedAt||'';
+      const lastBackup=meta.lastBackupAt||'';
+      if($('lastSavedText'))$('lastSavedText').textContent=formatDateTime(lastSaved);
+      if($('lastBackupText'))$('lastBackupText').textContent=formatDateTime(lastBackup);
+      if($('storageSizeText'))$('storageSizeText').textContent=formatBytes(getStateBytes());
+      const health=$('saveHealthCard'),title=$('saveHealthTitle'),note=$('saveHealthNote');
+      if(!health||!title||!note)return;
+      const needsBackup=!lastBackup || (Date.now()-new Date(lastBackup).getTime())>1000*60*60*24*7;
+      health.classList.toggle('warn',needsBackup);
+      title.textContent=needsBackup?'Saved on this device — backup recommended':'Saved on this device — backup looks good';
+      note.textContent=needsBackup?'Your progress is autosaved, but download a backup file so it is safer long-term.':'You have a recent backup. Keep exporting weekly or before changing devices.';
+    }
+    function exportData(){
+      if($('backupBox'))$('backupBox').value=backupJSON();
+      updateSaveStatus();
+    }
+    function downloadBackupFile(){
+      state.backupMeta=state.backupMeta||{};
+      state.backupMeta.lastBackupAt=new Date().toISOString();
+      state.backupMeta.lastSavedAt=new Date().toISOString();
+      localStorage.setItem(STORE_KEY,JSON.stringify(state));
+      const data=backupJSON();
+      if($('backupBox'))$('backupBox').value=data;
+      const stamp=new Date().toISOString().slice(0,10);
+      const blob=new Blob([data],{type:'application/json'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      a.download='one-percent-better-backup-'+stamp+'.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      updateSaveStatus();
+    }
+    async function copyBackupText(){
+      const data=backupJSON();
+      if($('backupBox'))$('backupBox').value=data;
+      try{
+        await navigator.clipboard.writeText(data);
+        alert('Backup text copied. Save it somewhere safe.');
+      }catch(e){
+        if($('backupBox')){$('backupBox').focus();$('backupBox').select();}
+        alert('Copy blocked by browser. The backup text is selected in the box — copy it manually.');
+      }
+    }
+    function normalizeImportedState(parsed){
+      const raw=parsed&&parsed.state?parsed.state:parsed;
+      if(!raw || typeof raw!=='object')throw new Error('Backup did not contain app data.');
+      return Object.assign(defaultState(),raw,{backupMeta:Object.assign({},defaultState().backupMeta,raw.backupMeta||{})});
+    }
+    function importData(){
+      try{
+        const text=$('backupBox')?.value||'';
+        if(!text.trim())return alert('Paste a backup into the Backup Box first.');
+        state=normalizeImportedState(JSON.parse(text));
+        state.backupMeta=state.backupMeta||{};
+        state.backupMeta.lastSavedAt=new Date().toISOString();
+        localStorage.setItem(STORE_KEY,JSON.stringify(state));
+        renderAll();
+        alert('Backup restored. Your progress is back in the app.');
+      }catch(e){
+        alert('That backup is not valid JSON or does not match this app.');
+      }
+    }
+    function importBackupFile(file){
+      if(!file)return;
+      const reader=new FileReader();
+      reader.onload=()=>{
+        if($('backupBox'))$('backupBox').value=String(reader.result||'');
+        importData();
+      };
+      reader.readAsText(file);
+    }
+    function clearData(){if(confirm('Clear all app data on this device? Make sure you have a backup first.')){state=defaultState();saveState();renderAll();}}
     function setFocusMinutes(min){focusSeconds=min*60;document.querySelectorAll('[data-focus-min]').forEach(b=>b.classList.toggle('active',Number(b.dataset.focusMin)===min));updateFocusTimer();} function updateFocusTimer(){if(!$('focusTimer'))return;$('focusTimer').textContent=String(Math.floor(focusSeconds/60)).padStart(2,'0')+':'+String(focusSeconds%60).padStart(2,'0');} function openFocus(){if($('focusOverlay'))$('focusOverlay').classList.add('active');} function closeFocus(){if($('focusOverlay'))$('focusOverlay').classList.remove('active');clearInterval(focusInterval);} function startFocus(){clearInterval(focusInterval);focusInterval=setInterval(()=>{if(focusSeconds>0){focusSeconds--;updateFocusTimer();}},1000);} function pauseFocus(){clearInterval(focusInterval);} function resetFocus(){clearInterval(focusInterval);const active=document.querySelector('[data-focus-min].active');setFocusMinutes(active?Number(active.dataset.focusMin):25);}
-    function bindEvents(){document.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.page)));document.querySelectorAll('[data-page-link]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.pageLink)));document.body.addEventListener('click',e=>{const status=e.target.closest('[data-status-area]');if(status)cycleStatus(status.dataset.statusArea,status.dataset.statusKey,Number(status.dataset.statusIndex));const tab=e.target.closest('[data-training-tab]');if(tab){state.selectedTrainingDay=Number(tab.dataset.trainingTab);saveState();renderTraining();}const skill=e.target.closest('[data-skill-log]');if(skill)addSkillLog(skill.dataset.skillLog);const gtab=e.target.closest('[data-growth-tab]');if(gtab){document.querySelectorAll('[data-growth-tab]').forEach(b=>b.classList.remove('active'));gtab.classList.add('active');document.querySelectorAll('.subpanel').forEach(p=>p.classList.remove('active'));$(gtab.dataset.growthTab).classList.add('active');}const folder=e.target.closest('[data-study-folder]');if(folder){state.selectedStudyFolder=Number(folder.dataset.studyFolder);state.currentFlash=0;state.flashFlipped=false;saveState();renderStudyFolders();}const delFolder=e.target.closest('[data-delete-folder]');if(delFolder){if(confirm('Delete this study folder?')){state.studyFolders.splice(Number(delFolder.dataset.deleteFolder),1);state.selectedStudyFolder=0;saveState();renderStudyFolders();}}const task=e.target.closest('[data-study-task]');if(task){const f=activeFolder();if(f&&f.tasks[Number(task.dataset.studyTask)]){f.tasks[Number(task.dataset.studyTask)].done=!f.tasks[Number(task.dataset.studyTask)].done;saveState();renderStudyFolders();}}const dt=e.target.closest('[data-delete-study-task]');if(dt){const f=activeFolder();if(f){f.tasks.splice(Number(dt.dataset.deleteStudyTask),1);saveState();renderStudyFolders();}}const dn=e.target.closest('[data-delete-study-note]');if(dn){const f=activeFolder();if(f){f.notes.splice(Number(dn.dataset.deleteStudyNote),1);saveState();renderActiveStudyFolder();}}const df=e.target.closest('[data-delete-flashcard]');if(df){const f=activeFolder();if(f){f.flashcards.splice(Number(df.dataset.deleteFlashcard),1);state.currentFlash=0;state.flashFlipped=false;saveState();renderStudyFolders();}}const star=e.target.closest('[data-star]');if(star){const idea=state.ideas[Number(star.dataset.star)];if(idea)idea.starred=!idea.starred;saveState();renderIdeas();}const action=e.target.closest('[data-action]');if(action){const idea=state.ideas[Number(action.dataset.action)];if(idea)idea.status='Next Action';saveState();renderIdeas();}const di=e.target.closest('[data-delete-idea]');if(di){state.ideas.splice(Number(di.dataset.deleteIdea),1);saveState();renderIdeas();}const dp=e.target.closest('[data-delete-product]');if(dp){state.business.products.splice(Number(dp.dataset.deleteProduct),1);saveState();renderProductIdeas();}const mission=e.target.closest('[data-mission-chip]');if(mission){document.querySelectorAll('[data-mission-chip]').forEach(b=>b.classList.remove('active'));mission.classList.add('active');state.missionLane=mission.dataset.missionChip;if($('missionInput')&&!$('missionInput').value)$('missionInput').value=mission.dataset.missionChip+': ';}const fm=e.target.closest('[data-focus-min]');if(fm)setFocusMinutes(Number(fm.dataset.focusMin));const accordion=e.target.closest('[data-accordion-action]');if(accordion){const shouldOpen=accordion.dataset.accordionAction==='open';document.querySelectorAll('#trainingAccordion details, #resourceAccordion details').forEach(panel=>{panel.open=shouldOpen;});}});$('saveMissionBtn').addEventListener('click',()=>{state.mission=$('missionInput').value.trim();saveState();renderHome();});$('scheduleModeSelect').addEventListener('change',e=>{state.selectedScheduleMode=e.target.value;saveState();renderSchedule();});$('saveTrainingLogBtn').addEventListener('click',saveTrainingLog);$('saveSkillsBtn').addEventListener('click',saveSkills);$('drawingPromptBtn').addEventListener('click',generateDrawingPrompt);$('addStudyFolderBtn').addEventListener('click',addStudyFolder);$('newStudyFolderName').addEventListener('keydown',e=>{if(e.key==='Enter')addStudyFolder();});$('addStudyTaskBtn').addEventListener('click',addStudyTask);$('addStudyNoteBtn').addEventListener('click',addStudyNote);$('addFlashcardBtn').addEventListener('click',addFlashcard);$('flipFlashBtn').addEventListener('click',()=>{state.flashFlipped=!state.flashFlipped;renderFlashcard();});$('nextFlashBtn').addEventListener('click',()=>moveFlash(1));$('prevFlashBtn').addEventListener('click',()=>moveFlash(-1));$('studySessionBtn').addEventListener('click',()=>{const f=activeFolder();if(f){f.sessions=(f.sessions||0)+1;saveState();renderStudyFolders();}});$('studyFocusBtn').addEventListener('click',()=>{const f=activeFolder();if(f&&$('focusTask'))$('focusTask').value='Study: '+f.name;openFocus();});$('saveFaithBtn').addEventListener('click',saveFaith);$('saveBusinessBtn').addEventListener('click',saveBusiness);$('moneyGoal').addEventListener('input',saveBusiness);$('moneyMade').addEventListener('input',saveBusiness);$('addProductIdeaBtn').addEventListener('click',addProductIdea);$('addIdeaBtn').addEventListener('click',addIdea);$('ideaSearch').addEventListener('input',renderIdeas);$('saveReviewBtn').addEventListener('click',saveReview);$('exportBtn').addEventListener('click',exportData);$('importBtn').addEventListener('click',importData);$('clearBtn').addEventListener('click',clearData);$('openFocusBtn').addEventListener('click',openFocus);$('openFocusBtn2').addEventListener('click',openFocus);$('startFocusBtn').addEventListener('click',startFocus);$('pauseFocusBtn').addEventListener('click',pauseFocus);$('resetFocusBtn').addEventListener('click',resetFocus);$('closeFocusBtn').addEventListener('click',closeFocus);}
-    function renderAll(){renderHome();renderSchedule();renderTraining();renderSkills();renderStudyFolders();renderFaith();renderBusiness();renderIdeas();loadReview();renderProgress();renderChart('reviewChart');}
+    function on(id,event,handler){const el=$(id);if(el)el.addEventListener(event,handler);}
+    function bindEvents(){document.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.page)));document.querySelectorAll('[data-page-link]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.pageLink)));document.body.addEventListener('click',e=>{const status=e.target.closest('[data-status-area]');if(status)cycleStatus(status.dataset.statusArea,status.dataset.statusKey,Number(status.dataset.statusIndex));const tab=e.target.closest('[data-training-tab]');if(tab){state.selectedTrainingDay=Number(tab.dataset.trainingTab);saveState();renderTraining();}const skill=e.target.closest('[data-skill-log]');if(skill)addSkillLog(skill.dataset.skillLog);const saveDrills=e.target.closest('[data-save-drill-bank]');if(saveDrills){saveSkills(true);}const randomDrill=e.target.closest('[data-random-drill]');if(randomDrill){saveSkills(false);randomizeSkillDrill(randomDrill.dataset.randomDrill);}const copyDrill=e.target.closest('[data-copy-drill-to-log]');if(copyDrill)copyCurrentDrillToLog(copyDrill.dataset.copyDrillToLog);const skillPick=e.target.closest('[data-skill-select]');if(skillPick){saveSkills(false);state.selectedSkill=skillPick.dataset.skillSelect;saveState();renderSkills();}const gtab=e.target.closest('[data-growth-tab]');if(gtab){document.querySelectorAll('[data-growth-tab]').forEach(b=>b.classList.remove('active'));gtab.classList.add('active');document.querySelectorAll('.subpanel').forEach(p=>p.classList.remove('active'));$(gtab.dataset.growthTab).classList.add('active');}const folder=e.target.closest('[data-study-folder]');if(folder){state.selectedStudyFolder=Number(folder.dataset.studyFolder);state.currentFlash=0;state.flashFlipped=false;saveState();renderStudyFolders();}const delFolder=e.target.closest('[data-delete-folder]');if(delFolder){if(confirm('Delete this study folder?')){state.studyFolders.splice(Number(delFolder.dataset.deleteFolder),1);state.selectedStudyFolder=0;saveState();renderStudyFolders();}}const task=e.target.closest('[data-study-task]');if(task){const f=activeFolder();if(f&&f.tasks[Number(task.dataset.studyTask)]){f.tasks[Number(task.dataset.studyTask)].done=!f.tasks[Number(task.dataset.studyTask)].done;saveState();renderStudyFolders();}}const dt=e.target.closest('[data-delete-study-task]');if(dt){const f=activeFolder();if(f){f.tasks.splice(Number(dt.dataset.deleteStudyTask),1);saveState();renderStudyFolders();}}const dn=e.target.closest('[data-delete-study-note]');if(dn){const f=activeFolder();if(f){f.notes.splice(Number(dn.dataset.deleteStudyNote),1);saveState();renderActiveStudyFolder();}}const df=e.target.closest('[data-delete-flashcard]');if(df){const f=activeFolder();if(f){f.flashcards.splice(Number(df.dataset.deleteFlashcard),1);state.currentFlash=0;state.flashFlipped=false;saveState();renderStudyFolders();}}const star=e.target.closest('[data-star]');if(star){const idea=state.ideas[Number(star.dataset.star)];if(idea)idea.starred=!idea.starred;saveState();renderIdeas();}const action=e.target.closest('[data-action]');if(action){const idea=state.ideas[Number(action.dataset.action)];if(idea)idea.status='Next Action';saveState();renderIdeas();}const di=e.target.closest('[data-delete-idea]');if(di){state.ideas.splice(Number(di.dataset.deleteIdea),1);saveState();renderIdeas();}const dbl=e.target.closest('[data-delete-business-lesson]');if(dbl){const b=ensureBusiness();b.lessons.splice(Number(dbl.dataset.deleteBusinessLesson),1);saveState();renderBusinessLessons();}
+        const dp=e.target.closest('[data-delete-product]');if(dp){ensureBusiness().products.splice(Number(dp.dataset.deleteProduct),1);saveState();renderProductIdeas();}const dq=e.target.closest('[data-delete-faith-quote]');if(dq){deleteFaithQuote(Number(dq.dataset.deleteFaithQuote));}const mission=e.target.closest('[data-mission-chip]');if(mission){document.querySelectorAll('[data-mission-chip]').forEach(b=>b.classList.remove('active'));mission.classList.add('active');state.missionLane=mission.dataset.missionChip;if($('missionInput')&&!$('missionInput').value)$('missionInput').value=mission.dataset.missionChip+': ';}const fm=e.target.closest('[data-focus-min]');if(fm)setFocusMinutes(Number(fm.dataset.focusMin));const accordion=e.target.closest('[data-accordion-action]');if(accordion){const shouldOpen=accordion.dataset.accordionAction==='open';document.querySelectorAll('#trainingAccordion details, #resourceAccordion details').forEach(panel=>{panel.open=shouldOpen;});}});$('saveMissionBtn').addEventListener('click',()=>{state.mission=$('missionInput').value.trim();saveState();renderHome();});$('scheduleModeSelect').addEventListener('change',e=>{state.selectedScheduleMode=e.target.value;const idx=['monday','tuesday','wednesday','thursday','friday','saturday','sunday'].indexOf(e.target.value);if(idx>=0)state.selectedTrainingDay=idx;saveState();renderSchedule();renderTraining();});$('saveTrainingLogBtn').addEventListener('click',saveTrainingLog);$('saveSkillsBtn').addEventListener('click',saveSkills);$('drawingPromptBtn').addEventListener('click',generateDrawingPrompt);if($('addStudyFolderBtn'))$('addStudyFolderBtn').addEventListener('click',addStudyFolder);if($('newStudyFolderName'))$('newStudyFolderName').addEventListener('keydown',e=>{if(e.key==='Enter')addStudyFolder();});if($('addStudyTaskBtn'))$('addStudyTaskBtn').addEventListener('click',addStudyTask);if($('addStudyNoteBtn'))$('addStudyNoteBtn').addEventListener('click',addStudyNote);if($('addFlashcardBtn'))$('addFlashcardBtn').addEventListener('click',addFlashcard);if($('flipFlashBtn'))$('flipFlashBtn').addEventListener('click',()=>{state.flashFlipped=!state.flashFlipped;renderFlashcard();});if($('nextFlashBtn'))$('nextFlashBtn').addEventListener('click',()=>moveFlash(1));if($('prevFlashBtn'))$('prevFlashBtn').addEventListener('click',()=>moveFlash(-1));if($('studySessionBtn'))$('studySessionBtn').addEventListener('click',()=>{const f=activeFolder();if(f){f.sessions=(f.sessions||0)+1;saveState();renderStudyFolders();}});if($('studyFocusBtn'))$('studyFocusBtn').addEventListener('click',()=>{const f=activeFolder();if(f&&$('focusTask'))$('focusTask').value='Study: '+f.name;openFocus();});if($('saveFaithBtn'))$('saveFaithBtn').addEventListener('click',saveFaith);
+    if($('faithFocusBtn'))$('faithFocusBtn').addEventListener('click',()=>{if($('focusTask'))$('focusTask').value='Catholic Study: prayer, Scripture, or virtue';openFocus();});
+    if($('randomCatholicChallengeBtn'))$('randomCatholicChallengeBtn').addEventListener('click',randomCatholicChallenge);
+    if($('useCatholicChallengeBtn'))$('useCatholicChallengeBtn').addEventListener('click',useCatholicChallenge);
+    if($('addFaithLogBtn'))$('addFaithLogBtn').addEventListener('click',addFaithLog);
+    if($('addFaithQuoteBtn'))$('addFaithQuoteBtn').addEventListener('click',addFaithQuote);
+    if($('clearFaithQuoteDraftBtn'))$('clearFaithQuoteDraftBtn').addEventListener('click',clearFaithQuoteDraft);
+    if($('faithQuoteSearch'))$('faithQuoteSearch').addEventListener('input',renderFaithQuotes);
+    if($('newCatholicQuestionBtn'))$('newCatholicQuestionBtn').addEventListener('click',newCatholicQuestion);
+    if($('checkCatholicAnswerBtn'))$('checkCatholicAnswerBtn').addEventListener('click',checkCatholicAnswer);
+    if($('hintCatholicQuestionBtn'))$('hintCatholicQuestionBtn').addEventListener('click',showCatholicHint);
+    if($('showCatholicAnswerBtn'))$('showCatholicAnswerBtn').addEventListener('click',showCatholicAnswer);
+    if($('catholicDrillCategory'))$('catholicDrillCategory').addEventListener('change',newCatholicQuestion);
+    if($('catholicDrillAnswer'))$('catholicDrillAnswer').addEventListener('keydown',e=>{if(e.key==='Enter')checkCatholicAnswer();});
+    document.body.addEventListener('click',e=>{if(e.target&&e.target.id==='randomCatholicMiniDrillBtn')randomCatholicMiniDrill();});
+    faithFields().forEach(id=>{if($(id))$(id).addEventListener('input',()=>{if(!state.faith)state.faith={logs:[]};state.faith[id]=$(id).value;saveState();});});$('saveLeadershipBtn').addEventListener('click',saveLeadership);$('addLeadershipLogBtn').addEventListener('click',addLeadershipLog);$('leadershipFocusBtn').addEventListener('click',()=>{if($('focusTask'))$('focusTask').value='Leadership: speaking challenge';openFocus();});$('openFocusSkillsBtn').addEventListener('click',()=>{if($('focusTask'))$('focusTask').value='Skill practice: '+(state.selectedSkill||'Speaking');openFocus();});on('saveBusinessBtn','click',saveBusiness);businessFields().forEach(id=>on(id,'input',saveBusiness));on('addBusinessLessonBtn','click',addBusinessLesson);on('addProductIdeaBtn','click',addProductIdea);on('saveReviewBtn','click',saveReview);$('exportBtn').addEventListener('click',exportData);$('downloadBackupBtn').addEventListener('click',downloadBackupFile);$('copyBackupBtn').addEventListener('click',copyBackupText);$('importFileBtn').addEventListener('click',()=>$('backupFileInput').click());$('backupFileInput').addEventListener('change',e=>importBackupFile(e.target.files[0]));$('importBtn').addEventListener('click',importData);$('clearBtn').addEventListener('click',clearData);$('openFocusBtn').addEventListener('click',openFocus);$('openFocusBtn2').addEventListener('click',openFocus);$('startFocusBtn').addEventListener('click',startFocus);$('pauseFocusBtn').addEventListener('click',pauseFocus);$('resetFocusBtn').addEventListener('click',resetFocus);$('closeFocusBtn').addEventListener('click',closeFocus);}
+    function renderAll(){renderHome();renderSchedule();renderTraining();renderSkills();renderFaith();renderLeadership();renderBusiness();loadReview();renderProgress();renderChart('reviewChart');updateSaveStatus();}
     function init(){bindEvents();if($('missionInput'))$('missionInput').value=state.mission||'';setFocusMinutes(25);renderAll();}
     document.addEventListener('DOMContentLoaded',init);
   </script>
